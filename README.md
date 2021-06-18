@@ -379,7 +379,7 @@ _ lines
 {Attribute options}
 ~~~
 
-### Block quotations
+### Quotation blocks
 
 ~~~
 > Block quote
