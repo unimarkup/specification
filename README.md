@@ -66,6 +66,20 @@ Inline formatting is applied to a paragraph. For multi-paragraph formatting see 
   ~~strikethrough text~~
   ~~~
 
+- Verbatim
+
+  A text can be defined verbatim by surrounding it with `.
+  ~~~
+  `verbatim text`
+  ~~~
+
+- Math
+
+  Inline math mode can be used by surrounding formulas with `$`.
+  ~~~
+  $\frac{1}{n}$
+  ~~~
+
 ### Bullet lists
 Any of the characters `-+*` at start of a line followed by a space or attribute block is treated as bullet list.
 
@@ -289,13 +303,22 @@ Converting yields Html and Pdf.
 ### Math blocks
 
 ~~~
-Get math mode $x = 32^3$ inside a paragraph.
+Blocked math mode
+$$x = \frac{3}{4}$$
+~~~
 
-Or blocked math mode
+Math block mode inside a paragraph:
+~~~
+Blocked math mode $$x = \frac{3}{4}$$ can be inside a paragraph, but it will be rendered as a new line.
+~~~
+
+So the above is equivalent to:
+~~~
+Blocked math mode
+
 $$x = \frac{3}{4}$$
 
-Blocked math mode $$x = \frac{3}{4}$$ can be inside a paragraph, but it will be rendered as a new line.
-
+can be inside a paragraph, but it will be rendered as a new line.
 ~~~
 
 ### Horizontal line
