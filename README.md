@@ -253,9 +253,38 @@ the outer block must have at least one `~` more than the inner block.
 ~~~~
 
 ~~~{Attributes for the verbatim block}
-
+Verbatim block with given attributes
 ~~~
 ~~~~~
+
+### Render blocks
+3 or more `'` at start of a line mark the start and end of a render block.
+A render block is used to render graphics, diagramms and charts written in common graph description languages like [mermaid](https://mermaid-js.github.io/) or [opl](https://en.wikipedia.org/wiki/Object_Process_Methodology).
+The language must be provided directly after the last `'` at the start of the render block.
+
+Since OPL by default does not specify styling or referencing options, it is extended in unimarkup with the following additions:
+
+- `is object` to define that the given name is an object
+- `is process` to define that the given name is a process
+- Attribute block at line end
+
+  This is useful to link an object or process to another graph where it is described in more detail for example. Or to provide additional styling information to color an object or process to show test coverage for example.
+
+~~~
+'''mermaid
+graph TB
+    A & B--> C & D
+'''
+
+'''opl{<render block attributes>}
+Unimarkup is object, informatical and systemic.
+Pdf is object, informatical and systemic.
+Html is object, informatical and systemic.
+Converting is process, informatical and systemic.{#main-converting-process}
+Converting consumes Unimarkup.
+Converting yields Html and Pdf.
+'''
+~~~
 
 ### Math blocks
 
