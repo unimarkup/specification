@@ -355,10 +355,10 @@ At least 4 `:` at start of a line surrounded by blank lines
 ### Referencing
 
 ~~~
-It is possible to cite using [@someRef]_.
-Specify them directly, or from a bibtex file [@bibtexref]_
+It is possible to cite using [&someRef]_.
+Specify them directly, or from a bibtex file [&bibtexref]_
 
-_[@someRef] Citation text 
+_[&someRef] Citation text 
 ~~~
 
 ### Footnotes
