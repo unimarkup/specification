@@ -387,7 +387,7 @@ _ lines
 > treates as spaces
 > as with normal paragraphs
 >
->> Nested block quote
+> > Nested block quote
 ~~~
 
 ### Line blocks
@@ -396,6 +396,8 @@ _ lines
 | Text where spaces are preserved as is.
 |    All other markup however, is considered as unimarkup text.
 ~~~
+
+**Note:** There is no nesting for line blocks.
 
 ### Definition lists
 
@@ -415,6 +417,16 @@ _ lines
 : spanning several lines :
 :
 : Paragraph for this definition
+
+: Main definition :
+:
+: Paragraph for the main definition.
+:
+: : Sub definition :
+: :
+: : Paragraph for the sub definition
+:
+: Other paragraph for the main definition
 ~~~
 
 
