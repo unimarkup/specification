@@ -423,6 +423,19 @@ _ It is also rendered before Header 2
 Some other text
 ~~~
 
+### Abbreviations
+
+~~~
+Some text with an [:abbr:]. Abbreviations must be defined surrounded by blank lines, or by other abbreviation definitions.
+It is possible to render a list of all abbreviations used inside a document using the macro {@abbr}.
+
+[:abbr:](Abbreviation)
+
+[:xml:](Extensible Markup Language)
+[:html:](Hypertext Markup Language)
+
+~~~
+
 ### Attribute blocks
 
 ~~~
