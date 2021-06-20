@@ -385,7 +385,9 @@ _[&someRef] Citation text
 ~~~
 
 ### Footnotes
-Footnotes will be Written at the end of a page before the footer content. If there is no new page specified, footnotes are printed before a new header. Footnotes are lost after they are printed.
+Footnote content will be rendered at the end of the page before the footer content where the content of a footnote is defined. If there is no new page specified, footnotes are printed at the end of the document.
+
+**Note:** Footnotes are lost after the footnote content is rendered, so the footnote-id can be reused per page for example.
 
 ~~~
 Referencing a footnote [^1]_ [^note]_.
@@ -394,6 +396,31 @@ _[^1] Here is the content of the footnote
 _[^note] A note
 _ can span several
 _ lines
+~~~
+
+### Endnotes
+Endnotes content will be rendered at the end of a header level at which the endnote content is defined.
+
+~~~
+# Header 1
+Referencing an endnote [1^]_.
+
+## Sub Header 1
+Referencing an endnote in a sub header [note^]_.
+
+## Sub Header 2
+Some more text.
+
+_[1^] Here is the content of the endnote
+_
+_ It is rendered before Header 2
+
+_[note^] Here is the content of the endnote
+_
+_ It is also rendered before Header 2
+
+# Header 2
+Some other text
 ~~~
 
 ### Attribute blocks
