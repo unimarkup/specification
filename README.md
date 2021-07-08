@@ -559,6 +559,8 @@ file preamble
 
 ### Macros
 
+A macroname can not start with `__`, since it is reserved for internal macros.
+
 ~~~
 A text that uses {@myMacro}.
 
@@ -567,8 +569,5 @@ This text{@sup{Is superscripted}}
 
 ### Internationalization and localization
 
-Using the attribute block, it is possible to specify identifiers to blocks of text.
-So it is possible to make a map of identifiers and block of texts that can be replaced with texts of other languages.
-
-Every language should again be written in unimarkup syntax.
+Using the attribute block, it is possible to specify identifiers to blocks of text explicitly. Otherwise identifiers are added implicitly by unimarkup. Every text is then stored in a table with its identifier. New languages can be added, by adding the translated texts into a new column.
 
