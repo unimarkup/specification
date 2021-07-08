@@ -8,6 +8,7 @@
 
 # Fundamentals
 ## Paragraph
+
 A text with at least one character followed by one or more blank lines, or file end. 
 A backslash `\` at the end of a line, creates a new line explicitly inside one paragraph.
 
@@ -30,12 +31,13 @@ A backslash `\` at the end of a line, creates a new line explicitly inside one p
   ~~~
 
 ## Headers
+
 Headers are in atx-style only with support for 6 heading-levels.
 A `#` at start of a line followed by a space and one or more characters marks a header. Adding `#` before the space increases the header-level.
 
-At least one space must be between `#` and the header and a blank line must come before the header, if the previous line is not a header.
+At least one space must be between `#` and the header and a blank line must come before and after the header, if the previous or next line is not a header. Text after a header without a blank new line is treated as header text, allowing multiline header text.
 
-To easily link to headers, references are created implicitly with, where spaces between characters get replaced by `-` and other special keywords or blocks are removed.
+To easily link to headers, references are created implicitly, where spaces between characters get replaced by `-` and other special keywords or blocks are removed.
 
 **Example:**
 
@@ -43,13 +45,16 @@ To easily link to headers, references are created implicitly with, where spaces 
 
   ~~~
   # First Main Header
+
   Some text...
   
   ## Nested Header
+
   More text...
   
   # Second Main Header
   ## Other Nested Header
+
   Even more text...
   ~~~
 
@@ -57,6 +62,8 @@ To easily link to headers, references are created implicitly with, where spaces 
 
   ~~~
   # First Main Header
+  Text still treated as header text!
+
   Some text...
   ## No blank line before header
   More text...
@@ -67,15 +74,15 @@ To easily link to headers, references are created implicitly with, where spaces 
   ~~~
 
 
-
-
 # Special characters
 ## Special characters in every context
+
 The following characters must always be escaped using a backslash if one wants to use them as plain text, except in verbatim or math mode:
 
 - `[{}]\*`
 
 ## Special characters in a specific context
+
 The following characters must only be escaped by a backslash in the given context:
 
 - `()`: At block end for a possible link
@@ -93,6 +100,7 @@ The following characters must only be escaped by a backslash in the given contex
 - `>` : At start of a new line
 
 ## Escaping special characters
+
 All characters except spaces can be escaped using a backslash before them. Escaping characters always means that the escaped character is taken literally. There is no special meaning for `\n` or `\t` for example.
 
 **Examples:**
@@ -110,6 +118,7 @@ All characters except spaces can be escaped using a backslash before them. Escap
 ~~~
 
 # File Insert
+
 Supported types
 
 - Images
@@ -145,6 +154,7 @@ Supported types
 
 
 # Flags
+
 Flags can contain any character except `§\` and spaces.
 Flags are given either in the preamble, or as arguments for conversion programs.
 
@@ -161,6 +171,7 @@ Flags are given either in the preamble, or as arguments for conversion programs.
 
 
 # Macros
+
 Macroname can have any character except `{}@` and spaces.
 
 Macros are either defined in a separate file, or inside the macro section of the [preamble](##preamble-sections).

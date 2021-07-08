@@ -1,4 +1,5 @@
 # Specification
+
 This repository contains the specification of the unimarkup markup language.
 
 The goal of unimarkup is to combine conventions of other well-known markup languages and extending them to create a markup language that can easily scale from simple README files to scientific papers.
@@ -11,31 +12,50 @@ Besides the language and conversions, there will also be a specification for pro
 All those specifications are needed to get consistency across programing languages, operating systems and editors.
 
 # Credit
+
 This language was heavily influenced by the Pandoc-Flavor of Markdown, reStructuredText and Latex.
 
 # Language Overview
+
 Below is only a short overview of the unimarkup language, the full reference manual can be found [here](Unimarkup_Language_ReferenceManual.md).
 
 ## Fundamentals
 ### Headers
-Headers are in atx-style only with support for 6 heading-levels. For more details, see [LRM-Headers](Unimarkup_Language_ReferenceManual.md##Headers)
+
+Headers are in atx-style only with support for 6 heading-levels. For more details, see [LRM-Headers](Unimarkup_Language_ReferenceManual.md##Headers). A header must have an emtpy new line before and after it, or another header. Header attributes are set at the end of the header text.
 
 **Example:**
 ~~~
 # First Main Header
-Some text...
+
+Some unimarkup text for this header...
 
 ## Nested Header
-More text...
+
+More unimarkup text for the nested header...
 
 # Second Main Header
 ## Other Nested Header
-Even more text...
 
-#{#explicit-header-id} Header with explicit identifier
+Even more unimarkup text...
+
+# Header with attributes {header attributes}
+
+# Multiline
+header is also possible
+
+The first paragraph of this header level starts here.
+
+# Multiline
+header with
+additional attributes {header attributes}
+
+# Header with explicit identifier {#explicit-header-id}
+
 ~~~
 
 ### Inline formatting
+
 Inline formatting is applied to a paragraph. For multi-paragraph formatting see [here](###attribute-blocks).
 
 - Bold
@@ -81,6 +101,7 @@ Inline formatting is applied to a paragraph. For multi-paragraph formatting see 
   ~~~
 
 ### Bullet lists
+
 Any of the characters `-+*` at start of a line followed by a space or attribute block is treated as bullet list.
 
 Text that is indented by 2*list-depth spaces, is part of the list content of this depth.
@@ -101,14 +122,14 @@ A single backslash at start of a line between two lists separates those two list
   Verbatim block for this bullet list
   ~~~
 
-  - Sub bullet list
+  - Sub bullet list {bullet list attributes}
 
     Paragraph for this sub bullet list
 
 + Bullet list with different symbol
   * Sub bullet list with different symbol
 
-*{#bullet-list-id} Bullet list with id
+* Bullet list with id {#bullet-list-id}
   - Sub bullet list indented 2 spaces 
 
 Paragraph not for a bullet list
@@ -123,6 +144,7 @@ Paragraph not for a bullet list
 ~~~~
 
 ### Numbered lists
+
 Same as bullet lists, except that enumeration items are used. Numbered lists also get automatically incremented per new item in the list and allowing to have the parent number prefixed to the sub list.
 
 The following enumerations are allowed:
@@ -160,9 +182,9 @@ a. Numbered list with latin symbols
   a. Sub numbered list with latin symbols
 
 a. Numbered list with latin symbols
-  a. Sub numbered list with latin symbols
+  a. Sub numbered list with latin symbols {numbered list attributes}
 
-1.{#numbered-list-id} Numbered list with id
+1. Numbered list with id {#numbered-list-id}
   1. Sub numbered list indented 2 spaces
 
 Paragraph not for a numbered list
@@ -195,6 +217,7 @@ Paragraph not for a numbered list
 ~~~~
 
 ### Combine bullet and numbered lists
+
 Bullet and numbered lists can be changed at any depth. If the list type changes at the same depth, it is treated as a new list.
 
 ~~~
@@ -215,6 +238,7 @@ Bullet and numbered lists can be changed at any depth. If the list type changes 
 ~~~
 
 ### Tables
+
 Unimarkup uses grid tables with extended flexibility.
 
 Most notably, columns don't need to align. This helps for easier styling, since some characters are used as keywords, so the table might have more text in Unimarkup, than what is displayed after rendering. A sideeffect of this is, that `|` must be escaped when used inside a table, even in verbatim and math blocks to get the possibility of multi line rows.
@@ -254,6 +278,7 @@ The table width adapts itself by taking the rendered width of the first column a
 ~~~
 
 ### Verbatim blocks
+
 3 or more `~` at start of a line mark the start and end of a verbatim block.
 
 ~~~~~
@@ -272,6 +297,7 @@ Verbatim block with given attributes
 ~~~~~
 
 ### Render blocks
+
 3 or more `'` at start of a line mark the start and end of a render block.
 A render block is used to render graphics, diagramms and charts written in common graph description languages like [mermaid](https://mermaid-js.github.io/) or [opl](https://en.wikipedia.org/wiki/Object_Process_Methodology).
 The language must be provided directly after the last `'` at the start of the render block.
@@ -322,6 +348,7 @@ can be inside a paragraph, but it will be rendered as a new line.
 ~~~
 
 ### Horizontal line
+
 Set `-` 3 or more times on a line that is surrounded by blank lines.
 
 ~~~
@@ -343,6 +370,7 @@ Set `-` 3 or more times on a line that is surrounded by blank lines.
 ~~~
 
 ### Comments
+
 Unimarkup provides line comments using `****`.
 
 **Note:** It is not possible to have a backslash at the end of a line to get a explicit new line, when a comment is used.
@@ -355,6 +383,7 @@ at the end of a line
 ~~~
 
 ### New page
+
 At least 4 `:` at start of a line surrounded by blank lines
 
 ~~~
@@ -385,6 +414,7 @@ _[&someRef] Citation text
 ~~~
 
 ### Footnotes
+
 Footnote content will be rendered at the end of the page before the footer content where the content of a footnote is defined. If there is no new page specified, footnotes are printed at the end of the document.
 
 **Note:** Footnotes are lost after the footnote content is rendered, so the footnote-id can be reused per page for example.
@@ -399,6 +429,7 @@ _ lines
 ~~~
 
 ### Endnotes
+
 Endnotes content will be rendered at the end of a header level at which the endnote content is defined.
 
 ~~~
@@ -494,6 +525,7 @@ It is possible to render a list of all abbreviations used inside a document usin
 
 
 ### Preamble
+
 It is possible to define a preamble at the start of a file.
 
 ~~~
