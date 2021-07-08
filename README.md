@@ -2,14 +2,22 @@
 
 This repository contains the specification of the unimarkup markup language.
 
-The goal of unimarkup is to combine conventions of other well-known markup languages and extending them to create a markup language that can easily scale from simple README files to scientific papers.
-As a rule of simplicity, the goal is to minimize semantic duplication. So there won't be two keywords who do the same. Macros are an exception to this, since they can be user defined and are merely a means of capsulation and not really keywords.
+The goal of unimarkup is to combine conventions of other well-known markup languages and combining them to create a markup language that can easily scale from simple README files to scientific papers or full program documentation.
 
-Since unimarkup is a markup language, it must be converted to other formats like pdf or html. Each conversion must also have its own specification.
+The focus of unimarkup is
 
-Besides the language and conversions, there will also be a specification for programs/libraries that convert unimarkup. 
+- Simplicity
+- Consistency
+- Internationalization
 
-All those specifications are needed to get consistency across programing languages, operating systems and editors.
+Unimarkup works with an implicit type system, to provide a more granular control for macros.
+See [unimarkup typesystem](Unimarkup_Language_ReferenceManual.md).
+
+For multi-language support, unimarkup sets a unique id for every block of text and stores this id with the text inside a table. Other languages are then added next to the respective entries in the table (see [internationalization and localization](###internationalization-and-localization)).
+
+Since unimarkup is a markup language, it must be converted to other formats like pdf or html. For this, unimarkup text is first converted to a tabular representation (see [tabular representation](Unimarkup_Language_ReferenceManual.md)), and then converted to any of the supported [output formats](Unimarkup_Language_ReferenceManual.md).
+
+Besides the language specification, there is also a specification for programs and libraries that convert unimarkup to get consistency across programing languages, operating systems and editors.
 
 # Credit
 
