@@ -501,7 +501,7 @@ It is possible to render a list of all abbreviations used inside a document usin
 
 **Note:** There is no nesting for line blocks.
 
-### Definition lists
+### Definition blocks
 
 ~~~
 : Definition term :

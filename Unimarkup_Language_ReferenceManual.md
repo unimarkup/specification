@@ -197,18 +197,60 @@ Using macros:
 
 - all
 - paragraph
+- inline
+  - inline_bold
+  - inline_italic
+  - inline_underlined
+  - inline_math
+  - inline_strikethrough
+  - inline_verbatim
+- header
 - table
+  - table_row
+  - table_entry
 - list
-- image
+  - list_bullet
+  - list_numbered
+  - list_task
+- fileinsert
+- hyperlink
+- comment
+- new_page
 - block
-- math
-- integer
-- ...
+  - block_text
+  - block_math
+  - block_verbatim
+  - block_render
+  - block_attribute
+  - block_flag
+  - block_quotation
+  - block_line
+  - block_definition
+- reference
+  - reference_definition
+  - reference_use
+- footnote
+  - footnote_definition
+  - footnote_use
+- endnote
+  - endnote_definition
+  - endnote_use
+- abbreviation
+  - abbreviation_definition
+  - abbreviation_use
+- preamble
+- unicode
+- number
+  - integer
+    - natural ... 0 included
+    - positive ... 0 not included
+    - negative
+  - decimal
 
-To combine multiple types except *all*, a underscore can be used between the types.
+To combine multiple types except *all*, types can be enclosed in braces and separated by a vertical bar.
 
 ~~~
-paragraph_table
+(paragraph|table|block_math)
 ~~~
 
 ## Predefined macros
