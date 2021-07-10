@@ -172,9 +172,11 @@ Flags are given either in the preamble, or as arguments for conversion programs.
 
 # Macros
 
-Macroname can have any character except `{}@` and spaces.
+Macroname can have any character except `{}@` and spaces and must not start with `__`.
 
 Macros are either defined in a separate file, or inside the macro section of the [preamble](##preamble-sections).
+
+## Usage
 
 Defining macros:
 ~~~
@@ -191,9 +193,26 @@ Using macros:
 {@macroname{<type parmetername1>}{<type parametername2>}}
 ~~~
 
-`type` defines what kind of text is allowed to be passed to the macro.
+`type` defines what kind of text is allowed to be passed to the macro, and what type the macro returns.
 
-**Types:**
+
+## Predefined macros
+
+- `{@sub{paragraph p}}`: This macro applies a subscript around the given paragraph
+- `{@sup{paragraph p}}`: This macro applies a superscript around the given paragraph
+- `{@mark{paragraph p}}`: This macro highlights the given paragraph
+- `{@space}`: This macro adds one non-breaking space
+- `{@repeat{all text, integer count}}`: This macro repeats a given text for `count`times
+- `{@tab}`: This macro adds two non-breaking spaces
+- `{@header{all text}}`: This macro defines a header that is applied to a page. It can be overwritten at any point, only the last macro call is taken for the header
+- `{@footer{all text}}`: This macro defines a footer that is applied to a page. It can be overwritten at any point, only the last macro call is taken for the footer
+- `{@toc}`: This macro inserts the table of contents at this position
+- `{@refs}`: This macro inserts references used in the document at this position
+- `{@abbr}`: This macro inserts abbreviations used in the document at this position
+
+# Types
+
+Unimarkup uses types for a more precise usage of macros.
 
 - all
 - paragraph
@@ -253,16 +272,4 @@ To combine multiple types except *all*, types can be enclosed in braces and sepa
 (paragraph|table|block_math)
 ~~~
 
-## Predefined macros
-
-- `{@sub{paragraph p}}`: This macro applies a subscript around the given paragraph
-- `{@sup{paragraph p}}`: This macro applies a superscript around the given paragraph
-- `{@mark{paragraph p}}`: This macro highlights the given paragraph
-- `{@space}`: This macro adds one non-breaking space
-- `{@repeat{all text, integer count}}`: This macro repeats a given text for `count`times
-- `{@tab}`: This macro adds two non-breaking spaces
-- `{@header{all text}}`: This macro defines a header that is applied to a page. It can be overwritten at any point, only the last macro call is taken for the header
-- `{@footer{all text}}`: This macro defines a footer that is applied to a page. It can be overwritten at any point, only the last macro call is taken for the footer
-- `{@toc}`: This macro inserts the table of contents at this position
-- `{@refs}`: This macro inserts the references used in the document so far at this position
 
