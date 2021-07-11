@@ -73,6 +73,39 @@ To easily link to headers, references are created implicitly, where spaces betwe
   Even more text...
   ~~~
 
+## Emojis
+
+Some special character sequences are reserved for direct emoji conversion. Those sequences must be surrounded by whitespaces.
+
+**Full list of available emojis:**
+
+- `:)` ... 🙂 (U+1F642)
+- `;)` ... 😉 (U+1F609)
+- `:D` ... 😃 (U+1F603)
+- `^^` ... 😄 (U+1F604)
+- `=)` ... 😊 (U+1F60A)
+- `:(` ... 🙁 (U+1F641)
+- `;(` ... 😢 (U+1F622)
+- `:P` ... 😛 (U+1F61B)
+- `;P` ... 😜 (U+1F61C)
+- `O:)` ... 😇 (U+1F607)
+- `:O` ... 😨 (U+1F628)
+- `>:(` ... 🤬 (U+1F92C)
+- `:/` ... 😕 (U+1F615)
+- `3:)` ... 😈 (U+1F608)
+- `-_-` ... 😑 (U+1F611)
+- `<3` ... ❤ (U+2764)
+- `(Y)` ... 👍 (U+1F44D)
+- `(N)` ... 👎 (U+1F44E)
+
+~~~
+A text with an emoji :D in it!
+~~~
+
+Rendered to:
+~~~
+A text with an emoji 😃 in it!
+~~~
 
 # Special characters
 ## Special characters in every context

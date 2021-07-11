@@ -403,6 +403,27 @@ At least 4 `:` at start of a line surrounded by blank lines
 
 ~~~
 
+### Emojis
+
+Some special character sequences are reserved for direct emoji conversion. Those sequences must be surrounded by whitespaces.
+
+**Some available emojis:**
+
+- `:)` ... 🙂 (U+1F642)
+- `;)` ... 😉 (U+1F609)
+- `:D` ... 😃 (U+1F603)
+
+~~~
+A text with an emoji :D in it!
+~~~
+
+Rendered to:
+~~~
+A text with an emoji 😃 in it!
+~~~
+
+The full list of supported emojis can be seen [here](Unimarkup_Language_ReferenceManual.md/##Emojis) 
+
 ## Advanced
 ### Text blocks
 
