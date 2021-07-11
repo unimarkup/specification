@@ -442,12 +442,15 @@ Endnotes content will be rendered at the end of a header level at which the endn
 
 ~~~
 # Header 1
+
 Referencing an endnote [1^]_.
 
 ## Sub Header 1
+
 Referencing an endnote in a sub header [note^]_.
 
 ## Sub Header 2
+
 Some more text.
 
 _[1^] Here is the content of the endnote
@@ -459,6 +462,7 @@ _
 _ It is also rendered before Header 2
 
 # Header 2
+
 Some other text
 ~~~
 
