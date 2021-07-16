@@ -503,6 +503,10 @@ It is possible to render a list of all abbreviations used inside a document usin
 
 ### Attribute blocks
 
+Attributes are given in JSON-Format. There are default attributes for all unimarkup elements and some specific ones for certain elements.
+
+The list of default attributes can be found [here](Unimarkup_Language_ReferenceManuel.md/##Default-Attributes)
+
 ~~~
 {Attribute options}
 ~~~
