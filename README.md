@@ -544,17 +544,19 @@ The list of default attributes can be found [here](Unimarkup_Language_ReferenceM
 ~~~
 > Block quote
 > with new lines
-> treates as spaces
+> treated as spaces
 > as with normal paragraphs
+> and other unimarkup syntax is also possible 
 >
-> > Nested block quote
+> > Nested block quote\
+> > A backslash at the end of a line creates a new line. 
 ~~~
 
 ### Line blocks
 
 ~~~
-| Text where spaces are preserved as is.
-|    All other markup however, is considered as unimarkup text.
+| Text where *spaces* are preserved as is.
+|    All other **markup** however, is considered as **unimarkup text**.
 ~~~
 
 **Note:** There is no nesting for line blocks.
