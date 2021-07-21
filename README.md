@@ -410,10 +410,32 @@ Set `-` 3 or more times on a line that is surrounded by blank lines.
 [Text represented as hyperlink](url){<optional hyperlink attributes>}
 ~~~
 
-### File insert
+### Image insert
+
+Images can be inserted using `![<description>](<image url>)`.
 
 ~~~
-![Alternative Text for this file](filepath){<optional insert attributes>}
+![<Additional text for this image>](<image url>){<image insert attributes>}
+~~~
+
+### File insert
+
+There are two different ways to insert files.
+
+#### Rendered file insert
+
+This way renders the inserted file. There are several supported file types besides unimarkup files.
+
+~~~
+"[<Additional text for this file>](<filepath>){<attributes>}
+~~~
+
+#### Verbatim file insert
+
+This way inserts the file as is inside a verbatim block. There are several supported file types besides unimarkup files.
+
+~~~
+~[<Additional text for this file>](<filepath>){<attributes>}
 ~~~
 
 ### Comments
