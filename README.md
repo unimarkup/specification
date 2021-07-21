@@ -158,7 +158,8 @@ Same as bullet lists, except that enumeration items are used. Numbered lists als
 The following enumerations are allowed:
 
 - `1.` : Numbered integer list that gets incremented by 1 per new item
-- `rI.` : Roman character list. Possible characters are `I`, `V`, `X`, `L`, `C`, `D`, `M`
+- `rI.` : Roman capital character list. Possible characters are `I`, `V`, `X`, `L`, `C`, `D`, `M`
+- `Ri.` : Roman lower character list. Possible characters are `i`, `v`, `x`, `l`, `c`, `d`, `m`
 - `a.` : Lower latin character list. After `z`, it goes to `aa`.
 - `A.` : Capital latin character list. After `Z`, it goes to `AA`.
 
@@ -184,8 +185,11 @@ It is also possible to start at a specific number, but this must be used for new
 
     Paragraph for this sub numbered list
 
-rI. Numbered list with roman symbols
-  rI. Sub numbered list with roman symbols
+rI. Numbered list with capital roman symbols
+  rI. Sub numbered list with capital roman symbols
+
+Ri. Numbered list with lower roman symbols
+  Ri. Sub numbered list with lower roman symbols
 
 a. Numbered list with latin symbols
   a. Sub numbered list with latin symbols
