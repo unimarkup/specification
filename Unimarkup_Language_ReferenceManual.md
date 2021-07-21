@@ -570,10 +570,6 @@ Using macros:
 
 ## Predefined macros
 
-- `{@sub{paragraph p}}`: This macro applies a subscript around the given paragraph
-- `{@sup{paragraph p}}`: This macro applies a superscript around the given paragraph
-- `{@overline{paragraph p}}`: This macro applies an overline to the given paragraph
-- `{@mark{paragraph p}}`: This macro highlights the given paragraph
 - `{@space}`: This macro adds one non-breaking space
 - `{@repeat{positive count, all text}}`: This macro repeats a given text for `count`times
 - `{@tab}`: This macro adds two non-breaking spaces

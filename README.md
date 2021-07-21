@@ -137,6 +137,15 @@ Inline formatting can also be applied inside words.
   $\frac{1}{n}$
   ~~~
 
+- Highlight
+
+  A text can be highlighted by surrounding it with `|`.
+
+  ~~~
+  |highlighted text|
+  ~~~
+
+
 ### Bullet lists
 
 Any of the characters `-+*` at start of a line followed by a space or attribute block is treated as bullet list.
