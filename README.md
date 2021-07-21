@@ -66,6 +66,8 @@ additional attributes {header attributes}
 
 Inline formatting is applied to a paragraph. For multi-paragraph formatting see [here](###attribute-blocks).
 
+Inline formatting can also be applied inside words.
+
 - Bold
 
   A text is bold by surrounding it with `**`.
@@ -80,11 +82,19 @@ Inline formatting is applied to a paragraph. For multi-paragraph formatting see 
   *italic text*
   ~~~
 
-- Underlined
+- Underline
 
   A text is underlined by surrounding it with `__`.
   ~~~
   __underlined text__
+  ~~~
+
+- Overline
+
+  A text is overlined by surrounding it with `^-`.
+
+  ~~~
+  ^-overlined text^-
   ~~~
 
 - Strikethrough
@@ -94,11 +104,30 @@ Inline formatting is applied to a paragraph. For multi-paragraph formatting see 
   ~~strikethrough text~~
   ~~~
 
+- Superscript
+
+  A text is superscripted by surrounding it with `^`.
+
+  ~~~
+  ^superscripted text^
+  ~~~
+
+- Subscript
+
+  A text is subscripted by surrounding it with `_`.
+
+  ~~~
+  _subscripted text_
+  ~~~
+
 - Verbatim
 
-  A text can be defined verbatim by surrounding it with `.
+  A text can be defined verbatim by surrounding it with `` ` ``.
+  If you want to use a `` ` `` inside, you need to use ` `` ` at start and end.  
   ~~~
   `verbatim text`
+
+  `` ` ``
   ~~~
 
 - Math
