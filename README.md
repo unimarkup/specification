@@ -295,13 +295,18 @@ The table width adapts itself by taking the rendered width of the first column a
 3 or more `~` at start of a line mark the start and end of a verbatim block.
 
 ~~~~~
-~~~~
+~~~
 Verbatim block, where nothing is rendered
+~~~
+
+~~~~
+Outer verbatim block.
 
 ~~~
 If a verbatim block must be displayed inside a verbatim block,
 the outer block must have at least one `~` more than the inner block.
 ~~~
+
 ~~~~
 
 ~~~{Attributes for the verbatim block}
