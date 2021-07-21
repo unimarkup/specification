@@ -499,15 +499,34 @@ Some other text
 
 ### Abbreviations
 
+To use abbreviations inside a text, use `[:<abbreviation>]_`. The full text of an abbreviation can then be displayed as tooltip, inserted instead of the abbreviation, or combined to a list of abbreviations depending on the output format and its options.
+
+Abbreviations must be defined using `_[:<abbreviation>] <full text of the abbreviation>` and surrounded by blank lines, or by other abbreviation definitions. It is possible to span multiple lines by starting the following line with `_ <continuing text>`.
+
+It is possible to render a list of all abbreviations used inside a document using the macro `{@abbr}`.
+
 ~~~
-Some text with an [:abbr:]. Abbreviations must be defined surrounded by blank lines, or by other abbreviation definitions.
-It is possible to render a list of all abbreviations used inside a document using the macro {@abbr}.
+Some text with an [:abbr]_. 
+~~~
 
-[:abbr:](Abbreviation)
+Defining abbreviations:
+~~~
+_[:abbr] Abbreviation
 
-[:xml:](Extensible Markup Language)
-[:html:](Hypertext Markup Language)
+_[:xml] Extensible Markup Language
+_[:html] Hypertext Markup Language
+~~~
 
+Multiword abbreviations are also allowed
+~~~
+_[:OPC UA TSN] OPC Unified Architecture Time-Sensitive Networking
+~~~
+
+Multiple lines is also possible
+~~~
+_[:mult] Abbreviation
+_ spanning multiple lines\
+_ Backslash at end creates a rendered new line!
 ~~~
 
 ### Attribute blocks
