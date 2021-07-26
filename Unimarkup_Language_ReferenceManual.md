@@ -119,15 +119,15 @@ The following characters must always be escaped using a backslash if one wants t
 The following characters must only be escaped by a backslash in the given context:
 
 - `()`: At block end for a possible link
-- `§` : At block start until end of flagname
-- `_` : When used twice to mark start or end of a underlined paragraph
+- `§` : At block start until end of flag name
+- `_` : When used twice to mark start or end of an underlined paragraph
 - `!` : Between `[` and `§` as flag negation
 - `@` : At block start for macros
 - `#` : At start of a header
 - `$` : When directly followed by a valid latex math symbol or another `$` and inside math mode
 - `|` : Inside a table (even inside verbatim or math blocks), or at start of a new line
 - `-` : At start of a new line marking a bullet list
-- `~` : When used twice to mark start or end of a strikethrough paragraph, or three times or more to mark a verbatim block
+- `~` : When used twice to mark start or end of a strike through paragraph, or three times or more to mark a verbatim block
 - `+` : At start of a new line marking a bullet list
 - `:` : After a `{` inside a macro definition and before a `}`, used to specify parameters
 - `>` : At start of a new line
@@ -157,13 +157,13 @@ Supported types
 - Images
 - Videos
 - Unimarkup
-- Programing languages
+- Programming languages
   - Ada
   - Python
   - C#
   - C/C++
   - Java
-  - Javascript
+  - JavaScript
   - Rust
 
 ~~~
@@ -177,9 +177,9 @@ Supported types
   Parse options depend on file type:
 
   - `verbatim`
-  - `embed` : svg embedding, or javascript in script-tags in HTML
+  - `embed` : SVG embedding, or JavaScript in script-tags in HTML
   - `unimarkup`
-  - `javaDoc`: Uses the JavaDoc syntax
+  - `javaDoc`: Uses the Javadoc syntax
   - `adaDoc`
   - `python`
 
@@ -248,7 +248,7 @@ Since attributes are defined in JSON-format, there are objects with elements tha
 
     - `cm` ... Centimeter
     - `mm` ... Millimeter
-    - `in` ... Inch (2.54cm)
+    - `in` ... Inch (2.54 cm)
     - `pt` ... Point (1/72 inch)
 
   - Relative units
@@ -259,10 +259,10 @@ Since attributes are defined in JSON-format, there are objects with elements tha
     
 ## Default attributes
 
-- `"id" : "<identifier name>"`
+- `"ID" : "<identifier name>"`
   
-  The identifier name must contain at least one character, cannot start with a number, and must not contain whitespaces. The name is case sensitive and must be unique in the generated document.
-  (The same constraints as with the [HTML id attribute](https://www.w3schools.com/html/html_id.asp))
+  The identifier name must contain at least one character, cannot start with a number, and must not contain whitespaces. The name is case-sensitive and must be unique in the generated document.
+  (The same constraints as with the [HTML ID attribute](https://www.w3schools.com/html/html_id.asp))
 
   Additionally, the identifier name must be unique for all items inside one generated document. If several unimarkup files are combined, the identifier name must be unique across all.
 
@@ -380,22 +380,22 @@ Since attributes are defined in JSON-format, there are objects with elements tha
 
   - `"top" : { }`
 
-    Attributes for the top border. Overwrites values of `all`.
+    Attributes for the top border. Overwrites the values of `all`.
     Same attributes of `all` are available.
 
   - `"bottom" : { }`
 
-    Attributes for the bottom border. Overwrites values of `all`.
+    Attributes for the bottom border. Overwrites the values of `all`.
     Same attributes of `all` are available.
 
   - `"left" : { }`
 
-    Attributes for the left border. Overwrites values of `all`.
+    Attributes for the left border. Overwrites the values of `all`.
     Same attributes of `all` are available.
 
   - `"right" : { }`
  
-    Attributes for the right border. Overwrites values of `all`.
+    Attributes for the right border. Overwrites the values of `all`.
     Same attributes of `all` are available.
 
   - `"image" : { }`
@@ -419,7 +419,7 @@ Since attributes are defined in JSON-format, there are objects with elements tha
 
 - `"background" : { }`
 
-  The background object has several different values. If a value is not set, the parent value is taken (At document level, the parent value is the default value).
+  The background object has several values. If a value is not set, the parent value is taken (At document level, the parent value is the default value).
 
   - `"color" : "<color unit>"`
 
@@ -484,7 +484,7 @@ Text attributes are available for all text type items.
   - `"align-last" : "<alignment option of last line>"`
 
     Define how the last line is aligned, if the text alignment is set to `justify`.
-    Otherwise `align-last` has the same option as `alignment`. 
+    Otherwise, `align-last` has the same option as `alignment`. 
 
     Possible options are:
 
@@ -495,7 +495,7 @@ Text attributes are available for all text type items.
 
   - `"line-decoration" : { }`
 
-    This attribute defines the line appearance that can be set for a text like underline, overline and strikethrough.
+    This attribute defines the line appearance that can be set for a text like underline, overline and strike through.
 
     - `"color" : "<color unit>"`
 
@@ -544,7 +544,7 @@ Different attributes can be applied at every level. If there are overlapping att
 
 # Macros
 
-Macroname can have any character except `{}@` and spaces and must not start with `__`.
+Macro name can have any character except `{}@` and spaces and must not start with `__`.
 
 Macros are either defined in a separate file, or inside the macro section of the [preamble](##preamble-sections).
 

@@ -11,13 +11,13 @@ The focus of unimarkup is
 - Internationalization
 
 Unimarkup works with an implicit type system, to provide a more granular control for macros.
-See [unimarkup typesystem](Unimarkup_Language_ReferenceManual.md).
+See [unimarkup type system](Unimarkup_Language_ReferenceManual.md).
 
-For multi-language support, unimarkup sets a unique id for every block of text and stores this id with the text inside a table. Other languages are then added next to the respective entries in the table (see [internationalization and localization](###internationalization-and-localization)).
+For multi-language support, unimarkup sets a unique ID for every block of text and stores this ID with the text inside a table. Other languages are then added next to the respective entries in the table (see [internationalization and localization](###internationalization-and-localization)).
 
-Since unimarkup is a markup language, it must be converted to other formats like pdf or html. For this, unimarkup text is first converted to a tabular representation (see [tabular representation](Unimarkup_Language_ReferenceManual.md)), and then converted to any of the supported [output formats](Unimarkup_Language_ReferenceManual.md).
+Since unimarkup is a markup language, it must be converted to other formats like PDF or HTML. For this, unimarkup text is first converted to a tabular representation (see [tabular representation](Unimarkup_Language_ReferenceManual.md)), and then converted to any of the supported [output formats](Unimarkup_Language_ReferenceManual.md).
 
-Besides the language specification, there is also a specification for programs and libraries that convert unimarkup to get consistency across programing languages, operating systems and editors.
+Besides the language specification, there is also a specification for programs and libraries that convert unimarkup to get consistency across programming languages, operating systems and editors.
 
 # Credit
 
@@ -30,7 +30,7 @@ Below is only a short overview of the unimarkup language, the full reference man
 ## Fundamentals
 ### Headers
 
-Headers are in atx-style only with support for 6 heading-levels. For more details, see [LRM-Headers](Unimarkup_Language_ReferenceManual.md##Headers). A header must have an emtpy new line before and after it, or another header. Header attributes are set at the end of the header text.
+Headers are in atx-style only with support for 6 heading-levels. For more details, see [LRM-Headers](Unimarkup_Language_ReferenceManual.md##Headers). A header must have an empty new line before and after it, or another header. Header attributes are set at the end of the header text.
 
 **Example:**
 ~~~
@@ -97,11 +97,11 @@ Inline formatting can also be applied inside words.
   ^-overlined text^-
   ~~~
 
-- Strikethrough
+- Strike through
 
-  A text is strikethrough by surrounding it with `~~`.
+  A text is strike through by surrounding it with `~~`.
   ~~~
-  ~~strikethrough text~~
+  ~~strike through text~~
   ~~~
 
 - Superscript
@@ -198,12 +198,12 @@ The following enumerations are allowed:
 - `1.` : Numbered integer list that gets incremented by 1 per new item
 - `rI.` : Roman capital character list. Possible characters are `I`, `V`, `X`, `L`, `C`, `D`, `M`
 - `Ri.` : Roman lower character list. Possible characters are `i`, `v`, `x`, `l`, `c`, `d`, `m`
-- `a.` : Lower latin character list. After `z`, it goes to `aa`.
-- `A.` : Capital latin character list. After `Z`, it goes to `AA`.
+- `a.` : Lower Latin character list. After `z`, it goes to `aa`.
+- `A.` : Capital Latin character list. After `Z`, it goes to `AA`.
 
 Besides a `.`, it is also possible to use `)`, or surround it like `(1)`, but it must be consistent inside a list.
 
-It is also possible to start at a specific number, but this must be used for new items. Otherwise a new list is started.
+It is also possible to start at a specific number, but this must be used for new items. Otherwise, a new list is started.
 
 ~~~~
 1. Start of numbered list
@@ -292,7 +292,7 @@ Bullet and numbered lists can be changed at any depth. If the list type changes 
 
 Unimarkup uses grid tables with extended flexibility.
 
-Most notably, columns don't need to align. This helps for easier styling, since some characters are used as keywords, so the table might have more text in Unimarkup, than what is displayed after rendering. A sideeffect of this is, that `|` must be escaped when used inside a table, even in verbatim and math blocks to get the possibility of multi line rows.
+Most notably, columns don't need to align. This helps for easier styling, since some characters are used as keywords, so the table might have more text in Unimarkup, than what is displayed after rendering. A side effect of this is, that `|` must be escaped when used inside a table, even in verbatim and math blocks to get the possibility of multi line rows.
 
 The table width adapts itself by taking the rendered width of the first column and scaling the other columns according to the first line ratio of the table columns.
 
@@ -355,7 +355,7 @@ Verbatim block with given attributes
 ### Render blocks
 
 3 or more `'` at start of a line mark the start and end of a render block.
-A render block is used to render graphics, diagramms and charts written in common graph description languages like [mermaid](https://mermaid-js.github.io/) or [opl](https://en.wikipedia.org/wiki/Object_Process_Methodology).
+A render block is used to render graphics, diagrams and charts written in common graph description languages like [mermaid](https://mermaid-js.github.io/) or [opl](https://en.wikipedia.org/wiki/Object_Process_Methodology).
 The language must be provided directly after the last `'` at the start of the render block.
 
 Since OPL by default does not specify styling or referencing options, it is extended in unimarkup with the following additions:
@@ -451,7 +451,7 @@ This way inserts the file as is inside a verbatim block. There are several suppo
 
 Unimarkup provides line comments using `****`.
 
-**Note:** It is not possible to have a backslash at the end of a line to get a explicit new line, when a comment is used.
+**Note:** It is not possible to have a backslash at the end of a line to get an explicit new line, when a comment is used.
 
 ~~~
 **** comment to end of line
@@ -505,86 +505,123 @@ The full list of supported emojis can be seen [here](Unimarkup_Language_Referenc
 
 ### Referencing
 
-~~~
-It is possible to cite using [&someRef]_.
-Specify them directly, or from a bibtex file [&bibtexref]_
+There are several possibilities to reference in unimarkup.
 
-_[&someRef] Citation text 
-~~~
+#### Footnotes
 
-### Footnotes
+Footnote content will be rendered at the end of the page before the footer content where the footnote is referenced. If the rendered document is a single page, footnotes are printed at the end of the rendered document. Each footnote has its own unique ID. 
 
-Footnote content will be rendered at the end of the page before the footer content where the content of a footnote is defined. If there is no new page specified, footnotes are printed at the end of the document.
-
-**Note:** Footnotes are lost after the footnote content is rendered, so the footnote-id can be reused per page for example.
+Footnotes are numbered automatically for the rendered output. The numbering scheme can be adapted in the preamble.
+It is possible to change between numerical or symbolic numbering and optionally set a header level at which the numbering is reset.
 
 ~~~
-Referencing a footnote [^1]_ [^note]_.
+Referencing a footnote [^^footnote-id]_ [^^myFootnote]_.
 
-_[^1] Here is the content of the footnote
-_[^note] A note
+_[^^footnote-id] Here is the content of the footnote
+_[^^myFootnote] A note
 _ can span several
-_ lines
+_ lines, but new lines must be added\
+_ explicitly by a backslash at the end of a line
+_
+_ Or with a blank footnote line between 
 ~~~
 
-### Endnotes
+#### Endnotes
 
-Endnotes content will be rendered at the end of a header level at which the endnote content is defined.
+Endnotes can be used to reference additional content that is only rendered at a specific position in the document.
+All used endnotes are rendered using the macro `{@endnotes}`.
+
+Endnotes are numbered automatically for the rendered output. The numbering scheme can be adapted in the preamble.
+It is possible to change between numerical or symbolic numbering and optionally set a header level at which the numbering is reset.
 
 ~~~
-# Header 1
+Referencing an endnote [endnote-id^^]_.
 
-Referencing an endnote [1^]_.
+Referencing another endnote [note^^]_.
 
-## Sub Header 1
-
-Referencing an endnote in a sub header [note^]_.
-
-## Sub Header 2
-
-Some more text.
-
-_[1^] Here is the content of the endnote
+_[endnote-id^^] Here is the content of the endnote
+_[note^^] Here is the content of the endnote that
+_ can span several
+_ lines, but new lines must be added\
+_ explicitly by a backslash at the end of a line
 _
-_ It is rendered before Header 2
+_ Or with a blank endnote line between 
+~~~
 
-_[note^] Here is the content of the endnote
-_
-_ It is also rendered before Header 2
+#### ID referencing
 
-# Header 2
+Every item of an unimarkup document can be referenced by its ID using `[##item-id]_`.
 
-Some other text
+To define the text that is shown when an item is referenced, the attribute `refOption` can be set with the following options
+
+- `headerNumberLvl1` ... shows the number of the header the referenced item is in (The level is from 1 to 6)
+- `headerTextLvl1` ... shows the text of the header the referenced item is in (The level is from 1 to 6)
+- `label` ... shows the label text of the referenced item
+- `prefix` ... shows the prefix text of the referenced item
+- `prefixLabel` ... shows the prefix and label text of the referenced item
+
+~~~
+![Some image](<image url>){ "ID" : "some-image-ID", "ref" : { "label" : "Some image", "prefix" : "Figure X:" } }
+
+A paragraph that references [##some-image-ID]{ "refOption" : "prefixLabel"}. 
+The referenced text looks like: Figure X: Some image 
+~~~
+
+#### Literature referencing
+
+Literature references are used to reference books, articles, journals or websites.
+To reference a literature, it must be provided via the preamble, JSON or BibTeX file.
+
+To reference a literature, the ID of a literature entry is used and the text that is displayed for this reference is set 
+in the form `[&&literature-id{<literature text that is displayed>}]`.
+
+It is possible to reference more than one literature with `[&&first-literature-id{<literature text>}&&second-literature-id{<literature text>}]`.
+
+There are different styles to reference literature entries. Either directly in parentheses, as footnotes or endnotes.
+The style must be consistent in the document, so the style is set in the preamble.
+
+To get a list of all used literature references, the macro `{@literature}` can be used. 
+
+~~~
+This text has some literature reference [&&literature-id{Author, year}].
+
+This text has more than one literature reference [&&id-1{Author1, year}&&id-2{Author2, year}].
+
+
+A list of all referenced literature is rendered below:
+
+{@literature}
+
 ~~~
 
 ### Abbreviations
 
-To use abbreviations inside a text, use `[:<abbreviation>]_`. The full text of an abbreviation can then be displayed as tooltip, inserted instead of the abbreviation, or combined to a list of abbreviations depending on the output format and its options.
+To use abbreviations inside a text, use `[::<abbreviation>]_`. The full text of an abbreviation can then be displayed as tooltip, inserted instead of the abbreviation, or combined to a list of abbreviations depending on the output format and its options.
 
-Abbreviations must be defined using `_[:<abbreviation>] <full text of the abbreviation>` and surrounded by blank lines, or by other abbreviation definitions. It is possible to span multiple lines by starting the following line with `_ <continuing text>`.
+Abbreviations must be defined using `_[::<abbreviation>] <full text of the abbreviation>` and surrounded by blank lines, or by other abbreviation definitions. It is possible to span multiple lines by starting the following line with `_ <continuing text>`.
 
 It is possible to render a list of all abbreviations used inside a document using the macro `{@abbr}`.
 
 ~~~
-Some text with an [:abbr]_. 
+Some text using an [::abbr]_. 
 ~~~
 
 Defining abbreviations:
 ~~~
-_[:abbr] Abbreviation
+_[::abbr] Abbreviation
 
-_[:xml] Extensible Markup Language
-_[:html] Hypertext Markup Language
-~~~
-
-Multiword abbreviations are also allowed
-~~~
-_[:OPC UA TSN] OPC Unified Architecture Time-Sensitive Networking
+_[::xml] Extensible Markup Language
+_[::html] Hypertext Markup Language
 ~~~
 
-Multiple lines is also possible
+Multi-word abbreviations are also allowed
 ~~~
-_[:mult] Abbreviation
+_[::OPC UA TSN] OPC Unified Architecture Time-Sensitive Networking
+~~~
+
+Multiple lines are also possible
+~~~
+_[::mult] Abbreviation
 _ spanning multiple lines\
 _ Backslash at end creates a rendered new line!
 ~~~
@@ -663,7 +700,7 @@ file preamble
 
 ~~~
 
-### Direct unicode
+### Direct Unicode
 
 ~~~
 <U+1F642>
@@ -679,7 +716,7 @@ file preamble
 
 ### Macros
 
-A macroname can not start with `__`, since it is reserved for internal macros.
+A macro name can not start with `__`, since it is reserved for internal macros.
 
 ~~~
 A text that uses {@myMacro}.
@@ -689,5 +726,5 @@ This text{@sup{Is superscripted}}
 
 ### Internationalization and localization
 
-Using the attribute block, it is possible to specify identifiers to blocks of text explicitly. Otherwise identifiers are added implicitly by unimarkup. Every text is then stored in a table with its identifier. New languages can be added, by adding the translated texts into a new column.
+Using the attribute block, it is possible to specify identifiers to blocks of text explicitly. Otherwise, identifiers are added implicitly by unimarkup. Every text is then stored in a table with its identifier. New languages can be added, by adding the translated texts into a new column.
 
