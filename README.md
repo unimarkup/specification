@@ -281,11 +281,43 @@ Bullet and numbered lists can be changed at any depth. If the list type changes 
 
 ### Task lists
 
+Task lists provide 4 states to represent tasks.
+
+1. `[ ]` Open task (the space between the square brackets is important)
+2. `[x]` Completed task (small `x`)
+3. `[o]` Active task (small `o`)
+4. `[/]` Failed task
+
+It is possible to get nested task lists, by setting `-[] <task description>` at the higher level.
+The state of the higher task depends on the states of all lower tasks.
+If at least one lower task is set to fail, the higher task is set to fail. Otherwise, the higher level task is set to active, if any of the lower tasks is set to active. The higher level task is set to completed, if all lower tasks are completed. If there are no active or failed lower tasks and there is at least one open lower task, the higher task is set to open.
+
 ~~~
 -[ ] Open task
--[x] Completed task (small `x`)
--[o] Active task that is worked on (small `o`)   
+-[x] Completed task
+-[o] Active task that is worked on   
 -[/] Failed task
+-[] Nested task with status = fail
+  -[x] Completed task
+  -[x] Another one completed
+  -[/] Failed task
+  -[o] Active task
+  -[ ] Open task
+-[] Nested task with status = active
+  -[x] Completed task
+  -[o] Active task
+  -[ ] Open task
+-[] Nested task with status = cmpleted
+  -[x] Completed task
+  -[x] Completed task2
+-[] Nested task with status = open
+  -[x] Completed task
+  -[ ] Open task
+-[] Nested tasks can be nested (this nested task has status = open)
+  -[] Nested task with status = completed
+    -[x] Completed task
+    -[x] Completed task2
+  -[ ] Open task
 ~~~
 
 ### Tables
