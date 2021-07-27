@@ -58,7 +58,7 @@ The first paragraph of this header level starts here.
 header with
 additional attributes {header attributes}
 
-# Header with explicit identifier {#explicit-header-id}
+# Header with explicit identifier { "id" : "explicit-header-id" }
 
 ~~~
 
@@ -168,14 +168,14 @@ A single backslash at start of a line between two lists separates those two list
   Verbatim block for this bullet list
   ~~~
 
-  - Sub bullet list {bullet list attributes}
+  - Sub bullet list {<bullet list attributes>}
 
     Paragraph for this sub bullet list
 
 + Bullet list with different symbol
   * Sub bullet list with different symbol
 
-* Bullet list with id {#bullet-list-id}
+* Bullet list with id { "id" : "bullet-list-id" }
   - Sub bullet list indented 2 spaces 
 
 Paragraph not for a bullet list
@@ -233,9 +233,9 @@ a. Numbered list with latin symbols
   a. Sub numbered list with latin symbols
 
 a. Numbered list with latin symbols
-  a. Sub numbered list with latin symbols {numbered list attributes}
+  a. Sub numbered list with latin symbols {<numbered list attributes>}
 
-1. Numbered list with id {#numbered-list-id}
+1. Numbered list with id { "id" : "numbered-list-id" }
   1. Sub numbered list indented 2 spaces
 
 Paragraph not for a numbered list
@@ -603,9 +603,9 @@ To define the text that is shown when an item is referenced, the attribute `refO
 - `prefixLabel` ... shows the prefix and label text of the referenced item
 
 ~~~
-![Some image](<image url>){ "ID" : "some-image-ID", "ref" : { "label" : "Some image", "prefix" : "Figure X:" } }
+![Some image](<image url>){ "id" : "some-image-id", "ref" : { "label" : "Some image", "prefix" : "Figure X:" } }
 
-A paragraph that references [##some-image-ID]{ "refOption" : "prefixLabel"}. 
+A paragraph that references [##some-image-id]{ "refOption" : "prefixLabel"}. 
 The referenced text looks like: Figure X: Some image 
 ~~~
 

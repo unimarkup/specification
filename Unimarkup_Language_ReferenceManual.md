@@ -37,7 +37,7 @@ A `#` at start of a line followed by a space and one or more characters marks a 
 
 At least one space must be between `#` and the header and a blank line must come before and after the header, if the previous or next line is not a header. Text after a header without a blank new line is treated as header text, allowing multiline header text.
 
-To easily link to headers, references are created implicitly, where spaces between characters get replaced by `-` and other special keywords or blocks are removed.
+To easily link to headers, references are created implicitly, where Latin characters are set to lower case, spaces between characters get replaced by `-` and other characters are removed. If the resulting ID is already present, it must be set explicitly.
 
 **Example:**
 
@@ -55,7 +55,8 @@ To easily link to headers, references are created implicitly, where spaces betwe
   # Second Main Header
   ## Other Nested Header
 
-  Even more text...
+  Even more text... 
+  Reference to the first header [##first-main-header]
   ~~~
 
 - Invalid Header
@@ -147,7 +148,7 @@ All characters except spaces can be escaped using a backslash before them. Escap
 
 ~~~
 [<Unimarkup text>]
-[<Unimarkup text>]{<general options>}
+[<Unimarkup text>]{<text block attributes>}
 ~~~
 
 # File Insert
@@ -167,7 +168,7 @@ Supported types
   - Rust
 
 ~~~
-![<alternative text>](<filepath>){<file options><general options>}
+![<alternative text>](<image url>){<image insert attributes>}
 ~~~
 
 ## File options
@@ -188,18 +189,24 @@ Supported types
 
 # Flags
 
-Flags can contain any character except `§\` and spaces.
 Flags are given either in the preamble, or as arguments for conversion programs.
 
-~~~
-[§flag§ <unimarkup text>]
-{§flag§ <unimarkup attributes>}
-~~~
+Flags provide the possibility to control the rendered output. They are set in the preamble and can be used on text or attribute blocks.
 
-**Flag-Negation:**
+Flags can contain any character except `?\` and spaces.
+
+Since flags represent a boolean condition, it is possible to combine several flags using boolean logic.
+
+**Logical operations with flags:**
+
+- **OR** ... `?flag1? | ?flag2?` means (flag1 OR flag2)
+- **AND** ... `?flag1? & ?flag2?` means (flag1 AND flag2) 
+- **NOT** ... `!?flag1?` means (NOT flag1)
+- **Precedence** ... `(?flag1? & ?flag2?) | ?flag3?` means (Either flag1 AND flag2, OR flag3)
+
 ~~~
-[!§flag§ <unimarkup text>]
-{!§flag§ <unimarkup attributes>}
+[?flag1? Text that gets rendered, if flag1 is set]
+{?flag1? Attributes that are applied, if flag1 is set}
 ~~~
 
 # Attributes
@@ -259,7 +266,7 @@ Since attributes are defined in JSON-format, there are objects with elements tha
     
 ## Default attributes
 
-- `"ID" : "<identifier name>"`
+- `"id" : "<identifier name>"`
   
   The identifier name must contain at least one character, cannot start with a number, and must not contain whitespaces. The name is case-sensitive and must be unique in the generated document.
   (The same constraints as with the [HTML ID attribute](https://www.w3schools.com/html/html_id.asp))
