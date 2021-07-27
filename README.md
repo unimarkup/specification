@@ -91,10 +91,10 @@ Inline formatting can also be applied inside words.
 
 - Overline
 
-  A text is overlined by surrounding it with `^-`.
+  A text is overlined by surrounding it with `^_`.
 
   ~~~
-  ^-overlined text^-
+  ^_overlined text^_
   ~~~
 
 - Strike through
