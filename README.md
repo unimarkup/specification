@@ -362,7 +362,12 @@ The table width adapts itself by taking the rendered width of the first column a
 
 ### Verbatim blocks
 
-3 or more `~` at start of a line mark the start and end of a verbatim block.
+A verbatim block is surrounded by 3 or more `~` at the start of a new line.
+
+If a verbatim block must be displayed inside a verbatim block,
+the outer block must have at least one `~` more than the inner block.
+
+Verbatim blocks can highlight programming code by setting the programming language in the verbatim block attribute `"language"`. Available languages are listed in the [language reference manual](Unimarkup_Language_ReferenceManual.md/##block-attributes).
 
 ~~~~~
 ~~~
@@ -373,14 +378,19 @@ Verbatim block, where nothing is rendered
 Outer verbatim block.
 
 ~~~
-If a verbatim block must be displayed inside a verbatim block,
-the outer block must have at least one `~` more than the inner block.
+Inner verbatim block.
 ~~~
 
 ~~~~
 
-~~~{Attributes for the verbatim block}
+~~~{<Attributes for the verbatim block>}
 Verbatim block with given attributes
+~~~
+
+~~~{ "language" : "C" }
+int add(int a,  int b) {
+  return a + b;
+}
 ~~~
 ~~~~~
 
