@@ -324,39 +324,56 @@ If at least one lower task is set to fail, the higher task is set to fail. Other
 
 Unimarkup uses grid tables with extended flexibility.
 
-Most notably, columns don't need to align. This helps for easier styling, since some characters are used as keywords, so the table might have more text in Unimarkup, than what is displayed after rendering. A side effect of this is, that `|` must be escaped when used inside a table, even in verbatim and math blocks to get the possibility of multi line rows.
+Most notably, columns don't need to align. This helps for easier styling, since some characters are used as keywords, so the table might have more text in Unimarkup, than what is displayed after rendering. A side effect of this is, that `|` must be escaped when used inside a table, except in verbatim and math blocks to get the possibility of multi-column rows. Multi-column rows are defined by replacing `+` with `-`. The number of `+` defines the number of `|` that are expected per row.
 
-The table width adapts itself by taking the rendered width of the first column and scaling the other columns according to the first line ratio of the table columns.
+The table width adapts itself by taking the rendered width of the top left column and scaling the other columns according to the first line ratio of the table columns. The column width can be overwritten by the `"width"` attribute if needed.
 
-`+___+` marks that no line will be created between two rows, creating a multi-row.
+A `_` instead of `-` marks that no line will be created between two rows, creating a multi-row. The number of `-` and `_` between the two rows must match per column. This means that only adjacent columns of rows can be combined. If all columns are combined to multi-row, the next line can be started with `|`.
+
+For easier alignment options, `:` can be used per column definition having no effect on the width scaling of columns. There are 3 alignment options
+
+- `+:--+` ... left alignment
+- `+--:+` ... right alignment
+- `+:--:+` ... center alignment
+
+A table is ended by 3 or more `+`.
+
+**Note:** Column attributes can not be set on columns marked with `_` (multi-row), since they take their style from the column above.
 
 ~~~
 
 +--+-+--+
-| First column of table | 1/2 length | same length as first |
-+-------+
+| Top left column of table | 1/2 length | same length as top left |
++++
 
 +-+-+
 | Multi row | row 1 |
 +_+-+
 | paragraph | row 2 |
-+---+
++++
+
++-+-+
+| multi row | also multi row |
+| for column1 | for column2 |
++++
 
 +:-+:-:+-:+
-| left alignment with `+:---+` | center alignment with `+:--:+` | right alignment with `+--:+` | 
-+---------+
+| left alignment with `+:--+` | center alignment with `+:--:+` | right alignment with `+--:+` | 
++++
 
 +-+-+-+
-| number of | must match | to create |
+| number of `|` | must match | to create |
 +---+-+
 | multi column | that gets |
 +-+---+
 | the combined | columns from the line above |
-+-----+
++++
 
-+-{column1 attributes}+-{column2 attributes}+{row1 attributes}
++-{<column1 attributes>}+-{<column2 attributes>}+{<row1 attributes>}
 | column1 row1 | column2 row1 |
-+----+{table attributes}
++-{<column1 row2 attributes>}+-+
+| column1 row2 | column2 row2 |
++++{<table attributes>}
 
 ~~~
 
