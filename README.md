@@ -783,7 +783,7 @@ The list of default attributes can be found [here](Unimarkup_Language_ReferenceM
 
 ### Column block
 
-A column block splits its content in a given number of columns. Unimarkup tries to distribute the content evenly between all columns.
+A column block splits its content in a given number of columns. The content is evenly distributed between all columns.
 
 ~~~
 [||<number of columns>|| <content that is evenly distributed over the given columns>]
