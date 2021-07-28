@@ -488,14 +488,16 @@ Images can be inserted using `![<description>](<image url>)`.
 
 ### File insert
 
-There are two different ways to insert files.
+There are two different ways to insert files. Optionally it is possible to insert parts of a document with slicing.
 
 #### Rendered file insert
 
 This way renders the inserted file. There are several supported file types besides unimarkup files.
 
 ~~~
-"[<Additional text for this file>](<filepath>){<attributes>}
+"[<Additional text for this file>](<file path>){<attributes>}
+
+"[Unimarkup LRM file insert](Unimarkup_Language_ReferenceManual.md)<<## File insert> .. >### Comments<>
 ~~~
 
 #### Verbatim file insert
@@ -503,8 +505,40 @@ This way renders the inserted file. There are several supported file types besid
 This way inserts the file as is inside a verbatim block. There are several supported file types besides unimarkup files.
 
 ~~~
-~[<Additional text for this file>](<filepath>){<attributes>}
+~[<Additional text for this file>](<file path>){<attributes>}
+
+~[Some code](someCodeFile.ads)<<package SPARK_Alloc> .. <end SPARK_Alloc;>>
 ~~~
+
+#### File insert slicing
+
+Slicing defines parts of a document that are inserted. The slice is set after the closing brace of the file path.
+
+- `<<Start text that is searched> .. <End text that is searched>>`
+
+  A start and end text is given between `<>` that must match positions inside the inserted document and the start position must be before the end position.
+
+  If both texts are matched in the inserted document, only the text between those two positions is inserted including the two matched texts.
+
+- `<<Start text that is searched>> ..>`
+
+  Here, only the start text position is searched for. If it matches to a text in the inserted document, every text after this position is inserted including the matched text.
+
+- `<.. <End text that is searched>>`
+
+  Every text up to the matched end text is inserted. If no text matches, nothing is inserted.
+
+- Excluding text slice
+
+  It is possible to mark a text that must be matched in the inserted document, but is not included.
+
+  To set a text slice as excluded, use `><` instead of `<>` to surround the text slice.
+
+  `<>excluded text slice< .. <included text slice>>`
+
+**Note:** `<>` above does not mark placeholder values. They are used to mark the start and end of a text slice. 
+
+**Note:** Regex is possible for text slices. The available tokens are described in the [LRM](Unimarkup_Language_ReferenceManual.md).
 
 ### Comments
 
