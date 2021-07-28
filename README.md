@@ -816,6 +816,8 @@ file preamble
 
 ### Direct Unicode
 
+Any Unicode character can be inserted in unimarkup by surrounding the Unicode value with `<>`.
+
 ~~~
 <U+1F642>
 ~~~
