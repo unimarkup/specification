@@ -589,11 +589,27 @@ The full list of supported emojis can be seen [here](Unimarkup_Language_Referenc
 ## Advanced
 ### Text blocks
 
+A text block can be used to group unimarkup text and set attributes that apply to the text inside the text block. Since a text block can have its own ID, it is easy to group and reference text.
+
+A text block can be used inside a paragraph or surrounded by blank lines. A text block can again be inside a text block.
+
 ~~~
-[
-  Everything inside is treated as unimarkup text.
+
+[Everything inside is treated as unimarkup text.
   Provided attributes apply to all text inside this block
 ]{Attributes for the text block}
+
+A paragaph that has a [text block]{ "text" : { "color" : "rgb(255,0,0)" }} inside.
+
+[
+# Main text block
+
+[
+  A nested text block
+]{ "id" : "main-text-block-content"}
+
+]
+
 ~~~
 
 ### Referencing
