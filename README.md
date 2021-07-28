@@ -825,18 +825,20 @@ file preamble
 
 Flags provide the possibility to control the rendered output. Flags are set in the preamble and can be used on text or attribute blocks.
 
-Since flags represent a boolean condition, it is possible to combine several flags using boolean logic.
+Since flags represent a boolean condition, it is possible to combine several flags using boolean logic. The logical formula is entered between the two `?`.
 
 **Logical operations with flags:**
 
-- **OR** ... `?flag1? | ?flag2?` means (flag1 OR flag2)
-- **AND** ... `?flag1? & ?flag2?` means (flag1 AND flag2) 
-- **NOT** ... `!?flag1?` means (NOT flag1)
-- **Precedence** ... `(?flag1? & ?flag2?) | ?flag3?` means (Either flag1 AND flag2, OR flag3)
+- **OR** ... `?flag1 | flag2?` means (flag1 OR flag2)
+- **AND** ... `?flag1 & flag2?` means (flag1 AND flag2) 
+- **NOT** ... `? !flag1 ?` means (NOT flag1)
+- **Precedence** ... `?(flag1 & flag2) | flag3?` means (Either flag1 AND flag2, OR flag3)
 
 ~~~
 [?flag1? Text that gets rendered, if flag1 is set]
 {?flag1? Attributes that are applied, if flag1 is set}
+
+[?flag1 | (!flag2 & flag3)? Text block with logical formula]
 ~~~
 
 ### Macros
