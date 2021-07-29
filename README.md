@@ -555,13 +555,15 @@ at the end of a line
 
 ### New page
 
-At least 4 `:` at start of a line surrounded by blank lines
+At least 3 `:` at start of a line surrounded by blank lines set a new page. How a new page is handled can be set in the preamble.
+
+**Note:** A new page inside an [explicit column block](#explicit-column-blocks) creates a new column instead of a new page.
 
 ~~~
 
-::::
+:::
 
-::::{new page with attributes}
+:::{new page with attributes}
 
 ~~~
 
@@ -797,15 +799,72 @@ The list of default attributes can be found [here](Unimarkup_Language_ReferenceM
 : Other paragraph for the main definition
 ~~~
 
-### Column block
+### Column blocks
 
-A column block splits its content in a given number of columns. The content is evenly distributed between all columns.
+There are two ways to create column blocks in unimarkup. 
+
+#### Explicit column blocks
+
+Columns with unimarkup content can be created explicitly by setting 3 or more `|` at the start of a new line with a blank line before the block start and after the block end.
+
+A new column is created using the [new page](#new-page) syntax. Therefore, a new page can not be created inside an explicit column block.
+
+The column orientation can be set using the attribute `"orientation"` with options
+
+- `"leftToRight"` ... The content from top to bottom is oriented **from left to right**
+- `"rightToLeft"` ... The content from top to bottom is oriented **from right to left**
+
+~~~
+|||
+This content is part of the **first** column.
+
+:::
+
+This content is part of the **second** column
+
+:::
+
+This content is part of the **third** column
+|||
+
+|||{ "orientation" : "rightToLeft" }
+First column is on the most right.
+
+:::
+
+This column is to the left side of the first column
+
+|||
+
+|||{<attributes for the explicit column block>}
+{<attributes for column 1>}
+
+Column 1 content
+
+:::{<attributes for column 2>}
+
+Column 2 content
+
+|||
+~~~
+
+#### Implicit column blocks
+
+An implicit column block automatically splits its content by a given number of columns. In contrast to [explicit column blocks](#explicit-column-blocks), all columns have the same width which can not be changed with attributes and the [new page](#new-page) syntax creates a new page.
+
+The content distribution can be defined with the attribute `"distribution"` and options
+
+- `"even"` ... The content is evenly distributed over all columns
+- `"page"` ... The content starts in the first column and wraps to the next column at a new page, which is either set explicitly or due to the rendered output
+- `"height"` ... The content starts in the first column and wraps to the next column after reaching the column block height
+
+As with the [explicit column blocks](#explicit-column-blocks), the orientation can be set using the `"orientation"` attribute.
 
 ~~~
 [||<number of columns>|| <content that is evenly distributed over the given columns>]
 
 [||2|| 
-This content can have any form of unimarkup content
+This content can have any form of unimarkup content. It is automatically split into two columns.
 
 # Header
 
@@ -815,7 +874,21 @@ This content can have any form of unimarkup content
 # Header2
 
 Some *more* text.
+]
 
+[||3||{ "distribution" : "page" }
+This content is in column 1.
+
+Up until a new page is reached.
+A new page can be set explicitly
+
+:::
+
+Content in column 2.
+
+A new page can also occur, if the output format is restricted to a certain page size and there is too much content to fit on one page.
+
+`page` and `height` distribution might not fill all columns. The remaining columns will remain blank.
 ]
 ~~~
 
