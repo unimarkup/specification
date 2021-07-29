@@ -474,8 +474,18 @@ Set `-` 3 or more times on a line that is surrounded by blank lines.
 
 ### Hyperlinks
 
+Hyperlinks can be set to external sources or IDs. For IDs, the given URL must start with a `#` followed by the ID.
+
+It is possible to set a link title using the `"title"` attribute. If it is not set, the URL is shown.
+
+**Note:** Hyperlinks with IDs as sources should only be used, if an explicit text is wanted. Otherwise, [ID referencing](#id-referencing) should be used.
+
 ~~~
 [Text represented as hyperlink](url){<optional hyperlink attributes>}
+
+[Explicit hyperlink text for some item](#item-id)
+
+[Hyperlink with an explicit title](some-url){ "title" : "Explicit hyperlink title" }
 ~~~
 
 ### Image insert
