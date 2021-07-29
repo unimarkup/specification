@@ -696,13 +696,13 @@ To get a list of all used literature references, the macro `{@literature}` can b
 ~~~
 This text has some literature reference [&&literature-id{Author, year}].
 
-This text has more than one literature reference [&&id-1{Author1, year}&&id-2{Author2, year}].
+This text has more than one literature reference [&&id-1{Author1 page, year}&&id-2{Author2, year}].
 
+The given literature text [&&id-x{can also be nonsense}], but this is up to the writer.
 
 A list of all referenced literature is rendered below:
 
 {@literature}
-
 ~~~
 
 ### Abbreviations
