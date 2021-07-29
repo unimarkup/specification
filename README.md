@@ -320,6 +320,22 @@ If at least one lower task is set to fail, the higher task is set to fail. Other
   -[ ] Open task
 ~~~
 
+### Option lists
+
+A bullet list can become an option list, if `...` is set after a non-space character in the first paragraph of the bullet list.
+
+The content after `...` is indented to align with all other list items of the option list.
+Multiple paragraphs can be set as with bullet lists.
+
+~~~
+- Bullet list ... Gets transformed to an option list
+- Possible `option` ... Content is indented to the right, to start at the same position as the content from all other option list items.
+- Multiple `-paragraphs` ... As with bullet lists
+
+  Multiple paragraphs are possible.
+  But the paragraphs are also indented to the same position.
+~~~
+
 ### Tables
 
 Unimarkup uses grid tables with extended flexibility.
