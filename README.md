@@ -47,7 +47,7 @@ More unimarkup text for the nested header...
 
 Even more unimarkup text...
 
-# Header with attributes {header attributes}
+# Header with attributes {<header attributes>}
 
 # Multiline
 header is also possible
@@ -56,7 +56,7 @@ The first paragraph of this header level starts here.
 
 # Multiline
 header with
-additional attributes {header attributes}
+additional attributes {<header attributes>}
 
 # Header with explicit identifier { "id" : "explicit-header-id" }
 
@@ -64,7 +64,7 @@ additional attributes {header attributes}
 
 ### Inline formatting
 
-Inline formatting is applied to a paragraph. For multi-paragraph formatting see [here](###attribute-blocks).
+Inline formatting is applied to a paragraph. For multi-paragraph formatting see [here](#attribute-blocks).
 
 Inline formatting can also be applied inside words.
 
@@ -435,7 +435,7 @@ graph TB
 Unimarkup is object, informatical and systemic.
 Pdf is object, informatical and systemic.
 Html is object, informatical and systemic.
-Converting is process, informatical and systemic.{#main-converting-process}
+Converting is process, informatical and systemic.{ "id" : "main-converting-process" }
 Converting consumes Unimarkup.
 Converting yields Html and Pdf.
 '''
@@ -684,7 +684,7 @@ To define the text that is shown when an item is referenced, the attribute `refO
 ~~~
 ![Some image](<image url>){ "id" : "some-image-id", "ref" : { "label" : "Some image", "prefix" : "Figure X:" } }
 
-A paragraph that references [##some-image-id]{ "refOption" : "prefixLabel"}. 
+A paragraph that references [##some-image-id]_{ "refOption" : "prefixLabel"}. 
 The referenced text looks like: Figure X: Some image 
 ~~~
 
@@ -886,7 +886,7 @@ This content can have any form of unimarkup content. It is automatically split i
 Some *more* text.
 ]
 
-[||3||{ "distribution" : "page" }
+[||3||
 This content is in column 1.
 
 Up until a new page is reached.
@@ -899,7 +899,7 @@ Content in column 2.
 A new page can also occur, if the output format is restricted to a certain page size and there is too much content to fit on one page.
 
 `page` and `height` distribution might not fill all columns. The remaining columns will remain blank.
-]
+]{ "distribution" : "page" }
 ~~~
 
 ### Preamble
