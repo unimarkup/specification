@@ -64,9 +64,9 @@ additional attributes {<header attributes>}
 
 ### Inline formatting
 
-Inline formatting is applied to a paragraph. For multi-paragraph formatting see [here](#attribute-blocks).
+Inline formatting is applied to a paragraph. For multi-paragraph formatting see [attribute blocks](#attribute-blocks). A non-space character must follow the inline formatting. If the inline formatting is not closed by the same characters, the characters are treated as normal characters. 
 
-Inline formatting can also be applied inside words.
+Inline formatting can also be applied inside words and stacked.
 
 - Bold
 
@@ -145,6 +145,17 @@ Inline formatting can also be applied inside words.
   |highlighted text|
   ~~~
 
+Inline formatting inside words
+~~~
+For*matt*ing inside __word__s is possible.
+~~~
+
+Stack inline formatting by nesting them.
+~~~
+Stacking this **__text to be bold and underlined__**.
+The opposite way __**is also bold and underlined**__.
+To get ***bold and italic***.
+~~~
 
 ### Bullet lists
 
