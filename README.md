@@ -508,12 +508,14 @@ $$\sum_{i = 1}^{\infty}{i^2}$$
 
 ### Horizontal line
 
-Set `-` 3 or more times on a line that is surrounded by blank lines.
+Set `-` 3 or more times on a new line that is surrounded by blank lines to create a horizontal line.
 
 ~~~
-
 ---
 
+Another horizontal line after this text.
+
+---
 ~~~
 
 ### Hyperlinks
