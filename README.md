@@ -828,7 +828,7 @@ An author text can optionally be set at the end of a quotation block by starting
 > >
 > >-- Author
 
-> Some quoted text that
+> Some quoted text
 >
 >-- by someone
 >-- and many others
