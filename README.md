@@ -350,11 +350,17 @@ Nested option lists indent the content to the right of `...` by the same length 
 
 ### Tables
 
-Unimarkup uses grid tables with extended flexibility.
+Unimarkup uses grid tables with extended flexibility. A table is started by a row definition line with `+` and a combination of `-` or `=` and `+`, where a `+` marks a column separation and `-` or `=` mark the column width.
 
-Most notably, columns don't need to align. This helps for easier styling, since some characters are used as keywords, so the table might have more text in Unimarkup, than what is displayed after rendering. A side effect of this is, that `|` must be escaped when used inside a table, except in verbatim and math blocks to get the possibility of multi-column rows. Multi-column rows are defined by replacing `+` with `-`. The number of `+` defines the number of `|` that are expected per row.
+A table is ended by 3 or more `+`.
 
-The table width adapts itself by taking the rendered width of the top left column and scaling the other columns according to the first line ratio of the table columns. The column width can be overwritten by the `"width"` attribute if needed.
+Extended flexibility means, that columns do not need to align. This helps for easier styling, since some characters are used as keywords, so the table might have more text in Unimarkup, than what is displayed after rendering. A side effect of this is, that `|` must be escaped when used inside a table, except in verbatim and math blocks to get the possibility of multi-column rows. Multi-column rows are defined by replacing `+` with `-`. The number of `+` defines the number of `|` that are expected per row.
+
+Header rows are marked by setting `=` instead of `-` in the row description line above the content.
+
+The column width of one `-` is automatically defined by taking the rendered width of the top left table item and scaling other items according to the line ratio of the column definition lines. The column width of one `-` can be overwritten by the `"column-width"` attribute of the table if needed.
+
+The sum of `-`, `=`, `_` and `+` must be the same for all row definition lines to get the same width of all rows. 
 
 A `_` instead of `-` marks that no line will be created between two rows, creating a multi-row. The number of `-` and `_` between the two rows must match per column. This means that only adjacent columns of rows can be combined. If all columns are combined to multi-row, the next line can be started with `|`.
 
@@ -364,14 +370,18 @@ For easier alignment options, `:` can be used per column definition having no ef
 - `+--:+` ... right alignment
 - `+:--:+` ... center alignment
 
-A table is ended by 3 or more `+`.
-
 **Note:** Column attributes can not be set on columns marked with `_` (multi-row), since they take their style from the column above.
 
 ~~~
 
 +--+-+--+
 | Top left column of table | 1/2 length | same length as top left |
++++
+
++=+=+
+| Header column 1 | Header column 2 |
++-+-+
+| Normal column 1 | Normal column 2 |
 +++
 
 +-+-+
@@ -399,10 +409,9 @@ A table is ended by 3 or more `+`.
 
 +-{<column1 attributes>}+-{<column2 attributes>}+{<row1 attributes>}
 | column1 row1 | column2 row1 |
-+-{<column1 row2 attributes>}+-+
-| column1 row2 | column2 row2 |
++-{<overwrite column1 attributes for later columns>}+-+
+| column1 row2 | column2 row2 {<column2 row2 attributes>}|
 +++{<table attributes>}
-
 ~~~
 
 ### Verbatim blocks
