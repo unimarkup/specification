@@ -322,10 +322,12 @@ If at least one lower task is set to fail, the higher task is set to fail. Other
 
 ### Option lists
 
-A bullet list can become an option list, if `...` is set after a non-space character in the first paragraph of the bullet list.
+A bullet list can become an option list, if `...` is set after a non-space character in the first line of a bullet list item.
 
 The content after `...` is indented to align with all other list items of the option list.
 Multiple paragraphs can be set as with bullet lists.
+
+Nested option lists indent the content to the right of `...` by the same length to the right compared to the content of the parent content, as the nested item is indented compared to the parent item.
 
 ~~~
 - Bullet list ... Gets transformed to an option list
@@ -334,6 +336,16 @@ Multiple paragraphs can be set as with bullet lists.
 
   Multiple paragraphs are possible.
   But the paragraphs are also indented to the same position.
+
+- Nested ... option list
+  - Works ... too
+~~~
+
+**Note:** If `...` does not appear in the first line, the list remains a bullet list.
+
+~~~
+- Bullet list
+  that remains ... a bullet list
 ~~~
 
 ### Tables
