@@ -473,6 +473,8 @@ Since OPL by default does not specify styling or referencing options, it is exte
 
   This is useful to link an object or process to another graph where it is described in more detail for example. Or to provide additional styling information to color an object or process to show test coverage for example.
 
+**Note:** Render blocks can not be nested.
+
 ~~~
 '''mermaid
 graph TB
