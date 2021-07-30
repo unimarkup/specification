@@ -810,15 +810,28 @@ The list of default attributes can be found [here](Unimarkup_Language_ReferenceM
 
 ### Quotation blocks
 
+Quotation blocks can be used to quote longer text sections. A block is started by starting a new line with `>` followed by one space. Multiple lines can be added by starting them with `>` followed by one space. A quotation block only supports paragraphs with inline formatting and must be surrounded by blank lines.   
+
+Quotation blocks can be nested, by setting `>` followed by one space at a new line of a quotation block. Empty quotation or blank lines must surround the nested block.
+
+An author text can optionally be set at the end of a quotation block by starting a new line with `>--` followed by one space after an empty quotation line. To get multiple author text lines, start each with `>--`.  
+
 ~~~
 > Block quote
 > with new lines
-> treated as spaces
+> *treated* as spaces
 > as with normal paragraphs
-> and other unimarkup syntax is also possible 
+> and other **inline formatting** syntax is also possible 
 >
 > > Nested block quote\
-> > A backslash at the end of a line creates a new line. 
+> > A backslash at the end of a line creates a new line.
+> >
+> >-- Author
+
+> Some quoted text that
+>
+>-- by someone
+>-- and many others
 ~~~
 
 ### Line blocks
