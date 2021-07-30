@@ -493,23 +493,17 @@ Converting yields Html and Pdf.
 
 ### Math blocks
 
-~~~
-Blocked math mode
-$$x = \frac{3}{4}$$
-~~~
+Math blocks allow using math mode on block level. Text given inside a math block is treated as one formula.
 
-Math block mode inside a paragraph:
-~~~
-Blocked math mode $$x = \frac{3}{4}$$ can be inside a paragraph, but it will be rendered as a new line.
-~~~
+A math block is given by `$$` at start and end and must be surrounded by blank lines or followed by another math block on the next line.
 
-So the above is equivalent to:
 ~~~
 Blocked math mode
 
 $$x = \frac{3}{4}$$
 
-can be inside a paragraph, but it will be rendered as a new line.
+$$\sum_{i = 1}^n{i^2}$$
+$$\sum_{i = 1}^{\infty}{i^2}$$
 ~~~
 
 ### Horizontal line
