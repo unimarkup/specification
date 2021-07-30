@@ -25,7 +25,7 @@ This language was heavily influenced by the Pandoc-Flavor of Markdown, reStructu
 
 # Language Overview
 
-Below is only a short overview of the unimarkup language, the full reference manual can be found [here](Unimarkup_Language_ReferenceManual.md).
+Below is only a short overview of the unimarkup language, the full reference manual can be found in the [Unimarkup language reference manual](Unimarkup_Language_ReferenceManual.md).
 
 ## Fundamentals
 ### Headers
@@ -33,6 +33,7 @@ Below is only a short overview of the unimarkup language, the full reference man
 Headers are in atx-style only with support for 6 heading-levels. For more details, see [LRM-Headers](Unimarkup_Language_ReferenceManual.md##Headers). A header must have an empty new line before and after it, or another header. Header attributes are set at the end of the header text.
 
 **Example:**
+
 ~~~
 # First Main Header
 
@@ -59,7 +60,6 @@ header with
 additional attributes {<header attributes>}
 
 # Header with explicit identifier { "id" : "explicit-header-id" }
-
 ~~~
 
 ### Inline formatting
@@ -71,6 +71,7 @@ Inline formatting can also be applied inside words and stacked.
 - Bold
 
   A text is bold by surrounding it with `**`.
+
   ~~~
   **bold text**
   ~~~
@@ -78,6 +79,7 @@ Inline formatting can also be applied inside words and stacked.
 - Italic
 
   A text is italic by surrounding it with `*`.
+
   ~~~
   *italic text*
   ~~~
@@ -85,6 +87,7 @@ Inline formatting can also be applied inside words and stacked.
 - Underline
 
   A text is underlined by surrounding it with `__`.
+
   ~~~
   __underlined text__
   ~~~
@@ -100,6 +103,7 @@ Inline formatting can also be applied inside words and stacked.
 - Strike through
 
   A text is strike through by surrounding it with `~~`.
+
   ~~~
   ~~strike through text~~
   ~~~
@@ -123,7 +127,8 @@ Inline formatting can also be applied inside words and stacked.
 - Verbatim
 
   A text can be defined verbatim by surrounding it with `` ` ``.
-  If you want to use a `` ` `` inside, you need to use ` `` ` at start and end.  
+  If you want to use a `` ` `` inside, you need to use ` `` ` at start and end.
+
   ~~~
   `verbatim text`
 
@@ -133,6 +138,7 @@ Inline formatting can also be applied inside words and stacked.
 - Math
 
   Inline math mode can be used by surrounding formulas with `$`.
+
   ~~~
   $\frac{1}{n}$
   ~~~
@@ -145,16 +151,27 @@ Inline formatting can also be applied inside words and stacked.
   |highlighted text|
   ~~~
 
+- Text group
+
+  Text inside one paragraph can be grouped by surrounding it with `[]`. Only inline formatting can be applied to text inside a text group. A text group can be used to apply [text attributes](Unimarkup_Language_ReferenceManual.md#text-attributes).
+
+  ~~~
+  A paragraph with [grouped text]{ "size" : "20pt" }. Also grouping in one w[or]d is possible.
+  ~~~
+
 Inline formatting inside words
+
 ~~~
 For*matt*ing inside __word__s is possible.
 ~~~
 
 Stack inline formatting by nesting them.
+
 ~~~
 Stacking this **__text to be bold and underlined__**.
 The opposite way __**is also bold and underlined**__.
 To get ***bold and italic***.
+Having a **[bold group]{ "color" : "rgb(0,255,0)" }**.
 ~~~
 
 ### Bullet lists
@@ -361,9 +378,8 @@ Nested option lists indent the content to the right of `...` by the same length 
 
 ### Tables
 
-Unimarkup uses grid tables with extended flexibility. A table is started by a row definition line with `+` and a combination of `-` or `=` and `+`, where a `+` marks a column separation and `-` or `=` mark the column width.
-
-A table is ended by 3 or more `+`.
+Unimarkup uses grid tables with extended flexibility. A table is started by a row definition line with `+` and a combination of `-` or `=` and `+`, where a `+` marks a column separation and `-` or `=` mark the column width. 
+A table is ended by 3 or more `+` and the table must be surrounded by blank lines.
 
 Extended flexibility means, that columns do not need to align. This helps for easier styling, since some characters are used as keywords, so the table might have more text in Unimarkup, than what is displayed after rendering. A side effect of this is, that `|` must be escaped when used inside a table, except in verbatim and math blocks to get the possibility of multi-column rows. Multi-column rows are defined by replacing `+` with `-`. The number of `+` defines the number of `|` that are expected per row.
 
@@ -384,7 +400,6 @@ For easier alignment options, `:` can be used per column definition having no ef
 **Note:** Column attributes can not be set on columns marked with `_` (multi-row), since they take their style from the column above.
 
 ~~~
-
 +--+-+--+
 | Top left column of table | 1/2 length | same length as top left |
 +++
@@ -427,7 +442,7 @@ For easier alignment options, `:` can be used per column definition having no ef
 
 ### Verbatim blocks
 
-A verbatim block is surrounded by 3 or more `~` at the start of a new line.
+A verbatim block is started by 3 or more `~` at the start of a new line and must be surrounded by blank lines.
 
 If a verbatim block must be displayed inside a verbatim block,
 the outer block must have at least one `~` more than the inner block.
@@ -461,8 +476,9 @@ int add(int a,  int b) {
 
 ### Render blocks
 
-3 or more `'` at start of a line mark the start and end of a render block.
-A render block is used to render graphics, diagrams and charts written in common graph description languages like [mermaid](https://mermaid-js.github.io/) or [opl](https://en.wikipedia.org/wiki/Object_Process_Methodology).
+3 or more `'` at start of a line mark the start and end of a render block. A render block must be surrounded by blank lines.
+
+A render block is used to render graphics, diagrams and charts written in common graph description languages like [mermaid](https://mermaid-js.github.io/) or [opl](https://en.wikipedia.org/wiki/Object_Process_Methodology).\
 The language must be provided directly after the last `'` at the start of the render block.
 
 Since OPL by default does not specify styling or referencing options, it is extended in unimarkup with the following additions:
@@ -616,7 +632,6 @@ At least 3 `:` at start of a line surrounded by blank lines set a new page. How 
 **Note:** A new page inside an [explicit column block](#explicit-column-blocks) creates a new column instead of a new page.
 
 ~~~
-
 :::
 
 :::{new page with attributes}
@@ -638,6 +653,7 @@ A text with an emoji :D in it!
 ~~~
 
 Rendered to:
+
 ~~~
 A text with an emoji 😃 in it!
 ~~~
@@ -649,31 +665,38 @@ The full list of supported emojis can be seen [here](Unimarkup_Language_Referenc
 
 A text block can be used to group unimarkup text and set attributes that apply to the text inside the text block. Since a text block can have its own ID, it is easy to group and reference text.
 
-A text block can be used everywhere inside a paragraph, followed by another text block, or a new line. A text block can again be inside a text block.
+A text block is started by `[[[` with a blank line before and ended with `]]]` followed by a blank line.
 
-**Note:** Inline formatting can not be applied to a text block. Formatting can be done by setting attributes for a text block, or use inline formatting inside the text block.
+For nested text blocks, add at least one `[` to the start and the same number of `]` to the end of the parent block.
 
-~~~
-[Everything inside is treated as unimarkup text.
-  Provided attributes apply to all text inside this block
-]{Attributes for the text block}
+**Note:** Text styling is applied to every text inside a text block independent of the item type.
 
-A paragaph that has a [text block]{ "text" : { "color" : "rgb(255,0,0)" }} inside.
+~~~~
+[[[{<Attributes for the text block>}
+Everything inside is treated as unimarkup text.
+Provided attributes apply to all text inside this block
+]]]
 
-[
+[[[[{ "text" : { "color" : "rgb(255,0,0)" }}
+Everything inside the text block gets red text-color.
+
 # Main text block
 
-[A nested text block]{ "id" : "main-text-block-content"}
-]
-Text is [start]{ "text" : { "size" : "20pt" } }ed at a new line after a text block.
+[[[{ "id" : "main-text-block-content"}
+A nested text block
+]]]
 
-[text blocks can be used before and after any other block type]{ "id" : "text-before-block" }
+]]]]
+
+[[[
+Any Unimarkup text can be inside a text block
+
 ~~~
-Verbatim block after a text block
+Verbatim block inside a text block
 ~~~
 
-Some text __[Inline formatting is NOT applied, but inline formatting inside **works** ]__!
-~~~
+]]]
+~~~~
 
 ### Referencing
 
@@ -779,6 +802,7 @@ Some text using an [::abbr]_.
 ~~~
 
 Defining abbreviations:
+
 ~~~
 _[::abbr] Abbreviation
 
@@ -787,11 +811,13 @@ _[::html] Hypertext Markup Language
 ~~~
 
 Multi-word abbreviations are also allowed
+
 ~~~
 _[::OPC UA TSN] OPC Unified Architecture Time-Sensitive Networking
 ~~~
 
 Multiple lines are also possible
+
 ~~~
 _[::mult] Abbreviation
 _ spanning multiple lines\
@@ -800,9 +826,9 @@ _ Backslash at end creates a rendered new line!
 
 ### Attribute blocks
 
-Attributes are given in JSON-Format. There are default attributes for all unimarkup elements and some specific ones for certain elements.
+Attributes are given in JSON-Format. There are default attributes for all unimarkup elements and some specific ones for certain elements. The allowed position of attribute blocks can be seen in the attribute section of each item in the [Unimarkup LRM](Unimarkup_Language_ReferenceManual.md).
 
-The list of default attributes can be found [here](Unimarkup_Language_ReferenceManuel.md/##Default-Attributes)
+The list of default attributes can be found in the [Unimarkup LRM](Unimarkup_Language_ReferenceManual.md#Default-attributes).
 
 ~~~
 {Attribute options}
@@ -888,6 +914,8 @@ The column orientation can be set using the attribute `"orientation"` with optio
 - `"leftToRight"` ... The content from top to bottom is oriented **from left to right**
 - `"rightToLeft"` ... The content from top to bottom is oriented **from right to left**
 
+Nested explicit column blocks are possible by adding at least one more `|` to the parent block.
+
 ~~~
 |||
 This content is part of the **first** column.
@@ -920,11 +948,26 @@ Column 1 content
 Column 2 content
 
 |||
+
+||||
+Some content.
+
+:::
+
+|||
+Nested column block
+
+:::
+
+Second column of the nested column block
+|||
+
+||||
 ~~~
 
 #### Implicit column blocks
 
-An implicit column block automatically splits its content by a given number of columns. In contrast to [explicit column blocks](#explicit-column-blocks), all columns have the same width which can not be changed with attributes and the [new page](#new-page) syntax creates a new page.
+An implicit column block automatically splits its content by a given number of columns. The block is started with `||<number of columns>||` and ended with `||#||`. A blank line must be before the start and end of a block. In contrast to [explicit column blocks](#explicit-column-blocks), all columns have the same width which can not be changed with attributes and the [new page](#new-page) syntax creates a new page.
 
 The content distribution can be defined with the attribute `"distribution"` and options
 
@@ -934,10 +977,14 @@ The content distribution can be defined with the attribute `"distribution"` and 
 
 As with the [explicit column blocks](#explicit-column-blocks), the orientation can be set using the `"orientation"` attribute.
 
-~~~
-[||<number of columns>|| <content that is evenly distributed over the given columns>]
+To create nested implicit column blocks, add at least one more `|` to both sides of the parent start and end block.
 
-[||2|| 
+~~~
+||<number of columns>||{<implicit column block attributes>}
+content that is evenly distributed over the given columns
+||#||
+
+||2|| 
 This content can have any form of unimarkup content. It is automatically split into two columns.
 
 # Header
@@ -948,9 +995,9 @@ This content can have any form of unimarkup content. It is automatically split i
 # Header2
 
 Some *more* text.
-]
+||#||
 
-[||3||
+||3||{ "distribution" : "page" }
 This content is in column 1.
 
 Up until a new page is reached.
@@ -963,7 +1010,16 @@ Content in column 2.
 A new page can also occur, if the output format is restricted to a certain page size and there is too much content to fit on one page.
 
 `page` and `height` distribution might not fill all columns. The remaining columns will remain blank.
-]{ "distribution" : "page" }
+||#||
+
+|||2|||
+It is possible to add nested columns
+
+||3||
+This content is inside a nested column block.
+||#||
+
+|||#|||
 ~~~
 
 ### Preamble
