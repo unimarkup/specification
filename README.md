@@ -861,11 +861,13 @@ The list of default attributes can be found in the [Unimarkup LRM](Unimarkup_Lan
 
 ### Quotation blocks
 
-Quotation blocks can be used to quote longer text sections. A block is started by starting a new line with `>` followed by one space. Multiple lines can be added by starting them with `>` followed by one space. A quotation block only supports paragraphs with inline formatting and must be surrounded by blank lines.   
+Quotation blocks can be used to quote longer text sections. A block is started by starting a new line with `>` followed by one space. Multiple lines can be added by starting them with `>` followed by one space. A quotation block must be surrounded by blank lines.
 
-Quotation blocks can be nested, by setting `>` followed by one space at a new line of a quotation block. Empty quotation or blank lines must surround the nested block.
+It is possible to use all unimarkup items inside a block quote, but headings are not considered as headers of the document. Styling for quoted headers can be set under the quotation block attribute `"header-styles"` for each level `"lvl<header level>"`.
 
-An author text can optionally be set at the end of a quotation block by starting a new line with `>--` followed by one space after an empty quotation line. To get multiple author text lines, start each with `>--`.  
+Quotation blocks can be nested, by setting `>` followed by one space at a new line of a quotation block. Empty quotation lines or blank lines must surround the nested block.
+
+An author text can optionally be set at the end of a quotation block by starting a new line with `>--` followed by one space after an empty quotation line. To get multiple author text lines, start each with `>--`.
 
 ~~~
 > Block quote
@@ -878,50 +880,87 @@ An author text can optionally be set at the end of a quotation block by starting
 > > A backslash at the end of a line creates a new line.
 > >
 > >-- Author
+>
+>{<Quotation block attributes>}
 
 > Some quoted text
 >
 >-- by someone
 >-- and many others
+>--{<Quotation block author attributes>}
 ~~~
 
 ### Line blocks
 
-~~~
-| Text where *spaces* are preserved as is.
-|    All other **markup** however, is considered as **unimarkup text**.
-~~~
+Line blocks preserve all spaces, tabs and new lines. A line block is started with `|` per new line followed by one space. A block must be surrounded by blank lines.
+
+It is possible to use all unimarkup items inside line blocks, except other line blocks.
 
 **Note:** There is no nesting for line blocks.
 
+**Note:** Since keywords are removed in the rendered document, the text might not align the same way in the raw and rendered form.
+
+~~~
+| Text where *spaces* are preserved as is.
+|    All other **markup** however, is considered as **unimarkup text**.
+
+| A verbatim block can be used inside a line block
+|
+| ~~~
+| Some verbatim text
+| ~~~
+|
+| Since spaces are already kept, a verbatim block inside a line block
+| is only necessary to get code highlighting.
+|{<Line block attributes>}
+~~~
+
 ### Definition blocks
+
+Definition blocks can be used to set a term with an optional classifier and a definition for this term. A definition block can be useful for theorems or variables.
+
+A definition block is started with `:` per new line followed by one space. A block must be surrounded by blank lines.
+
+The definition block starts with the term. A term can have multiple paragraphs and every Unimarkup item that can be used inside a paragraph. Other Unimarkup items are not allowed. To end the term section, `:` must be set at the end of the last line of the term section. An empty definition line must follow the term section if no classifier is given.
+
+An optional classifier can be set by starting the lines after the term section with `:--`.
+Lists are allowed for the classifier besides the supported Unimarkup items in the term section. A blank definition line must follow the classifier.
+
+The definition section allows any Unimarkup item.
 
 ~~~
 : Definition term :
 :
 : Definition of this term
-: can span multple lines
+: can span multiple lines
 
-: New definition :
+: New definition term :
+:-- Classifier for this term
 :
 : Paragraph 1
 :
 : Paragraph 2
 
-: New definition
+: New term
 : spanning several lines :
+:-- Also classifiers
+:-- can span multiple lines
 :
-: Paragraph for this definition
+: Paragraph for this term definition
 
-: Main definition :
+: Main term :{<Term attributes>}
 :
-: Paragraph for the main definition.
+: Paragraph for the main term definition.
 :
-: : Sub definition :
+: : Sub term :
+: :-- - Classifier with a bullet list
+: :-- - Second bullet list item
+: :--{<Classifier attributes>}
 : :
-: : Paragraph for the sub definition
+: : Paragraph for the sub term definition
 :
-: Other paragraph for the main definition
+: Other paragraph for the main term definition
+:{<Definition block attributes>}
 ~~~
 
 ### Column blocks
