@@ -681,7 +681,7 @@ A text block is started by `[[[` with a blank line before and ended with `]]]` f
 
 For nested text blocks, add at least one `[` to the start and the same number of `]` to the end of the parent block.
 
-**Note:** Text styling is applied to every text inside a text block independent of the item type.
+**Note:** Text styling is applied to every text inside a text block independent of the item type. To get independent styling per type, see [attribute hierarchy](Unimarkup_Language_ReferenceManual.md#attribute-hierarchy).
 
 ~~~~
 [[[{<Attributes for the text block>}
@@ -696,6 +696,19 @@ Everything inside the text block gets red text-color.
 
 [[[{ "id" : "main-text-block-content"}
 A nested text block
+]]]
+
+[[[{ "list_bullet" : { "background" : { "color" : "rgb(0,255,0)" }},
+    "list_numbered" : { "background" : { "color" : "rgb(0,0,255)" }}}
+
+- This bullet list has a green background
+
+1. This numbered list has a blue background
+
+- Again green background
+
+This paragraph has the default background.
+
 ]]]
 
 ]]]]
