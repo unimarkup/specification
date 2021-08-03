@@ -629,13 +629,25 @@ at the end of a line
 
 At least 3 `:` at start of a line surrounded by blank lines set a new page. How a new page is handled can be set in the preamble.
 
+It is possible to set styling attributes for Unimarkup types like tables, lists or paragraphs that apply only to the following page. See [attribute hierarchy](Unimarkup_Language_ReferenceManual.md#attribute-hierarchy) for more information on how to set attributes for different types.
+
 **Note:** A new page inside an [explicit column block](#explicit-column-blocks) creates a new column instead of a new page.
 
 ~~~
 :::
 
-:::{new page with attributes}
+:::{<new page with attributes>}
 
+:::{ "text" : { "font" : ["sans serif"] },
+  "class" : ["special-page"],
+  "table" : { "font" : ["monospace"] }
+}
+
+Every text on this page has a *sans-serif* font. Additional styling might be given by the `class` attribute. Tables have a *monospace* font.
+
+:::
+
+This text has the default font again.
 ~~~
 
 ### Emojis
