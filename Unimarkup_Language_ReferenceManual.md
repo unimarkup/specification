@@ -33,11 +33,13 @@ A backslash `\` at the end of a line, creates a new line explicitly inside one p
 ## Headers
 
 Headers are in atx-style only with support for 6 heading-levels.
-A `#` at start of a line followed by a space and one or more characters marks a header. Adding `#` before the space increases the header-level.
+A `#` at start of a line followed by a space and a paragraph marks a header. Adding `#` before the space increases the header-level.
 
-At least one space must be between `#` and the header and a blank line must come before and after the header, if the previous or next line is not a header. Text after a header without a blank new line is treated as header text, allowing multiline header text.
+At least one space must be between `#` and the header text and a blank line must come before and after the header, if the previous or next line is not a header. Text after a header without a blank new line is treated as header text, allowing multiline header text.
 
 To easily link to headers, references are created implicitly, where Latin characters are set to lower case, spaces between characters get replaced by `-` and other characters are removed. If the resulting ID is already present, it must be set explicitly.
+
+**Note:** A header text can have any item that is allowed inside a paragraph.
 
 **Example:**
 
@@ -56,7 +58,7 @@ To easily link to headers, references are created implicitly, where Latin charac
   ## Other Nested Header
 
   Even more text... 
-  Reference to the first header [##first-main-header]
+  Reference to the first header [##first-main-header]_
   ~~~
 
 - Invalid Header
