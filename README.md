@@ -313,7 +313,7 @@ Task lists provide 4 states to represent tasks.
 
 1. `[ ]` Open task (the space between the square brackets is important)
 2. `[x]` Completed task (small `x`)
-3. `[o]` Active task (small `o`)
+3. `[a]` Active task (small `a`)
 4. `[/]` Failed task
 
 It is possible to get nested task lists, by setting `-[] <task description>` at the higher level.
@@ -323,19 +323,19 @@ If at least one lower task is set to fail, the higher task is set to fail. Other
 ~~~
 -[ ] Open task
 -[x] Completed task
--[o] Active task that is worked on   
+-[a] Active task that is worked on   
 -[/] Failed task
 -[] Nested task with status = fail
   -[x] Completed task
   -[x] Another one completed
   -[/] Failed task
-  -[o] Active task
+  -[a] Active task
   -[ ] Open task
 -[] Nested task with status = active
   -[x] Completed task
-  -[o] Active task
+  -[a] Active task
   -[ ] Open task
--[] Nested task with status = cmpleted
+-[] Nested task with status = completed
   -[x] Completed task
   -[x] Completed task2
 -[] Nested task with status = open
@@ -366,10 +366,10 @@ Nested option lists indent the content to the right of `...` by the same length 
   But the paragraphs are also indented to the same position.
 
 - Nested ... option list
-  - Works ... too
+  + Works ... too
 ~~~
 
-**Note:** If `...` does not appear in the first line, the list remains a bullet list.
+**Note:** The list remains a bullet list, if `...` does not appear in the first line.
 
 ~~~
 - Bullet list
