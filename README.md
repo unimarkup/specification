@@ -621,7 +621,7 @@ If at least one lower task is set to fail, the higher task is set to fail. Other
 
 ### Option lists
 
-A bullet list can become an option list, if `...` is set after a non-space character in the first line of a bullet list item.
+A bullet list can become an option list, if `...` is set after a space character in the first line of a bullet list item. Any non-space character must be set between the start of the list and `...`.
 
 The content after `...` is indented to align with all other list items of the option list.
 Multiple paragraphs can be set as with bullet lists.
