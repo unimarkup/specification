@@ -1129,9 +1129,28 @@ This content is inside a nested column block.
 ~~~
 
 ## Other items
+### Block titles
+
+A title can be set for a block by preceding the block with a paragraph surrounded by `===`.
+
+~~~
+===
+Title for a table
+===
++-+-+
+| table | row |
++-+-+
+
+===
+Another title for a numbered list
+===
+1. Numbered list
+1. Some list
+~~~
+
 ### Caption
 
-It is possible to set a caption at the end of a block item. A caption can have only one paragraph.
+It is possible to set a caption at the end of a block item. A caption can only have one paragraph.
 To set a caption to a block, set `+++` on a new line immediately after the block end. To close the caption, set `+++` at the next new line. A blank line must follow a caption.
 
 ~~~
