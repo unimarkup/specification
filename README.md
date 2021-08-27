@@ -1131,7 +1131,8 @@ This content is inside a nested column block.
 ## Other items
 ### Block titles
 
-A title can be set for a block by preceding the block with a paragraph surrounded by `===`.
+A title can be set for a block item by directly preceding the block with one paragraph surrounded by `===`.
+A blank line must be set before a block title.
 
 ~~~
 ===
