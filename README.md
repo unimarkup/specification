@@ -154,7 +154,7 @@ A non-space character must immediately follow an opened inline formatting. If th
 
 - **Quote**
 
-  A text can be quoted by surrounding it with `""""`.
+  A text can be quoted by surrounding it with `""`.
 
   ~~~
   ""quoted text""
@@ -225,32 +225,30 @@ Some paragraph text with ![some image](<image url>).
 
 ### Inline file insert
 
-There are two different ways to insert files inside a paragraph. Optionally it is possible to insert parts of a document with slicing.
+There are two different ways to insert files inside a paragraph. Optionally it is possible to insert parts of a document with slicing. The general form of an inline file insert looks like a hyperlink with a **special character** set before `[`.
 
 **Note:** If the inserted content does not fit inside a paragraph, no content is inserted.
 
+**Note:** The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
+
 #### Rendered inline file insert
 
-This way renders the inserted file. Supported file types that can be rendered are listed in the [Language Reference Manual](Unimarkup_Language_ReferenceManual.md).
-
-The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
+Using `'` as special character renders the inserted file depending on the file type. Supported file types that can be rendered are listed in the [Language Reference Manual](Unimarkup_Language_ReferenceManual.md).
 
 ~~~
-"[<Description for the file content that is inserted>](<file path>){<attributes>}
+'[<Description for the file content that is inserted>](<file path>){<attributes>}
 
-"[Header note](Unimarkup_Language_ReferenceManual.md)<>## Headers .*Note:\*\*< .. >{@blankLine}<>
+'[Header note](Unimarkup_Language_ReferenceManual.md)<>## Headers .*Note:\*\*< ..>
 ~~~
 
 #### Verbatim inline file insert
 
-This way inserts the text of a file as is like inline verbatim formatting. Every plain text format can be inserted.
-
-The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
+Using `~` as special character inserts the text of a file as is like inline verbatim formatting. Every plain text format can be inserted.
 
 ~~~
 ~[<Description for the file content that is inserted>](<file path>){<attributes>}
 
-Some paragraph text with ~[Some code](someCodeFile.ads)<<package SPARK_Alloc> .. <end SPARK_Alloc;>>.
+Some paragraph text with ~[Some code](someCodeFile.rs)<<fn > ..>. This would insert the first declared function of a rust file.
 ~~~
 
 #### Inline file insert slicing
@@ -259,17 +257,19 @@ Slicing defines parts of a document that are inserted. The slice is set after th
 
 - `<<Start text that is searched> .. <End text that is searched>>`
 
-  A start and end text is given between `<>` that must match positions inside the inserted document and the start position must be before the end position.
+  A start and end text is given between `<>` that must match positions inside the inserted document. 
+  
+  **Note:** The start position must be before the end position.
 
-  If both texts are matched in the inserted document, only the text between those two positions is inserted including the two matched texts.
+  **Note:** If the matched text can not be contained in one paragraph, nothing is inserted.
 
 - `<<Start text that is searched>> ..>`
 
-  Here, only the start text position is searched for. If it matches to a text in the inserted document, every text after this position is inserted including the matched text.
+  Here, only the start text position is searched for. If it matches to a text in the inserted document, every text after this position that preserves the text to remain one paragraph is inserted including the matched text.
 
 - `<.. <End text that is searched>>`
 
-  Every text up to the matched end text is inserted. If no text matches, nothing is inserted.
+  Every text that preserves the text to remain one paragraph up to the matched end text is inserted. If no text matches, nothing is inserted.
 
 - Excluding text slice
 
@@ -817,27 +817,25 @@ Image that shows something.
 
 ### Block file insert
 
-There are two different ways to insert files as block items. Optionally it is possible to insert parts of a document with slicing. Block file inserts must be surrounded by blank lines.
+There are two different ways to insert files as block items. Optionally it is possible to insert parts of a document with slicing. The general form of an inline file insert looks like a hyperlink with a **special character** repeated three or more times before `[`. Block file inserts must be surrounded by blank lines.
 
-Slicing is done in the same way as [slicing for inline file inserts](#inline-file-insert-slicing).
+The syntax for slicing is the same as [slicing for inline file inserts](#inline-file-insert-slicing). Instead of restricting slices to one paragraph, the whole document can be inserted. As a result, one-sided slicing does not stop at one paragraph but inserts either everything before or after a match.
+
+**Note:** The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
 
 #### Rendered block file insert
 
-This way renders the inserted file. Supported file types that can be rendered are listed in the [Language Reference Manual](Unimarkup_Language_ReferenceManual.md).
-
-The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
+Using `'` as special character renders the inserted file according to its type. Supported file types that can be rendered are listed in the [Language Reference Manual](Unimarkup_Language_ReferenceManual.md).
 
 ~~~
-"""[<Description for the file content that is inserted>](<file path>){<attributes>}
+'''[<Description for the file content that is inserted>](<file path>){<attributes>}
 
-"""[Header description without examples](Unimarkup_Language_ReferenceManual.md)<<## Headers> .. >\*\*Example<>
+'''[Header description without examples](Unimarkup_Language_ReferenceManual.md)<<## Headers> .. >\*\*Example<>
 ~~~
 
 #### Verbatim block file insert
 
-This way inserts the text of a file as is like a verbatim block. Every plain text format can be inserted.
-
-The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
+Using `~` as special character inserts the text of a file as is like a verbatim block. Every plain text format can be inserted.
 
 ~~~~
 ~~~[<Description for the file content that is inserted>](<file path>){<attributes>}
