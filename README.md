@@ -829,17 +829,17 @@ The description given inside `[]` is only used as information about the content 
 """[Header description without examples](Unimarkup_Language_ReferenceManual.md)<<## Headers> .. >\*\*Example<>
 ~~~
 
-#### Verbatim inline file insert
+#### Verbatim block file insert
 
 This way inserts the text of a file as is like a verbatim block. Every plain text format can be inserted.
 
 The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
 
-~~~
+~~~~
 ~~~[<Description for the file content that is inserted>](<file path>){<attributes>}
 
 ~~~[Some code](someCodeFile.ads)<<package SPARK_Alloc> .. <end SPARK_Alloc;>>
-~~~
+~~~~
 
 ### Text blocks
 
