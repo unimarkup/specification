@@ -782,17 +782,23 @@ Converting yields Html and Pdf.
 
 ### Math blocks
 
-Math blocks allow using math mode on block level. Text given inside a math block is treated as one formula.
-
-A math block is given by `$$` at start and end and must be surrounded by blank lines or followed by another math block on the next line.
+Math blocks allow using math mode on block level. Text given inside a math block is treated as one mathematical formula.
+A math block is given by `$$$` at start and end and must be surrounded by blank lines.
 
 ~~~
 Blocked math mode
 
-$$x = \frac{3}{4}$$
+$$$
+x = \frac{3}{4}
+$$$
 
-$$\sum_{i = 1}^n{i^2}$$
-$$\sum_{i = 1}^{\infty}{i^2}$$
+$$$
+\sum_{i = 1}^n{i^2}
+$$$
+
+$$$
+\sum_{i = 1}^{\infty}{i^2}
+$$$
 ~~~
 
 ### Figure insert
