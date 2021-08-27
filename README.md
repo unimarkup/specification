@@ -362,6 +362,8 @@ To define the text that is shown when an item is referenced, the attribute `refO
 - `prefix` ... shows the prefix text of the referenced item
 - `prefixLabel` ... shows the prefix and label text of the referenced item
 
+**Note:** Depending on the referenced item, additional referencing options can be available.
+
 ~~~
 ![Some image](<image url>){ "id" : "some-image-id", "ref" : { "label" : "Some image", "prefix" : "Figure X:" } }
 
