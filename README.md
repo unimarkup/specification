@@ -448,9 +448,7 @@ The following items are treated as blocks.
 ### Bullet lists
 
 Any of the characters `-+*` at start of a line followed by a space or attribute block is treated as bullet list.
-
 Text that is indented by 2*list-depth spaces, is part of the list content of this depth.
-
 A single backslash at start of a line between two lists separates those two lists at the highest depth.
 
 ~~~~
@@ -485,7 +483,7 @@ Paragraph not for a bullet list
 
 \
 
-- Backslash above defines this as new bullet list
+- Backslash above defines this as a new bullet list
 ~~~~
 
 ### Numbered lists
