@@ -942,6 +942,8 @@ It is possible to use all unimarkup items inside line blocks, except other line 
 
 **Note:** Since keywords are removed in the rendered document, the text might not align the same way in the raw and rendered form.
 
+**Note:** Setting explicit new lines with a backslash at the end has no effect, since new lines are preserved in line blocks. 
+
 ~~~
 | Text where *spaces* are preserved as is.
 |    All other **markup** however, is considered as **unimarkup text**.
