@@ -285,7 +285,7 @@ Slicing defines parts of a document that are inserted. The slice is set after th
 
 ### Emojis
 
-Some special character sequences are reserved for direct emoji conversion. Those sequences must be surrounded by whitespaces.
+Some special character sequences are reserved for direct emoji conversion. Those sequences must be surrounded by whitespaces, or they are kept as is.
 
 **Some available emojis:**
 
@@ -303,7 +303,32 @@ Rendered to:
 A text with an emoji 😃 in it!
 ~~~
 
-The full list of supported emojis can be seen in the [Language Reference Manual](Unimarkup_Language_ReferenceManual.md/#Emojis) 
+The full list of supported emojis can be seen in the [Language Reference Manual](Unimarkup_Language_ReferenceManual.md/#Emojis).
+
+### Arrows
+
+Some character sequences are translated to certain Unicode arrows. Those sequences must be surrounded by whitespaces, or they are kept as is.
+
+**Some arrow translations:**
+
+- `-->` ... 🠖 (U+1F816)
+- `|-->` ... ↦ (U+21A6)
+- `---->` ... ⟶ (U+27F6)
+- `====>` ... ⟹ (U+27F9)
+- `<--` ... 🠔 (U+1F814)
+- `<==>` ... ⇔ (U+21D4)
+
+~~~
+A text --> using an arrow!
+~~~
+
+Rendered to:
+
+~~~
+A text 🠖 using an arrow!
+~~~
+
+The full list of supported arrows can be seen in the [Language Reference Manual](Unimarkup_Language_ReferenceManual.md/#Emojis).
 
 ### Referencing
 

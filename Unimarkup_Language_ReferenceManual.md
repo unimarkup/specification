@@ -78,7 +78,7 @@ To easily link to headers, references are created implicitly, where Latin charac
 
 ## Emojis
 
-Some special character sequences are reserved for direct emoji conversion. Those sequences must be surrounded by whitespaces.
+Some special character sequences are reserved for direct emoji conversion. Those sequences must be surrounded by whitespaces, or they are kept as is.
 
 **Full list of available emojis:**
 
@@ -108,6 +108,41 @@ A text with an emoji :D in it!
 Rendered to:
 ~~~
 A text with an emoji 😃 in it!
+~~~
+
+### Arrows
+
+Some character sequences are translated to certain Unicode arrows. Those sequences must be surrounded by whitespaces, or they are kept as is.
+
+**Some arrow translations:**
+
+- `-->` ... 🠖 (U+1F816)
+- `|-->` ... ↦ (U+21A6)
+- `---->` ... ⟶ (U+27F6)
+- `|---->` ... ⟼ (U+27FC)
+- `==>` ... ⇒ (U+21D2)
+- `|==>` ... ⤇ (U+2907)
+- `====>` ... ⟹ (U+27F9)
+- `|====>` ... ⟾ (U+27FE)
+- `<--` ... 🠔 (U+1F814)
+- `<--|` ... ↤ (U+21A4)
+- `<----` ... ⟵ (U+27F5)
+- `<----|` ... ⟻ (U+27FB)
+- `<==` ... ⇐ (U+21D0)
+- `<==|` ... ⤆ (U+2906)
+- `<====` ... ⟸ (U+27F8)
+- `<====|` ... ⟽ (U+27F8)
+- `<-->` ... ⟷ (U+27F7)
+- `<==>` ... ⇔ (U+21D4)
+
+~~~
+A text --> using an arrow!
+~~~
+
+Rendered to:
+
+~~~
+A text 🠖 using an arrow!
 ~~~
 
 # Special characters
