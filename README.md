@@ -674,18 +674,29 @@ Nested option lists indent the content to the right of `...` by the same length 
 
 ### Tables
 
-Unimarkup uses grid tables with extended flexibility. A table is started by a row definition line with `+` and a combination of `-` or `=` and `+`, where a `+` marks a column separation and `-` or `=` mark the column width. 
-A table must be ended by a row definition line with same length as the first one and the table must be surrounded by blank lines. The length is the sum of `-`, `+`, `_`, `=` and spaces within the two outer `+`.
+Unimarkup uses grid tables with extended flexibility. A table is started by a row definition line with `+` and a combination of `-`, `_`, `=` or spaces and `+`, where a `+` marks a column separation and `-`, `_`, `=` or spaces mark the column width.
 
-Extended flexibility means, that columns do not need to align. This helps for easier styling, since some characters are used as keywords, so the table might have more text in Unimarkup, than what is displayed after rendering. A side effect of this is, that `|` must be escaped when used inside a table, except in verbatim and math blocks to get the possibility of multi-column rows. Multi-column rows are defined by replacing `+` with `-`. The number of `+` defines the number of `|` that are expected per row.
+**Note:** The first row definition line can not have `_` or spaces.
 
-Header rows are marked by setting `=` instead of `-` in the row description line above the content for all columns. Footer rows are marked by setting `_` instead of `-` in the row description line above the content for all columns.
+Table content is placed between `|` with at least one space difference to a `|`. Each table content row must start and end with one `|`.
+
+Extended flexibility means, that columns do not need to align. This helps for easier styling, since some characters are used as keywords, so the table might have more text in Unimarkup, than what is displayed after rendering. A side effect of this is, that `|` must be escaped when used inside a table, except in verbatim and math blocks, to get the possibility of multi-column rows. Multi-column rows are defined by replacing `+` with `-`, `=` or `_`. The number of `+` defines the number of `|` that are expected per row.
+
+A table must be ended by a row definition line that only uses `+` or `-` and the table must be surrounded by blank lines. This means, that the last line has at least the form `+-+` with additional `+` and `-` added between.
+
+Header rows are marked by setting `=` instead of `-` in the row description line above the content for all columns, or spaces, if the previous row is already marked as header or footer. Footer rows are marked by setting `_` instead of `-` in the row description line above the content for all columns.
+
+**Note:** The table is not rendered, if not all column entries in a row definition line have the same character and are not part of a multi-row header or footer column.
+
+It is also possible to set header columns by setting `=` or spaces instead of `-` for the column in each row definition line above. Spaces are only allowed, if the column was set as a header column before, making it a multi-row header column.
+
+**Note:** The table is not rendered, if a header column has `-` or `_` in one of the row definition lines.
 
 The column width of one `-` is automatically defined by taking the rendered width of the top left table item and scaling other items according to the line ratio of the column definition lines. The column width of one `-` can be overwritten by the `"column-width"` attribute of the table if needed.
 
-The sum of `-`, `=`, `_`, `+` and spaces between the two outer `+` must be the same for all row definition lines to get the same width of all rows. 
+The number of `-`, `=`, `_`, `+` and spaces between the two outer `+` must be the same for all row definition lines to get the same width for all rows.
 
-One space instead of `-` marks that no line will be created between two rows, creating a multi-row. The number of `-` and spaces between the two rows must match per column. This means that only adjacent columns of rows can be combined. If all columns are combined to multi-row, the next line can be started with `|`.
+One space instead of `-` marks that no line will be created between two rows, creating a multi-row. The number of `-` and spaces between the two rows must match per column. This means that only adjacent columns of rows can be combined. If all columns are combined to multi-rows, the next line can directly be started with `|`.
 
 For easier alignment options, `:` can be used per column definition having no effect on the width scaling of columns. There are 3 alignment options
 
@@ -704,6 +715,12 @@ For easier alignment options, `:` can be used per column definition having no ef
 | Header column 1 | Header column 2 |
 +-+-+
 | Normal column 1 | Normal column 2 |
++---+
+
++=+-+
+| Header column | Normal column |
++=+-+
+| Header column | Normal column |
 +---+
 
 +-+-+
