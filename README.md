@@ -1311,6 +1311,88 @@ A text that uses {@myMacro}.
 This text{@sup{Is superscripted}}
 ~~~
 
+## Non-printable items
+
+These items can not be printed, as their behavior is either dynamic or only useable for certain output formats.
+For higher security, those items can be disabled in the preamble and are then treated as normal text.
+
+### Output blocks
+
+Every content inside an output block is forwarded as is to the rendered document. A block is started and ended with three or more `<` at a new line. Output blocks must be surrounded by blank lines and do not allow nesting.
+
+Output blocks are especially useful for the HTML output format.
+
+~~~
+<<<
+<aside>
+Some text. No Unimarkup support inside output blocks! 
+</aside>
+<<<
+
+<<<
+<script src="someScript.js"></script>
+<<<
+~~~
+
+### Media block insert
+
+With media blocks allowed, it is possible to insert video and audio files in addition to images using an extended figure insert syntax that allows to specify multiple sources, in case a media format is not supported, by adding them with `(<alternative source>)` directly after the first source entry.
+
+**Note:** The given sources must all be from the same media type. It is not possible to have sources for video, media or image types.
+
+~~~
+!!![<Alternative text if media file is not supported>](<media to use>)(<alternative media to use>)
+
+!!![Some video](someVideo.mp4)(someVideo.ogg)(someVideo.webm)
+~~~
+
+### Form blocks
+
+If form blocks are allowed, predefined form macros can be used next to other Unimarkup content inside a form block to get user input that can be submitted to a URL that is set using the `send-to` attribute. A form block must be surrounded by blank lines.
+
+**Note:** It is not possible to nest form blocks.
+
+The full list of predefined form macros can be found in the [LRM](Unimarkup_Language_ReferenceManual.md).
+
+~~~
+///{ "send-to" : "<some url>"}
+**Unimarkup** content can be used like always!
+
++-+-+
+| {@formLabel{First name:}} | {@formText{Sam}}{ "id" : "fname" } |
++-+-+
+| {@formLabel{Last name:}} | {@formText{Simpleman}}{ "id" : "lname" } |
++---+
+
+Radio buttons can flow freely: {@formRadio{%text{Option1}%group{grp1}}}.
+
++-+-+
+| {@formSubmit{Press to submit}} | {@formReset{Press to reset}} |
++-+-+
+
+Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
+
+{@formSet{%name{Feedback:}%content{
+  ===  
+  {@formLabel{Write something below}}
+  ===
+  {@formTextarea{Enter some text...}}
+
+  ===  
+  Provide contact information
+  ===
+  {@formLabel{Email:}} {@formEmail{sam.simpleman@mail.com}}\
+  {@formLabel{Tel:}} {@formTel{}}
+}}}
+
+{@formLabel{How do you like Unimarkup so far?}}
+
+<<<
+<input type="range" id="happiness" name="happiness" min="0" max="100">
+<<<
+///
+~~~
+
 # Internationalization and localization
 
 Using the attribute block, it is possible to specify identifiers to blocks of text explicitly. Otherwise, identifiers are added implicitly by unimarkup. Every text is then stored in a table with its identifier. New languages can be added, by adding the translated texts into a new column.

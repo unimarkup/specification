@@ -687,4 +687,72 @@ To combine multiple types except *all*, types can be enclosed in braces and sepa
 (paragraph|table|block_math)
 ~~~
 
+# Non-printable items
+### Form blocks
 
+If form blocks are allowed, predefined form macros can be used next to other Unimarkup content inside a form block to get user input that can be submitted to a URL that is set using the `send-to` attribute.
+
+**Note:** It is not possible to nest form blocks.
+
+**The following form macros are supported:**
+
+- `{@formText{}}`
+- `{@formRadio{}}`
+- `{@formSubmit{}}`
+- `{@formCheckbox{}}`
+- `{@formDate{}}`
+- `{@formDatetime{}}`
+- `{@formEmail{}}`
+- `{@formImage{}}`
+- `{@formMonth{}}`
+- `{@formNumber{}}`
+- `{@formPassword{}}`
+- `{@formReset{}}`
+- `{@formSearch{}}`
+- `{@formTel{}}`
+- `{@formTime{}}`
+- `{@formUrl{}}`
+- `{@formWeek{}}`
+- `{@formLabel{}}`
+- `{@formSelect{}}`
+- `{@formTextarea{}}`
+- `{@formSet{}}`
+
+~~~
+///{ "send-to" : "<some url>"}
+**Unimarkup** content can be used like always!
+
++-+-+
+| {@formLabel{First name:}} | {@formText{Sam}}{ "id" : "fname" } |
++-+-+
+| {@formLabel{Last name:}} | {@formText{Simpleman}}{ "id" : "lname" } |
++---+
+
+Radio buttons can flow freely: {@formRadio{%text{Option1}%group{grp1}}}.
+
++-+-+
+| {@formSubmit{Press to submit}} | {@formReset{Press to reset}} |
++-+-+
+
+Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
+
+{@formSet{%name{Feedback:}%content{
+  ===  
+  {@formLabel{Write something below}}
+  ===
+  {@formTextarea{Enter some text...}}
+
+  ===  
+  Provide contact information
+  ===
+  {@formLabel{Email:}} {@formEmail{sam.simpleman@mail.com}}\
+  {@formLabel{Tel:}} {@formTel{}}
+}}}
+
+{@formLabel{How do you like Unimarkup so far?}}
+
+<<<
+<input type="range" id="happiness" name="happiness" min="0" max="100">
+<<<
+///
+~~~
