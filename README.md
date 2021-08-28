@@ -336,7 +336,11 @@ There are several possibilities to reference in unimarkup.
 
 #### Footnotes
 
-Footnote content will be rendered at the end of the page before the footer content where the footnote is referenced. If the rendered document is a single page, footnotes are printed at the end of the rendered document. Each footnote has its own unique ID. 
+Footnotes can be used to reference additional content that can only be rendered inside the `{@setFooter}` macro by accessing the list `{%footnotes}`. The `{%footnotes}` list contains all footnotes that have been referenced, since the last time footnotes were rendered inside the document.
+
+A footnote is referenced inside a paragraph with `[^^<footnote-id>]_`. The footnote definition can be given in the preamble or directly in the document using `_[^^<footnote-id>]` followed by one space and the footnote content. The in-document definition must be surrounded by blank lines, or by other footnote definitions. Multiple lines can be added by starting them with `_` followed by one space.
+
+**Note:** Each footnote must have its own unique ID.
 
 Footnotes are numbered automatically for the rendered output. The numbering scheme can be adapted in the preamble.
 It is possible to change between numerical or symbolic numbering and optionally set a header level at which the numbering is reset.
@@ -348,15 +352,19 @@ _[^^footnote-id] Here is the content of the footnote
 _[^^myFootnote] A note
 _ can span several
 _ lines, but new lines must be added\
-_ explicitly by a backslash at the end of a line
+_ explicitly by a backslash at the end of a line.
 _
-_ Or with a blank footnote line between 
+_ A blank footnote line between creates another paragraph.
 ~~~
 
 #### Endnotes
 
 Endnotes can be used to reference additional content that is only rendered at a specific position in the document.
-All used endnotes are rendered using the macro `{@endnotes}`.
+All used endnotes can be rendered using the macro `{@renderEndnotes}` by accessing the list `{%endnotes}`. The `{%endnotes}` list contains all endnotes that have been referenced, since the last time endnotes were rendered using `{@renderEndnotes}` inside the document.
+
+An endnote is referenced inside a paragraph with `[<endnote-id>^^]_`. The endnote definition can be given in the preamble or directly in the document using `_[<endnote-id>^^]` followed by one space and the endnote content. The in-document definition must be surrounded by blank lines, or by other endnote definitions. Multiple lines can be added by starting them with `_` followed by one space.
+
+**Note:** Each endnote must have its own unique ID. 
 
 Endnotes are numbered automatically for the rendered output. The numbering scheme can be adapted in the preamble.
 It is possible to change between numerical or symbolic numbering and optionally set a header level at which the numbering is reset.
@@ -372,64 +380,71 @@ _ can span several
 _ lines, but new lines must be added\
 _ explicitly by a backslash at the end of a line
 _
-_ Or with a blank endnote line between 
+_ Or with a blank endnote line between
+
+
+... some text
+
+
+Render all used endnotes below:
+
+{@renderEndnotes}
 ~~~
 
 #### ID referencing
 
-Every item of an unimarkup document can be referenced by its ID using `[##item-id]_`.
+Every item of an Unimarkup document can be referenced by its ID using `[##item-id]_`.
 
 To define the text that is shown when an item is referenced, the attribute `refOption` can be set with the following options
 
 - `headerNumberLvl1` ... shows the number of the header the referenced item is in (The level is from 1 to 6)
 - `headerTextLvl1` ... shows the text of the header the referenced item is in (The level is from 1 to 6)
 - `label` ... shows the label text of the referenced item
-- `prefix` ... shows the prefix text of the referenced item
-- `prefixLabel` ... shows the prefix and label text of the referenced item
 
-**Note:** Depending on the referenced item, additional referencing options can be available.
+**Note:** Depending on the referenced item, additional referencing options can be set.
 
 ~~~
-![Some image](<image url>){ "id" : "some-image-id", "ref" : { "label" : "Some image", "prefix" : "Figure X:" } }
+![Some image](<image url>){ "id" : "some-image-id", "ref" : { "label" : "Some image" } }
 
-A paragraph that references [##some-image-id]_{ "refOption" : "prefixLabel"}. 
-The referenced text looks like: Figure X: Some image 
+A paragraph that references [##some-image-id]_{ "refOption" : "label"}. 
+The referenced text looks like: Some image
 ~~~
 
 #### Literature referencing
 
-Literature references are used to reference books, articles, journals or websites.
-To reference a literature, it must be provided via the preamble, JSON or BibTeX file.
+Literature references are used to reference books, articles, journals or websites and use the [Citation Style Language](https://citationstyles.org/) to render literature depending on the provided CSL file.
+To reference a literature, the literatures meta-data and CSL file must be provided via the preamble.
 
-To reference a literature, the ID of a literature entry is used and the text that is displayed for this reference is set 
-in the form `[&&literature-id{<literature text that is displayed>}]`.
+To reference a literature, the ID (called *label* in BibTeX) of a literature entry is used in the form `[&&literature-id]`.
+It is possible to reference more than one literature with `[&&first-literature-id&&second-literature-id]`.
 
-It is possible to reference more than one literature with `[&&first-literature-id{<literature text>}&&second-literature-id{<literature text>}]`.
+Depending on the used CSL, citations are either `in-text` or `note` (For information can be found in the [CSL specification](https://docs.citationstyles.org/en/1.0.1/specification.html)). For the `note` variant, it is possible to set either `footnote` or `endnote` in the preamble to define how the referenced literature is rendered.
 
-There are different styles to reference literature entries. Either directly in parentheses, as footnotes or endnotes.
-The style must be consistent in the document, so the style is set in the preamble.
+**Note:** Normal foot- and endnotes can be used alongside literature referencing, which might result in similar rendered notes! To prevent this similarity, set different numbering schemes in the preamble.
 
-To get a list of all used literature references, the macro `{@literature}` can be used. 
+Referenced literatures are stored in a list that can be accessed over the variable `{%literatures}`.
+To render all used literature references, the macro `{@renderLiteratures}` can be used.
 
 ~~~
-This text has some literature reference [&&literature-id{Author, year}].
+This text has some literature reference [&&literature-id].
+This text has more than one literature reference [&&id-1&&id-2].
 
-This text has more than one literature reference [&&id-1{Author1 page, year}&&id-2{Author2, year}].
+All referenced literature used in this document is rendered below:
 
-The given literature text [&&id-x{can also be nonsense}], but this is up to the writer.
-
-A list of all referenced literature is rendered below:
-
-{@literature}
+{@renderLiteratures}
 ~~~
 
 ### Abbreviations
 
-To use abbreviations inside a text, use `[::<abbreviation>]_`. The full text of an abbreviation can then be displayed as tooltip, inserted instead of the abbreviation, or combined to a list of abbreviations depending on the output format and its options.
+To use abbreviations inside a paragraph, use `[::<abbreviation>]_`. The full text of an abbreviation can then be displayed as tooltip or inserted instead of the abbreviation by setting the `display` attribute either to `tooltip` or `replace`.
 
-Abbreviations must be defined using `_[::<abbreviation>] <full text of the abbreviation>` and surrounded by blank lines, or by other abbreviation definitions. It is possible to span multiple lines by starting the following line with `_ <continuing text>`.
+Abbreviations can be defined in the preamble or directly on the document, by setting `_[::<abbreviation>]` followed by one space and the abbreviation definition. The in-document definition must be surrounded by blank lines, or by other abbreviation definitions. It is possible to span multiple lines by starting the following line with `_ <continuing text>`.
 
-It is possible to render a list of all abbreviations used inside a document using the macro `{@abbr}`.
+**Note:** If an abbreviation has more than one abbreviation definition, the last found definition is used.
+
+**Note:** An abbreviation definition can only consist of one paragraph.
+
+It is possible to render a list of all abbreviations used inside a document using the macro `{@renderAbbreviations}` by accessing the list `{@abbreviations}`.
 
 ~~~
 Some text using an [::abbr]_. 
