@@ -30,11 +30,11 @@ There are several terms used inside the Unimarkup specification that are defined
 The frontend part of Unimarkup defines available Unimarkup elements and how to use them.
 The [frontend reference](Frontend_Reference.md) contains the frontend specification.
 
-## Intermediate
+## Middle end
 
-The intermediate part of Unimarkup defines how a Unimarkup document is stored in a SQL database.
+The middle end part of Unimarkup defines how a Unimarkup document is stored in an intermediate representation.
 This part also covers internationalization and localization for Unimarkup documents.
-The [intermediate reference](Intermediate_Reference.md) contains the intermediate specification.
+The [middle end reference](Middleend_Reference.md) contains the middle end specification.
 
 ## Output format
 
@@ -46,4 +46,4 @@ The `OutputFormats` folder contains various references on how the intermediate r
 For multi-language support, Unimarkup sets a unique ID for every block element and stores those IDs with the content inside a table of a SQL database.
 Other languages are then added as new columns next to the respective entries in the table.
 
-Using the attribute block, it is possible to specify identifiers to blocks of text explicitly. Otherwise, identifiers are added implicitly by Unimarkup.
+Using the attribute block, it is possible to specify identifiers to block elements explicitly. Otherwise, identifiers are added implicitly by Unimarkup.
