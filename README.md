@@ -30,11 +30,11 @@ There are several terms used inside the Unimarkup specification that are defined
 The frontend part of Unimarkup defines available Unimarkup elements and how to use them.
 The [frontend reference](Frontend_Reference.md) contains the frontend specification.
 
-## Intermediate
+## Middle end
 
-The intermediate part of Unimarkup defines how a Unimarkup document is stored in a SQL database.
-This part also covers internationalization and localization for Unimarkup documents.
-The [intermediate reference](Intermediate_Reference.md) contains the intermediate specification.
+The middle end part of Unimarkup defines how a Unimarkup document is stored in an intermediate representation.
+This part also covers multi-language support for Unimarkup documents.
+The [middle end reference](Middleend_Reference.md) contains the middle end specification.
 
 ## Output format
 
@@ -42,8 +42,15 @@ Different output formats are defined for Unimarkup documents.
 The `OutputFormats` folder contains various references on how the intermediate representation is converted to an output format.
 
 # Internationalization and localization
+## Multi-language
 
-For multi-language support, Unimarkup sets a unique ID for every block element and stores those IDs with the content inside a table of a SQL database.
-Other languages are then added as new columns next to the respective entries in the table.
+For multi-language support, Unimarkup sets a unique ID for every block element and stores those block elements with their IDs inside a table that can be exported.
+Other languages can then be added as new columns next to the respective entries in the table and replace the text on block element level.
+For more details, read the [multi-language section](/Middleend_Reference.md#multi-language) inside the middle end reference.
 
-Using the attribute block, it is possible to specify identifiers to blocks of text explicitly. Otherwise, identifiers are added implicitly by Unimarkup.
+Using the attribute block, it is possible to specify identifiers for block elements explicitly. Otherwise, identifiers are added implicitly by Unimarkup.
+
+## Localization
+
+In addition to the multi-language concept, [flags](/Frontend_Reference.md#flags), [variables](/Frontend_Reference.md#variables) and [macros](/Frontend_Reference.md#macros)
+can be used to add localization capabilities.
