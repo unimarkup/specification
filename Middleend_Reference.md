@@ -42,7 +42,7 @@ Block elements that allow nesting are split into multiple rows depending on thei
 The table consists of the following columns:
 
 - `id` ...--not null text-- The ID of the stored block element that is either set explicitly, or implicitly while parsing
-- `type` ...--not null text-- The type of the stored block element
+- `um_type` ...--not null text-- The Unimarkup type of the stored block element
 - `text` ...--text-- The text of the block element or parts of it, if the block has nested block elements
 - `fallback-text` ...--text-- This text field is used if the `text` field is empty, which can happen in multi-language context
 - `attributes` ...--text-- Unformatted JSON attributes for the stored block element (The first and last character must be `{}` to enclose JSON data)
@@ -62,7 +62,7 @@ The variable table stores all variables that are used inside the root Unimarkup 
 The table consists of the following columns:
 
 - `name` ...--not null text-- The name of the variable
-- `type` ...--not null text-- The type of the variable
+- `um_type` ...--not null text-- The Unimarkup type of the variable
 - `value` ...--text-- The value of the variable
 - `fallback-value` ...--text-- The value of the variable that is used if `variable` is empty, which can happen in multi-language context
 
@@ -75,7 +75,7 @@ The macros table stores all macros that are used inside the root Unimarkup file.
 The table consists of the following columns:
 
 - `name` ...--not null text-- The name of the macro
-- `type` ...--not null text-- The type of the macro
+- `um_type` ...--not null text-- The Unimarkup type of the macro
 - `parameters` ...--text-- The parameters of the macro
 - `body` ...--text-- The body of the macro
 - `fallback-body` ...--text-- The body of the macro that is used if `body` is empty, which can happen in multi-language context
@@ -89,7 +89,7 @@ The metadata table contains metadata about the root Unimarkup file and all Unima
 The table consists of the following columns:
 
 - `filename` ...--not null text-- The name of a Unimarkup file
-- `filehash` ...--not null binary-- The sha256 hash of the file set at `filename`
+- `filehash` ...--not null blob-- The sha256 hash of the file set at `filename`
 - `path` ...--not null text-- The path including the `filename`, where the file is located
 - `preamble` ...--text-- The unformatted JSON or YAML preamble of the file set at `filename`. If this field starts with `{`, JSON is assumed and the field must end with `}`. Otherwise, YAML is used for parsing
 - `fallback-preamble` ...--text-- This preamble is used if `preamble` is empty, which can happen in multi-language context
