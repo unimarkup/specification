@@ -4,11 +4,1025 @@ This document is the specification for the frontend part of the Unimarkup markup
 The frontend part is what the user sees when opening a Unimarkup file inside any plain text editor.
 
 A Unimarkup frontend file has `.um` as an extension.
+
 # Elements
 
 This section contains the element definitions of all Unimarkup elements.
 
-## Heading
+**All elements are grouped in four main element types:**
+
+- [`inline`](#inline-elements)
+- [`atomic-block`](#atomic-block-elements)
+- [`enclosed-block`](#enclosed-block-elements)
+- [`um-definition`](#um-definition-elements)
+
+## Inline elements
+
+Inline elements may be part of the content of other elements. They must not contain blank lines themselves.
+An optional attribute block may be given at the end of an inline element and may span multiple lines.
+
+**Example:**
+
+~~~
+**bold text**, [hyperlink text](url), :D 
+~~~
+
+**Type:**
+
+: `inline` :
+:-- `Group`
+:
+: Group type for all inline elements.
+
+### Inline formatting
+
+Inline formatting consists of special character sequences inside one paragraph, that format an enclosed text in a certain way. For multi-paragraph formatting see [text blocks](#text-blocks).
+
+A none-white-space character must immediately follow an opening character sequence for inline formatting.
+If the inline formatting is not closed by the same character sequence with a none-white-space character before the closing character sequence, no formatting is applied.
+
+~~~ebnf
+special_
+
+inline_formatting = blank_line , [ ( none_white_space , { any_character } ) ] , 
+~~~
+
+**Note:** Inline formatting may also be applied inside words and stacked.
+
+**Examples:**
+
+- Inline formatting within words
+
+~~~
+For*matt*ing inside __word__s is possible.
+~~~
+
+- Stacking inline formatting by nesting them
+
+**Note:** Not all formatting may be combined and some require certain order. Those restrictions are noted at the corresponding formatting definitions.
+
+~~~
+Stacking this **__text to be bold and underlined__**.
+
+The opposite way __**is also bold and underlined**__.
+
+To get ***bold and italic***.
+
+Having a **`bold verbatim text`**.
+
+Combining ^^_overlined superscript^_^ text.
+~~~
+
+- No inline formatting
+
+The following examples show text with formatting character sequences, but no formatting is applied, because not all requirements are fulfilled.
+
+~~~
+Text with* starting sequence followed by a white-space.
+
+Text *with correct starting sequence, but paragraph ends without closing sequence.
+
+Text *with correct starting sequence, *but ending sequence is preceded by a white-space.
+
+Text ***with correct bold and italic starting sequence, but* only italic closing sequence is correct with bold being ignored.
+
+Text ***with correct bold and italic starting sequence, but** only bold closing sequence is correct with italic being ignored.
+~~~
+
+**Type:**
+
+: `inline_format` :
+:-- `Group`
+:
+: Group type for all inline formatting elements.
+
+#### **Bold**
+
+A text is bold by surrounding it with `**`.
+
+**Usage:**
+
+~~~
+**bold text**
+~~~
+
+**Type:**
+
+: `inline_format_bold` :
+:-- `Single`
+:
+: Element type for bold inline formatting.
+
+#### **Italic**
+
+A text is italic by surrounding it with `*`.
+
+**Usage:**
+
+~~~
+*italic text*
+~~~
+
+**Type:**
+
+: `inline_format_italic` :
+:-- `Single`
+:
+: Element type for italic inline formatting.
+
+#### **Underline**
+
+A text is underlined by surrounding it with `__`.
+
+**Usage:**
+
+~~~
+__underlined text__
+~~~
+
+**Type:**
+
+: `inline_format_underline` :
+:-- `Single`
+:
+: Element type for underline inline formatting.
+
+#### **Overline**
+
+A text is overlined by surrounding it with `^_`.
+
+**Usage:**
+
+~~~
+^_overlined text^_
+~~~
+
+**Type:**
+
+: `inline_format_overline` :
+:-- `Single`
+:
+: Element type for overline inline formatting.
+
+#### **Strike through**
+
+A text is strike through by surrounding it with `~~`.
+
+**Usage:**
+
+~~~
+~~strike through text~~
+~~~
+
+**Type:**
+
+: `inline_format_strikethrough` :
+:-- `Single`
+:
+: Element type for strike through inline formatting.
+
+#### **Superscript**
+
+A text is superscripted by surrounding it with `^`.
+
+**Note:** This formatting may not be stacked with subscript formatting.
+
+**Usage:**
+
+~~~
+^superscripted text^
+~~~
+
+**Type:**
+
+: `inline_format_superscript` :
+:-- `Single`
+:
+: Element type for superscript inline formatting.
+
+#### **Subscript**
+
+A text is subscripted by surrounding it with `_`.
+
+**Note:** This formatting may not be stacked with superscript formatting.
+
+**Usage:**
+
+~~~
+_subscripted text_
+~~~
+
+**Type:**
+
+: `inline_format_subscript` :
+:-- `Single`
+:
+: Element type for subscript inline formatting.
+
+#### **Verbatim**
+
+A text may be defined verbatim by surrounding it with `` ` ``.
+If you want to use a `` ` `` inside, you need to use ` `` ` at start and end.
+
+**Note:** This formatting must be the most inner formatting for stacked formatting.
+
+**Usage:**
+
+~~~
+`verbatim text`
+
+`` ` ``
+~~~
+
+**Type:**
+
+: `inline_format_verbatim` :
+:-- `Single`
+:
+: Element type for verbatim inline formatting.
+
+**Attribute:**
+
+: `highlighter` :
+:-- Only names of available highlighter are allowed.
+:
+: The name of the highlighter that should be used.
+
+#### **Highlight**
+
+A text may be highlighted by surrounding it with `||`.
+
+**Usage:**
+
+~~~
+||highlighted text||
+~~~
+
+**Type:**
+
+: `inline_format_highlight` :
+:-- `Single`
+:
+: Element type for highlight inline formatting.
+
+#### **Quote**
+
+A text may be quoted by surrounding it with `""`.
+
+**Usage:**
+
+~~~
+""quoted text""
+~~~
+
+**Type:**
+
+: `inline_format_quote` :
+:-- `Single`
+:
+: Element type for quote inline formatting.
+
+### Inline math mode
+
+Inline math mode may be used by surrounding formulas with `$`.
+More information about math mode may be found in the [math mode definition section](#math-mode)
+
+**Usage:**
+
+~~~
+$\frac{1}{n}$
+~~~
+
+**Type:**
+
+: `inline_math` :
+:-- `Single`
+:
+: Element type for inline math mode elements.
+
+**Attributes:**
+
+- [Text attributes](#text-attributes)
+
+### Inline text group
+
+Text inside one paragraph may be grouped by surrounding it with `[]`. Only inline elements may be used inside a text group.
+Attributes may be set after the closing `]` of the text group.
+
+**Usage:**
+
+~~~
+A paragraph with [grouped text]{ "size" : "20pt" }. Also grouping within one w[or]{ "color" : "rgb(255,0,0)" }d is possible.
+~~~
+
+**Type:**
+
+: `inline_textgroup` :
+:-- `Single`
+:
+: Element type for inline text group elements.
+
+**Attributes:**
+
+- [Text attributes](#text-attributes)
+
+### Hyperlink
+
+A hyperlink is set with `[<displayed text>](<link>)`, where the displayed text may only have inline elements.
+Hyperlinks may be set to external sources by setting a URL as link, or IDs. For IDs, the given link must start with a `#` followed by the ID.
+It is possible to set a link title using the `"title"` attribute. If it is not set, the URL is shown. If no character is set inside `()`, the displayed text is taken as link.
+Attributes may be set after the closing `)` of the URL.
+
+Elements of other documents can be linked, by setting `<link to other document>#<element id>` as link.
+
+**Note:** Hyperlinks with IDs as sources should only be used, if an explicit text is wanted. Otherwise, [ID referencing](#id-referencing) should be used.
+
+**Usage:**
+
+~~~
+[Text represented as hyperlink](/some/url)
+
+[Explicit hyperlink text for some element](#element-id)
+
+[Hyperlink with an explicit title](some-url){ "title" : "Explicit hyperlink title" }
+
+[https://github.com/]()
+
+[Requirements.md#stick-to-unimarkup]
+~~~
+
+**Type:**
+
+: `inline_hyperlink` :
+:-- `Single`
+:
+: Element type for inline hyperlink elements.
+
+**Attributes:**
+
+- [Text attributes](#text-attributes)
+
+: `title` :
+:-- `text`
+:
+: Optional link title that is displayed instead of the URL.
+
+### Inline image
+
+Images may be inserted inside a paragraph using `![<alternate text>](<image url>)`.
+The alternate text is shown if the image may not be found, or may be used by screen readers.
+It is only possible to use plain text as alternate text.
+Optional attributes are set after the closing `)` of the URL.
+
+**Usage:**
+
+~~~
+Some paragraph text with ![some image](<image url>).
+
+![<alternate text for this image>](<image url>){<inline image attributes>}
+~~~
+
+**Type:**
+
+: `inline_image` :
+:-- `Single`
+:
+: Element type for inline image elements.
+
+**Attributes:**
+
+: `width` :
+:-- `unit_size`
+:
+: Width of the displayed image.
+
+: `height` :
+:-- `unit_size`
+:
+: Height of the displayed image.
+
+: `title` :
+:-- `text`
+:
+: Optional link title that is displayed instead of the URL.
+
+### Inline file insert
+
+There are two different ways to insert files inside a paragraph. Optionally, it is possible to insert parts of a document by slicing.
+The general form of an inline file insert looks like a hyperlink with a **special character** set before `[`.
+Optional slicing is set after the closing `)` of the URL and attributes may be set after slicing.
+
+**Note:** If the inserted content does not fit inside a paragraph, no content is inserted.
+
+**Note:** The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
+
+~~~ebnf
+inline_insert = hyperlink , [ slicing ] , [ attribute_block ] ;
+~~~
+
+**Type:**
+
+: `inline_insert` :
+:-- `Group`
+:
+: Group type for inline file insert elements.
+
+#### Rendered inline file insert
+
+Using `'` as special character renders the inserted file depending on the file type.
+Supported file types depend on the available renderer. See [additional renderer](#additional-renderer) for more information.
+
+**Usage:**
+
+~~~
+'[<description for the file content that is inserted>](<file path>){<attributes>}
+
+'[First heading note](Unimarkup_Language_ReferenceManual.md)<>## Heading .*Note:\*\*< ..>
+~~~
+
+**Type:**
+
+: `inline_insert_rendered` :
+:-- `Single`
+:
+: Element type for inline rendered file insert elements.
+
+**Attribute:**
+
+: `renderer` :
+:-- Only names of available renderer are allowed.
+:
+: The name of the renderer that should be used, if the renderer is not determined automatically from the file type.
+
+#### Verbatim inline file insert
+
+Using `~` as special character inserts the text of a file as is like inline verbatim formatting. Every plain text format may be inserted.
+An optional text highlighter may be set as attribute. See [additional highlighter](#additional-highlighter) for more information on available highlighter.
+
+**Usage:**
+
+~~~
+~[<description for the file content that is inserted>](<file path>){<attributes>}
+
+Some paragraph text with ~[Some code](someCodeFile.rs)<<fn > ..>. This would insert the first declared function of a rust file.
+~~~
+
+**Type:**
+
+: `inline_insert_verbatim` :
+:-- `Single`
+:
+: Element type for inline verbatim file insert elements.
+
+**Attribute:**
+
+: `highlighter` :
+:-- Only names of available highlighter are allowed.
+:
+: The name of the highlighter that should be used, if the highlighter is not determined automatically from the file type.
+
+#### Inline file insert slicing
+
+**TODO:** mhatzl Is slicing really needed?
+
+Slicing defines parts of a document that are inserted. The slice is set after the closing `)` of the file path.
+
+- `<<Start text that is searched> .. <End text that is searched>>`
+
+  A start and end text is given between `<>` that must match positions inside the inserted document. 
+  
+  **Note:** The start position must be before the end position.
+
+  **Note:** If the matched text may not be contained in one paragraph, nothing is inserted.
+
+- `<<Start text that is searched>> ..>`
+
+  Here, only the start text position is searched for. If it matches to a text in the inserted document, every text after this position that preserves the text to remain one paragraph is inserted including the matched text.
+
+- `<.. <End text that is searched>>`
+
+  Every text that preserves the text to remain one paragraph up to the matched end text is inserted. If no text matches, nothing is inserted.
+
+- Excluding text slice
+
+  It is possible to mark a text that must be matched in the inserted document, but is not included.
+
+  To set a text slice as excluded, use `><` instead of `<>` to surround the text slice.
+
+  `<>excluded text slice< .. <included text slice>>`
+
+**Note:** `<>` above does not mark placeholder values. They are used to mark the start and end of a text slice. 
+
+**Supported regex tokens:**
+
+The following regex tokens are allowed inside slices:
+
+- `[<any_characters>]` ... Matches at least one of the characters between `[]`
+- `[^<any_characters>]` ... Matches none one of the characters between `[^]`
+- `.` ... Matches any character
+- `<text1>|<text2>` ... Matches either `text1` or `text2`
+- `\s` ... Any white-space character is matched
+- `\S` ... No white-space character is matched
+- `\d` ... Any digit character is matched
+- `\D` ... No digit character is matched
+- `\w` ... Any none-white-space character is matched
+- `\W` ... No none-white-space character is matched
+- `<character>?` ... Matches `character` zero or one time
+- `<character>*` ... Matches `character` zero or more times
+- `<character>+` ... Matches `character` one or more times
+- `<character>{<variable>}` ... Matches `character` number of `variable` times, where `variable` is of type `natural`
+- `<character>{<variable>,}` ... Matches `character` number of `variable` or more times, where `variable` is of type `natural`
+- `<character>{<variable1>,<variable2>}` ... Matches `character` from `variable1` to `variable2` times, where `variable1` and `variable2` are of type `natural`
+
+Additionally, line numbers may be set as starting point, from which the text matching starts, using the attribute `start-line`.
+
+**Attribute:**
+
+: `start-line` :
+:-- `positive`
+:
+: The line number, starting with 1, from which the text matching starts.
+
+### Emoji substitution
+
+Some special character sequences are reserved for direct emoji conversion. Those sequences must be surrounded by white-spaces, or they are kept as is.
+It is also possible to use [emoji shortcuts](https://github.com/github/gemoji/blob/master/db/emoji.json) with the alias being surrounded by `::`.
+Emoji shortcuts, unlike direct emojis, may appear inside words. The list of supported emoji shortcuts may be increased in the [preamble](#preamble).
+
+**Full list of available direct emojis:**
+
+- `:)` ... 🙂 (U+1F642)
+- `;)` ... 😉 (U+1F609)
+- `:D` ... 😃 (U+1F603)
+- `^^` ... 😄 (U+1F604)
+- `=)` ... 😊 (U+1F60A)
+- `:(` ... 🙁 (U+1F641)
+- `;(` ... 😢 (U+1F622)
+- `:P` ... 😛 (U+1F61B)
+- `;P` ... 😜 (U+1F61C)
+- `O:)` ... 😇 (U+1F607)
+- `:O` ... 😨 (U+1F628)
+- `>:(` ... 🤬 (U+1F92C)
+- `:/` ... 😕 (U+1F615)
+- `3:)` ... 😈 (U+1F608)
+- `-_-` ... 😑 (U+1F611)
+- `<3` ... ❤ (U+2764)
+- `(Y)` ... 👍 (U+1F44D)
+- `(N)` ... 👎 (U+1F44E)
+
+**Usage:**
+
+~~~
+***
+"emoji" : {
+  "shortcuts" : [
+    {
+      "emoji" : "😁",
+      "aliases" : [ "grin" ]
+    },
+    {
+      "emoji" : "&U+1F642;",
+      "aliases" : [ "slight_smile" ]
+    }
+  ]
+}
+***
+
+A text with an emoji :D in it!
+
+Using ::monocle_face::'s emoji shortcut and one from the preamble ::grin::.
+~~~
+
+Rendered to:
+~~~
+A text with an emoji 😃 in it!
+
+Using 🧐's emoji shortcut and one from the preamble 😁.
+~~~
+
+**Type:**
+
+: `inline_emoji` :
+:-- `Single`
+:
+: Type for direct emojis or emoji shortcuts.
+
+**Preamble options**
+
+: `shortcuts` :
+:-- `list<emoji_shortcut>`
+:
+: List of emoji shortcuts.
+:
+: : `emoji_shortcut`
+: :
+: : Type for an emoji shortcut that supports the following fields.
+: : Other fields will be ignored.
+: :
+: : : `emoji` :
+: : :
+: : : Allows direct emoji insertion, or using the [direct Unicode element](#direct-unicode).
+: :
+: : : `aliases` :
+: : :
+: : : List of aliases that may be used in an emoji shortcut to get the emoji.
+: : : White-space characters and `:` are not allowed.
+
+: `extern-shortcuts` :
+:
+: Path to a JSON-file that may contain a list of the `emoji_shortcut` type.
+
+### Arrow substitution
+
+Some character sequences are translated to certain Unicode arrows. Those sequences must be surrounded by whitespaces, or they are kept as is.
+
+**Some arrow translations:**
+
+- `-->` ... 🠖 (U+1F816)
+- `|-->` ... ↦ (U+21A6)
+- `---->` ... ⟶ (U+27F6)
+- `|---->` ... ⟼ (U+27FC)
+- `==>` ... ⇒ (U+21D2)
+- `|==>` ... ⤇ (U+2907)
+- `====>` ... ⟹ (U+27F9)
+- `|====>` ... ⟾ (U+27FE)
+- `<--` ... 🠔 (U+1F814)
+- `<--|` ... ↤ (U+21A4)
+- `<----` ... ⟵ (U+27F5)
+- `<----|` ... ⟻ (U+27FB)
+- `<==` ... ⇐ (U+21D0)
+- `<==|` ... ⤆ (U+2906)
+- `<====` ... ⟸ (U+27F8)
+- `<====|` ... ⟽ (U+27F8)
+- `<-->` ... ⟷ (U+27F7)
+- `<==>` ... ⇔ (U+21D4)
+
+**Usage:**
+
+~~~
+A text --> using an arrow!
+~~~
+
+Rendered to:
+
+~~~
+A text 🠖 using an arrow!
+~~~
+
+**Type:**
+
+: `inline_arrow` :
+:-- `Single`
+:
+: Type for arrow translation.
+
+### Referencing
+
+There are several possibilities to reference in Unimarkup.
+
+**Type:**
+
+: `inline_reference` :
+:-- `Group`
+:
+: Group type for reference elements.
+
+#### Footnote
+
+Footnotes may be used to reference additional content that may only be rendered inside the `{@setFooter}` macro by accessing the list `{%footnotes}`.
+The `{%footnotes}` list contains all footnotes that have been referenced since the last time footnotes were rendered inside the document.
+
+A footnote may be referenced inside a paragraph with `[^^<footnote-id>]_`. The footnote definition is set anywhere in the document using `_[^^<footnote-id>]` followed by one space and the footnote definition content.
+Any Unimarkup element may be used inside a footnote definition. The definition must be surrounded by blank lines, or by other footnote definitions. 
+Multiple lines may be added to the definition by starting them with `_` followed by one space.
+
+**Note:** IDs may only have none-white-space characters excluding `^` and `]`.
+
+**Note:** Each footnote must have its own unique ID.
+
+Footnotes are numbered automatically for the rendered output. The numbering scheme may be adapted in the [preamble](#preamble).
+
+**Usage:**
+
+~~~
+***
+<some optional settings between>
+"footnote" : {
+  "numbering" : "numerical",
+  "reset-heading-level" : "none",
+  "ref-style" : "^\[{%currentFootnoteNr}]^",
+  "separator" : ": "
+}
+<some optional settings between>
+***
+
+<some optional text between>
+
+Referencing a footnote [^^footnote-id]_ [^^myFootnote]_.
+
+<some optional text between>
+
+_[^^footnote-id] Here is the content of the footnote
+_[^^myFootnote] A note
+_ may span several
+_ lines, but new lines must be added\
+_ explicitly by a backslash at the end of a line.
+_
+_ A blank footnote line between creates another paragraph.
+~~~
+
+**Types:**
+
+: `inline_reference_footnote` :
+:-- `Single`
+:
+: Element type for referencing defined footnotes.
+
+: `block_footnote_definition` :
+:-- `Single`
+:
+: Element type for in-document definitions of footnotes to be referenced.
+
+#### Endnote
+
+Endnotes may be used to reference additional content that is only rendered at a specific position in the document.
+All used endnotes may be rendered using the macro `{@renderEndnotes}` by accessing the list `{%endnotes}`.
+The `{%endnotes}` list contains all endnotes that have been referenced, since the last time endnotes were rendered using `{@renderEndnotes}` inside the document.
+
+An endnote is referenced inside a paragraph with `[<endnote-id>^^]_`. The endnote definition is set anywhere in the document using `_[<endnote-id>^^]` followed by one space and the endnote content.
+Any Unimarkup element may be used inside an endnote definition. The definition must be surrounded by blank lines, or by other endnote definitions.
+Multiple lines may be added by starting them with `_` followed by one space.
+
+**Note:** IDs may only have none-white-space characters excluding `^` and `]`.
+
+**Note:** Each endnote must have its own unique ID. 
+
+Endnotes are numbered automatically for the rendered output. The numbering scheme may be adapted in the [preamble](#preamble).
+
+**Usage:**
+
+~~~
+***
+<some optional settings between>
+"endnote" : {
+  "numbering" : "symbolic",
+  "reset-heading-level" : "1"
+}
+<some optional settings between>
+***
+
+<some optional text between>
+
+Referencing an endnote [endnote-id^^]_.
+Referencing another endnote [note^^]_.
+
+<some optional text between>
+
+_[endnote-id^^] Here is the content of the endnote
+_[note^^] Here is the content of the endnote that
+_ may span several
+_ lines, but new lines must be added\
+_ explicitly by a backslash at the end of a line
+_
+_ Or with a blank endnote line between
+
+<some optional text between>
+
+**Render all used endnotes below:**
+
+{@renderEndnotes}
+~~~
+
+**Types:**
+
+: `inline_reference_endnote` :
+:-- `Single`
+:
+: Element type for referencing defined endnotes.
+
+: `block_endnote_definition` :
+:-- `Single`
+:
+: Element type for in-document definitions of endnotes to be referenced.
+
+#### ID referencing
+
+Every heading and block element of an Unimarkup document may be referenced by its ID using `[##<element-id>]_`.
+To define the text that is shown when an element is referenced, the attribute `ref-option` may be used.
+Attributes are set after the closing `]`.
+
+**Usage:**
+
+~~~
+![Some image](<image url>){ "id" : "some-image-id", "ref" : { "label" : "Some image" } }
+
+A paragraph that references [##some-image-id]_{ "refOption" : "label" }. 
+The referenced text looks like: Some image
+~~~
+
+**Type:**
+
+: `inline_reference_id` :
+:-- `Single`
+:
+: Element type for ID references.
+
+**Attributes:**
+
+- [Text attributes](#text-attributes)
+
+: `ref-option` :
+:-- `enum`
+:
+: This attribute defines the text the reference is substituted with in the rendered document.
+:
+: Below are the options every heading and block element has:
+:
+: - `heading-lvl<level number>-nr` ... Shows the number of the heading the referenced element is in (The heading level is from 1 to 6)
+: - `heading-lvl<level number>-text` ... Shows the text of the heading the referenced element is in (The heading level is from 1 to 6)
+: - `label` ... Shows the label text of the referenced element
+:
+: The following options are only allowed if the referenced element is a block element:
+:
+: - `caption` ... Shows the caption paragraph of the referenced block element, if a caption was set
+: - `title` ... Shows the title paragraph of the referenced block element, if a title was set
+
+#### Literature referencing
+
+Literature references are used to reference books, articles, journals or websites and use the [Citation Style Language](https://citationstyles.org/) to render literature depending on the provided CSL file.
+To reference a literature, the literature meta-data and CSL file must be provided via the [preamble](#preamble).
+The literature meta-data must be in a format that is supported by the used CSL processing tool. See the documentation of the used Unimarkup implementation for more information.
+
+A literature is referenced using the ID (called *label* in BibTeX) of a literature entry in the form `[&&<literature-id>]_`.
+It is possible to reference more than one literature with `[&&<first-literature-id>&&<second-literature-id>]_`.
+
+Depending on the used CSL, citations are either `in-text` or `note`. More information may be found in the [CSL specification](https://docs.citationstyles.org/en/1.0.1/specification.html).
+For the `note` variant, it is possible to set either `footnote` or `endnote` in the [preamble](#preamble) to define how the referenced literature is rendered.
+
+**Note:** Normal foot- and endnotes may be used alongside literature referencing, which might result in similar rendered notes! To prevent this similarity, set different numbering schemes in the preamble.
+
+Referenced literatures, used up to the current position in the document, are stored in a list that may be accessed over the variable `{%literatures}`.
+To render used literature references stored inside `{%literatures}`, the macro `{@renderLiteratures}` may be used.
+
+**Note:** If `note` is set to `footnote`, the `{%literatures}` list may only be accessed inside the `{@setFooter}` macro as described in the footnote definition.
+
+**Note:** If a literature has more than one definition, the behavior depends on the used CSL processor tool.
+
+**Note:** Literature ID restrictions depend on the used CSL processor tool, but must not include `&` and `]`.
+
+**Usage:**
+
+~~~
+***
+<some optional settings between>
+"literature" : {
+  "data-file" : "localLiteratureDataInCslFormat.json",
+  "csl-file" : "cslStyleFile.csl",
+  "note-style" : "endnote"
+}
+<some optional settings between>
+***
+
+This text has some literature reference [&&literature-id]_.
+This text has more than one literature reference [&&id-1&&id-2]_.
+
+**All referenced literature used above in this document is rendered below:**
+
+{@renderLiteratures}
+~~~
+
+**Type:**
+
+: `inline_reference_literature` :
+:-- `Single`
+:
+: Element type for literature references.
+
+### Abbreviation
+
+To use abbreviations inside a paragraph, use `[::<abbreviation>]_`. The full text of an abbreviation may then be displayed as tooltip or inserted instead of the abbreviation by setting the `display` attribute either to `tooltip` or `replace`.
+
+Abbreviation definitions may be set anywhere inside the document, by setting `_[::<abbreviation>]` followed by one space and the definition content.
+The definition must be surrounded by blank lines, or by other abbreviation definitions. It is possible to span multiple lines by starting the following line with `_ <continuing text>`.
+
+**Note:** If an abbreviation has more than one definition, the last found definition is used.
+
+**Note:** An abbreviation definition may only consist of inline elements.
+
+It is possible to render a list of abbreviations, used up to the current position inside a document, using the macro `{@renderAbbreviations}` by accessing the list `{@abbreviations}`.
+
+**Usage:**
+
+~~~
+Some text using an [::abbr]_. 
+
+Text using abbreviations [::xml]_, [::html]_ and [::OPC UA TSN]_.
+
+[::mult]_{ "display" : "replace" }
+
+
+_[::abbr] Abbreviation
+
+_[::mult] Abbreviation
+_ spanning multiple lines\
+_ Backslash at end creates a rendered new line!
+
+_[::xml] Extensible Markup Language
+_[::html] Hypertext Markup Language
+~~~
+
+**Types:**
+
+: `inline_abbreviation` :
+:-- `Single`
+:
+: Element type for inline abbreviations.
+
+: `block_abbreviation_definition` :
+:-- `Single`
+:
+: Element type for in-document abbreviation definitions.
+
+**Attributes:**
+
+: `display` :
+:-- `enum`
+:
+: This attribute defines how the abbreviation definition is displayed.
+:
+: Possible options are:
+:
+: - `tooltip` ... The abbreviation definition is shown as tooltip.
+:                 **Note:** The tooltip behavior depends on the output format.
+: - `replace` ... This replaces the abbreviation with the text defined in the definition.
+
+### Direct Unicode
+
+Any Unicode code point may be inserted in Unimarkup with `&<Unicode code point>;`. Where the *Unicode code point* is given in the form `U+<HEX value>`.
+
+**Usage:**
+
+~~~
+&U+1F642;
+~~~
+
+**Type:**
+
+: `inline_unicode` :
+:-- `Single`
+:
+: Element type for inline Unicode.
+
+### Comment
+
+Unimarkup provides line comments using `****`.
+
+**Note:** It is not possible to have a backslash at the end of a line to get an explicit new line, when a comment is used.
+
+**Usage:**
+
+~~~
+**** comment to end of line
+
+A comment may be **** end of line comment
+at the end of a line
+~~~
+
+### Inline field
+
+This element adds a field name at the start of an inline text group that is enclosed inside `:`.
+This field name may be used for certain output formats or extensions.
+If a field name is not known by an output format, or no extension is available to handle the field name, the inline field
+is treated as a normal [inline text group](#inline-text-group). Optional flags must be set before the field name. 
+
+**Usage:**
+
+~~~
+[:<field name>: Some inline content]
+
+[?someFlag?:someField: Some inline content]
+~~~
+
+## Atomic block elements
+
+Atomic block elements must be surrounded by blank lines and must not contain blank lines themselves.
+An optional attribute block may be given at the end of an atomic block and may span multiple lines.
+
+**Example:**
+
+~~~
+# Heading 1
+## Subheading 1.1
+~~~
+
+**Type:**
+
+: `atomic-block` :
+:-- `Group`
+:
+: Group type for all atomic block elements.
+
+### Heading
 
 Headings are in [atx-style](http://www.aaronsw.com/2002/atx/intro) with support for 6 heading-levels.
 A `#` at start of a line followed by a space and a paragraph marks a heading. Adding `#` before the space increases the heading-level. At least one space must be between `#` and the heading text. 
@@ -173,1055 +1187,6 @@ additional attributes
 :
 : This separator is placed between the heading prefix and text.
 
-## Paragraph elements
-
-The following elements may be used inside a [paragraph](#paragraph).
-
-**Type:**
-
-: `inline` :
-:-- `Group`
-:
-: Group type for all paragraph elements.
-
-### Inline formatting
-
-Inline formatting consists of special character sequences inside one paragraph, that format an enclosed text in a certain way. For multi-paragraph formatting see [text blocks](#text-blocks).
-
-A none-white-space character must immediately follow an opening character sequence for inline formatting.
-If the inline formatting is not closed by the same character sequence with a none-white-space character before the closing character sequence, no formatting is applied.
-
-~~~ebnf
-special_
-
-inline_formatting = blank_line , [ ( none_white_space , { any_character } ) ] , 
-~~~
-
-**Note:** Inline formatting may also be applied inside words and stacked.
-
-**Examples:**
-
-- Inline formatting within words
-
-~~~
-For*matt*ing inside __word__s is possible.
-~~~
-
-- Stacking inline formatting by nesting them
-
-**Note:** Not all formatting may be combined and some require certain order. Those restrictions are noted at the corresponding formatting definitions.
-
-~~~
-Stacking this **__text to be bold and underlined__**.
-
-The opposite way __**is also bold and underlined**__.
-
-To get ***bold and italic***.
-
-Having a **`bold verbatim text`**.
-
-Combining ^^_overlined superscript^_^ text.
-~~~
-
-- No inline formatting
-
-The following examples show text with formatting character sequences, but no formatting is applied, because not all requirements are fulfilled.
-
-~~~
-Text with* starting sequence followed by a white-space.
-
-Text *with correct starting sequence, but paragraph ends without closing sequence.
-
-Text *with correct starting sequence, *but ending sequence is preceded by a white-space.
-
-Text ***with correct bold and italic starting sequence, but* only italic closing sequence is correct with bold being ignored.
-
-Text ***with correct bold and italic starting sequence, but** only bold closing sequence is correct with italic being ignored.
-~~~
-
-**Type:**
-
-: `inline_format` :
-:-- `Group`
-:
-: Group type for all inline formatting elements.
-
-#### **Bold**
-
-A text is bold by surrounding it with `**`.
-
-**Usage:**
-
-~~~
-**bold text**
-~~~
-
-**Type:**
-
-: `inline_format_bold` :
-:-- `Single`
-:
-: Element type for bold inline formatting.
-
-**No attributes**
-
-**No preamble options**
-
-#### **Italic**
-
-A text is italic by surrounding it with `*`.
-
-**Usage:**
-
-~~~
-*italic text*
-~~~
-
-**Type:**
-
-: `inline_format_italic` :
-:-- `Single`
-:
-: Element type for italic inline formatting.
-
-**No attributes**
-
-**No preamble options**
-
-#### **Underline**
-
-A text is underlined by surrounding it with `__`.
-
-**Usage:**
-
-~~~
-__underlined text__
-~~~
-
-**Type:**
-
-: `inline_format_underline` :
-:-- `Single`
-:
-: Element type for underline inline formatting.
-
-**No attributes**
-
-**No preamble options**
-
-#### **Overline**
-
-A text is overlined by surrounding it with `^_`.
-
-**Usage:**
-
-~~~
-^_overlined text^_
-~~~
-
-**Type:**
-
-: `inline_format_overline` :
-:-- `Single`
-:
-: Element type for overline inline formatting.
-
-**No attributes**
-
-**No preamble options**
-
-#### **Strike through**
-
-A text is strike through by surrounding it with `~~`.
-
-**Usage:**
-
-~~~
-~~strike through text~~
-~~~
-
-**Type:**
-
-: `inline_format_strikethrough` :
-:-- `Single`
-:
-: Element type for strike through inline formatting.
-
-**No attributes**
-
-**No preamble options**
-
-#### **Superscript**
-
-A text is superscripted by surrounding it with `^`.
-
-**Note:** This formatting may not be stacked with subscript formatting.
-
-**Usage:**
-
-~~~
-^superscripted text^
-~~~
-
-**Type:**
-
-: `inline_format_superscript` :
-:-- `Single`
-:
-: Element type for superscript inline formatting.
-
-**No attributes**
-
-**No preamble options**
-
-#### **Subscript**
-
-A text is subscripted by surrounding it with `_`.
-
-**Note:** This formatting may not be stacked with superscript formatting.
-
-**Usage:**
-
-~~~
-_subscripted text_
-~~~
-
-**Type:**
-
-: `inline_format_subscript` :
-:-- `Single`
-:
-: Element type for subscript inline formatting.
-
-**No attributes**
-
-**No preamble options**
-
-#### **Verbatim**
-
-A text may be defined verbatim by surrounding it with `` ` ``.
-If you want to use a `` ` `` inside, you need to use ` `` ` at start and end.
-
-**Note:** This formatting must be the most inner formatting for stacked formatting.
-
-**Usage:**
-
-~~~
-`verbatim text`
-
-`` ` ``
-~~~
-
-**Type:**
-
-: `inline_format_verbatim` :
-:-- `Single`
-:
-: Element type for verbatim inline formatting.
-
-**Attribute:**
-
-: `highlighter` :
-:-- Only names of available highlighter are allowed.
-:
-: The name of the highlighter that should be used.
-
-**No preamble options**
-
-#### **Highlight**
-
-A text may be highlighted by surrounding it with `||`.
-
-**Usage:**
-
-~~~
-||highlighted text||
-~~~
-
-**Type:**
-
-: `inline_format_highlight` :
-:-- `Single`
-:
-: Element type for highlight inline formatting.
-
-**No attributes**
-
-**No preamble options**
-
-#### **Quote**
-
-A text may be quoted by surrounding it with `""`.
-
-**Usage:**
-
-~~~
-""quoted text""
-~~~
-
-**Type:**
-
-: `inline_format_quote` :
-:-- `Single`
-:
-: Element type for quote inline formatting.
-
-**No attributes**
-
-**No preamble options**
-
-### Inline math mode
-
-Inline math mode may be used by surrounding formulas with `$`.
-More information about math mode may be found in the [math mode definition section](#math-mode)
-
-**Usage:**
-
-~~~
-$\frac{1}{n}$
-~~~
-
-**Type:**
-
-: `inline_math` :
-:-- `Single`
-:
-: Element type for inline math mode elements.
-
-**Attributes:**
-
-- [Text attributes](#text-attributes)
-
-**No preamble options**
-
-### Inline text group
-
-Text inside one paragraph may be grouped by surrounding it with `[]`. Only inline elements may be used inside a text group.
-Attributes may be set after the closing `]` of the text group.
-
-**Usage:**
-
-~~~
-A paragraph with [grouped text]{ "size" : "20pt" }. Also grouping within one w[or]{ "color" : "rgb(255,0,0)" }d is possible.
-~~~
-
-**Type:**
-
-: `inline_textgroup` :
-:-- `Single`
-:
-: Element type for inline text group elements.
-
-**Attributes:**
-
-- [Text attributes](#text-attributes)
-
-**No preamble options**
-
-### Hyperlink
-
-A hyperlink is set with `[<displayed text>](<link>)`, where the displayed text may only have inline elements.
-Hyperlinks may be set to external sources by setting a URL as link, or IDs. For IDs, the given link must start with a `#` followed by the ID.
-It is possible to set a link title using the `"title"` attribute. If it is not set, the URL is shown. If no character is set inside `()`, the displayed text is taken as link.
-Attributes may be set after the closing `)` of the URL.
-
-Elements of other documents can be linked, by setting `<link to other document>#<element id>` as link.
-
-**Note:** Hyperlinks with IDs as sources should only be used, if an explicit text is wanted. Otherwise, [ID referencing](#id-referencing) should be used.
-
-**Usage:**
-
-~~~
-[Text represented as hyperlink](/some/url)
-
-[Explicit hyperlink text for some element](#element-id)
-
-[Hyperlink with an explicit title](some-url){ "title" : "Explicit hyperlink title" }
-
-[https://github.com/]()
-
-[Requirements.md#stick-to-unimarkup]
-~~~
-
-**Type:**
-
-: `inline_hyperlink` :
-:-- `Single`
-:
-: Element type for inline hyperlink elements.
-
-**Attributes:**
-
-- [Text attributes](#text-attributes)
-
-: `title` :
-:-- `text`
-:
-: Optional link title that is displayed instead of the URL.
-
-**No preamble options**
-
-### Inline image
-
-Images may be inserted inside a paragraph using `![<alternate text>](<image url>)`.
-The alternate text is shown if the image may not be found, or may be used by screen readers.
-It is only possible to use plain text as alternate text.
-Optional attributes are set after the closing `)` of the URL.
-
-**Usage:**
-
-~~~
-Some paragraph text with ![some image](<image url>).
-
-![<alternate text for this image>](<image url>){<inline image attributes>}
-~~~
-
-**Type:**
-
-: `inline_image` :
-:-- `Single`
-:
-: Element type for inline image elements.
-
-**Attributes:**
-
-: `width` :
-:-- `unit_size`
-:
-: Width of the displayed image.
-
-: `height` :
-:-- `unit_size`
-:
-: Height of the displayed image.
-
-: `title` :
-:-- `text`
-:
-: Optional link title that is displayed instead of the URL.
-
-**No preamble options**
-
-### Inline file insert
-
-There are two different ways to insert files inside a paragraph. Optionally, it is possible to insert parts of a document by slicing.
-The general form of an inline file insert looks like a hyperlink with a **special character** set before `[`.
-Optional slicing is set after the closing `)` of the URL and attributes may be set after slicing.
-
-**Note:** If the inserted content does not fit inside a paragraph, no content is inserted.
-
-**Note:** The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
-
-~~~ebnf
-inline_insert = hyperlink , [ slicing ] , [ attribute_block ] ;
-~~~
-
-**Type:**
-
-: `inline_insert` :
-:-- `Group`
-:
-: Group type for inline file insert elements.
-
-**No attributes**
-
-**No preamble options**
-
-#### Rendered inline file insert
-
-Using `'` as special character renders the inserted file depending on the file type.
-Supported file types depend on the available renderer. See [additional renderer](#additional-renderer) for more information.
-
-**Usage:**
-
-~~~
-'[<description for the file content that is inserted>](<file path>){<attributes>}
-
-'[First heading note](Unimarkup_Language_ReferenceManual.md)<>## Heading .*Note:\*\*< ..>
-~~~
-
-**Type:**
-
-: `inline_insert_rendered` :
-:-- `Single`
-:
-: Element type for inline rendered file insert elements.
-
-**Attribute:**
-
-: `renderer` :
-:-- Only names of available renderer are allowed.
-:
-: The name of the renderer that should be used, if the renderer is not determined automatically from the file type.
-
-**No preamble options**
-
-#### Verbatim inline file insert
-
-Using `~` as special character inserts the text of a file as is like inline verbatim formatting. Every plain text format may be inserted.
-An optional text highlighter may be set as attribute. See [additional highlighter](#additional-highlighter) for more information on available highlighter.
-
-**Usage:**
-
-~~~
-~[<description for the file content that is inserted>](<file path>){<attributes>}
-
-Some paragraph text with ~[Some code](someCodeFile.rs)<<fn > ..>. This would insert the first declared function of a rust file.
-~~~
-
-**Type:**
-
-: `inline_insert_verbatim` :
-:-- `Single`
-:
-: Element type for inline verbatim file insert elements.
-
-**Attribute:**
-
-: `highlighter` :
-:-- Only names of available highlighter are allowed.
-:
-: The name of the highlighter that should be used, if the highlighter is not determined automatically from the file type.
-
-**No preamble options**
-
-#### Inline file insert slicing
-
-**TODO:** mhatzl Is slicing really needed?
-
-Slicing defines parts of a document that are inserted. The slice is set after the closing `)` of the file path.
-
-- `<<Start text that is searched> .. <End text that is searched>>`
-
-  A start and end text is given between `<>` that must match positions inside the inserted document. 
-  
-  **Note:** The start position must be before the end position.
-
-  **Note:** If the matched text may not be contained in one paragraph, nothing is inserted.
-
-- `<<Start text that is searched>> ..>`
-
-  Here, only the start text position is searched for. If it matches to a text in the inserted document, every text after this position that preserves the text to remain one paragraph is inserted including the matched text.
-
-- `<.. <End text that is searched>>`
-
-  Every text that preserves the text to remain one paragraph up to the matched end text is inserted. If no text matches, nothing is inserted.
-
-- Excluding text slice
-
-  It is possible to mark a text that must be matched in the inserted document, but is not included.
-
-  To set a text slice as excluded, use `><` instead of `<>` to surround the text slice.
-
-  `<>excluded text slice< .. <included text slice>>`
-
-**Note:** `<>` above does not mark placeholder values. They are used to mark the start and end of a text slice. 
-
-**Supported regex tokens:**
-
-The following regex tokens are allowed inside slices:
-
-- `[<any_characters>]` ... Matches at least one of the characters between `[]`
-- `[^<any_characters>]` ... Matches none one of the characters between `[^]`
-- `.` ... Matches any character
-- `<text1>|<text2>` ... Matches either `text1` or `text2`
-- `\s` ... Any white-space character is matched
-- `\S` ... No white-space character is matched
-- `\d` ... Any digit character is matched
-- `\D` ... No digit character is matched
-- `\w` ... Any none-white-space character is matched
-- `\W` ... No none-white-space character is matched
-- `<character>?` ... Matches `character` zero or one time
-- `<character>*` ... Matches `character` zero or more times
-- `<character>+` ... Matches `character` one or more times
-- `<character>{<variable>}` ... Matches `character` number of `variable` times, where `variable` is of type `natural`
-- `<character>{<variable>,}` ... Matches `character` number of `variable` or more times, where `variable` is of type `natural`
-- `<character>{<variable1>,<variable2>}` ... Matches `character` from `variable1` to `variable2` times, where `variable1` and `variable2` are of type `natural`
-
-Additionally, line numbers may be set as starting point, from which the text matching starts, using the attribute `start-line`.
-
-**Attribute:**
-
-: `start-line` :
-:-- `positive`
-:
-: The line number, starting with 1, from which the text matching starts.
-
-**No preamble options**
-
-## Emoji substitution
-
-Some special character sequences are reserved for direct emoji conversion. Those sequences must be surrounded by white-spaces, or they are kept as is.
-It is also possible to use [emoji shortcuts](https://github.com/github/gemoji/blob/master/db/emoji.json) with the alias being surrounded by `::`.
-Emoji shortcuts, unlike direct emojis, may appear inside words. The list of supported emoji shortcuts may be increased in the [preamble](#preamble).
-
-**Full list of available direct emojis:**
-
-- `:)` ... 🙂 (U+1F642)
-- `;)` ... 😉 (U+1F609)
-- `:D` ... 😃 (U+1F603)
-- `^^` ... 😄 (U+1F604)
-- `=)` ... 😊 (U+1F60A)
-- `:(` ... 🙁 (U+1F641)
-- `;(` ... 😢 (U+1F622)
-- `:P` ... 😛 (U+1F61B)
-- `;P` ... 😜 (U+1F61C)
-- `O:)` ... 😇 (U+1F607)
-- `:O` ... 😨 (U+1F628)
-- `>:(` ... 🤬 (U+1F92C)
-- `:/` ... 😕 (U+1F615)
-- `3:)` ... 😈 (U+1F608)
-- `-_-` ... 😑 (U+1F611)
-- `<3` ... ❤ (U+2764)
-- `(Y)` ... 👍 (U+1F44D)
-- `(N)` ... 👎 (U+1F44E)
-
-**Usage:**
-
-~~~
-***
-"emoji" : {
-  "shortcuts" : [
-    {
-      "emoji" : "😁",
-      "aliases" : [ "grin" ]
-    },
-    {
-      "emoji" : "&U+1F642;",
-      "aliases" : [ "slight_smile" ]
-    }
-  ]
-}
-***
-
-A text with an emoji :D in it!
-
-Using ::monocle_face::'s emoji shortcut and one from the preamble ::grin::.
-~~~
-
-Rendered to:
-~~~
-A text with an emoji 😃 in it!
-
-Using 🧐's emoji shortcut and one from the preamble 😁.
-~~~
-
-**Type:**
-
-: `inline_emoji` :
-:-- `Single`
-:
-: Type for direct emojis or emoji shortcuts.
-
-**No attributes**
-
-**Preamble options**
-
-: `shortcuts` :
-:-- `list<emoji_shortcut>`
-:
-: List of emoji shortcuts.
-:
-: : `emoji_shortcut`
-: :
-: : Type for an emoji shortcut that supports the following fields.
-: : Other fields will be ignored.
-: :
-: : : `emoji` :
-: : :
-: : : Allows direct emoji insertion, or using the [direct Unicode element](#direct-unicode).
-: :
-: : : `aliases` :
-: : :
-: : : List of aliases that may be used in an emoji shortcut to get the emoji.
-: : : White-space characters and `:` are not allowed.
-
-: `extern-shortcuts` :
-:
-: Path to a JSON-file that may contain a list of the `emoji_shortcut` type.
-
-### Arrow substitution
-
-Some character sequences are translated to certain Unicode arrows. Those sequences must be surrounded by whitespaces, or they are kept as is.
-
-**Some arrow translations:**
-
-- `-->` ... 🠖 (U+1F816)
-- `|-->` ... ↦ (U+21A6)
-- `---->` ... ⟶ (U+27F6)
-- `|---->` ... ⟼ (U+27FC)
-- `==>` ... ⇒ (U+21D2)
-- `|==>` ... ⤇ (U+2907)
-- `====>` ... ⟹ (U+27F9)
-- `|====>` ... ⟾ (U+27FE)
-- `<--` ... 🠔 (U+1F814)
-- `<--|` ... ↤ (U+21A4)
-- `<----` ... ⟵ (U+27F5)
-- `<----|` ... ⟻ (U+27FB)
-- `<==` ... ⇐ (U+21D0)
-- `<==|` ... ⤆ (U+2906)
-- `<====` ... ⟸ (U+27F8)
-- `<====|` ... ⟽ (U+27F8)
-- `<-->` ... ⟷ (U+27F7)
-- `<==>` ... ⇔ (U+21D4)
-
-**Usage:**
-
-~~~
-A text --> using an arrow!
-~~~
-
-Rendered to:
-
-~~~
-A text 🠖 using an arrow!
-~~~
-
-**Type:**
-
-: `inline_arrow` :
-:-- `Single`
-:
-: Type for arrow translation.
-
-**No attributes**
-
-**No preamble options**
-
-### Referencing
-
-There are several possibilities to reference in Unimarkup.
-
-**Type:**
-
-: `inline_reference` :
-:-- `Group`
-:
-: Group type for reference elements.
-
-#### Footnote
-
-Footnotes may be used to reference additional content that may only be rendered inside the `{@setFooter}` macro by accessing the list `{%footnotes}`.
-The `{%footnotes}` list contains all footnotes that have been referenced since the last time footnotes were rendered inside the document.
-
-A footnote may be referenced inside a paragraph with `[^^<footnote-id>]_`. The footnote definition is set anywhere in the document using `_[^^<footnote-id>]` followed by one space and the footnote definition content.
-Any Unimarkup element may be used inside a footnote definition. The definition must be surrounded by blank lines, or by other footnote definitions. 
-Multiple lines may be added to the definition by starting them with `_` followed by one space.
-
-**Note:** IDs may only have none-white-space characters excluding `^` and `]`.
-
-**Note:** Each footnote must have its own unique ID.
-
-Footnotes are numbered automatically for the rendered output. The numbering scheme may be adapted in the [preamble](#preamble).
-
-**Usage:**
-
-~~~
-***
-<some optional settings between>
-"footnote" : {
-  "numbering" : "numerical",
-  "reset-heading-level" : "none",
-  "ref-style" : "^\[{%currentFootnoteNr}]^",
-  "separator" : ": "
-}
-<some optional settings between>
-***
-
-<some optional text between>
-
-Referencing a footnote [^^footnote-id]_ [^^myFootnote]_.
-
-<some optional text between>
-
-_[^^footnote-id] Here is the content of the footnote
-_[^^myFootnote] A note
-_ may span several
-_ lines, but new lines must be added\
-_ explicitly by a backslash at the end of a line.
-_
-_ A blank footnote line between creates another paragraph.
-~~~
-
-**Types:**
-
-: `inline_reference_footnote` :
-:-- `Single`
-:
-: Element type for referencing defined footnotes.
-
-: `block_footnote_definition` :
-:-- `Single`
-:
-: Element type for in-document definitions of footnotes to be referenced.
-
-**No attributes**
-
-**Preamble options:**
-
-mhatzl
-
-#### Endnote
-
-Endnotes may be used to reference additional content that is only rendered at a specific position in the document.
-All used endnotes may be rendered using the macro `{@renderEndnotes}` by accessing the list `{%endnotes}`.
-The `{%endnotes}` list contains all endnotes that have been referenced, since the last time endnotes were rendered using `{@renderEndnotes}` inside the document.
-
-An endnote is referenced inside a paragraph with `[<endnote-id>^^]_`. The endnote definition is set anywhere in the document using `_[<endnote-id>^^]` followed by one space and the endnote content.
-Any Unimarkup element may be used inside an endnote definition. The definition must be surrounded by blank lines, or by other endnote definitions.
-Multiple lines may be added by starting them with `_` followed by one space.
-
-**Note:** IDs may only have none-white-space characters excluding `^` and `]`.
-
-**Note:** Each endnote must have its own unique ID. 
-
-Endnotes are numbered automatically for the rendered output. The numbering scheme may be adapted in the [preamble](#preamble).
-
-**Usage:**
-
-~~~
-***
-<some optional settings between>
-"endnote" : {
-  "numbering" : "symbolic",
-  "reset-heading-level" : "1"
-}
-<some optional settings between>
-***
-
-<some optional text between>
-
-Referencing an endnote [endnote-id^^]_.
-Referencing another endnote [note^^]_.
-
-<some optional text between>
-
-_[endnote-id^^] Here is the content of the endnote
-_[note^^] Here is the content of the endnote that
-_ may span several
-_ lines, but new lines must be added\
-_ explicitly by a backslash at the end of a line
-_
-_ Or with a blank endnote line between
-
-<some optional text between>
-
-**Render all used endnotes below:**
-
-{@renderEndnotes}
-~~~
-
-**Types:**
-
-: `inline_reference_endnote` :
-:-- `Single`
-:
-: Element type for referencing defined endnotes.
-
-: `block_endnote_definition` :
-:-- `Single`
-:
-: Element type for in-document definitions of endnotes to be referenced.
-
-**No attributes**
-
-**Preamble options:**
-
-mhatzl
-
-#### ID referencing
-
-Every heading and block element of an Unimarkup document may be referenced by its ID using `[##<element-id>]_`.
-To define the text that is shown when an element is referenced, the attribute `ref-option` may be used.
-Attributes are set after the closing `]`.
-
-**Usage:**
-
-~~~
-![Some image](<image url>){ "id" : "some-image-id", "ref" : { "label" : "Some image" } }
-
-A paragraph that references [##some-image-id]_{ "refOption" : "label" }. 
-The referenced text looks like: Some image
-~~~
-
-**Type:**
-
-: `inline_reference_id` :
-:-- `Single`
-:
-: Element type for ID references.
-
-**Attributes:**
-
-- [Text attributes](#text-attributes)
-
-: `ref-option` :
-:-- `enum`
-:
-: This attribute defines the text the reference is substituted with in the rendered document.
-:
-: Below are the options every heading and block element has:
-:
-: - `heading-lvl<level number>-nr` ... Shows the number of the heading the referenced element is in (The heading level is from 1 to 6)
-: - `heading-lvl<level number>-text` ... Shows the text of the heading the referenced element is in (The heading level is from 1 to 6)
-: - `label` ... Shows the label text of the referenced element
-:
-: The following options are only allowed if the referenced element is a block element:
-:
-: - `caption` ... Shows the caption paragraph of the referenced block element, if a caption was set
-: - `title` ... Shows the title paragraph of the referenced block element, if a title was set
-
-**No preamble options**
-
-#### Literature referencing
-
-Literature references are used to reference books, articles, journals or websites and use the [Citation Style Language](https://citationstyles.org/) to render literature depending on the provided CSL file.
-To reference a literature, the literature meta-data and CSL file must be provided via the [preamble](#preamble).
-The literature meta-data must be in a format that is supported by the used CSL processing tool. See the documentation of the used Unimarkup implementation for more information.
-
-A literature is referenced using the ID (called *label* in BibTeX) of a literature entry in the form `[&&<literature-id>]_`.
-It is possible to reference more than one literature with `[&&<first-literature-id>&&<second-literature-id>]_`.
-
-Depending on the used CSL, citations are either `in-text` or `note`. More information may be found in the [CSL specification](https://docs.citationstyles.org/en/1.0.1/specification.html).
-For the `note` variant, it is possible to set either `footnote` or `endnote` in the [preamble](#preamble) to define how the referenced literature is rendered.
-
-**Note:** Normal foot- and endnotes may be used alongside literature referencing, which might result in similar rendered notes! To prevent this similarity, set different numbering schemes in the preamble.
-
-Referenced literatures, used up to the current position in the document, are stored in a list that may be accessed over the variable `{%literatures}`.
-To render used literature references stored inside `{%literatures}`, the macro `{@renderLiteratures}` may be used.
-
-**Note:** If `note` is set to `footnote`, the `{%literatures}` list may only be accessed inside the `{@setFooter}` macro as described in the footnote definition.
-
-**Note:** If a literature has more than one definition, the behavior depends on the used CSL processor tool.
-
-**Note:** Literature ID restrictions depend on the used CSL processor tool, but must not include `&` and `]`.
-
-**Usage:**
-
-~~~
-***
-<some optional settings between>
-"literature" : {
-  "data-file" : "localLiteratureDataInCslFormat.json",
-  "csl-file" : "cslStyleFile.csl",
-  "note-style" : "endnote"
-}
-<some optional settings between>
-***
-
-This text has some literature reference [&&literature-id]_.
-This text has more than one literature reference [&&id-1&&id-2]_.
-
-**All referenced literature used above in this document is rendered below:**
-
-{@renderLiteratures}
-~~~
-
-**Type:**
-
-: `inline_reference_literature` :
-:-- `Single`
-:
-: Element type for literature references.
-
-**No attributes**
-
-**Preamble options:**
-
-mhatzl
-
-### Abbreviation
-
-To use abbreviations inside a paragraph, use `[::<abbreviation>]_`. The full text of an abbreviation may then be displayed as tooltip or inserted instead of the abbreviation by setting the `display` attribute either to `tooltip` or `replace`.
-
-Abbreviation definitions may be set anywhere inside the document, by setting `_[::<abbreviation>]` followed by one space and the definition content.
-The definition must be surrounded by blank lines, or by other abbreviation definitions. It is possible to span multiple lines by starting the following line with `_ <continuing text>`.
-
-**Note:** If an abbreviation has more than one definition, the last found definition is used.
-
-**Note:** An abbreviation definition may only consist of inline elements.
-
-It is possible to render a list of abbreviations, used up to the current position inside a document, using the macro `{@renderAbbreviations}` by accessing the list `{@abbreviations}`.
-
-**Usage:**
-
-~~~
-Some text using an [::abbr]_. 
-
-Text using abbreviations [::xml]_, [::html]_ and [::OPC UA TSN]_.
-
-[::mult]_{ "display" : "replace" }
-
-
-_[::abbr] Abbreviation
-
-_[::mult] Abbreviation
-_ spanning multiple lines\
-_ Backslash at end creates a rendered new line!
-
-_[::xml] Extensible Markup Language
-_[::html] Hypertext Markup Language
-~~~
-
-**Types:**
-
-: `inline_abbreviation` :
-:-- `Single`
-:
-: Element type for inline abbreviations.
-
-: `block_abbreviation_definition` :
-:-- `Single`
-:
-: Element type for in-document abbreviation definitions.
-
-**Attributes:**
-
-: `display` :
-:-- `enum`
-:
-: This attribute defines how the abbreviation definition is displayed.
-:
-: Possible options are:
-:
-: - `tooltip` ... The abbreviation definition is shown as tooltip.
-:                 **Note:** The tooltip behavior depends on the output format.
-: - `replace` ... This replaces the abbreviation with the text defined in the definition.
-
-**No preamble options**
-
-### Direct Unicode
-
-Any Unicode code point may be inserted in Unimarkup with `&<Unicode code point>;`. Where the *Unicode code point* is given in the form `U+<HEX value>`.
-
-**Usage:**
-
-~~~
-&U+1F642;
-~~~
-
-**Type:**
-
-: `inline_unicode` :
-:-- `Single`
-:
-: Element type for inline Unicode.
-
-**No attributes**
-
-**No preamble options**
-
-## Block elements
-
-The following elements are treated as block elements.
-
-**Type:**
-
-: `block` :
-:-- `Group`
-:
-: General type for all block elements.
-
 ### Paragraph
 
 A text starting with at least one none white-space character followed by one or more blank lines is considered as one paragraph. All white-space characters between none white-space characters are replaced by exactly one space.
@@ -1258,8 +1223,6 @@ with an explicit new line.
 
 - [Block attributes](#block-attributes)
 - [Text attributes](#text-attributes)
-
-**No preamble options**
 
 ### List elements
 
@@ -1378,9 +1341,7 @@ Paragraph not for a bullet list
   - [Text attributes](#text-attributes)
 
 - Attributes for bullet list entries
-  -  [Text attributes](#text-attributes) 
-
-**No preamble options**
+  -  [Text attributes](#text-attributes)
 
 #### **Numbered list**
 
@@ -1487,8 +1448,6 @@ Paragraph not for a numbered list
 - Attributes for numbered list entries
   -  [Text attributes](#text-attributes)
 
-**No preamble options**
-
 #### **Task list**
 
 A task list may be started with `-[<task state>]` followed one space. Additional paragraphs and attributes are set the same way as for bullet lists.
@@ -1569,8 +1528,6 @@ The following list is parsed from 1. to 5. to get the higher task state:
 - Attributes for task list entries
   -  [Text attributes](#text-attributes)
 
-**No preamble options**
-
 #### **Definition list**
 
 A bullet or numbered list may become a definition list, if `...` is set after a space in a list entry heading. Any none-white-space character must be set between the start of the list entry and `...`.
@@ -1637,8 +1594,6 @@ It is also possible to set a **definition class** directly after `...` by surrou
 
 - Attributes for definition list entries
   -  [Text attributes](#text-attributes)
-
-**No preamble options**
 
 ### Table
 
@@ -1819,45 +1774,329 @@ By default, all table [captions](#caption) are added to the list `{%tableCaption
 +-| r3c1.1 |    r3c1.2    |-+------+
 ~~~
 
-**Types:**
+### Figure insert
 
-mhatzl
+Images may be inserted as figures using `!!![<alternate text>](<image url>)`.
+A figure insert may not be used inside a paragraph. Use [inline image insert](#inline-image-insert) instead to insert an image inside a paragraph.
+The alternate text is used if the image may not be found or for screen readers.
+Attributes may be set after the closing `)`.
 
-: `block_list_definition` :
-:-- `Group`
+By default, all figure [captions](#caption) are added to the list `{%figureCaptions}`.
+
+**Usage:**
+
+~~~
+!!![some image](<image url>).
++++
+Image caption that shows something.
++++
+
+!!![<alternate text for this image>](<image url>){<image insert attributes>}
+~~~
+
+**Type:**
+
+: `block_figure` :
+:-- `Single`
 :
-: Group type for definition list elements.
-:
-: : `block_list_definition_entry`
-: :-- `Group`
-: :
-: : Group type for a definition list entry element.
-: :
-: : : `block_list_definition_entry_term` :
-: : :-- `Single`
-: : :
-: : : Element type for a definition entry term element.
-: : :
-: : : `block_list_definition_entry_class` :
-: : :-- `Single`
-: : :
-: : : Element type for a definition entry class element.
-: : :
-: : : `block_list_definition_entry_description` :
-: : :-- `Single`
-: : :
-: : : Element type for a definition entry description element.
+: Element type for figure elements.
 
 **Attributes:**
 
-- Attributes for the definition list
-  - [Block attributes](#block-attributes)
-  - [Text attributes](#text-attributes)
+- [Block attributes](#block-attributes)
 
-- Attributes for definition list entries
-  -  [Text attributes](#text-attributes)
+### Media insert
 
-**No preamble options**
+With media inserts allowed, it is possible to insert video and audio files in addition to images using an extended figure insert syntax that allows to specify multiple sources, in case a media format is not supported, by adding them with `(<alternative source>)` directly after the first source entry.
+
+**Note:** The given sources must all be from the same media type. It is not possible to mix sources for video, media or image types.
+
+**Usage:**
+
+~~~
+!!![<Alternative text if media file is not supported>](<media to use>)(<alternative media to use>)
+
+!!![Some video](someVideo.mp4)(someVideo.ogg)(someVideo.webm)
+~~~
+
+### Block file insert
+
+There are two different ways to insert files as block elements. Optionally, it is possible to insert parts of a document with slicing.
+The general form of a block file insert looks like a hyperlink with a **special character** repeated three or more times before `[`.
+Block file inserts must be surrounded by blank lines.
+
+The syntax for slicing is the same as [slicing for inline file inserts](#inline-file-insert-slicing). Instead of restricting slices to one paragraph, the whole file may be inserted.
+As a result, one-sided slicing does not stop at one paragraph but inserts either everything before or after a match.
+
+**Note:** The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
+
+#### Rendered block file insert
+
+Using `'` as special character renders the inserted file according to its type.
+Supported file types depend on the available renderer. If the file type is not supported, nothing is rendered.
+See [additional renderer](#additional-renderer) for more information on available renderer.
+
+**Usage:**
+
+~~~
+'''[<Description for the file content that is inserted>](<file path>){<attributes>}
+
+'''[Header description without examples](Unimarkup_Language_ReferenceManual.md)<<## Headers> .. >\*\*Example<>
+~~~
+
+**Type:**
+
+: `block_insert_rendered` :
+:-- `Single`
+:
+: Element type for block rendered file insert elements.
+
+**Attributes:**
+
+- [Block attributes](#block-attributes)
+
+: `renderer` :
+:-- Only names of available renderer are allowed.
+:
+: The name of the renderer that should be used, if the renderer is not determined automatically from the file type.
+
+#### Verbatim block file insert
+
+Using `~` as special character inserts the text of a file as is like a verbatim block. Every plain text format may be inserted.
+If no highlighter is available for the inserted file type, the content is inserted as is.
+See [additional highlighter](#additional-highlighter) for more information on available highlighter.
+
+**Usage:**
+
+~~~~
+~~~[<Description for the file content that is inserted>](<file path>){<attributes>}
+
+~~~[Some code](someCodeFile.ads)<<package SPARK_Alloc> .. <end SPARK_Alloc;>>
+~~~~
+
+**Type:**
+
+: `block_insert_rendered` :
+:-- `Single`
+:
+: Element type for block rendered file insert elements.
+
+**Attributes:**
+
+- [Block attributes](#block-attributes)
+
+: `highlighter` :
+:-- Only names of available highlighter are allowed.
+:
+: The name of the highlighter that should be used, if the highlighter is not determined automatically from the file type.
+
+### Quotation block
+
+Quotation blocks may be used to quote longer text sections. A block is started by starting a new line with `>` followed by one space. Multiple lines may be added by starting them with `>` followed by one space. A quotation block must be surrounded by blank lines.
+It is possible to use all Unimarkup elements inside a block quote, but headings are not considered as headings of the document.
+Attribute blocks are set at the end of a quotation block.
+Like with [text blocks](#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a quotation block. 
+
+Quotation blocks may be nested, by setting `>` followed by one space at a new line of a quotation block. Empty quotation lines or blank lines must surround the nested block.
+
+An author text may optionally be set at the end of a quotation block by starting a new line with `>--` followed by one space after an empty quotation line. To get multiple author text lines, start each with `>--`. Only paragraphs may be used for author texts.
+
+**Usage:**
+
+~~~
+> Block quote
+> with new lines
+> *treated* as spaces
+> as with normal paragraphs
+> and other **inline formatting** syntax is also possible 
+>
+> > Nested block quote\
+> > A backslash at the end of a line creates a new line.
+> >
+> >-- Author
+>
+>{<Quotation block attributes>}
+
+> Some quoted text
+>
+>-- by someone
+>-- and many others
+>--{<author paragraph attributes>}
+~~~
+
+**Type:**
+
+: `block_quote` :
+:-- `Single`
+:
+: Element type for quotation block elements.
+
+**Attributes:**
+
+- [Block attributes](#block-attributes)
+- [Element attributes](#element-attributes)
+
+### Line block
+
+Line blocks preserve all spaces, tabs and new lines. A line block is started with `|` per new line followed by one space.
+A block must be surrounded by blank lines. It is possible to use all Unimarkup elements inside line blocks, except other line blocks.
+Attribute blocks are set at the end of a line block.
+Like with [text blocks](#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a line block. 
+
+**Note:** There is no nesting for line blocks.
+
+**Note:** Since Unimarkup keywords are removed in the rendered document, the text might not align the same way in the raw and rendered form.
+
+**Note:** Setting explicit new lines with a backslash at the end has no effect, since new lines are preserved in line blocks. 
+
+**Usage:**
+
+~~~
+| Text where *spaces* are preserved as is.
+|    All other **markup** however, is considered as **Unimarkup text**.
+
+| A verbatim block may be used inside a line block
+|
+| ~~~
+| Some verbatim text
+| ~~~
+|
+| Since spaces are already kept, a verbatim block inside a line block
+| is only necessary to get code highlighting.
+|{<Line block attributes>}
+~~~
+
+**Type:**
+
+: `block_line` :
+:-- `Single`
+:
+: Element type for line block elements.
+
+**Attributes:**
+
+- [Block attributes](#block-attributes)
+- [Element attributes](#element-attributes)
+
+### Definition block
+
+Definition blocks may be used to set a term with an optional classifier and a definition for this term.
+A definition block is started with `:` per new line followed by one space. A block must be surrounded by blank lines.
+
+The definition block starts with the term. A term may have multiple paragraphs and every Unimarkup element that may be used inside a paragraph.
+Other Unimarkup elements are not allowed.
+To end the term section, `:` must be set at the end of the last line of the term section.
+An empty definition line must follow the term section if no classifier is given.
+A term attribute block may be set after the closing `:`.
+
+An optional classifier may be set by starting the lines after the term section with `:--`.
+Lists are allowed for the classifier besides the supported Unimarkup elements in the term section.
+The last classifier line may contain an attribute block.
+A blank definition line must follow the classifier.
+
+The definition section allows any Unimarkup element. Attribute blocks are set at the end of a definition section.
+Like with [text blocks](#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a definition section. 
+
+**Usage:**
+
+~~~
+: Definition term :
+:
+: Definition of this term
+: may span multiple lines
+
+: New definition term :
+:-- Classifier for this term
+:
+: Paragraph 1
+:
+: Paragraph 2
+
+: New term
+: spanning several lines :
+:-- Also classifiers
+:-- may span multiple lines
+:
+: Paragraph for this term definition
+
+: Main term :{<term attributes>}
+:
+: Paragraph for the main term definition.
+:
+: : Sub term :
+: :-- - Classifier with a bullet list
+: :-- - Second bullet list element
+: :--{<classifier attributes>}
+: :
+: : Paragraph for the sub term definition
+:
+: Other paragraph for the main term definition
+:{<definition block attributes>}
+~~~
+
+
+### Horizontal line
+
+Set `-` 3 or more times on a new line that is surrounded by blank lines to create a horizontal line.
+
+**Usage:**
+
+~~~
+---
+
+Another horizontal line after this text.
+
+---
+~~~
+
+### Page break
+
+At least 3 `:` at start of a line surrounded by blank lines set a page break. How a page break is rendered depends on the output format.
+It is possible to set attributes for Unimarkup elements, but they are only valid until the next page break is set.
+
+**Note:** A page break inside an [explicit column block](#explicit-column-block) creates a new column.
+
+**Usage:**
+
+~~~
+:::
+
+:::{<new page with attributes>}
+
+:::{ "text" : { "font" : ["sans serif"] },
+  "class" : ["special-page"],
+  "table" : { "font" : ["monospace"] }
+}
+
+Every text on this page has a *sans-serif* font. Additional styling might be given by the `class` attribute. Tables have a *monospace* font.
+
+:::
+
+This text has the default font again.
+~~~
+
+## Enclosed block elements
+
+Enclosed block elements must be surrounded by blank lines and start and end with special character sequences.
+The character sequences must start at the beginning of a new line.
+Everything between those character sequences is considered part of the enclosed block.
+An optional attribute block may be given directly after the starting character sequence.
+The attribute block must start at the same line as the start character sequence, but may span multiple lines.
+
+**Example:**
+
+~~~~
+~~~
+verbatim block
+~~~
+~~~~  
+
+**Type:**
+
+: `enclosed-block` :
+:-- `Group`
+:
+: Group type for all enclosed block elements.
 
 ### Verbatim blocks
 
@@ -1911,8 +2150,6 @@ int add(int a,  int b) {
 - [Block attributes](#block-attributes)
 - [Text attributes](#text-attributes)
 
-**No preamble options**
-
 ### Render blocks
 
 A render block is opened by three or more `'` at the start of a new line and closed with the same number of `'` at a following new line.
@@ -1953,8 +2190,6 @@ Converting yields Html and Pdf.
 
 - [Block attributes](#block-attributes)
 
-**No preamble options**
-
 ### Math blocks
 
 Math blocks allow using math mode on block level. Content inside a math block is treated as one mathematical formula.
@@ -1994,116 +2229,6 @@ $$$
 
 - [Block attributes](#block-attributes)
 - [Text attributes](#text-attributes)
-
-**No preamble options**
-
-### Figure insert
-
-Images may be inserted as figures using `!!![<alternate text>](<image url>)`.
-A figure insert may not be used inside a paragraph. Use [inline image insert](#inline-image-insert) instead to insert an image inside a paragraph.
-The alternate text is used if the image may not be found or for screen readers.
-Attributes may be set after the closing `)`.
-
-By default, all figure [captions](#caption) are added to the list `{%figureCaptions}`.
-
-**Usage:**
-
-~~~
-!!![some image](<image url>).
-+++
-Image caption that shows something.
-+++
-
-!!![<alternate text for this image>](<image url>){<image insert attributes>}
-~~~
-
-**Type:**
-
-: `block_figure` :
-:-- `Single`
-:
-: Element type for figure elements.
-
-**Attributes:**
-
-- [Block attributes](#block-attributes)
-
-**No preamble options**
-
-### Block file insert
-
-There are two different ways to insert files as block elements. Optionally, it is possible to insert parts of a document with slicing.
-The general form of a block file insert looks like a hyperlink with a **special character** repeated three or more times before `[`.
-Block file inserts must be surrounded by blank lines.
-
-The syntax for slicing is the same as [slicing for inline file inserts](#inline-file-insert-slicing). Instead of restricting slices to one paragraph, the whole file may be inserted.
-As a result, one-sided slicing does not stop at one paragraph but inserts either everything before or after a match.
-
-**Note:** The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
-
-#### Rendered block file insert
-
-Using `'` as special character renders the inserted file according to its type.
-Supported file types depend on the available renderer. If the file type is not supported, nothing is rendered.
-See [additional renderer](#additional-renderer) for more information on available renderer.
-
-**Usage:**
-
-~~~
-'''[<Description for the file content that is inserted>](<file path>){<attributes>}
-
-'''[Header description without examples](Unimarkup_Language_ReferenceManual.md)<<## Headers> .. >\*\*Example<>
-~~~
-
-**Type:**
-
-: `block_insert_rendered` :
-:-- `Single`
-:
-: Element type for block rendered file insert elements.
-
-**Attributes:**
-
-- [Block attributes](#block-attributes)
-
-: `renderer` :
-:-- Only names of available renderer are allowed.
-:
-: The name of the renderer that should be used, if the renderer is not determined automatically from the file type.
-
-**No preamble options**
-
-#### Verbatim block file insert
-
-Using `~` as special character inserts the text of a file as is like a verbatim block. Every plain text format may be inserted.
-If no highlighter is available for the inserted file type, the content is inserted as is.
-See [additional highlighter](#additional-highlighter) for more information on available highlighter.
-
-**Usage:**
-
-~~~~
-~~~[<Description for the file content that is inserted>](<file path>){<attributes>}
-
-~~~[Some code](someCodeFile.ads)<<package SPARK_Alloc> .. <end SPARK_Alloc;>>
-~~~~
-
-**Type:**
-
-: `block_insert_rendered` :
-:-- `Single`
-:
-: Element type for block rendered file insert elements.
-
-**Attributes:**
-
-- [Block attributes](#block-attributes)
-
-: `highlighter` :
-:-- Only names of available highlighter are allowed.
-:
-: The name of the highlighter that should be used, if the highlighter is not determined automatically from the file type.
-
-**No preamble options**
 
 ### Text block
 
@@ -2164,8 +2289,6 @@ Verbatim block inside a text block
 - [Block attributes](#block-attributes)
 - [Element attributes](#element-attributes)
 
-**No preamble options**
-
 ### Attribute block
 
 An attribute block is opened with `{` and closed with `}`.
@@ -2198,166 +2321,6 @@ If attribute blocks set the same attribute for an element, the last value is tak
 ~~~
 ## heading {?pdf? "color" : "rgb(0,255,0)" }{?html? "color" : "rgb(255,0,0)" }
 ~~~
-
-**No preamble options**
-
-### Quotation block
-
-Quotation blocks may be used to quote longer text sections. A block is started by starting a new line with `>` followed by one space. Multiple lines may be added by starting them with `>` followed by one space. A quotation block must be surrounded by blank lines.
-It is possible to use all Unimarkup elements inside a block quote, but headings are not considered as headings of the document.
-Attribute blocks are set at the end of a quotation block.
-Like with [text blocks](#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a quotation block. 
-
-Quotation blocks may be nested, by setting `>` followed by one space at a new line of a quotation block. Empty quotation lines or blank lines must surround the nested block.
-
-An author text may optionally be set at the end of a quotation block by starting a new line with `>--` followed by one space after an empty quotation line. To get multiple author text lines, start each with `>--`. Only paragraphs may be used for author texts.
-
-**Usage:**
-
-~~~
-> Block quote
-> with new lines
-> *treated* as spaces
-> as with normal paragraphs
-> and other **inline formatting** syntax is also possible 
->
-> > Nested block quote\
-> > A backslash at the end of a line creates a new line.
-> >
-> >-- Author
->
->{<Quotation block attributes>}
-
-> Some quoted text
->
->-- by someone
->-- and many others
->--{<author paragraph attributes>}
-~~~
-
-**Type:**
-
-: `block_quote` :
-:-- `Single`
-:
-: Element type for quotation block elements.
-
-**Attributes:**
-
-- [Block attributes](#block-attributes)
-- [Element attributes](#element-attributes)
-
-**No preamble options**
-
-### Line block
-
-Line blocks preserve all spaces, tabs and new lines. A line block is started with `|` per new line followed by one space.
-A block must be surrounded by blank lines. It is possible to use all Unimarkup elements inside line blocks, except other line blocks.
-Attribute blocks are set at the end of a line block.
-Like with [text blocks](#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a line block. 
-
-**Note:** There is no nesting for line blocks.
-
-**Note:** Since Unimarkup keywords are removed in the rendered document, the text might not align the same way in the raw and rendered form.
-
-**Note:** Setting explicit new lines with a backslash at the end has no effect, since new lines are preserved in line blocks. 
-
-**Usage:**
-
-~~~
-| Text where *spaces* are preserved as is.
-|    All other **markup** however, is considered as **Unimarkup text**.
-
-| A verbatim block may be used inside a line block
-|
-| ~~~
-| Some verbatim text
-| ~~~
-|
-| Since spaces are already kept, a verbatim block inside a line block
-| is only necessary to get code highlighting.
-|{<Line block attributes>}
-~~~
-
-**Type:**
-
-: `block_line` :
-:-- `Single`
-:
-: Element type for line block elements.
-
-**Attributes:**
-
-- [Block attributes](#block-attributes)
-- [Element attributes](#element-attributes)
-
-**No preamble options**
-
-### Definition block
-
-Definition blocks may be used to set a term with an optional classifier and a definition for this term.
-A definition block is started with `:` per new line followed by one space. A block must be surrounded by blank lines.
-
-The definition block starts with the term. A term may have multiple paragraphs and every Unimarkup element that may be used inside a paragraph.
-Other Unimarkup elements are not allowed.
-To end the term section, `:` must be set at the end of the last line of the term section.
-An empty definition line must follow the term section if no classifier is given.
-A term attribute block may be set after the closing `:`.
-
-An optional classifier may be set by starting the lines after the term section with `:--`.
-Lists are allowed for the classifier besides the supported Unimarkup elements in the term section.
-The last classifier line may contain an attribute block.
-A blank definition line must follow the classifier.
-
-The definition section allows any Unimarkup element. Attribute blocks are set at the end of a definition section.
-Like with [text blocks](#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a definition section. 
-
-**Usage:**
-
-~~~
-: Definition term :
-:
-: Definition of this term
-: may span multiple lines
-
-: New definition term :
-:-- Classifier for this term
-:
-: Paragraph 1
-:
-: Paragraph 2
-
-: New term
-: spanning several lines :
-:-- Also classifiers
-:-- may span multiple lines
-:
-: Paragraph for this term definition
-
-: Main term :{<term attributes>}
-:
-: Paragraph for the main term definition.
-:
-: : Sub term :
-: :-- - Classifier with a bullet list
-: :-- - Second bullet list element
-: :--{<classifier attributes>}
-: :
-: : Paragraph for the sub term definition
-:
-: Other paragraph for the main term definition
-:{<definition block attributes>}
-~~~
-
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
 
 ### Column blocks
 
@@ -2426,16 +2389,6 @@ Second column of the nested column block
 ||||
 ~~~
 
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
-
 #### Implicit column block
 
 An implicit column block automatically splits its content by a given number of columns. The block is started with `|||<number of columns>|` and ended with `|||#|`.
@@ -2497,194 +2450,6 @@ This content is inside a nested column block.
 ||||#|
 ~~~
 
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
-
-## Other elements
-### Block title
-
-A title may be set for a block element by directly preceding the block with one paragraph surrounded by `===`.
-A blank line must be set before a block title.
-
-**Usage:**
-
-~~~
-===
-Title for a table
-===
-+-+-+
-| table | row |
-+-+-+
-
-===
-Another title for a numbered list
-===
-1. Numbered list
-1. Some list
-~~~
-
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
-
-### Caption
-
-It is possible to set a caption at the end of a block element. A caption may only have one paragraph.
-To set a caption to a block, set `+++` on a new line immediately after the block end. To close the caption, set `+++` at the next new line. A blank line must follow a caption.
-
-**Usage:**
-
-~~~
-!!![figure insert](image.png)
-+++
-Caption of a figure
-+++
-
-+-+-+
-| some table | with columns |
-+---+
-+++
-Caption of a table
-+++
-~~~
-
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
-
-### Horizontal line
-
-Set `-` 3 or more times on a new line that is surrounded by blank lines to create a horizontal line.
-
-**Usage:**
-
-~~~
----
-
-Another horizontal line after this text.
-
----
-~~~
-
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
-
-### Comment
-
-Unimarkup provides line comments using `****`.
-
-**Note:** It is not possible to have a backslash at the end of a line to get an explicit new line, when a comment is used.
-
-**Usage:**
-
-~~~
-**** comment to end of line
-
-A comment may be **** end of line comment
-at the end of a line
-~~~
-
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
-
-### Page break
-
-At least 3 `:` at start of a line surrounded by blank lines set a page break. How a page break is rendered depends on the output format.
-It is possible to set attributes for Unimarkup elements, but they are only valid until the next page break is set.
-
-**Note:** A page break inside an [explicit column block](#explicit-column-block) creates a new column.
-
-**Usage:**
-
-~~~
-:::
-
-:::{<new page with attributes>}
-
-:::{ "text" : { "font" : ["sans serif"] },
-  "class" : ["special-page"],
-  "table" : { "font" : ["monospace"] }
-}
-
-Every text on this page has a *sans-serif* font. Additional styling might be given by the `class` attribute. Tables have a *monospace* font.
-
-:::
-
-This text has the default font again.
-~~~
-
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
-
-# Non-printable elements
-
-These elements may not be printed, as their behavior is either dynamic or allows extensions.
-For higher security, those elements can be disabled in the [preamble](#preamble) and are then treated as verbatim text.
-
-### Inline field
-
-This element adds a field name at the start of an inline text group that is enclosed inside `:`.
-This field name may be used for certain output formats or extensions.
-If a field name is not known by an output format, or no extension is available to handle the field name, the inline field
-is treated as a normal [inline text group](#inline-text-group). Optional flags must be set before the field name. 
-
-**Usage:**
-
-~~~
-[:<field name>: Some inline content]
-
-[?someFlag?:someField: Some inline content]
-~~~
-
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
 
 ### Field block
 
@@ -2709,26 +2474,6 @@ Any Unimarkup content.
 ]]]
 ~~~
 
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
-
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
-
 ### Output block
 
 Every content inside an output block is forwarded as is to the rendered document. A block is started and ended with three or more `<` at a new line.
@@ -2745,40 +2490,6 @@ Output blocks must be surrounded by blank lines and do not allow nesting.
 <script src="someScript.js"></script>
 <<<
 ~~~
-
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
-
-### Media block insert
-
-With media blocks allowed, it is possible to insert video and audio files in addition to images using an extended figure insert syntax that allows to specify multiple sources, in case a media format is not supported, by adding them with `(<alternative source>)` directly after the first source entry.
-
-**Note:** The given sources must all be from the same media type. It is not possible to mix sources for video, media or image types.
-
-**Usage:**
-
-~~~
-!!![<Alternative text if media file is not supported>](<media to use>)(<alternative media to use>)
-
-!!![Some video](someVideo.mp4)(someVideo.ogg)(someVideo.webm)
-~~~
-
-**Types:**
-
-mhatzl
-
-**Attributes:**
-
-mhatzl
-
-**No preamble options**
 
 ### Form block
 
@@ -2852,15 +2563,89 @@ Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
 ///
 ~~~
 
-**Types:**
+## Unimarkup definition elements
 
-mhatzl
+Unimarkup definition elements are used to define additional content or behavior for a Unimarkup document.
+They must be surrounded by blank lines or other `um-definition` elements.
+An optional attribute block may be given at the end of an `um-definition` and may span multiple lines.
 
-**Attributes:**
+**Example:**
 
-mhatzl
+~~~
+_[::xml] Extensible Markup Language
+_[::html] Hypertext Markup Language
+~~~
 
-**No preamble options**
+**Type:**
+
+: `um-definition` :
+:-- `Group`
+:
+: Group type for all Unimarkup definition elements.
+
+### Footnote definition
+
+
+
+### Endnote definition
+
+
+
+### Abbreviation definition
+
+
+
+### Macro definition
+
+
+
+### Variable definition
+
+
+
+# Element decorations
+## Block title
+
+A title may be set for an atomic or enclosed block element by directly preceding the block with one paragraph surrounded by `===`.
+A blank line must be set before a block title.
+
+**Usage:**
+
+~~~
+===
+Title for a table
+===
++-+-+
+| table | row |
++-+-+
+
+===
+Another title for a numbered list
+===
+1. Numbered list
+1. Some list
+~~~
+
+## Caption
+
+It is possible to set a caption at the end of an atomic or enclosed block element. A caption may only have one paragraph.
+To set a caption to a block, set `+++` on a new line immediately after the block end. To close the caption, set `+++` at the next new line. A blank line must follow a caption.
+
+**Usage:**
+
+~~~
+!!![figure insert](image.png)
++++
+Caption of a figure
++++
+
++-+-+
+| some table | with columns |
++---+
++++
+Caption of a table
++++
+~~~
 
 # Preamble
 
