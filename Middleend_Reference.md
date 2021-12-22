@@ -17,12 +17,12 @@ This Unimarkup file is referred to as **root** in all further sections.
 - **Variables**
 
   This table stores all variables that are defined for the Unimarkup document.
-  See [variables table](#variables-table) for more details.
+  See [variable table](#variable-table) for more details.
 
 - **Macros**
 
   This table stores all macros that are defined for the Unimarkup document.
-  See [macros table](#macros-table) for more details.
+  See [macro table](#macro-table) for more details.
 
 - **Metadata**
 
@@ -75,7 +75,7 @@ The primary key for this table is the combination of `id` and `line-nr`.
 
 Block elements have an additional `<typename>_open` and `<typename>_close` type, where `typename` denotes the type of the block element.
 
-## Variables table
+## Variable table
 
 The variable table stores all variables that are defined for the Unimarkup document.
 
@@ -83,12 +83,15 @@ The table consists of the following columns:
 
 - `name` ...--not null text-- The name of the variable
 - `um_type` ...--not null text-- The Unimarkup type of the variable
+- `context` ...--not null text-- The context defines usage restrictions for variables
 - `value` ...--text-- The value of the variable
 - `fallback-value` ...--text-- The value of the variable that is used if `variable` is empty, which can happen in multi-language context
 
 The primary key for this table is the `name` field. This means, that a variable is unique by its `name` independent of its type.
 
-## Macros table
+The context can be set to `all` to have no restriction, to a specific macro or combination of macros, to only allow a variable to be used inside certain macros, or to any Unimarkup type or combination of types, to only allow the usage inside certain Unimarkup elements. The combination of macros and types is given in the form `({@<first-macroname>}|{@<second-macroname>})` or `(<first-type>|<second-type>)`.
+
+## Macro table
 
 The macro table stores all macros that are defined for the Unimarkup document.
 
@@ -96,11 +99,14 @@ The table consists of the following columns:
 
 - `name` ...--not null text-- The name of the macro
 - `um_type` ...--not null text-- The Unimarkup type of the macro
+- `context` ...--not null text-- The context defines usage restrictions for macros
 - `parameters` ...--text-- The parameters of the macro
 - `body` ...--text-- The body of the macro
 - `fallback-body` ...--text-- The body of the macro that is used if `body` is empty, which can happen in multi-language context
 
 The primary key for this table is the combination of `name` and `parameters`. This means, that a macro is unique by its `name` and `parameters`.
+
+The context can be set to `all` to have no restriction, to a specific macro or combination of macros, to only allow a macro to be used inside certain macros, or to any Unimarkup type or combination of types, to only allow the usage inside certain Unimarkup elements. The combination of macros and types is given in the form `({@<first-macroname>}|{@<second-macroname>})` or `(<first-type>|<second-type>)`.
 
 ## Metadata table
 
