@@ -6,7 +6,7 @@ and also opens up the possibility to introduce a multi-language concept for Unim
 
 # Intermediate tables
 
-The intermediate form is a SQL database consisting of five tables storing information about one Unimarkup file.
+The intermediate form is a SQL database consisting of several tables storing information about one Unimarkup file.
 This Unimarkup file is referred to as **root** in all further sections.
 
 - **Content**
@@ -16,12 +16,12 @@ This Unimarkup file is referred to as **root** in all further sections.
 
 - **Variables**
 
-  This table stores all variables that are used in the root Unimarkup file.
+  This table stores all variables that are defined for the Unimarkup document.
   See [variables table](#variables-table) for more details.
 
 - **Macros**
 
-  This table stores all macros that are used in the root Unimarkup file.
+  This table stores all macros that are defined for the Unimarkup document.
   See [macros table](#macros-table) for more details.
 
 - **Metadata**
@@ -33,6 +33,26 @@ This Unimarkup file is referred to as **root** in all further sections.
 
   This table stores all paths to externally referenced files that are used inside the root Unimarkup file and can not be converted to Unimarkup elements.
 	See [resource table](#resource-table) for more details.
+
+- **Abbreviations**
+
+  This table stores all abbreviations, that are defined for the Unimarkup document.
+  See [abbreviation table](#abbreviation-table) for more details.
+
+- **Footnotes**
+
+  This table stores all footnotes, that are defined for the Unimarkup document.
+  See [footnote table](#footnote-table) for more details.
+
+- **Endnotes**
+
+  This table stores all endnotes, that are defined for the Unimarkup document.
+  See [endnote table](#endnote-table) for more details.
+
+- **Literature**
+
+  This table stores all literature, that are defined for the Unimarkup document.
+  See [literature table](#literature-table) for more details.
 
 ## Content table
 
@@ -57,7 +77,7 @@ Block elements have an additional `<typename>_open` and `<typename>_close` type,
 
 ## Variables table
 
-The variable table stores all variables that are used inside the root Unimarkup file.
+The variable table stores all variables that are defined for the Unimarkup document.
 
 The table consists of the following columns:
 
@@ -70,7 +90,7 @@ The primary key for this table is the `name` field. This means, that a variable 
 
 ## Macros table
 
-The macros table stores all macros that are used inside the root Unimarkup file.
+The macro table stores all macros that are defined for the Unimarkup document.
 
 The table consists of the following columns:
 
@@ -109,6 +129,53 @@ The table consists of the following columns:
 
 The primary key for this table is the `path` field.
 
+## Abbreviation table
+
+The abbreviation table stores all abbreviations that are defined for the Unimarkup document.
+
+The table consists of the following columns:
+
+- `abbreviation` ...--not null text-- The name of the abbreviation
+- `content` ...--text-- The content of the abbreviation
+- `fallback-content` ...--text-- The content of the abbreviation that is used if `content` is empty, which can happen in multi-language context
+
+The primary key for this table is the `abbreviation` field.
+
+## Footnote table
+
+The footnote table stores all footnotes that are defined for the Unimarkup document.
+
+The table consists of the following columns:
+
+- `id` ...--not null text-- The ID of the footnote
+- `content` ...--text-- The content of the footnote
+- `fallback-content` ...--text-- The content of the footnote that is used if `content` is empty, which can happen in multi-language context
+
+The primary key for this table is the `id` field.
+
+## Endnote table
+
+The endnote table stores all endnotes that are defined for the Unimarkup document.
+
+The table consists of the following columns:
+
+- `id` ...--not null text-- The ID of the endnote
+- `content` ...--text-- The content of the endnote
+- `fallback-content` ...--text-- The content of the endnote that is used if `content` is empty, which can happen in multi-language context
+
+The primary key for this table is the `id` field.
+
+## Literature table
+
+The Literature table stores all literature that is defined for the Unimarkup document.
+
+The table consists of the following columns:
+
+- `id` ...--not null text-- The ID of the literature
+- `data` ...--text-- The data of the literature being given in JSON form
+- `fallback-data` ...--text-- The data of the literature that is used if `data` is empty, which can happen in multi-language context
+
+The primary key for this table is the `id` field.
 
 # Multi-language handling
 ## Steps **before** content translation
