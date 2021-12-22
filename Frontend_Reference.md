@@ -887,17 +887,20 @@ Any Unicode code point may be inserted in Unimarkup with `&<Unicode code point>;
 
 ### Comment
 
-Unimarkup provides line comments using `****`.
+Unimarkup provides line comments using `;;` to start a comment.
+Optionally, a comment can be ended using `;;`, to end a comment before the end of a line. 
 
 **Note:** It is not possible to have a backslash at the end of a line to get an explicit new line, when a comment is used.
 
 **Usage:**
 
 ~~~
-**** comment to end of line
+;; comment to end of line
 
-A comment may be **** end of line comment
+A comment may be ;; end of line comment
 at the end of a line
+
+Comment ;;this is a comment;; inside one line.
 ~~~
 
 ### Inline field
@@ -3015,7 +3018,7 @@ The logical formula is entered between the two `?`.
 
 # Macros
 
-**** mhatzl
+;; mhatzl
 
 Macro name may have any character except `{}@` and spaces.
 Macros may be defined anywhere in the document, but must be surrounded by blank lines or other macro definitions.
@@ -3054,7 +3057,7 @@ Macros may be defined anywhere in the document, but must be surrounded by blank 
 
 # Variables
 
-**** mhatzl
+;; mhatzl
 
 - `{@setCounter{%{word}name%{(no|numeric|roman-upper|roman-lower)}numbering%{natural}startNr%numberingLvl1{{@empty}}%numberingLvl2{{@empty}}%numberingLvl3{{@empty}}%numberingLvl4{{@empty}}%numberingLvl5{{@empty}}%numberingLvl6{{@empty}}}}`
 
@@ -3077,7 +3080,7 @@ Macros may be defined anywhere in the document, but must be surrounded by blank 
 
 # Types
 
-**** mhatzl
+;; mhatzl
 
 Unimarkup uses types for all elements. Those types are used for variables and macros,
 to define where defined variables and macros are allowed to be used.
