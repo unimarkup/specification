@@ -2630,7 +2630,7 @@ Caption of a table
 It is possible to define a preamble block at the start of a Unimarkup file by surrounding the block with `;;;`
 followed by a blank line. Only one preamble is allowed and must start at the first line.
 
-Alternative ways are defined in the [configuration reference](Configuration_Reference.md).
+Possible options and alternative configurations ways are defined in the [configuration reference](Configuration_Reference.md).
 
 **Usage:**
 
