@@ -2581,14 +2581,6 @@ _[::html] Hypertext Markup Language
 :
 : Element type for abbreviation definitions.
 
-### Macro definition
-
-
-
-### Variable definition
-
-
-
 # Element decorations
 ## Block title
 
