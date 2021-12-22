@@ -702,7 +702,7 @@ A footnote may be referenced inside a paragraph with `[^^<footnote-id>]_`.
 Referencing a footnote [^^footnote-id]_ and [^^myFootnote]_.
 ~~~
 
-**Types:**
+**Type:**
 
 : `footnote-reference` :
 :-- `Single`
@@ -715,61 +715,27 @@ Endnotes may be used to reference additional content that is only rendered at a 
 All used endnotes may be rendered using the macro `{@renderEndnotes}` by accessing the list `{%endnotes}`.
 The `{%endnotes}` list contains all endnotes that have been referenced, since the last time endnotes were rendered using `{@renderEndnotes}` inside the document.
 
-An endnote is referenced inside a paragraph with `[<endnote-id>^^]_`. The endnote definition is set anywhere in the document using `_[<endnote-id>^^]` followed by one space and the endnote content.
-Any Unimarkup element may be used inside an endnote definition. The definition must be surrounded by blank lines, or by other endnote definitions.
-Multiple lines may be added by starting them with `_` followed by one space.
+An endnote is referenced inside a paragraph with `[<endnote-id>^^]_`.
 
-**Note:** IDs may only have none-white-space characters excluding `^` and `]`.
-
-**Note:** Each endnote must have its own unique ID. 
-
-Endnotes are numbered automatically for the rendered output. The numbering scheme may be adapted in the [preamble](#preamble).
+**Note:** See [endnote definition](#endnote-definition) on how to define the endnote content. 
 
 **Usage:**
 
 ~~~
-***
-<some optional settings between>
-"endnote" : {
-  "numbering" : "symbolic",
-  "reset-heading-level" : "1"
-}
-<some optional settings between>
-***
-
-<some optional text between>
-
 Referencing an endnote [endnote-id^^]_.
 Referencing another endnote [note^^]_.
 
-<some optional text between>
-
-_[endnote-id^^] Here is the content of the endnote
-_[note^^] Here is the content of the endnote that
-_ may span several
-_ lines, but new lines must be added\
-_ explicitly by a backslash at the end of a line
-_
-_ Or with a blank endnote line between
-
-<some optional text between>
-
-**Render all used endnotes below:**
+**Render all above used endnotes below:**
 
 {@renderEndnotes}
 ~~~
 
-**Types:**
+**Type:**
 
-: `inline_reference_endnote` :
+: `endnote-definition` :
 :-- `Single`
 :
 : Element type for referencing defined endnotes.
-
-: `block_endnote_definition` :
-:-- `Single`
-:
-: Element type for in-document definitions of endnotes to be referenced.
 
 #### ID referencing
 
@@ -2573,7 +2539,7 @@ _
 _ A blank line starts another paragraph.
 ~~~
 
-**Types:**
+**Type:**
 
 : `footnote-definition` :
 :-- `Single`
@@ -2582,7 +2548,32 @@ _ A blank line starts another paragraph.
 
 ### Endnote definition
 
+The endnote definition is set anywhere in the document using `_[<endnote-id>^^]` followed by at least one space and the endnote content.
+Any Unimarkup element may be used inside an endnote definition.
+Multiple lines may be added by starting them with `_` followed by at least one space.
 
+**Note:** IDs may only have none-white-space characters excluding `^` and `]`.
+
+**Note:** Each endnote must have its own unique ID.
+
+**Usage:**
+
+~~~
+_[endnote-id^^] Here is the content of the endnote
+_[note^^] Here is the content of the endnote that
+_ may span several
+_ lines, but new lines must be added\
+_ explicitly by a backslash at the end of a line
+_
+_ A blank line starts another paragraph.
+~~~
+
+**Type:**
+
+: `endnote-definition` :
+:-- `Single`
+:
+: Element type for definitions of endnotes to be referenced.
 
 ### Abbreviation definition
 
