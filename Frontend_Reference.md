@@ -832,16 +832,11 @@ This text has more than one literature reference [&&id-1&&id-2]_.
 
 ### Abbreviation
 
-To use abbreviations inside a paragraph, use `[::<abbreviation>]_`. The full text of an abbreviation may then be displayed as tooltip or inserted instead of the abbreviation by setting the `display` attribute either to `tooltip` or `replace`.
-
-Abbreviation definitions may be set anywhere inside the document, by setting `_[::<abbreviation>]` followed by one space and the definition content.
-The definition must be surrounded by blank lines, or by other abbreviation definitions. It is possible to span multiple lines by starting the following line with `_ <continuing text>`.
+To use abbreviations, use `[::<abbreviation>]_`. The full text of an abbreviation may then be displayed as tooltip or inserted instead of the abbreviation by setting the `display` attribute either to `tooltip` or `replace`.
 
 **Note:** If an abbreviation has more than one definition, the last found definition is used.
 
-**Note:** An abbreviation definition may only consist of inline elements.
-
-It is possible to render a list of abbreviations, used up to the current position inside a document, using the macro `{@renderAbbreviations}` by accessing the list `{@abbreviations}`.
+It is possible to render a list of abbreviations, used up to the current position inside a document, using the macro `{@renderAbbreviations}` by accessing the list `{%abbreviations}`.
 
 **Usage:**
 
@@ -851,29 +846,14 @@ Some text using an [::abbr]_.
 Text using abbreviations [::xml]_, [::html]_ and [::OPC UA TSN]_.
 
 [::mult]_{ "display" : "replace" }
-
-
-_[::abbr] Abbreviation
-
-_[::mult] Abbreviation
-_ spanning multiple lines\
-_ Backslash at end creates a rendered new line!
-
-_[::xml] Extensible Markup Language
-_[::html] Hypertext Markup Language
 ~~~
 
-**Types:**
+**Type:**
 
-: `inline_abbreviation` :
+: `inline-abbreviation` :
 :-- `Single`
 :
 : Element type for inline abbreviations.
-
-: `block_abbreviation_definition` :
-:-- `Single`
-:
-: Element type for in-document abbreviation definitions.
 
 **Attributes:**
 
@@ -2577,7 +2557,29 @@ _ A blank line starts another paragraph.
 
 ### Abbreviation definition
 
+Abbreviation definitions may be set anywhere inside the document, by setting `_[::<abbreviation>]` followed by at least one space and the definition content.
+It is possible to span multiple lines by starting the following line with `_` followed by at least one space.
 
+**Note:** An abbreviation definition may only consist of inline elements.
+
+**Usage:**
+
+~~~
+_[::abbr] Abbreviation
+_[::mult] Abbreviation
+_ spanning multiple lines\
+_ Backslash at end creates a rendered new line!
+
+_[::xml] Extensible Markup Language
+_[::html] Hypertext Markup Language
+~~~
+
+**Type:**
+
+: `abbreviation-definition` :
+:-- `Single`
+:
+: Element type for abbreviation definitions.
 
 ### Macro definition
 
