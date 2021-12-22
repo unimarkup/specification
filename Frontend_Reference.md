@@ -408,16 +408,16 @@ Some paragraph text with ![some image](<image url>).
 
 ### Inline file insert
 
-There are two different ways to insert files inside a paragraph. Optionally, it is possible to insert parts of a document by slicing.
+There are two different ways to insert files inside a paragraph.
 The general form of an inline file insert looks like a hyperlink with a **special character** set before `[`.
-Optional slicing is set after the closing `)` of the URL and attributes may be set after slicing.
+Optional attributes are set after the closing `)` of the URL.
 
 **Note:** If the inserted content does not fit inside a paragraph, no content is inserted.
 
 **Note:** The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
 
 ~~~ebnf
-inline_insert = hyperlink , [ slicing ] , [ attribute_block ] ;
+inline_insert = hyperlink , [ attribute_block ] ;
 ~~~
 
 **Type:**
@@ -426,6 +426,14 @@ inline_insert = hyperlink , [ slicing ] , [ attribute_block ] ;
 :-- `Group`
 :
 : Group type for inline file insert elements.
+
+**Attribute:**
+
+: `insert-id` :
+:-- `text`
+:
+: An ID of a paragraph element of the inserted file may be set, to only include the content of this paragraph,
+: even if the file itself would have more content, and could not be inserted as inline. 
 
 #### Rendered inline file insert
 
@@ -437,7 +445,7 @@ Supported file types depend on the available renderer. See [additional renderer]
 ~~~
 '[<description for the file content that is inserted>](<file path>){<attributes>}
 
-'[First heading note](Unimarkup_Language_ReferenceManual.md)<>## Heading .*Note:\*\*< ..>
+'[First heading note](Unimarkup_Language_ReferenceManual.md){ "insert-id" : "first-heading-note" }
 ~~~
 
 **Type:**
@@ -464,7 +472,7 @@ An optional text highlighter may be set as attribute. See [additional highlighte
 ~~~
 ~[<description for the file content that is inserted>](<file path>){<attributes>}
 
-Some paragraph text with ~[Some code](someCodeFile.rs)<<fn > ..>. This would insert the first declared function of a rust file.
+Some paragraph text with ~[First heading note](Unimarkup_Language_ReferenceManual.md){ "insert-id" : "first-heading-note" }.
 ~~~
 
 **Type:**
@@ -480,68 +488,6 @@ Some paragraph text with ~[Some code](someCodeFile.rs)<<fn > ..>. This would ins
 :-- Only names of available highlighter are allowed.
 :
 : The name of the highlighter that should be used, if the highlighter is not determined automatically from the file type.
-
-#### Inline file insert slicing
-
-**TODO:** mhatzl Is slicing really needed?
-
-Slicing defines parts of a document that are inserted. The slice is set after the closing `)` of the file path.
-
-- `<<Start text that is searched> .. <End text that is searched>>`
-
-  A start and end text is given between `<>` that must match positions inside the inserted document. 
-  
-  **Note:** The start position must be before the end position.
-
-  **Note:** If the matched text may not be contained in one paragraph, nothing is inserted.
-
-- `<<Start text that is searched>> ..>`
-
-  Here, only the start text position is searched for. If it matches to a text in the inserted document, every text after this position that preserves the text to remain one paragraph is inserted including the matched text.
-
-- `<.. <End text that is searched>>`
-
-  Every text that preserves the text to remain one paragraph up to the matched end text is inserted. If no text matches, nothing is inserted.
-
-- Excluding text slice
-
-  It is possible to mark a text that must be matched in the inserted document, but is not included.
-
-  To set a text slice as excluded, use `><` instead of `<>` to surround the text slice.
-
-  `<>excluded text slice< .. <included text slice>>`
-
-**Note:** `<>` above does not mark placeholder values. They are used to mark the start and end of a text slice. 
-
-**Supported regex tokens:**
-
-The following regex tokens are allowed inside slices:
-
-- `[<any_characters>]` ... Matches at least one of the characters between `[]`
-- `[^<any_characters>]` ... Matches none one of the characters between `[^]`
-- `.` ... Matches any character
-- `<text1>|<text2>` ... Matches either `text1` or `text2`
-- `\s` ... Any white-space character is matched
-- `\S` ... No white-space character is matched
-- `\d` ... Any digit character is matched
-- `\D` ... No digit character is matched
-- `\w` ... Any none-white-space character is matched
-- `\W` ... No none-white-space character is matched
-- `<character>?` ... Matches `character` zero or one time
-- `<character>*` ... Matches `character` zero or more times
-- `<character>+` ... Matches `character` one or more times
-- `<character>{<variable>}` ... Matches `character` number of `variable` times, where `variable` is of type `natural`
-- `<character>{<variable>,}` ... Matches `character` number of `variable` or more times, where `variable` is of type `natural`
-- `<character>{<variable1>,<variable2>}` ... Matches `character` from `variable1` to `variable2` times, where `variable1` and `variable2` are of type `natural`
-
-Additionally, line numbers may be set as starting point, from which the text matching starts, using the attribute `start-line`.
-
-**Attribute:**
-
-: `start-line` :
-:-- `positive`
-:
-: The line number, starting with 1, from which the text matching starts.
 
 ### Emoji substitution
 
@@ -1736,14 +1682,27 @@ With media inserts allowed, it is possible to insert video and audio files in ad
 
 ### Block file insert
 
-There are two different ways to insert files as block elements. Optionally, it is possible to insert parts of a document with slicing.
+There are two different ways to insert files as block elements.
 The general form of a block file insert looks like a hyperlink with a **special character** repeated three or more times before `[`.
 Block file inserts must be surrounded by blank lines.
 
-The syntax for slicing is the same as [slicing for inline file inserts](#inline-file-insert-slicing). Instead of restricting slices to one paragraph, the whole file may be inserted.
-As a result, one-sided slicing does not stop at one paragraph but inserts either everything before or after a match.
-
 **Note:** The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
+
+**Attributes:**
+
+: `insert-ids` :
+:-- `list<text>`
+:
+: A list of IDs of Unimarkup elements of the inserted file may be set, to only include content of elements with set IDs,
+: even if the file itself would have more content. 
+
+: `insert-classes` :
+:-- `list<text>`
+:
+: A list of classes of Unimarkup elements of the inserted file may be set, to only include content of elements,
+: that have at least one of those classes set, even if the file itself would have more content.
+
+**Note:** The inserted order of elements depends on the position inside the inserted file.
 
 #### Rendered block file insert
 
@@ -1756,7 +1715,7 @@ See [additional renderer](#additional-renderer) for more information on availabl
 ~~~
 '''[<Description for the file content that is inserted>](<file path>){<attributes>}
 
-'''[Header description without examples](Unimarkup_Language_ReferenceManual.md)<<## Headers> .. >\*\*Example<>
+'''[The whole style guide for Unimarkup](StyleGuide.md)
 ~~~
 
 **Type:**
@@ -1786,7 +1745,7 @@ See [additional highlighter](#additional-highlighter) for more information on av
 ~~~~
 ~~~[<Description for the file content that is inserted>](<file path>){<attributes>}
 
-~~~[Some code](someCodeFile.ads)<<package SPARK_Alloc> .. <end SPARK_Alloc;>>
+~~~[The whole style guide for Unimarkup](StyleGuide.md)
 ~~~~
 
 **Type:**
