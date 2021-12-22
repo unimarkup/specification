@@ -692,15 +692,9 @@ There are several possibilities to reference in Unimarkup.
 Footnotes may be used to reference additional content that may only be rendered inside the `{@setFooter}` macro by accessing the list `{%footnotes}`.
 The `{%footnotes}` list contains all footnotes that have been referenced since the last time footnotes were rendered inside the document.
 
-A footnote may be referenced inside a paragraph with `[^^<footnote-id>]_`. The footnote definition is set anywhere in the document using `_[^^<footnote-id>]` followed by one space and the footnote definition content.
-Any Unimarkup element may be used inside a footnote definition. The definition must be surrounded by blank lines, or by other footnote definitions. 
-Multiple lines may be added to the definition by starting them with `_` followed by one space.
+A footnote may be referenced inside a paragraph with `[^^<footnote-id>]_`. Footnotes are numbered automatically for the rendered output. The numbering scheme may be adapted in the [preamble](#preamble).
 
-**Note:** IDs may only have none-white-space characters excluding `^` and `]`.
-
-**Note:** Each footnote must have its own unique ID.
-
-Footnotes are numbered automatically for the rendered output. The numbering scheme may be adapted in the [preamble](#preamble).
+**Note:** See [footnote definition](#footnote-definition) on how to define the footnote content. 
 
 **Usage:**
 
@@ -719,16 +713,6 @@ Footnotes are numbered automatically for the rendered output. The numbering sche
 <some optional text between>
 
 Referencing a footnote [^^footnote-id]_ [^^myFootnote]_.
-
-<some optional text between>
-
-_[^^footnote-id] Here is the content of the footnote
-_[^^myFootnote] A note
-_ may span several
-_ lines, but new lines must be added\
-_ explicitly by a backslash at the end of a line.
-_
-_ A blank footnote line between creates another paragraph.
 ~~~
 
 **Types:**
@@ -2566,8 +2550,10 @@ Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
 ## Unimarkup definition elements
 
 Unimarkup definition elements are used to define additional content or behavior for a Unimarkup document.
+Their form is either an atomic or enclosed block, but their content is not rendered at the position where they are defined. 
 They must be surrounded by blank lines or other `um-definition` elements.
 An optional attribute block may be given at the end of an `um-definition` and may span multiple lines.
+Given attributes affect every usage of the definition.
 
 **Example:**
 
@@ -2585,7 +2571,25 @@ _[::html] Hypertext Markup Language
 
 ### Footnote definition
 
+The footnote definition is set anywhere in the document using `_[^^<footnote-id>]` followed by at least one space and the footnote definition content.
+Any Unimarkup element may be used inside a footnote definition.
+Multiple lines may be added to the definition by starting them with `_` followed by at least one space.
 
+**Note:** IDs may only have none-white-space characters excluding `^` and `]`.
+
+**Note:** Each footnote must have its own unique ID.
+
+**Usage:**
+
+~~~
+_[^^footnote-id] Here is the content of the footnote
+_[^^myFootnote] A note
+_ may span several
+_ lines, but new lines must be added\
+_ explicitly by a backslash at the end of a line.
+_
+_ A blank line starts another paragraph.
+~~~
 
 ### Endnote definition
 
