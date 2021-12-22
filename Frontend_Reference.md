@@ -692,40 +692,22 @@ There are several possibilities to reference in Unimarkup.
 Footnotes may be used to reference additional content that may only be rendered inside the `{@setFooter}` macro by accessing the list `{%footnotes}`.
 The `{%footnotes}` list contains all footnotes that have been referenced since the last time footnotes were rendered inside the document.
 
-A footnote may be referenced inside a paragraph with `[^^<footnote-id>]_`. Footnotes are numbered automatically for the rendered output. The numbering scheme may be adapted in the [preamble](#preamble).
+A footnote may be referenced inside a paragraph with `[^^<footnote-id>]_`.
 
 **Note:** See [footnote definition](#footnote-definition) on how to define the footnote content. 
 
 **Usage:**
 
 ~~~
-***
-<some optional settings between>
-"footnote" : {
-  "numbering" : "numerical",
-  "reset-heading-level" : "none",
-  "ref-style" : "^\[{%currentFootnoteNr}]^",
-  "separator" : ": "
-}
-<some optional settings between>
-***
-
-<some optional text between>
-
-Referencing a footnote [^^footnote-id]_ [^^myFootnote]_.
+Referencing a footnote [^^footnote-id]_ and [^^myFootnote]_.
 ~~~
 
 **Types:**
 
-: `inline_reference_footnote` :
+: `footnote-reference` :
 :-- `Single`
 :
 : Element type for referencing defined footnotes.
-
-: `block_footnote_definition` :
-:-- `Single`
-:
-: Element type for in-document definitions of footnotes to be referenced.
 
 #### Endnote
 
@@ -2590,6 +2572,13 @@ _ explicitly by a backslash at the end of a line.
 _
 _ A blank line starts another paragraph.
 ~~~
+
+**Types:**
+
+: `footnote-definition` :
+:-- `Single`
+:
+: Element type for definitions of footnotes to be referenced.
 
 ### Endnote definition
 
