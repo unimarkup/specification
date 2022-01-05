@@ -130,15 +130,16 @@ The primary key for this table is the `filehash` field.
 
 ## Resource table
 
-The resource table contains files that are rendered and/or inserted in the root Unimarkup file that can not be converted to Unimarkup elements.
-Files that can not be converted to Unimarkup elements are for example images and videos of any format.
+The resource table contains files inserted in the root Unimarkup file that cannot be converted to Unimarkup elements.
+Files that cannot be converted to Unimarkup elements are for example literature, images or videos of any format.
 
 The table consists of the following columns:
 
 - `filename` ...--not null text-- The name of a resource file
+- `filehash` ...--not null blob-- The sha256 hash of the file set at `filename`
 - `path` ...--not null text-- The path including the `filename`, where the file is located
 
-The primary key for this table is the `path` field.
+The primary key for this table is the `filehash` field.
 
 ## Abbreviation table
 
