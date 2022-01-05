@@ -124,7 +124,7 @@ The table consists of the following columns:
 - `path` ...--not null text-- The path including the `filename`, where the file is located
 - `preamble` ...--text-- The unformatted JSON or YAML preamble of the file set at `filename`. If this field starts with `{`, JSON is assumed and the field must end with `}`. Otherwise, YAML is used for parsing
 - `fallback-preamble` ...--text-- This preamble is used if `preamble` is empty, which can happen in multi-language context
-- `root` ...--not null bit-- This field defines if the `filename` is the root of the Unimarkup document with `root = True`. Otherwise, `filename` refers to an Unimarkup file that is rendered and/or inserted in the root Unimarkup file
+- `kind` ...--not null text-- This field defines the kind of the metadata, like `root`, `theme`, or `insert`, where `root` defines the entry point for a Unimarkup document, `theme` refers to theme files and `insert` refers to files that are inserted via render or verbatim insert. Exactly one file in this table must be `root`.
 
 The primary key for this table is the `filehash` field.
 
