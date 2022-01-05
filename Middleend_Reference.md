@@ -54,6 +54,11 @@ This Unimarkup file is referred to as **root** in all further sections.
   This table stores all literature, that are defined for the Unimarkup document.
   See [literature table](#literature-table) for more details.
 
+- **Emojis**
+
+  This table stores emojis, additionally added to the Unimarkup document.
+  See [emoji table](#emoji-table) for more details.
+
 ## Content table
 
 The content table stores all used Unimarkup block elements of the root Unimarkup file as rows, except used Variables and Macros.
@@ -182,6 +187,18 @@ The table consists of the following columns:
 - `fallback-data` ...--text-- The data of the literature that is used if `data` is empty, which can happen in multi-language context
 
 The primary key for this table is the `id` field.
+
+## Emoji table
+
+The emoji table stores emojis, additionally added to the Unimarkup document.
+
+The table consists of the following columns:
+
+- `alias` ...--not null text-- The alias that is used to identify and emoji
+- `unicode-glyph` ...--text-- The Unicode glyph representing the emoji
+- `fallback-glyph` ...--text-- The Unicode glyph that is used if `unicode-glyph` is empty, which can happen in multi-language context
+
+The primary key for this table is the `alias` field.
 
 # Multi-language handling
 ## Steps **before** content translation
