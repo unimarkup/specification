@@ -2398,32 +2398,6 @@ _[::html] Hypertext Markup Language
 :
 : Group type for all Unimarkup definition elements.
 
-### Abbreviation definition
-
-Abbreviation definitions may be set anywhere inside the document, by setting `_[::<abbreviation>]` followed by at least one space and the definition content.
-It is possible to span multiple lines by starting the following line with `_` followed by at least one space.
-
-**Note:** An abbreviation definition may only consist of inline elements.
-
-**Usage:**
-
-~~~
-_[::abbr] Abbreviation
-_[::mult] Abbreviation
-_ spanning multiple lines\
-_ Backslash at end creates a rendered new line!
-
-_[::xml] Extensible Markup Language
-_[::html] Hypertext Markup Language
-~~~
-
-**Type:**
-
-: `abbreviation-definition` :
-:-- `Single`
-:
-: Element type for abbreviation definitions.
-
 # Element decorations
 ## Block title
 
