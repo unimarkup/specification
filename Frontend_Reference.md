@@ -623,7 +623,7 @@ Referencing a footnote [^^footnote-id] and [^^myFootnote].
 
 #### ID referencing
 
-Every heading and block element of an Unimarkup document may be referenced by its ID using `[##<element-id>]_`.
+Every heading and block element of an Unimarkup document may be referenced by its ID using `[##<element-id>]`.
 To define the text that is shown when an element is referenced, the attribute `ref-option` may be used.
 Attributes are set after the closing `]`.
 
@@ -632,7 +632,7 @@ Attributes are set after the closing `]`.
 ~~~
 ![Some image](<image url>){ "id" : "some-image-id", "ref" : { "label" : "Some image" } }
 
-A paragraph that references [##some-image-id]_{ "refOption" : "label" }. 
+A paragraph that references [##some-image-id]{ "refOption" : "label" }. 
 The referenced text looks like: Some image
 ~~~
 
