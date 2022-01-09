@@ -666,21 +666,15 @@ The referenced text looks like: Some image
 #### Literature referencing
 
 Literature references are used to reference books, articles, journals or websites and use the [Citation Style Language](https://citationstyles.org/) to render literature depending on the provided CSL file.
-To reference a literature, the literature meta-data and CSL file must be provided via the [preamble](#preamble).
+To reference a literature, the literature meta-data and CSL file must be provided using one of the [configuration options](Configuration_Reference.md).
 The literature meta-data must be in a format that is supported by the used CSL processing tool. See the documentation of the used Unimarkup implementation for more information.
 
-A literature is referenced using the ID (called *label* in BibTeX) of a literature entry in the form `[&&<literature-id>]_`.
-It is possible to reference more than one literature with `[&&<first-literature-id>&&<second-literature-id>]_`.
+A literature is referenced using the ID (called *label* in BibTeX) of a literature entry in the form `[&&<literature-id>]`.
+It is possible to reference more than one literature with `[&&<first-literature-id>&&<second-literature-id>]`.
 
 Depending on the used CSL, citations are either `in-text` or `note`. More information may be found in the [CSL specification](https://docs.citationstyles.org/en/1.0.1/specification.html).
-For the `note` variant, it is possible to set either `footnote` or `endnote` in the [preamble](#preamble) to define how the referenced literature is rendered.
-
-**Note:** Normal foot- and endnotes may be used alongside literature referencing, which might result in similar rendered notes! To prevent this similarity, set different numbering schemes in the preamble.
-
-Referenced literatures, used up to the current position in the document, are stored in a list that may be accessed over the variable `{%literatures}`.
-To render used literature references stored inside `{%literatures}`, the macro `{@renderLiteratures}` may be used.
-
-**Note:** If `note` is set to `footnote`, the `{%literatures}` list may only be accessed inside the `{@setFooter}` macro as described in the footnote definition.
+In the `note` variant, literature references are treated like footnotes, but references are not added to the footnote list.
+Referenced literatures, used up to the current position in the document, are stored in the list `{%um.usedLiterature}`.
 
 **Note:** If a literature has more than one definition, the behavior depends on the used CSL processor tool.
 
@@ -689,22 +683,8 @@ To render used literature references stored inside `{%literatures}`, the macro `
 **Usage:**
 
 ~~~
-***
-<some optional settings between>
-"literature" : {
-  "data-file" : "localLiteratureDataInCslFormat.json",
-  "csl-file" : "cslStyleFile.csl",
-  "note-style" : "endnote"
-}
-<some optional settings between>
-***
-
-This text has some literature reference [&&literature-id]_.
-This text has more than one literature reference [&&id-1&&id-2]_.
-
-**All referenced literature used above in this document is rendered below:**
-
-{@renderLiteratures}
+This text has some literature reference [&&literature-id]
+This text has more than one literature reference [&&id-1&&id-2].
 ~~~
 
 **Type:**
