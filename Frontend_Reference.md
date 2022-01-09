@@ -9,12 +9,11 @@ A Unimarkup frontend file has `.um` as an extension.
 
 This section contains the element definitions of all Unimarkup elements.
 
-**All elements are grouped in four main element types:**
+**All elements are grouped in three main element types:**
 
 - [`inline`](#inline-elements)
 - [`atomic-block`](#atomic-block-elements)
 - [`enclosed-block`](#enclosed-block-elements)
-- [`um-definition`](#um-definition-elements)
 
 ## Inline elements
 
@@ -2375,28 +2374,6 @@ Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
 <<<
 ///
 ~~~
-
-## Unimarkup definition elements
-
-Unimarkup definition elements are used to define additional content or behavior for a Unimarkup document.
-Their form is either an atomic or enclosed block, but their content is not rendered at the position where they are defined. 
-They must be surrounded by blank lines or other `um-definition` elements.
-An optional attribute block may be given at the end of an `um-definition` and may span multiple lines.
-Given attributes affect every usage of the definition.
-
-**Example:**
-
-~~~
-_[::xml] Extensible Markup Language
-_[::html] Hypertext Markup Language
-~~~
-
-**Type:**
-
-: `um-definition` :
-:-- `Group`
-:
-: Group type for all Unimarkup definition elements.
 
 # Element decorations
 ## Block title
