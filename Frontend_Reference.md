@@ -591,7 +591,7 @@ A text 🠖 using an arrow!
 
 ### Referencing
 
-There are several possibilities to reference in Unimarkup.
+There are several reference variations in Unimarkup.
 
 **Type:**
 
@@ -602,17 +602,17 @@ There are several possibilities to reference in Unimarkup.
 
 #### Footnote
 
-Footnotes may be used to reference additional content that may only be rendered inside the `{@setFooter}` macro by accessing the list `{%footnotes}`.
-The `{%footnotes}` list contains all footnotes that have been referenced since the last time footnotes were rendered inside the document.
+Footnotes may be used to reference additional content that should not be part of the normal document flow.
+The `{%um.footnotes}` list contains all footnotes that have been referenced up until the current position in the document, where the list is accessed.
 
-A footnote may be referenced inside a paragraph with `[^^<footnote-id>]_`.
+A footnote may be referenced inside a paragraph with `[^^<footnote-id>]`.
 
-**Note:** See [footnote definition](#footnote-definition) on how to define the footnote content. 
+**Note:** The macro [`{@<definition> um.addFootnote{%id%content}}`](#predefined-macros) must be used to define the footnote content. 
 
 **Usage:**
 
 ~~~
-Referencing a footnote [^^footnote-id]_ and [^^myFootnote]_.
+Referencing a footnote [^^footnote-id] and [^^myFootnote].
 ~~~
 
 **Type:**
