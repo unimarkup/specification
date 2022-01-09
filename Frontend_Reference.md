@@ -2789,40 +2789,86 @@ The logical formula is entered between the two `?`.
 
 # Macros
 
-;; mhatzl
+Macros may be used to reduce text duplication, improve consistency across documents, or to provide functionality for out of flow elements.
+Macros are similar to functions in most common programming languages.
 
-Macro name may have any character except `{}@` and spaces.
-Macros may be defined anywhere in the document, but must be surrounded by blank lines or other macro definitions.
+A macro is uniquely identified by a namespace and the macro name. Every macro is inside the namespace of the Unimarkup file in which it is defined.
+
+## Macro definition
+
+A macro may be defined using the following syntax:
+
+- Macro returning inline elements
+
+  ~~~
+  ;; Description for this macro
+  {@ <return type> macroname (%<parameter type>param1 %<parameter type>param2) => macro body}
+  ~~~
+
+  **Note:** The first space after `=>` is mandatory and not considered as part of the body.
+
+- Macro returning block elements
+
+  ~~~
+  ;; Description for this macro
+  {@ <return type> macroname (%<parameter type>param1 %<parameter type>param2) =>
+  macro body
+  }
+  ~~~
+
+A macro definition is not allowed inside a nested block and may only be surrounded by blank lines or other macro definitions.
+
+**Note:** `<>` are mandatory and no placeholders.
+
+**Note:** If no parameter is set, empty parentheses must be used like `{@<inline> macroname()}`.
 
 **Usage:**
 
 - Defining macros:
 
   ~~~
-  {@{all}macroname[]}
-
-  paragraph@macroname{<type> parmetername1}{<type> parametername2}[
-  This is a paragraph {:parametername1:} 
-  ]
+  {@<paragraph> macroname(%<paragraph> param1) =>
+  Some text: {%param1} (as one paragraph).
+  }
   ~~~
 
 - Using macros:
 
   ~~~
-  {@macroname}
-  {@macroname{<type parmetername1>}{<type parametername2>}}
+  {@macroname(%param1{using a parameter})}
   ~~~
+
+## Namespaces and macro names
+
+Namespaces may be used to group macros, since `<namespace>.<macro name>` must be unique across the entire document.
+Every Unimarkup file has its own namespace, but it is possible to add namespaces inside a file.
+
+A macro name may consist of any character except `{}@.()%<>` and spaces.
+If a `.` is part of the name, the text before `.` is considered as a namespace.
+
+Macros defined in the current Unimarkup file may be accessed without a namespace or starting the macro name with `.`.
 
 ## Predefined macros
 
-- `{@space}`: This macro adds one non-breaking space
-- `{@repeat{positive count, all text}}`: This macro repeats a given text for `count`times
-- `{@tab}`: This macro adds two non-breaking spaces
-- `{@header{all text}}`: This macro defines a header that is applied to a page. It may be overwritten at any point, only the last macro call is taken for the header
-- `{@footer{all text}}`: This macro defines a footer that is applied to a page. It may be overwritten at any point, only the last macro call is taken for the footer
-- `{@toc}`: This macro inserts the table of contents at this position
-- `{@refs}`: This macro inserts references used in the document at this position
-- `{@abbr}`: This macro inserts abbreviations used in the document at this position
+The following macros are predefined and must be part of every Unimarkup implementation.
+Predefined macros must have `um` as namespace.
+
+- `{@<text> um.space()}`: This macro adds one non-breaking space
+- `{@<text> um.tab()}`: This macro adds two non-breaking spaces
+
+
+
+
+
+
+;; mhatzl
+
+- `{@<inline> um.repeat(%<positive> count %<inline> text}}`: This macro repeats a given text for `count` times
+- `{@um.defineHeader{all text}}`: This macro defines a header that is applied to a page. It may be overwritten at any point, only the last macro call is taken for the header
+- `{@um.defineFooter{all text}}`: This macro defines a footer that is applied to a page. It may be overwritten at any point, only the last macro call is taken for the footer
+- `{@um.defineToc}`: This macro inserts the table of contents at this position
+- `{@um.defineRefs}`: This macro inserts references used in the document at this position
+- `{@um.defineAbbr}`: This macro inserts abbreviations used in the document at this position
 
 
 
