@@ -696,20 +696,20 @@ This text has more than one literature reference [&&id-1&&id-2].
 
 ### Abbreviation
 
-To use abbreviations, use `[::<abbreviation>]_`. The full text of an abbreviation may then be displayed as tooltip or inserted instead of the abbreviation by setting the `display` attribute either to `tooltip` or `replace`.
+Abbreviations may be used as substitution or tooltip with the syntax `[::<abbreviation>]`. The full text of an abbreviation may then be displayed as tooltip or substituted by setting the `display` attribute either to `tooltip` or `substitute`.
 
-**Note:** If an abbreviation has more than one definition, the last found definition is used.
+**Note:** If an abbreviation is defined more than once, Unimarkup returns and error.
 
-It is possible to render a list of abbreviations, used up to the current position inside a document, using the macro `{@renderAbbreviations}` by accessing the list `{%abbreviations}`.
+The list `{%um.abbreviations}` holds all used abbreviations in the document up to the current position.
 
 **Usage:**
 
 ~~~
-Some text using an [::abbr]_. 
+Some text using an [::abbr]. 
 
-Text using abbreviations [::xml]_, [::html]_ and [::OPC UA TSN]_.
+Text using abbreviations [::xml], [::html] and [::OPC UA TSN].
 
-[::mult]_{ "display" : "replace" }
+[::mult]{ "display" : "substitute" }
 ~~~
 
 **Type:**
@@ -730,7 +730,7 @@ Text using abbreviations [::xml]_, [::html]_ and [::OPC UA TSN]_.
 :
 : - `tooltip` ... The abbreviation definition is shown as tooltip.
 :                 **Note:** The tooltip behavior depends on the output format.
-: - `replace` ... This replaces the abbreviation with the text defined in the definition.
+: - `substitute` ... This substitutes the abbreviation by the text defined in the definition.
 
 ### Direct Unicode
 
