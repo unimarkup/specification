@@ -2398,35 +2398,6 @@ _[::html] Hypertext Markup Language
 :
 : Group type for all Unimarkup definition elements.
 
-### Footnote definition
-
-The footnote definition is set anywhere in the document using `_[^^<footnote-id>]` followed by at least one space and the footnote definition content.
-Any Unimarkup element may be used inside a footnote definition.
-Multiple lines may be added to the definition by starting them with `_` followed by at least one space.
-
-**Note:** IDs may only have none-white-space characters excluding `^` and `]`.
-
-**Note:** Each footnote must have its own unique ID.
-
-**Usage:**
-
-~~~
-_[^^footnote-id] Here is the content of the footnote
-_[^^myFootnote] A note
-_ may span several
-_ lines, but new lines must be added\
-_ explicitly by a backslash at the end of a line.
-_
-_ A blank line starts another paragraph.
-~~~
-
-**Type:**
-
-: `footnote-definition` :
-:-- `Single`
-:
-: Element type for definitions of footnotes to be referenced.
-
 ### Abbreviation definition
 
 Abbreviation definitions may be set anywhere inside the document, by setting `_[::<abbreviation>]` followed by at least one space and the definition content.
