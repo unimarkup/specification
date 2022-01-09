@@ -622,34 +622,6 @@ Referencing a footnote [^^footnote-id] and [^^myFootnote].
 :
 : Element type for referencing defined footnotes.
 
-#### Endnote
-
-Endnotes may be used to reference additional content that is only rendered at a specific position in the document.
-All used endnotes may be rendered using the macro `{@renderEndnotes}` by accessing the list `{%endnotes}`.
-The `{%endnotes}` list contains all endnotes that have been referenced, since the last time endnotes were rendered using `{@renderEndnotes}` inside the document.
-
-An endnote is referenced inside a paragraph with `[<endnote-id>^^]_`.
-
-**Note:** See [endnote definition](#endnote-definition) on how to define the endnote content. 
-
-**Usage:**
-
-~~~
-Referencing an endnote [endnote-id^^]_.
-Referencing another endnote [note^^]_.
-
-**Render all above used endnotes below:**
-
-{@renderEndnotes}
-~~~
-
-**Type:**
-
-: `endnote-definition` :
-:-- `Single`
-:
-: Element type for referencing defined endnotes.
-
 #### ID referencing
 
 Every heading and block element of an Unimarkup document may be referenced by its ID using `[##<element-id>]_`.
@@ -2454,35 +2426,6 @@ _ A blank line starts another paragraph.
 :-- `Single`
 :
 : Element type for definitions of footnotes to be referenced.
-
-### Endnote definition
-
-The endnote definition is set anywhere in the document using `_[<endnote-id>^^]` followed by at least one space and the endnote content.
-Any Unimarkup element may be used inside an endnote definition.
-Multiple lines may be added by starting them with `_` followed by at least one space.
-
-**Note:** IDs may only have none-white-space characters excluding `^` and `]`.
-
-**Note:** Each endnote must have its own unique ID.
-
-**Usage:**
-
-~~~
-_[endnote-id^^] Here is the content of the endnote
-_[note^^] Here is the content of the endnote that
-_ may span several
-_ lines, but new lines must be added\
-_ explicitly by a backslash at the end of a line
-_
-_ A blank line starts another paragraph.
-~~~
-
-**Type:**
-
-: `endnote-definition` :
-:-- `Single`
-:
-: Element type for definitions of endnotes to be referenced.
 
 ### Abbreviation definition
 
