@@ -492,7 +492,7 @@ Some paragraph text with ~[First heading note](Unimarkup_Language_ReferenceManua
 
 Some special character sequences are reserved for direct emoji conversion. Those sequences must be surrounded by white-spaces, or they are kept as is.
 It is also possible to use [emoji shortcuts](https://github.com/github/gemoji/blob/master/db/emoji.json) with the alias being surrounded by `:`.
-Emoji shortcuts, unlike direct emojis, may appear inside words. The list of supported emoji shortcuts may be increased using the macro `{@<definition> addEmoji (%<text>alias%<text>emoji_glyph)}`.
+Emoji shortcuts, unlike direct emojis, may appear inside words. The list of supported emoji shortcuts may be increased using the macro `{@<definition> um.addEmoji (%<text>alias%<text>emoji_glyph)}`.
 
 **Full list of available direct emojis:**
 
@@ -518,8 +518,8 @@ Emoji shortcuts, unlike direct emojis, may appear inside words. The list of supp
 **Usage:**
 
 ~~~
-{@addEmoji (%alias{grin}%emoji_glyph{😁})}
-{@addEmoji (%alias{slight_smile}%emoji_glyph{&U+1F642;})}
+{@um.addEmoji (%alias{grin}%emoji_glyph{😁})}
+{@um.addEmoji (%alias{slight_smile}%emoji_glyph{&U+1F642;})}
 
 A text with an emoji :D in it!
 
