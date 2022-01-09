@@ -492,58 +492,50 @@ Some paragraph text with ~[First heading note](Unimarkup_Language_ReferenceManua
 ### Emoji substitution
 
 Some special character sequences are reserved for direct emoji conversion. Those sequences must be surrounded by white-spaces, or they are kept as is.
-It is also possible to use [emoji shortcuts](https://github.com/github/gemoji/blob/master/db/emoji.json) with the alias being surrounded by `::`.
-Emoji shortcuts, unlike direct emojis, may appear inside words. The list of supported emoji shortcuts may be increased in the [preamble](#preamble).
+It is also possible to use [emoji shortcuts](https://github.com/github/gemoji/blob/master/db/emoji.json) with the alias being surrounded by `:`.
+Emoji shortcuts, unlike direct emojis, may appear inside words. The list of supported emoji shortcuts may be increased using the macro `{@<definition> addEmoji (%<text>alias%<text>emoji_glyph)}`.
 
 **Full list of available direct emojis:**
 
-- `:)` ... 🙂 (U+1F642)
-- `;)` ... 😉 (U+1F609)
-- `:D` ... 😃 (U+1F603)
-- `^^` ... 😄 (U+1F604)
-- `=)` ... 😊 (U+1F60A)
-- `:(` ... 🙁 (U+1F641)
-- `;(` ... 😢 (U+1F622)
-- `:P` ... 😛 (U+1F61B)
-- `;P` ... 😜 (U+1F61C)
-- `O:)` ... 😇 (U+1F607)
-- `:O` ... 😨 (U+1F628)
-- `>:(` ... 🤬 (U+1F92C)
-- `:/` ... 😕 (U+1F615)
-- `3:)` ... 😈 (U+1F608)
-- `-_-` ... 😑 (U+1F611)
-- `<3` ... ❤ (U+2764)
-- `(Y)` ... 👍 (U+1F44D)
-- `(N)` ... 👎 (U+1F44E)
+- `:)` ... 🙂 (U+1F642) has aliases: `slightly_smiling_face`
+- `;)` ... 😉 (U+1F609) has aliases: `wink` 
+- `:D` ... 😃 (U+1F603) has aliases: `smiley`
+- `^^` ... 😄 (U+1F604) has aliases: `smile`
+- `=)` ... 😊 (U+1F60A) has aliases: `blush`
+- `:(` ... 🙁 (U+1F641) has aliases: `slightly_frowning_face`
+- `;(` ... 😢 (U+1F622) has aliases: `cry`
+- `:P` ... 😛 (U+1F61B) has aliases: `stuck_out_tongue`
+- `;P` ... 😜 (U+1F61C) has aliases: `stuck_out_tongue_winking_eye`
+- `O:)` ... 😇 (U+1F607) has aliases: `innocent`
+- `:O` ... 😨 (U+1F628) has aliases: `fearful`
+- `>:(` ... 🤬 (U+1F92C) has aliases: `cursing_face`
+- `:/` ... 😕 (U+1F615) has aliases: `confused`
+- `3:)` ... 😈 (U+1F608) has aliases: `smiling_imp`
+- `-_-` ... 😑 (U+1F611) has aliases: `expressionless`
+- `<3` ... ❤ (U+2764) has aliases: `heart`
+- `(Y)` ... 👍 (U+1F44D) has aliases: `+1`, `thumbsup`
+- `(N)` ... 👎 (U+1F44E) has aliases: `-1`, `thumbsdown`
 
 **Usage:**
 
 ~~~
-***
-"emoji" : {
-  "shortcuts" : [
-    {
-      "emoji" : "😁",
-      "aliases" : [ "grin" ]
-    },
-    {
-      "emoji" : "&U+1F642;",
-      "aliases" : [ "slight_smile" ]
-    }
-  ]
-}
-***
+{@addEmoji (%alias{grin}%emoji_glyph{😁})}
+{@addEmoji (%alias{slight_smile}%emoji_glyph{&U+1F642;})}
 
 A text with an emoji :D in it!
 
-Using ::monocle_face::'s emoji shortcut and one from the preamble ::grin::.
+Using :monocle_face:'s predefined emoji shortcut and the manual :grin: using the macro.
+
+Multiple :grin::grin:
 ~~~
 
 Rendered to:
 ~~~
 A text with an emoji 😃 in it!
 
-Using 🧐's emoji shortcut and one from the preamble 😁.
+Using 🧐's predefined emoji shortcut and the manual 😁 using the macro.
+
+Multiple 😁😁
 ~~~
 
 **Type:**
@@ -552,31 +544,6 @@ Using 🧐's emoji shortcut and one from the preamble 😁.
 :-- `Single`
 :
 : Type for direct emojis or emoji shortcuts.
-
-**Preamble options**
-
-: `shortcuts` :
-:-- `list<emoji_shortcut>`
-:
-: List of emoji shortcuts.
-:
-: : `emoji_shortcut`
-: :
-: : Type for an emoji shortcut that supports the following fields.
-: : Other fields will be ignored.
-: :
-: : : `emoji` :
-: : :
-: : : Allows direct emoji insertion, or using the [direct Unicode element](#direct-unicode).
-: :
-: : : `aliases` :
-: : :
-: : : List of aliases that may be used in an emoji shortcut to get the emoji.
-: : : White-space characters and `:` are not allowed.
-
-: `extern-shortcuts` :
-:
-: Path to a JSON-file that may contain a list of the `emoji_shortcut` type.
 
 ### Arrow substitution
 
