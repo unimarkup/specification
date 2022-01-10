@@ -44,11 +44,6 @@ This Unimarkup file is referred to as **root** in all further sections.
   This table stores all footnotes, that are defined for the Unimarkup document.
   See [footnote table](#footnote-table) for more details.
 
-- **Endnotes**
-
-  This table stores all endnotes, that are defined for the Unimarkup document.
-  See [endnote table](#endnote-table) for more details.
-
 - **Literature**
 
   This table stores all literature, that are defined for the Unimarkup document.
@@ -156,18 +151,6 @@ The table consists of the following columns:
 - `id` ...--not null text-- The ID of the footnote
 - `content` ...--text-- The content of the footnote
 - `fallback-content` ...--text-- The content of the footnote that is used if `content` is empty, which can happen in multi-language context
-
-The primary key for this table is the `id` field.
-
-## Endnote table
-
-The endnote table stores all endnotes that are defined for the Unimarkup document.
-
-The table consists of the following columns:
-
-- `id` ...--not null text-- The ID of the endnote
-- `content` ...--text-- The content of the endnote
-- `fallback-content` ...--text-- The content of the endnote that is used if `content` is empty, which can happen in multi-language context
 
 The primary key for this table is the `id` field.
 
