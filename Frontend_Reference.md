@@ -35,16 +35,10 @@ An optional attribute block may be given at the end of an inline element and may
 
 ### Inline formatting
 
-Inline formatting consists of special character sequences inside one paragraph, that format an enclosed text in a certain way. For multi-paragraph formatting see [text blocks](#text-blocks).
+Inline formatting consists of special character sequences inside one paragraph that format an enclosed text in a certain way. For multi-paragraph formatting see [text blocks](#text-blocks).
 
 A none-white-space character must immediately follow an opening character sequence for inline formatting.
 If the inline formatting is not closed by the same character sequence with a none-white-space character before the closing character sequence, no formatting is applied.
-
-~~~ebnf
-special_
-
-inline_formatting = blank_line , [ ( none_white_space , { any_character } ) ] , 
-~~~
 
 **Note:** Inline formatting may also be applied inside words and stacked.
 
@@ -52,41 +46,117 @@ inline_formatting = blank_line , [ ( none_white_space , { any_character } ) ] ,
 
 - Inline formatting within words
 
-~~~
-For*matt*ing inside __word__s is possible.
-~~~
+  ~~~
+  For*matt*ing inside __word__s is possible.
+  ~~~
 
 - Stacking inline formatting by nesting them
 
-**Note:** Not all formatting may be combined and some require certain order. Those restrictions are noted at the corresponding formatting definitions.
+  **Note:** Not all formatting may be combined and some require certain order. Those restrictions are noted at the corresponding formatting definitions.
 
-~~~
-Stacking this **__text to be bold and underlined__**.
+  ~~~
+  Stacking this **__text to be bold and underlined__**.
 
-The opposite way __**is also bold and underlined**__.
+  The opposite way __**is also bold and underlined**__.
 
-To get ***bold and italic***.
+  To get ***bold and italic***.
 
-Having a **`bold verbatim text`**.
+  Having a **`bold verbatim text`**.
 
-Combining ^^_overlined superscript^_^ text.
-~~~
+  Combining ^^_overlined superscript^_^ text.
+  ~~~
+
+  **Note:** If a special sequence starts inside another one and an closing sequence for an upper formatting is encountered, the closing sequence is not considered.
+
+  ~~~
+  *outer **inner*bold** end outer*
+  ~~~
+
+  The above renders to the following abstract form
+
+  ~~~
+  <italic>(outer <bold>(inner*bold) end outer)
+  ~~~
+
+  - Fallback handling
+
+    Formatting is started at the beginning of an inline content. If a special formatting sequence is reached, it is parsed until the corresponding end sequence is found.
+    If another special sequence is encountered, the inner sequence is first tried to be completed. Any encountered end sequence of the outer format is ignored until the inner sequence is completed.
+    If the inner sequence cannot be completed, because end of content is reached without finding the corresponding end sequence, the outer format reevaluates the content starting at the inner start sequence,
+    but now considers the inner sequence as plain text.
+
+    **Example:**
+
+    ~~~
+    *only italic **bold fails* plain text 
+    ~~~
+
+    The above goes through the following steps:
+
+    1. `<italic start>(only italic <bold start>`
+    2. `<italic start<(only italic <bold start>(bold fails* plain text)<end reached>`
+    3. `<italic start>(only italic **bold fails)<italic end>`
+    4. `<italic start>(only italic **bold fails)<italic end> plain text`
+
+  - Order of `bold` and `italic`
+
+    If `bold` and `italic` are directly stacked, the order depends on the closing sequence.
+
+    1. Start and end are stacked
+
+      The order does not matter, since all `*` are part of special sequences and the containing text gets both formats.
+
+      ~~~
+      ***bold and italic***
+      ~~~
+
+    2. Start is stacked, but `bold` ends before `italic`
+
+      The outer `*` is considered part of `italic` and the inner `**` part of `bold`.
+
+      ~~~
+      ***bold and italic** only italic*
+      ~~~
+
+    3. Start is stacked, but `italic` ends before `bold`
+
+      The outer `**` is considered part of `bold` and the inner `*` part of `italic`.
+
+      ~~~
+      ***bold and italic* only bold**
+      ~~~
+
+    4. End is stacked, but `bold` starts before `italic`
+
+      The outer `**` is considered part of `bold` and the inner `*` part of `italic`.
+
+      ~~~
+      **only bold *bold and italic***
+      ~~~
+
+    5. End is stacked, but `italic` starts before `bold`
+
+      The outer `*` is considered part of `italic` and the inner `**` part of `bold`.
+
+      ~~~
+      *only italic **bold and italic***
+      ~~~
 
 - No inline formatting
 
-The following examples show text with formatting character sequences, but no formatting is applied, because not all requirements are fulfilled.
+  The following examples show text with formatting character sequences, but no formatting is applied, because not all requirements are fulfilled.
 
-~~~
-Text with* starting sequence followed by a white-space.
+  ~~~
+  Text with* starting sequence followed by a white-space.
 
-Text *with correct starting sequence, but paragraph ends without closing sequence.
+  Text *with correct starting sequence, but paragraph ends without closing sequence.
 
-Text *with correct starting sequence, *but ending sequence is preceded by a white-space.
+  Text *with correct starting sequence, *but ending sequence is preceded by a white-space.
 
-Text ***with correct bold and italic starting sequence, but* only italic closing sequence is correct with bold being ignored.
+  Text ***with correct bold and italic starting sequence, but* only italic closing sequence is correct with bold being ignored.
 
-Text ***with correct bold and italic starting sequence, but** only bold closing sequence is correct with italic being ignored.
-~~~
+  Text ***with correct bold and italic starting sequence, but** only bold closing sequence is correct with italic being ignored.
+  ~~~
 
 **Type:**
 
@@ -220,8 +290,8 @@ _subscripted text_
 
 #### **Verbatim**
 
-A text may be defined verbatim by surrounding it with `` ` ``.
-If you want to use a `` ` `` inside, you need to use ` `` ` at start and end.
+A text may be defined as verbatim by surrounding it with `` ` ``.
+If you want to use a `` ` `` inside, you need to use ` `` ` instead of `` ` `` with at least one character between the inner content and ` `` `.
 
 **Note:** This formatting must be the most inner formatting for stacked formatting.
 
@@ -231,6 +301,8 @@ If you want to use a `` ` `` inside, you need to use ` `` ` at start and end.
 `verbatim text`
 
 `` ` ``
+
+``char` ``
 ~~~
 
 **Type:**
