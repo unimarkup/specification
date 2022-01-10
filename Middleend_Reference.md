@@ -39,10 +39,10 @@ This Unimarkup file is referred to as **root** in all further sections.
   This table stores all abbreviations, that are defined for the Unimarkup document.
   See [abbreviation table](#abbreviation-table) for more details.
 
-- **Footnotes**
+- **Notes**
 
-  This table stores all footnotes, that are defined for the Unimarkup document.
-  See [footnote table](#footnote-table) for more details.
+  This table stores all notes, that are defined for the Unimarkup document.
+  See [note table](#note-table) for more details.
 
 - **Literature**
 
@@ -143,15 +143,15 @@ The table consists of the following columns:
 
 The primary key for this table is the `abbreviation` field.
 
-## Footnote table
+## Note table
 
-The footnote table stores all footnotes that are defined for the Unimarkup document.
+The note table stores all notes that are defined for the Unimarkup document.
 
 The table consists of the following columns:
 
-- `id` ...--not null text-- The ID of the footnote
-- `content` ...--text-- The content of the footnote
-- `fallback-content` ...--text-- The content of the footnote that is used if `content` is empty, which can happen in multi-language context
+- `id` ...--not null text-- The ID of the note
+- `content` ...--text-- The content of the note
+- `fallback-content` ...--text-- The content of the note that is used if `content` is empty, which can happen in multi-language context
 
 The primary key for this table is the `id` field.
 

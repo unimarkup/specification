@@ -599,27 +599,27 @@ There are several reference variations in Unimarkup.
 :
 : Group type for reference elements.
 
-#### Footnote
+#### Notes
 
-Footnotes may be used to reference additional content that should not be part of the normal document flow.
-The `{%um.footnotes}` list contains all footnotes that have been referenced up until the current position in the document, where the list is accessed.
+Notes may be used to reference additional content that should not be part of the normal document flow.
+The `{%um.notes}` list contains all notes that have been referenced up until the current position in the document, where the list is accessed.
 
-A footnote may be referenced inside a paragraph with `[^^<footnote-id>]`.
+A note may be referenced inside a paragraph with `[^^<note-id>]`.
 
-**Note:** The macro [`{@<definition> um.addFootnote{%id%content}}`](#predefined-macros) must be used to define the footnote content. 
+**Note:** The macro [`{@<definition> um.addNote{%id%content}}`](#predefined-macros) must be used to define the note content. 
 
 **Usage:**
 
 ~~~
-Referencing a footnote [^^footnote-id] and [^^myFootnote].
+Referencing a note [^^note-id] and [^^myNote].
 ~~~
 
 **Type:**
 
-: `footnote-reference` :
+: `note-reference` :
 :-- `Single`
 :
-: Element type for referencing defined footnotes.
+: Element type for referencing defined notes.
 
 #### ID referencing
 
@@ -678,7 +678,7 @@ A literature is referenced using the ID (called *label* in BibTeX) of a literatu
 It is possible to reference more than one literature with `[&&<first-literature-id>&&<second-literature-id>]`.
 
 Depending on the used CSL, citations are either `in-text` or `note`. More information may be found in the [CSL specification](https://docs.citationstyles.org/en/1.0.1/specification.html).
-In the `note` variant, literature references are treated like footnotes, but references are not added to the footnote list.
+In the `note` variant, literature references are treated like [notes](#notes), but references are not added to the note list.
 Referenced literatures, used up to the current position in the document, are stored in the list `{%um.usedLiterature}`.
 
 **Note:** If a literature has more than one definition, the behavior depends on the used CSL processor tool.
