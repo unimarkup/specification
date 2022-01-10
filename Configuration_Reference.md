@@ -11,28 +11,28 @@ The following options are available for all configuration variants.
 
 ### Taking values
 
-- `output-file` ... Defines the filename that must be used for the rendered outputs. The extension of the filename depends on the output format.
+- `output-file` ...--`filepath`-- Defines the filename (without extension) that must be used for the rendered outputs. The extension of the filename depends on the output format.
                     If no path is given, the output file(s) will be rendered into the workspace folder.
 
 - `output-formats` ... Set output formats the Unimarkup document should be rendered to. Set outputs are also treated as flags inside the Unimarkup document. ;; mhatzl: link to possible formats
 
-- `insert-path` ... Set paths that are searched for relative file and image inserts.
+- `insert-paths` ...--`list<folderpath>`-- Set paths that are searched for relative file and image inserts.
 
-- `dot-unimarkup` ... Set the path to a directory that is used for default configuration and theme settings. The intermediate form of rendered documents will also be stored at this path.
+- `dot-unimarkup` ...--`folderpath`-- Set the path to a directory that is used for default configuration and theme settings. The intermediate form of rendered documents will also be stored at this path.
 
-- `theme` ... Set a Unimarkup theme file to be used for rendering.
+- `theme` ...--`filepath`-- Set a Unimarkup theme file to be used for rendering.
 
-- `flag` ... Set flags that will be set for rendering.
+- `flag` ...--`list<string>`-- Set flags that will be set for rendering.
 
-- `enable-elements` ... Explicitly set Unimarkup block elements that can be used inside the given Unimarkup document. If this option is set, all Unimarkup elements that are not given are disabled.
+- `enable-elements` ...--`list<Unimarkup block elements>`-- Explicitly set Unimarkup block elements that can be used inside the given Unimarkup document. If this option is set, all Unimarkup elements that are not given are disabled.
 
-- `disable-elements` ... Explicitly set Unimarkup block elements that can NOT be used inside the given Unimarkup document. If this option is set, all Unimarkup elements that are not given are enabled.
+- `disable-elements` ...--`list<Unimarkup block elements>`-- Explicitly set Unimarkup block elements that can NOT be used inside the given Unimarkup document. If this option is set, all Unimarkup elements that are not given are enabled.
 
-- `citation-style` ... Set citation style sheet that is used to process referenced literature.
+- `citation-style` ...--`filepath`-- Set citation style sheet that is used to process referenced literature.
 
-- `references` ... Set one or more reference files in BibTeX or JSON format to use them with literature referencing.
+- `references` ...--`list<filepath>`-- Set one or more reference files in BibTeX or JSON format to use them with literature referencing.
 
-- `fonts` ... Set TTF or WOFF fonts to be able to use them for rendering.
+- `fonts` ...--`list<filepath>`-- Set TTF or WOFF fonts to be able to use them for rendering.
 
 ### Boolean options
 
@@ -47,11 +47,11 @@ The following options are available for all configuration variants.
 ## HTML options
 ### Taking values
 
-- `html-template` ... Set a template HTML file with `{{ head }}` set inside the `head` element and `{{ body }}` set inside the body element.
+- `html-template` ...--`filepath`-- Set a template HTML file with `{{ head }}` set inside the `head` element and `{{ body }}` set inside the body element.
                       Styling, fonts and scripts will be inserted at `{{ head }}` and the rendered Unimarkup content is placed inside `{{ body }}`.
                       Optionally, `{{ toc }}` can be set to get the table of contents (**Note:** This will not remove a rendered table of contents inside the rendered Unimarkup content if present).
 
-- `html-mathmode` ... Set the mathmode of MathJax to be used for rendered HTML documents.
+- `html-mathmode` ...--`(svg|embed|cdn)`-- Set the mathmode of MathJax to be used for rendered HTML documents.
 
 ### Boolean options
 
@@ -65,7 +65,7 @@ In addition to the options that are valid for all configuration options, additio
 
 ### Taking values
 
-- `um-file` ... The filename of the Unimarkup file that is used as root for rendering. **Note:** This is a mandatory setting to identify the Unimarkup file that should be rendered.
+- `um-file` ...--`filepath`-- The filename of the Unimarkup file that is used as root for rendering. **Note:** This is a mandatory setting to identify the Unimarkup file that should be rendered.
                 It can either point to a `.um` file, or `.db` that contains the intermediate representation.
 
 ### Boolean options
