@@ -34,6 +34,8 @@ The following options are available for all configuration variants.
 
 - `fonts` ...--`list<filepath>`-- Set TTF or WOFF fonts to be able to use them for rendering.
 
+- `relative-insert-prefix` ...--`folderpath`-- This prefix will be set before inserts in the rendered document to inserts that use relative paths. **Note:** During rendering, the original relative path is taken.
+
 ### Boolean options
 
 - `overwrite-out-files` ... Overwrite files set with `out-file` if already existing.
@@ -41,8 +43,6 @@ The following options are available for all configuration variants.
 - `clean` ... Deletes all previously rendered documents stored inside the `dot-unimarkup` path.
 
 - `rebuild` ... Ignores all previously rendered documents stored inside the `dot-unimarkup` path and renders the given Unimarkup file.
-
-- `relative-insert-prefix` ... This prefix will be set before inserts in the rendered document to inserts that use relative paths. **Note:** During rendering, the original relative path is taken.
 
 ## HTML options
 ### Taking values
