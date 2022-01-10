@@ -623,7 +623,12 @@ Referencing a footnote [^^footnote-id] and [^^myFootnote].
 
 #### ID referencing
 
-Every heading and block element of an Unimarkup document may be referenced by its ID using `[##<element-id>]`.
+Every heading and block element of an Unimarkup file may be referenced by its ID using `[##<element-id>]`.
+To reference an element that is part of the Unimarkup document, but not in the same Unimarkup file,
+the namespace of the Unimarkup file of the element must be set like `[##<namespace>##<element-id>]`.
+
+**Note:** If the element-id contains `##`, it must be escaped to not be considered as namespace.
+
 To define the text that is shown when an element is referenced, the attribute `ref-option` may be used.
 Attributes are set after the closing `]`.
 
