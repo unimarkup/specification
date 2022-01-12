@@ -35,7 +35,7 @@ An optional attribute block may be given at the end of an inline element and may
 
 ### Inline formatting
 
-Inline formatting consists of special character sequences inside one paragraph that format an enclosed text in a certain way. For multi-paragraph formatting see [text blocks](#text-blocks).
+Inline formatting consists of special character sequences that format an enclosed text in a certain way. For multi-block formatting see [text blocks](#text-blocks).
 
 A none-white-space character must immediately follow an opening character sequence for inline formatting.
 If the inline formatting is not closed by the same character sequence with a none-white-space character before the closing character sequence, no formatting is applied.
@@ -66,29 +66,30 @@ If the inline formatting is not closed by the same character sequence with a non
   Combining ^^_overlined superscript^_^ text.
   ~~~
 
-  **Note:** If a special sequence starts inside another one and an closing sequence for an upper formatting is encountered, the closing sequence is not considered.
+  **Note:** If a special sequence starts inside another one and an closing sequence for an upper formatting is encountered, the inner formatting is not considered, and the outer formatting is closed.
 
   ~~~
-  *outer **inner*bold** end outer*
+  *outer **only italic*non-bold** non-italic*
   ~~~
 
   The above renders to the following abstract form
 
   ~~~
-  <italic>(outer <bold>(inner*bold) end outer)
+  <italic start>outer **only italic<italic end>non-bold** non-italic*
   ~~~
+
+  **Special cases:**
 
   - Fallback handling
 
-    Formatting is started at the beginning of an inline content. If a special formatting sequence is reached, it is parsed until the corresponding end sequence is found.
-    If another special sequence is encountered, the inner sequence is first tried to be completed. Any encountered end sequence of the outer format is ignored until the inner sequence is completed.
-    If the inner sequence cannot be completed, because end of content is reached without finding the corresponding end sequence, the outer format reevaluates the content starting at the inner start sequence,
-    but now considers the inner sequence as plain text.
+    Formatting is started at the beginning of an inline content. If a special formatting sequence is reached, it is parsed until another special sequence is encountered.
+    The inner sequence is first tried to be completed, but if an end sequence of the outer format is encountered before the inner sequence is completed, the inner is not formatted, and the outer is applied.
+    If a formatting is not closed at the end of an inline content, it fails and must not be applied. 
 
     **Example:**
 
     ~~~
-    *only italic **bold fails* plain text 
+    *only italic **bold fails* plain text
     ~~~
 
     The above goes through the following steps:
@@ -101,6 +102,7 @@ If the inline formatting is not closed by the same character sequence with a non
   - Order of `bold` and `italic`
 
     If `bold` and `italic` are directly stacked, the order depends on the closing sequence.
+    Otherwise, `**` is always taken as `bold` and not as opening and/or closing `italic` sequence.
 
     1. Start and end are stacked
 
@@ -144,7 +146,7 @@ If the inline formatting is not closed by the same character sequence with a non
 
 - No inline formatting
 
-  The following examples show text with formatting character sequences, but no formatting is applied, because not all requirements are fulfilled.
+  The following examples show text with formatting character sequences, but no/partial formatting is applied, because not all requirements are fulfilled.
 
   ~~~
   Text with* starting sequence followed by a white-space.
