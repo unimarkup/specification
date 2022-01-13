@@ -916,19 +916,11 @@ If the resulting ID is already present, it must be set explicitly.
 **Usage:**
 
 ~~~
-***
-<some optional settings between>
-"heading" : {
-  "prefix" : "{@renderHeadingNumber}",
-  "prefix-separator" : ": "
-}
-<some optional settings between>
-***
-{@setHeadingPrefix{%numbering{roman-upper}%startNr{I}}}
+{@um.setHeadingPrefix(%numbering[roman-upper]%startNr[I])}
 
 # First main heading
 
-Some unimarkup text for this heading...
+Some Unimarkup text for this heading...
 
 ## Nested heading
 
@@ -937,14 +929,15 @@ More unimarkup text for the nested heading...
 # Second main heading
 ## Other nested heading
 
-Even more unimarkup text...
-Reference to the first heading [##first-main-heading]_
+Even more Unimarkup text...
+Reference to the first heading [##first-main-heading]
 
-{@setHeadingPrefix{%numbering{numeric}}}
+{@um.setHeadingPrefix(%numbering[numeric])}
 
 # Heading with numeric 3 prefixed
 
-# Heading with attributes {<heading attributes>}
+# Heading with attributes
+{<heading attributes>}
 
 # Multiline
 heading is also possible
@@ -955,7 +948,8 @@ The first paragraph of this heading level starts here.
 additional attributes
 {<heading attributes>}
 
-# Heading with explicit identifier { "id" : "explicit-heading-id" }
+# Heading with explicit identifier
+{ "id" : "explicit-heading-id" }
 ~~~
 
 **Examples of invalid headings:**
@@ -1032,20 +1026,6 @@ additional attributes
 :-- `bool`
 :
 : Defines if the heading is added (`true`) to the table of contents, or not (`false`).
-
-**Preamble options:**
-
-: `prefix` :
-:-- `inline`
-:
-: Defines the prefix content that is set before a heading text.
-:
-: **Note:** Only one line is possible.
-
-: `prefix-separator` :
-:-- `inline`
-:
-: This separator is placed between the heading prefix and text.
 
 ### Paragraph
 
