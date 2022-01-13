@@ -864,13 +864,15 @@ is treated as a normal [inline text group](#inline-text-group). Optional flags m
 ## Atomic block elements
 
 Atomic block elements must be surrounded by blank lines and must not contain blank lines themselves.
-An optional attribute block may be given at the end of an atomic block and may span multiple lines.
+An optional attribute block may be given starting at a new line at the end of an atomic block and may span multiple lines.
+None line breaking spaces are allowed before the attribute opening.
 
 **Example:**
 
 ~~~
-# Heading 1
-## Subheading 1.1
+# 1 Heading
+## 1.1 Subheading
+{ <optional heading attributes for "1.1 Subheading"> }
 ~~~
 
 **Type:**
