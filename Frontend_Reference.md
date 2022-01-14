@@ -873,17 +873,19 @@ Comment ;;this is a comment;; inside one line.
 
 ### Inline field
 
-This element adds a field name at the start of an inline text group that is enclosed inside `;`.
+This element adds a field name at the start of an inline text group that is enclosed inside `<>`.
 This field name may be used for certain output formats or extensions.
 If a field name is not known by an output format, or no extension is available to handle the field name, the inline field
 is treated as a normal [inline text group](#inline-text-group). Optional flags must be set before the field name. 
 
+**Note:** `<>` is not a placeholder in the usage examples.
+
 **Usage:**
 
 ~~~
-[;<field name>; Some inline content]
+[<field name> Some inline content]
 
-[?someFlag?;someField; Some inline content]
+[?someFlag?<someField> Some inline content]
 ~~~
 
 **Type:**
@@ -2369,21 +2371,23 @@ This content is inside a nested column block.
 
 ### Field block
 
-This element adds a field name at the start of a text block that is enclosed inside `;`.
+This element adds a field name at the start of a text block that is enclosed inside `<>`.
 This field name may be used for certain output formats or extensions.
 If a field name is not known by an output format, or no extension is available to handle the field name, the field block
-is treated as a normal [text block](#text-block). Optional flags must be set before the field name. 
+is treated as a normal [text block](#text-block). Optional flags may be set before the field name. 
+
+**Note:** `<>` is not a placeholder in the usage examples.
 
 **Usage:**
 
 ~~~
-[[[;<field name>;
+[[[<field name>
 
 Any Unimarkup content.
 
 ]]]
 
-[[[?someFlag?;someField;
+[[[?someFlag?<someField>
 
 Any Unimarkup content.
 
