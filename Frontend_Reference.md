@@ -1940,8 +1940,7 @@ Like with [text blocks](#text-block), it is possible to set attributes for all U
 Definition blocks may be used to set a term with an optional classifier and a definition for this term.
 A definition block is started with `:` per new line followed by one space. A block must be surrounded by blank lines.
 
-The definition block starts with the term. A term may have multiple paragraphs and every Unimarkup element that may be used inside a paragraph.
-Other Unimarkup elements are not allowed.
+The definition block starts with the term. A term only allows inline elements.
 To end the term section, `:` must be set at the end of the last line of the term section.
 An empty definition line must follow the term section if no classifier is given.
 A term attribute block may be set after the closing `:`.
@@ -1951,7 +1950,7 @@ Lists are allowed for the classifier besides the supported Unimarkup elements in
 The last classifier line may contain an attribute block.
 A blank definition line must follow the classifier.
 
-The definition section allows any Unimarkup element. Attribute blocks are set at the end of a definition section.
+The definition section allows any Unimarkup element. Attribute blocks are set at the end of a definition section with a blank line above.
 Like with [text blocks](#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a definition section. 
 
 **Usage:**
@@ -1988,6 +1987,7 @@ Like with [text blocks](#text-block), it is possible to set attributes for all U
 : : Paragraph for the sub term definition
 :
 : Other paragraph for the main term definition
+:
 :{<definition block attributes>}
 ~~~
 
