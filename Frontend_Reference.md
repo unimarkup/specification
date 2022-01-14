@@ -571,6 +571,8 @@ Some paragraph text with ~[First heading note](Unimarkup_Language_ReferenceManua
 : 
 : The name of the markup/programming language that is displayed in the verbatim body.
 : Supported languages depend on the used highlighter.
+:
+: **Note:** If `plain` is set, the highlighter may try to guess the language to highlight.
 
 : `highlighter` :
 :-- `text` Default = `default`
