@@ -2531,12 +2531,15 @@ Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
 ## Block title
 
 A title may be set for an atomic or enclosed block element except headings, by directly preceding the block with one paragraph surrounded by `===`.
+An attribute block may be set directly after the starting `===` on the same line and may span multiple lines.
 A blank line must be set before a block title.
+
+**Note:** Elements with a title must create an additional IR entry with `-title` as postfix to the Unimarkup type of the element and content and attributes being the title ones, but the ID is taken from the element.
 
 **Usage:**
 
 ~~~
-===
+==={ <optional title attributes> }
 Title for a table
 ===
 +-+-+
@@ -2554,13 +2557,16 @@ Another title for a numbered list
 
 It is possible to set a caption at the end of an atomic or enclosed block element except headings. A caption may only have one paragraph.
 To set a caption to a block, set `+++` on a new line immediately after the block end. To close the caption, set `+++` at a new line after the caption paragraph.
+An attribute block may be set directly after the starting `+++` on the same line and may span multiple lines.
 A blank line must follow a caption.
+
+**Note:** Elements with a caption must create an additional IR entry with `-caption` as postfix to the Unimarkup type of the element and content and attributes being the caption ones, but the ID is taken from the element.
 
 **Usage:**
 
 ~~~
 !!![figure insert](image.png)
-+++
++++{ <optional caption attributes> }
 Caption of a figure
 +++
 
