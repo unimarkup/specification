@@ -2503,7 +2503,7 @@ Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
 # Element decorations
 ## Block title
 
-A title may be set for an atomic or enclosed block element by directly preceding the block with one paragraph surrounded by `===`.
+A title may be set for an atomic or enclosed block element except headings, by directly preceding the block with one paragraph surrounded by `===`.
 A blank line must be set before a block title.
 
 **Usage:**
@@ -2525,8 +2525,9 @@ Another title for a numbered list
 
 ## Caption
 
-It is possible to set a caption at the end of an atomic or enclosed block element. A caption may only have one paragraph.
-To set a caption to a block, set `+++` on a new line immediately after the block end. To close the caption, set `+++` at the next new line. A blank line must follow a caption.
+It is possible to set a caption at the end of an atomic or enclosed block element except headings. A caption may only have one paragraph.
+To set a caption to a block, set `+++` on a new line immediately after the block end. To close the caption, set `+++` at a new line after the caption paragraph.
+A blank line must follow a caption.
 
 **Usage:**
 
