@@ -316,10 +316,19 @@ If you want to use a `` ` `` inside, you need to use ` `` ` instead of `` ` `` w
 
 **Attribute:**
 
-: `highlighter` :
-:-- Only names of available highlighter are allowed.
+: `language` :
+:-- `text` Default = `plain`
+: 
+: The name of the markup/programming language that is displayed in the verbatim body.
+: Supported languages depend on the used highlighter.
 :
+: **Note:** If `plain` is set, the highlighter may try to guess the language to highlight.
+
+: `highlighter` :
+:-- `text` Default = `default`
+: 
 : The name of the highlighter that should be used.
+: Only names of available highlighter are allowed.
 
 #### **Highlight**
 
@@ -541,7 +550,7 @@ Supported file types depend on the available renderer. See [additional renderer]
 : `renderer` :
 :-- `text` Default = `default`
 :
-: The name of the renderer that should be used, if the renderer is not determined automatically from the file type.
+: The name of the renderer that should be used.
 : Only names of available renderer are allowed.
 
 #### Verbatim inline file insert
@@ -1763,10 +1772,19 @@ See [additional renderer](#additional-renderer) for more information on availabl
 
 - [Block attributes](#block-attributes)
 
-: `renderer` :
-:-- Only names of available renderer are allowed.
+: `language` :
+:-- `text` Default = `plain`
+: 
+: The name of the language that is displayed in the render body.
+: Supported languages depend on the used renderer.
 :
-: The name of the renderer that should be used, if the renderer is not determined automatically from the file type.
+: **Note:** If `plain` is set, the renderer may try to guess the language to render.
+
+: `renderer` :
+:-- `text` Default = `default`
+:
+: The name of the renderer that should be used.
+: Only names of available renderer are allowed.
 
 #### Verbatim block file insert
 
@@ -1784,7 +1802,7 @@ See [additional highlighter](#additional-highlighter) for more information on av
 
 **Type:**
 
-: `rendered-block-insert` :
+: `verbatim-block-insert` :
 :-- `Single`
 :
 : Element type for block rendered file insert elements.
@@ -1793,10 +1811,19 @@ See [additional highlighter](#additional-highlighter) for more information on av
 
 - [Block attributes](#block-attributes)
 
-: `highlighter` :
-:-- Only names of available highlighter are allowed.
+: `language` :
+:-- `text` Default = `plain`
+: 
+: The name of the markup/programming language that is displayed in the verbatim body.
+: Supported languages depend on the used highlighter.
 :
-: The name of the highlighter that should be used, if the highlighter is not determined automatically from the file type.
+: **Note:** If `plain` is set, the highlighter may try to guess the language to highlight.
+
+: `highlighter` :
+:-- `text` Default = `default`
+: 
+: The name of the highlighter that should be used.
+: Only names of available highlighter are allowed.
 
 ### Quotation block
 
