@@ -2399,19 +2399,15 @@ Any Unimarkup content.
 
 ### Output block
 
-Every content inside an output block is forwarded as is to the rendered document. A block is started and ended with three or more `<` at a new line.
+Every content inside an output block is forwarded as is to the rendered document. A block is started with three or more `<` at a new line and ended with the same number of `<` at a following new line.
 Output blocks must be surrounded by blank lines and do not allow nesting.
 
 **Usage:**
 
 ~~~
 <<<
-<string>Some important text</strong>
-<<<
-
-<<<
 <script src="someScript.js"></script>
-<<<
+>>>
 ~~~
 
 **Type:**
