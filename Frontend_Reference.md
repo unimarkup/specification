@@ -162,7 +162,7 @@ If the inline formatting is not closed by the same character sequence with a non
 
 **Type:**
 
-: `inline_format` :
+: `inline-format` :
 :-- `Group`
 :
 : Group type for all inline formatting elements.
@@ -179,7 +179,7 @@ A text is bold by surrounding it with `**`.
 
 **Type:**
 
-: `inline_format_bold` :
+: `bold` :
 :-- `Single`
 :
 : Element type for bold inline formatting.
@@ -196,7 +196,7 @@ A text is italic by surrounding it with `*`.
 
 **Type:**
 
-: `inline_format_italic` :
+: `italic` :
 :-- `Single`
 :
 : Element type for italic inline formatting.
@@ -213,7 +213,7 @@ __underlined text__
 
 **Type:**
 
-: `inline_format_underline` :
+: `underline` :
 :-- `Single`
 :
 : Element type for underline inline formatting.
@@ -230,7 +230,7 @@ A text is overlined by surrounding it with `^_`.
 
 **Type:**
 
-: `inline_format_overline` :
+: `overline` :
 :-- `Single`
 :
 : Element type for overline inline formatting.
@@ -247,7 +247,7 @@ A text is strike through by surrounding it with `~~`.
 
 **Type:**
 
-: `inline_format_strikethrough` :
+: `strikethrough` :
 :-- `Single`
 :
 : Element type for strike through inline formatting.
@@ -266,7 +266,7 @@ A text is superscripted by surrounding it with `^`.
 
 **Type:**
 
-: `inline_format_superscript` :
+: `superscript` :
 :-- `Single`
 :
 : Element type for superscript inline formatting.
@@ -285,7 +285,7 @@ _subscripted text_
 
 **Type:**
 
-: `inline_format_subscript` :
+: `subscript` :
 :-- `Single`
 :
 : Element type for subscript inline formatting.
@@ -309,7 +309,7 @@ If you want to use a `` ` `` inside, you need to use ` `` ` instead of `` ` `` w
 
 **Type:**
 
-: `inline_format_verbatim` :
+: `inline-verbatim` :
 :-- `Single`
 :
 : Element type for verbatim inline formatting.
@@ -333,7 +333,7 @@ A text may be highlighted by surrounding it with `||`.
 
 **Type:**
 
-: `inline_format_highlight` :
+: `highlight` :
 :-- `Single`
 :
 : Element type for highlight inline formatting.
@@ -350,7 +350,7 @@ A text may be quoted by surrounding it with `""`.
 
 **Type:**
 
-: `inline_format_quote` :
+: `inline-quote` :
 :-- `Single`
 :
 : Element type for quote inline formatting.
@@ -368,7 +368,7 @@ $\frac{1}{n}$
 
 **Type:**
 
-: `inline_math` :
+: `inline-math` :
 :-- `Single`
 :
 : Element type for inline math mode elements.
@@ -390,7 +390,7 @@ A paragraph with [grouped text]{ "size" : "20pt" }. Also grouping within one w[o
 
 **Type:**
 
-: `inline_textgroup` :
+: `textgroup` :
 :-- `Single`
 :
 : Element type for inline text group elements.
@@ -426,7 +426,7 @@ Elements of other documents can be linked, by setting `<link to other document>#
 
 **Type:**
 
-: `inline_hyperlink` :
+: `hyperlink` :
 :-- `Single`
 :
 : Element type for inline hyperlink elements.
@@ -457,7 +457,7 @@ Some paragraph text with ![some image](<image url>).
 
 **Type:**
 
-: `inline_image` :
+: `inline-image` :
 :-- `Single`
 :
 : Element type for inline image elements.
@@ -495,7 +495,7 @@ inline_insert = hyperlink , [ attribute_block ] ;
 
 **Type:**
 
-: `inline_insert` :
+: `inline-insert` :
 :-- `Group`
 :
 : Group type for inline file insert elements.
@@ -523,7 +523,7 @@ Supported file types depend on the available renderer. See [additional renderer]
 
 **Type:**
 
-: `inline-insert-rendered` :
+: `rendered-inline-insert` :
 :-- `Single`
 :
 : Element type for inline rendered file insert elements.
@@ -559,7 +559,7 @@ Some paragraph text with ~[First heading note](Unimarkup_Language_ReferenceManua
 
 **Type:**
 
-: `inline-insert-verbatim` :
+: `verbatim-inline-insert` :
 :-- `Single`
 :
 : Element type for inline verbatim file insert elements.
@@ -631,7 +631,7 @@ Multiple 😁😁
 
 **Type:**
 
-: `inline_emoji` :
+: `emoji` :
 :-- `Single`
 :
 : Type for direct emojis or emoji shortcuts.
@@ -675,7 +675,7 @@ A text 🠖 using an arrow!
 
 **Type:**
 
-: `inline_arrow` :
+: `arrow` :
 :-- `Single`
 :
 : Type for arrow translation.
@@ -686,7 +686,7 @@ There are several reference variations in Unimarkup.
 
 **Type:**
 
-: `inline_reference` :
+: `reference` :
 :-- `Group`
 :
 : Group type for reference elements.
@@ -735,7 +735,7 @@ The referenced text looks like: Some image
 
 **Type:**
 
-: `inline_reference_id` :
+: `id-reference` :
 :-- `Single`
 :
 : Element type for ID references.
@@ -786,7 +786,7 @@ This text has more than one literature reference [&&id-1&&id-2].
 
 **Type:**
 
-: `inline_reference_literature` :
+: `literature-reference` :
 :-- `Single`
 :
 : Element type for literature references.
@@ -811,7 +811,7 @@ Text using abbreviations [::xml], [::html] and [::OPC UA TSN].
 
 **Type:**
 
-: `inline-abbreviation` :
+: `abbreviation` :
 :-- `Single`
 :
 : Element type for inline abbreviations.
@@ -841,7 +841,7 @@ Any Unicode code point may be inserted in Unimarkup with `&<Unicode code point>;
 
 **Type:**
 
-: `inline_unicode` :
+: `direct-unicode` :
 :-- `Single`
 :
 : Element type for inline Unicode.
@@ -851,7 +851,7 @@ Any Unicode code point may be inserted in Unimarkup with `&<Unicode code point>;
 Unimarkup provides line comments using `;;` to start a comment.
 Optionally, a comment can be ended using `;;`, to end a comment before the end of a line. 
 
-**Note:** It is not possible to have a backslash at the end of a line to get an explicit new line, when a comment is used.
+**Note:** It is not possible to have a backslash at the end of a line to get an explicit new line, if a comment is not closed.
 
 **Usage:**
 
@@ -863,6 +863,13 @@ at the end of a line
 
 Comment ;;this is a comment;; inside one line.
 ~~~
+
+**Type:**
+
+: `comment` :
+:-- `Single`
+:
+: Element type for Unimarkup comments.
 
 ### Inline field
 
@@ -878,6 +885,13 @@ is treated as a normal [inline text group](#inline-text-group). Optional flags m
 
 [?someFlag?;someField; Some inline content]
 ~~~
+
+**Type:**
+
+: `inline-field` :
+:-- `Single`
+:
+: Element type for an inline field.
 
 ## Atomic block elements
 
@@ -999,36 +1013,36 @@ additional attributes
 :-- `Group`
 :
 : Group type for all headings.
-
-: `heading_level_1` :
-:-- `Single`
-:
-: Type for level 1 headings.
-
-: `heading_level_2` :
-:-- `Single`
-:
-: Type for level 2 headings.
-
-: `heading_level_3` :
-:-- `Single`
-:
-: Type for level 3 headings.
-
-: `heading_level_4` :
-:-- `Single`
-:
-: Type for level 4 headings.
-
-: `heading_level_5` :
-:-- `Single`
-:
-: Type for level 5 headings.
-
-: `heading_level_6` :
-:-- `Single`
-:
-: Type for level 6 headings.
+: 
+: : `heading-level-1` :
+: :-- `Single`
+: :
+: : Type for level 1 headings.
+: 
+: : `heading-level-2` :
+: :-- `Single`
+: :
+: : Type for level 2 headings.
+: 
+: : `heading-level-3` :
+: :-- `Single`
+: :
+: : Type for level 3 headings.
+: 
+: : `heading-level-4` :
+: :-- `Single`
+: :
+: : Type for level 4 headings.
+: 
+: : `heading-level-5` :
+: :-- `Single`
+: :
+: : Type for level 5 headings.
+: 
+: : `heading-level-6` :
+: :-- `Single`
+: :
+: : Type for level 6 headings.
 
 **Attributes:**
 
@@ -1121,7 +1135,7 @@ Lists may be changed at any depth. If the list type changes at the same depth, i
 
 **Type:**
 
-: `block_list` :
+: `list` :
 :-- `Group`
 :
 : General type for all list elements.
@@ -1182,12 +1196,12 @@ Paragraph not for a bullet list
 
 **Types:**
 
-: `block_list_bullet` :
+: `bullet-list` :
 :-- `Group`
 :
 : Group type for bullet list elements.
 :
-: : `block_list_bullet_entry`
+: : `bullet-list-entry`
 : :-- `Single`
 : :
 : : Element type for a bullet list entry element.
@@ -1287,12 +1301,12 @@ Paragraph not for a numbered list
 
 **Types:**
 
-: `block_list_numbered` :
+: `numbered-list` :
 :-- `Group`
 :
 : Group type for numbered list elements.
 :
-: : `block_list_numbered_entry`
+: : `numbered-list-entry`
 : :-- `Single`
 : :
 : : Element type for a numbered list entry element.
@@ -1367,12 +1381,12 @@ The following list is parsed from 1. to 5. to get the higher task state:
 
 **Types:**
 
-: `block_list_task` :
+: `task-list` :
 :-- `Group`
 :
 : Group type for task list elements.
 :
-: : `block_list_task_entry`
+: : `task-list-entry`
 : :-- `Single`
 : :
 : : Element type for a task list entry element.
@@ -1419,27 +1433,27 @@ It is also possible to set a **definition class** directly after `...` by surrou
 
 **Types:**
 
-: `block_list_definition` :
+: `definition-list` :
 :-- `Group`
 :
 : Group type for definition list elements.
 :
-: : `block_list_definition_entry`
+: : `definition-list-entry`
 : :-- `Group`
 : :
 : : Group type for a definition list entry element.
 : :
-: : : `block_list_definition_entry_term` :
+: : : `definition-list-entry-term` :
 : : :-- `Single`
 : : :
 : : : Element type for a definition entry term element.
-: : :
-: : : `block_list_definition_entry_class` :
+: :
+: : : `definition-list-entry-class` :
 : : :-- `Single`
 : : :
 : : : Element type for a definition entry class element.
-: : :
-: : : `block_list_definition_entry_description` :
+: :
+: : : `definition-list-entry-description` :
 : : :-- `Single`
 : : :
 : : : Element type for a definition entry description element.
@@ -1632,6 +1646,13 @@ By default, all table [captions](#caption) are added to the list `{%tableCaption
 +-| r3c1.1 |    r3c1.2    |-+------+
 ~~~
 
+**Type:**
+
+: `table` :
+:-- `Single`
+:
+: Element type for table elements.
+
 ### Figure insert
 
 Images may be inserted as figures using `!!![<alternate text>](<image url>)`.
@@ -1654,7 +1675,7 @@ Image caption that shows something.
 
 **Type:**
 
-: `block_figure` :
+: `figure` :
 :-- `Single`
 :
 : Element type for figure elements.
@@ -1677,6 +1698,13 @@ With media inserts allowed, it is possible to insert video and audio files in ad
 !!![Some video](someVideo.mp4)(someVideo.ogg)(someVideo.webm)
 ~~~
 
+**Type:**
+
+: `media-insert` :
+:-- `Single`
+:
+: Element type for media insert elements.
+
 ### Block file insert
 
 There are two different ways to insert files as block elements.
@@ -1684,6 +1712,13 @@ The general form of a block file insert looks like a hyperlink with a **special 
 Block file inserts must be surrounded by blank lines.
 
 **Note:** The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
+
+**Type:**
+
+: `block-insert` :
+:-- `Single`
+:
+: Group type for block insert elements.
 
 **Attributes:**
 
@@ -1717,7 +1752,7 @@ See [additional renderer](#additional-renderer) for more information on availabl
 
 **Type:**
 
-: `block_insert_rendered` :
+: `rendered-block-insert` :
 :-- `Single`
 :
 : Element type for block rendered file insert elements.
@@ -1747,7 +1782,7 @@ See [additional highlighter](#additional-highlighter) for more information on av
 
 **Type:**
 
-: `block_insert_rendered` :
+: `rendered-block-insert` :
 :-- `Single`
 :
 : Element type for block rendered file insert elements.
@@ -1797,7 +1832,7 @@ An author text may optionally be set at the end of a quotation block by starting
 
 **Type:**
 
-: `block_quote` :
+: `block-quote` :
 :-- `Single`
 :
 : Element type for quotation block elements.
@@ -1839,7 +1874,7 @@ Like with [text blocks](#text-block), it is possible to set attributes for all U
 
 **Type:**
 
-: `block_line` :
+: `line-block` :
 :-- `Single`
 :
 : Element type for line block elements.
@@ -1905,6 +1940,22 @@ Like with [text blocks](#text-block), it is possible to set attributes for all U
 :{<definition block attributes>}
 ~~~
 
+**Type:**
+
+: `definition-block` :
+:-- `Group`
+:
+: Group type for definition blocks.
+:
+: `definition-block-term` :
+:-- `Single`
+:
+: Element type for definition block term elements.
+:
+: `definition-block-class` :
+:-- `Single`
+:
+: Element type for definition block class elements.
 
 ### Horizontal line
 
@@ -1919,6 +1970,13 @@ Another horizontal line after this text.
 
 ---
 ~~~
+
+**Type:**
+
+: `horizontal-line` :
+:-- `Single`
+:
+: Element type for horizontal line elements.
 
 ### Page break
 
@@ -1945,6 +2003,13 @@ Every text on this page has a *sans-serif* font. Additional styling might be giv
 
 This text has the default font again.
 ~~~
+
+**Type:**
+
+: `page-break` :
+:-- `Single`
+:
+: Element type for page break elements.
 
 ## Enclosed block elements
 
@@ -2011,7 +2076,7 @@ int add(int a,  int b) {
 
 **Type:**
 
-: `block_verbatim` :
+: `verbatim-block` :
 :-- `Single`
 :
 : Element type for verbatim block elements.
@@ -2052,7 +2117,7 @@ Converting yields Html and Pdf.
 
 **Type:**
 
-: `block_render` :
+: `render-block` :
 :-- `Single`
 :
 : Element type for render block elements.
@@ -2091,7 +2156,7 @@ $$$
 
 **Type:**
 
-: `block_math` :
+: `math-block` :
 :-- `Single`
 :
 : Element type for math block elements.
@@ -2150,7 +2215,7 @@ Verbatim block inside a text block
 
 **Type:**
 
-: `block_text` :
+: `text-block` :
 :-- `Single`
 :
 : Element type for text block elements.
@@ -2159,39 +2224,6 @@ Verbatim block inside a text block
 
 - [Block attributes](#block-attributes)
 - [Element attributes](#element-attributes)
-
-### Attribute block
-
-An attribute block is opened with `{` and closed with `}`.
-The allowed positions of attribute blocks is defined in the attribute section of each element definition.
-The attribute format, attribute groups and hierarchy are described in the [attributes section](#attributes). 
-
-**Usage:**
-
-~~~
-## heading {<heading attributes>}
-
-Paragraph text with `**verbatim**`{ "highlighter" : "unimarkup" }
-{<paragraph attributes>}
-~~~
-
-**Type:**
-
-: `block_attribute` :
-:-- `Single`
-:
-: Element type for attribute block elements.
-
-**Attributes:**
-
-It is possible to concatenate attribute blocks. This allows to use flags for attribute blocks.
-If attribute blocks set the same attribute for an element, the last value is taken.
-
-**Example:**
-
-~~~
-## heading {?pdf? "color" : "rgb(0,255,0)" }{?html? "color" : "rgb(255,0,0)" }
-~~~
 
 ### Column blocks
 
@@ -2260,6 +2292,13 @@ Second column of the nested column block
 ||||
 ~~~
 
+**Type:**
+
+: `explicit-column` :
+:-- `Single`
+:
+: Element type for explicit column elements.
+
 #### Implicit column block
 
 An implicit column block automatically splits its content by a given number of columns. The block is started with `|||<number of columns>|` and ended with `|||#|`.
@@ -2321,6 +2360,12 @@ This content is inside a nested column block.
 ||||#|
 ~~~
 
+**Type:**
+
+: `implicit-column` :
+:-- `Single`
+:
+: Element type for implicit column elements.
 
 ### Field block
 
@@ -2345,6 +2390,13 @@ Any Unimarkup content.
 ]]]
 ~~~
 
+**Type:**
+
+: `field-block` :
+:-- `Single`
+:
+: Element type for field block elements.
+
 ### Output block
 
 Every content inside an output block is forwarded as is to the rendered document. A block is started and ended with three or more `<` at a new line.
@@ -2361,6 +2413,13 @@ Output blocks must be surrounded by blank lines and do not allow nesting.
 <script src="someScript.js"></script>
 <<<
 ~~~
+
+**Type:**
+
+: `output-block` :
+:-- `Single`
+:
+: Element type for output block elements.
 
 ### Form block
 
@@ -2433,6 +2492,13 @@ Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
 <<<
 ///
 ~~~
+
+**Type:**
+
+: `form-block` :
+:-- `Single`
+:
+: Element type for form block elements.
 
 # Element decorations
 ## Block title
@@ -2509,12 +2575,71 @@ For example, there is no special meaning for `\n` or `\t`.
 
 # Attributes
 
-Attributes are given in [JSON-Format](https://www.json.org/json-en.html).
+Attributes may be set for elements using attribute blocks with attributes being in [JSON-Format](https://www.json.org/json-en.html).
 There are general attributes that are valid for all Unimarkup elements and some specific ones for certain elements.
-Default attribute values for all elements may be set in the [preamble](#preamble).
+The position where an attribute block may be set for an element is described for each element or element group.
 
 To reset attributes to their default values, write `""` for single value elements, `[]` for arrays and `{}` for objects.
 If attributes are not set, default values are used, but resetting may be useful, if some parent changed attribute values that would be inherited.
+
+## Attribute block
+
+An attribute block is opened with `{` and closed with `}`.
+The allowed positions of attribute blocks is defined in the attribute section of each element definition.
+The attribute format, attribute groups and hierarchy are described in the [attributes section](#attributes). 
+
+**Usage:**
+
+~~~
+## heading
+{<heading attributes>}
+
+Paragraph text with `**verbatim**`{ "language" : "unimarkup" }
+{<paragraph attributes>}
+~~~
+
+**Type:**
+
+: `attribute` :
+:-- `Single`
+:
+: Element type for element attributes.
+
+## Attribute block concatenation
+
+It is possible to concatenate attribute blocks. This allows to use different flags for attribute blocks.
+Attributes are taken from the left most attribute block and are overwritten by attributes of following attribute blocks,
+if both attribute blocks are taken.
+
+**Example:**
+
+- Using different flags for attribute blocks
+
+  ~~~
+  ## heading
+  {?pdf? "color" : "rgb(0,255,0)" }{?html? "color" : "rgb(255,0,0)" }
+  ~~~
+
+- Using a base attribute block followed by a flagged attribute block
+
+  ~~~
+  # heading with text color blue and red background for the html output
+  { "color" : "rgb(0,255,0)" }{?html? "background" : { "color" : "rgb(255,0,0)" }}
+  ~~~
+
+- Attribute overlapping
+
+  ~~~
+  # heading with in general blue text color except for html output, where it is red
+  { "color" : "rgb(0,255,0)" }{?html? "color" : "rgb(255,0,0)" }
+  ~~~
+
+  **Note:** The following will always generate red text color!
+
+  ~~~
+  # heading with red text color (html attribute is overwritten)
+  {?html? "color" : "rgb(0,255,0)" }{ "color" : "rgb(255,0,0)" }
+  ~~~
 
 ## General attribute units
 
@@ -2973,71 +3098,3 @@ Predefined macros must have `um` as namespace.
 :-- `natural`
 :
 : Sets the start number for a counter variable.
-
-# Types
-
-;; mhatzl
-
-Unimarkup uses types for all elements. Those types are used for variables and macros,
-to define where defined variables and macros are allowed to be used.
-
-**List of all element types:**
-
-- all
-- element
-- paragraph
-- inline
-  - formatting
-    - inline_bold
-    - inline_italic
-    - inline_underlined
-    - inline_math
-    - inline_strikethrough
-    - inline_verbatim
-  - literature
-  - footnote
-    - footnote_definition
-    - footnote_use
-  - endnote
-    - endnote_definition
-    - endnote_use
-  - abbreviation
-    - abbreviation_definition
-    - abbreviation_use
-  - direct_unicode
-  - image
-  - hyperlink
-- heading
-- table
-  - table_row
-  - table_entry
-- list
-  - list_bullet
-  - list_numbered
-  - list_task
-  - list_definition
-- comment
-- page_break
-- block
-  - block_text
-  - block_math
-  - block_verbatim
-  - block_render
-  - block_attribute
-  - block_quotation
-  - block_line
-  - block_definition
-  - block_figure
-- preamble
-- number
-  - integer
-    - natural ... 0 included
-    - positive ... 0 not included
-    - negative
-  - decimal
-
-To combine multiple types except *all*, types may be enclosed in braces and separated by a vertical bar.
-
-~~~
-(paragraph|table|block_math)
-~~~
