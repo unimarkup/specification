@@ -1896,7 +1896,7 @@ An author text may optionally be set at the end of a quotation block by starting
 
 Line blocks preserve all spaces, tabs and new lines. A line block is started with `|` per new line followed by one space.
 A block must be surrounded by blank lines. It is possible to use all Unimarkup elements inside line blocks, except other line blocks.
-Attribute blocks are set at the end of a line block.
+Attribute blocks are set at the end of a line block with a blank line above and may span multiple lines.
 Like with [text blocks](#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a line block. 
 
 **Note:** There is no nesting for line blocks.
@@ -1919,6 +1919,7 @@ Like with [text blocks](#text-block), it is possible to set attributes for all U
 |
 | Since spaces are already kept, a verbatim block inside a line block
 | is only necessary to get code highlighting.
+|
 |{<Line block attributes>}
 ~~~
 
