@@ -523,17 +523,26 @@ Supported file types depend on the available renderer. See [additional renderer]
 
 **Type:**
 
-: `inline_insert_rendered` :
+: `inline-insert-rendered` :
 :-- `Single`
 :
 : Element type for inline rendered file insert elements.
 
 **Attribute:**
 
+: `language` :
+:-- `text` Default = `plain`
+: 
+: The name of the language that is displayed in the render body.
+: Supported languages depend on the used renderer.
+:
+: **Note:** If `plain` is set, the renderer may try to guess the language to render.
+
 : `renderer` :
-:-- Only names of available renderer are allowed.
+:-- `text` Default = `default`
 :
 : The name of the renderer that should be used, if the renderer is not determined automatically from the file type.
+: Only names of available renderer are allowed.
 
 #### Verbatim inline file insert
 
