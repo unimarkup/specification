@@ -2489,7 +2489,7 @@ Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
 
 <<<
 <input type="range" id="happiness" name="happiness" min="0" max="100">
-<<<
+>>>
 ///
 ~~~
 
