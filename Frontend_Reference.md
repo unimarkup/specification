@@ -1112,38 +1112,6 @@ with an explicit new line.
 The following elements are all list elements.
 The macro `{@breakLists}` at start of a line between two lists separates those two lists at the highest depth.
 
-- **Nesting lists:**
-
-Text that is indented by $2 * \text{list-depth spaces}$, is part of the list content of this depth.
-The main list entry is at depth 1.
-
-**Examples:**
-
-~~~
-- Main list entry
-  - Two spaces before the list start mark a nested list
-    - Another two mark a nested list of a nested list. And so on.
-  - This is again only the nested list of the main list
-
-  This text is part of the main list entry
-
-This is some independent paragraph.
-~~~
-
-- **Combining lists:**
-
-Lists may be changed at any depth. If the list type changes at the same depth, it is treated as a new list.
-
-**Examples:**
-
-~~~
-- Bullet list
-  1. Sub numbered list
-
-1. New numbered list
-  - Sub bullet list
-~~~
-
 **Type:**
 
 : `list` :
@@ -1151,12 +1119,62 @@ Lists may be changed at any depth. If the list type changes at the same depth, i
 :
 : General type for all list elements.
 
+- **Nesting lists:**
+
+  Text that is indented by $2 * \text{list-depth spaces}$, is part of the list content of this depth.
+  The main list entry is at depth 1.
+
+  **Examples:**
+
+  ~~~
+  - Main list entry
+    - Two spaces before the list start mark a nested list
+      - Another two mark a nested list of a nested list. And so on.
+    - This is again only the nested list of the main list
+
+    This text is part of the main list entry
+
+  This is some independent paragraph.
+  ~~~
+
+- **Combining lists:**
+
+  Lists may be changed at any depth. If the list type changes at the same depth, it is treated as a new list.
+
+  **Examples:**
+
+  ~~~
+  - Bullet list
+    1. Sub numbered list
+
+  1. New numbered list
+    - Sub bullet list
+  ~~~
+
+- **Setting list attributes:**
+
+  List attributes are set at a new line following the last list entry attributes.
+  Since list entry attributes must be set at a new line after the entry content, list attributes cannot be set without setting a list entry attribute.
+  To set list attributes without setting list entry attributes, an empty attribute block may be used.
+
+  **Examples:**
+
+  ~~~
+  - list entry
+  { <some list entry attributes> }
+  { <some list attributes> }
+
+  1. numbered list entry
+  {}
+  { <some list attributes> }
+  ~~~
+
 #### **Bullet list**
 
-Any of the characters `-+*` at start of a line followed by a space and any character, is treated as the start of a bullet list.
+Any of the characters `-+*` at start of a line followed by a space and any none space character, is treated as the start of a bullet list.
 A list entry heading consists of one paragraph. Indented text at subsequent lines is part of a list entry, but a blank line must be between entry heading and additional entry content.
 As an exception, a nested list may directly follow an entry heading. A blank line must follow an additional entry content.
-Attributes for list entries are set at the end of the entries heading and bullet list attributes are set at the last list line, but without any spaces before the attribute block.
+Attributes for list entries are set starting at a new line of the entries heading.
 List entry attributes only apply to the entry heading. If additional content is given, they must be styled in another way. 
 
 ~~~ebnf
@@ -1164,7 +1182,7 @@ bullet_list_start_character = "-" | "+" | "*" ;
 bullet_list_entry_heading = list_depth_spaces , bullet_list_start_character , space , heading_end ;
 bullet_list_entry = bullet_list_entry_heading , line_break , [ ( blank_line , { ( list_depth_spaces , any_character , blank_line ) } ) ] ;
 
-bullet_list = blank_line , bullet_list_entry , { bullet_list_entry } , [ attribute_block ] , blank_line ;
+bullet_list = blank_line , bullet_list_entry , { bullet_list_entry } , [ ( new_line , attribute_block ) ] , blank_line ;
 ~~~
 
 **Usage:**
@@ -1183,16 +1201,18 @@ bullet_list = blank_line , bullet_list_entry , { bullet_list_entry } , [ attribu
   Verbatim block for this bullet list
   ~~~
 
-  - Sub bullet list {<bullet list entry attributes>}
+  - Sub bullet list
+  { <bullet list entry attributes> }
 
     Paragraph for this sub bullet list
 
 + Bullet list with different symbol
   * Sub bullet list with different symbol
 
-* Bullet list with id 
-  - Sub bullet list indented 2 spaces 
+* Bullet list with id
+{}
 { "id" : "bullet-list-id" }
+  - Sub bullet list indented 2 spaces 
 
 Paragraph not for a bullet list
 
@@ -1278,8 +1298,9 @@ a. Numbered list with latin symbols
   a. Sub numbered list with latin symbols {<numbered list entry attributes>}
 
 1. Numbered list with id
-  1. Sub numbered list indented 2 spaces
+{}
 { "id" : "numbered-list-id" }
+  1. Sub numbered list indented 2 spaces
 
 Paragraph not for a numbered list
 
@@ -1333,14 +1354,14 @@ Paragraph not for a numbered list
 
 #### **Task list**
 
-A task list may be started with `-[<task state>]` followed one space. Additional paragraphs and attributes are set the same way as for bullet lists.
+A task list may be started with `-[<task state>]` followed by one space. Additional paragraphs and attributes are set the same way as for bullet lists.
 Task lists provide five states to represent tasks.
 
 1. `[ ]` ... Open task (the space between the square brackets is important)
 2. `[c]` or `[x]` ... Completed task
 3. `[a]` ... Active task
-3. `[h]` ... Task on hold
-4. `[f]` or `[/]` ... Failed task
+4. `[h]` ... Task on hold
+5. `[f]` or `[/]` ... Failed task
 
 It is possible to get nested task lists by setting `-[] <task description>` at the higher level.
 The state of the higher task depends on the states of all lower tasks.
@@ -1415,7 +1436,7 @@ The following list is parsed from 1. to 5. to get the higher task state:
 
 A bullet or numbered list may become a definition list, if `...` is set after a space in a list entry heading. Any none-white-space character must be set between the start of the list entry and `...`.
 Multiple paragraphs may be set as with other list elements. The content on the left of `...` is called **definition term** and the content on the right **definition description**.
-The option term only allows inline elements. The option description allows all Unimarkup elements.
+The term and description only allow inline elements. However, all Unimarkup elements are allowed for the entry body.
 It is also possible to set a **definition class** directly after `...` by surrounding it with `--`. The definition class only allows inline elements and at least one space must come after the closing `--`.
 
 **Usage:**
@@ -2641,9 +2662,11 @@ Paragraph text with `**verbatim**`{ "language" : "unimarkup" }
 
 ## Attribute block concatenation
 
-It is possible to concatenate attribute blocks. This allows to use different flags for attribute blocks.
+It is possible to concatenate attribute blocks, by starting another attribute block directly after closing one.
 Attributes are taken from the left most attribute block and are overwritten by attributes of following attribute blocks,
 if both attribute blocks are taken.
+
+**Note:** A new line between concatenated attribute blocks is not allowed, but none breaking spaces are. 
 
 **Example:**
 
