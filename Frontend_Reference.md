@@ -430,7 +430,7 @@ Elements of other documents can be linked, by setting `<link to other document>#
 
 [https://github.com/]()
 
-[Requirements.md#stick-to-unimarkup]
+[Requirements.md#stick-to-unimarkup]()
 ~~~
 
 **Type:**
