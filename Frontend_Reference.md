@@ -550,17 +550,24 @@ Some paragraph text with ~[First heading note](Unimarkup_Language_ReferenceManua
 
 **Type:**
 
-: `inline_insert_verbatim` :
+: `inline-insert-verbatim` :
 :-- `Single`
 :
 : Element type for inline verbatim file insert elements.
 
 **Attribute:**
 
+: `language` :
+:-- `text` Default = `plain`
+: 
+: The name of the markup/programming language that is displayed in the verbatim body.
+: Supported languages depend on the used highlighter.
+
 : `highlighter` :
-:-- Only names of available highlighter are allowed.
-:
-: The name of the highlighter that should be used, if the highlighter is not determined automatically from the file type.
+:-- `text` Default = `default`
+: 
+: The name of the highlighter that should be used.
+: Only names of available highlighter are allowed.
 
 ### Emoji substitution
 
