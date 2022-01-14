@@ -16,12 +16,12 @@ This Unimarkup file is referred to as **root** in all further sections.
 
 - **Variables**
 
-  This table stores all variables that are defined for the Unimarkup document.
+  This table stores all variables that are defined inside the Unimarkup file.
   See [variable table](#variable-table) for more details.
 
 - **Macros**
 
-  This table stores all macros that are defined for the Unimarkup document.
+  This table stores all macros that are defined inside the Unimarkup file.
   See [macro table](#macro-table) for more details.
 
 - **Metadata**
@@ -36,22 +36,22 @@ This Unimarkup file is referred to as **root** in all further sections.
 
 - **Abbreviations**
 
-  This table stores all abbreviations, that are defined for the Unimarkup document.
+  This table stores all abbreviations, that are defined for the Unimarkup file.
   See [abbreviation table](#abbreviation-table) for more details.
 
 - **Notes**
 
-  This table stores all notes, that are defined for the Unimarkup document.
+  This table stores all notes, that are defined inside the Unimarkup file.
   See [note table](#note-table) for more details.
 
 - **Literature**
 
-  This table stores all literature, that are defined for the Unimarkup document.
+  This table stores all literature, that are defined for the Unimarkup file.
   See [literature table](#literature-table) for more details.
 
 - **Emojis**
 
-  This table stores emojis, additionally added to the Unimarkup document.
+  This table stores emojis, additionally added to the Unimarkup file.
   See [emoji table](#emoji-table) for more details.
 
 ## Content table
@@ -64,9 +64,9 @@ The table consists of the following columns:
 - `id` ...--not null text-- The ID of the stored block element that is either set explicitly, or implicitly while parsing
 - `um_type` ...--not null text-- The Unimarkup type of the stored block element
 - `text` ...--text-- The text of the block element or parts of it, if the block has nested block elements
-- `fallback-text` ...--text-- This text field is used if the `text` field is empty, which can happen in multi-language context
+- `fallback-text` ...--text-- This text field is used if the `text` field is empty, which may happen in multi-language context
 - `attributes` ...--text-- Unformatted JSON attributes for the stored block element (The first and last character must be `{}` to enclose JSON data)
-- `fallback-attributes` ...--text-- This field is used if the `attributes` field is empty, which can happen in multi-language context
+- `fallback-attributes` ...--text-- This field is used if the `attributes` field is empty, which may happen in multi-language context
 - `line-nr` ...--not null bigint-- The line number of the parsed Unimarkup file where the block element starts
 
 The primary key for this table is the combination of `id` and `line-nr`.
@@ -77,20 +77,22 @@ Block elements have an additional `<typename>_open` and `<typename>_close` type,
 
 ## Variable table
 
-The variable table stores all variables that are defined for the Unimarkup document.
+The variable table stores all variables that are defined inside the Unimarkup file.
 
 The table consists of the following columns:
 
 - `name` ...--not null text-- The name of the variable
 - `um_type` ...--not null text-- The Unimarkup type of the variable
 - `value` ...--text-- The value of the variable
-- `fallback-value` ...--text-- The value of the variable that is used if `variable` is empty, which can happen in multi-language context
+- `fallback-value` ...--text-- The value of the variable that is used if `variable` is empty, which may happen in multi-language context
+- `description` ...--text-- An optional description of the variable
+- `fallback-description` ...--text-- The description of the variable that is used, if `description´ is empty, which may happen in multi-language context
 
 The primary key for this table is the `name` field. This means, that a variable is unique by its `name` independent of its type.
 
 ## Macro table
 
-The macro table stores all macros that are defined for the Unimarkup document.
+The macro table stores all macros that are defined inside the Unimarkup file.
 
 The table consists of the following columns:
 
@@ -98,7 +100,9 @@ The table consists of the following columns:
 - `um_type` ...--not null text-- The Unimarkup type of the macro
 - `parameters` ...--text-- The parameters of the macro
 - `body` ...--text-- The body of the macro
-- `fallback-body` ...--text-- The body of the macro that is used if `body` is empty, which can happen in multi-language context
+- `fallback-body` ...--text-- The body of the macro that is used if `body` is empty, which may happen in multi-language context
+- `description` ...--text-- An optional description of the macro
+- `fallback-description` ...--text-- The description of the macro table that is used, if `description´ is empty, which may happen in multi-language context
 
 The primary key for this table is the combination of `name` and `parameters`. This means, that a macro is unique by its `name` and `parameters`.
 
@@ -112,7 +116,7 @@ The table consists of the following columns:
 - `filehash` ...--not null blob-- The sha256 hash of the file set at `filename`
 - `path` ...--not null text-- The path including the `filename`, where the file is located
 - `preamble` ...--text-- The unformatted JSON or YAML preamble of the file set at `filename`. If this field starts with `{`, JSON is assumed and the field must end with `}`. Otherwise, YAML is used for parsing
-- `fallback-preamble` ...--text-- This preamble is used if `preamble` is empty, which can happen in multi-language context
+- `fallback-preamble` ...--text-- This preamble is used if `preamble` is empty, which may happen in multi-language context
 - `kind` ...--not null text-- This field defines the kind of the metadata, like `root`, `theme`, or `insert`, where `root` defines the entry point for a Unimarkup document, `theme` refers to theme files and `insert` refers to files that are inserted via render or verbatim insert. Exactly one file in this table must be `root`.
 - `namespace` ...--not null text-- The namespace set for this Unimarkup file
 
@@ -133,51 +137,63 @@ The primary key for this table is the `filehash` field.
 
 ## Abbreviation table
 
-The abbreviation table stores all abbreviations that are defined for the Unimarkup document.
+The abbreviation table stores all abbreviations that are defined for the Unimarkup file.
 
 The table consists of the following columns:
 
 - `abbreviation` ...--not null text-- The name of the abbreviation
-- `content` ...--text-- The content of the abbreviation
-- `fallback-content` ...--text-- The content of the abbreviation that is used if `content` is empty, which can happen in multi-language context
+- `content` ...--not null text-- The content of the abbreviation
+- `fallback-content` ...--text-- The content of the abbreviation that is used if `content` is empty, which may happen in multi-language context
 
 The primary key for this table is the `abbreviation` field.
 
 ## Note table
 
-The note table stores all notes that are defined for the Unimarkup document.
+The note table stores all notes that are defined for the Unimarkup file.
 
 The table consists of the following columns:
 
 - `id` ...--not null text-- The ID of the note
-- `content` ...--text-- The content of the note
-- `fallback-content` ...--text-- The content of the note that is used if `content` is empty, which can happen in multi-language context
+- `content` ...--not null text-- The content of the note
+- `fallback-content` ...--text-- The content of the note that is used if `content` is empty, which may happen in multi-language context
 
 The primary key for this table is the `id` field.
 
 ## Literature table
 
-The Literature table stores all literature that is defined for the Unimarkup document.
+The Literature table stores all literature that is defined for the Unimarkup file.
 
 The table consists of the following columns:
 
 - `id` ...--not null text-- The ID of the literature
-- `data` ...--text-- The data of the literature being given in JSON form
-- `fallback-data` ...--text-- The data of the literature that is used if `data` is empty, which can happen in multi-language context
+- `data` ...--not null text-- The data of the literature being given in JSON form
+- `fallback-data` ...--text-- The data of the literature that is used if `data` is empty, which may happen in multi-language context
 
 The primary key for this table is the `id` field.
 
 ## Emoji table
 
-The emoji table stores emojis, additionally added to the Unimarkup document.
+The emoji table stores emojis, additionally added to the Unimarkup file.
 
 The table consists of the following columns:
 
 - `alias` ...--not null text-- The alias that is used to identify and emoji
-- `unicode-glyph` ...--text-- The Unicode glyph representing the emoji
-- `fallback-glyph` ...--text-- The Unicode glyph that is used if `unicode-glyph` is empty, which can happen in multi-language context
+- `unicode-glyph` ...--not null text-- The Unicode glyph representing the emoji
+- `fallback-glyph` ...--text-- The Unicode glyph that is used if `unicode-glyph` is empty, which may happen in multi-language context
 
 The primary key for this table is the `alias` field.
+
+## Class table
+
+The class table stores class attributes that are defined inside the Unimarkup file.
+
+The table consists of the following columns:
+
+- `classname` ...--not null text-- The name to identify the class
+- `attributes` ...--text-- Unformatted JSON attributes for the stored block element (The first and last character must be `{}` to enclose JSON data)
+- `fallback-attributes` ...--text-- This field is used if the `attributes` field is empty, which may happen in multi-language context
+
+The primary key for this table is the `classname` field.
 
 # Multi-language handling
 ## Steps **before** content translation
@@ -195,18 +211,36 @@ The language must be given in the [IETF BCP 47 language tag](https://tools.ietf.
   - `<language tag>-text` ...--text-- Contains the text of a block element entry in the language set as `<language tag>`
   - `<language tag>-attributes` ...--text-- Contains the attributes of a block element entry in the language set as `<language tag>`
 
-- New columns inside the variables table
+- New columns inside the variable table
   - `<language tag>-value` ...--text-- Contains the value of a variable entry in the language set as `<language tag>`
+  - `<language tag>-description` ...--text-- Contains an optional description of a variable entry in the language set as `<language tag>`
   
-- New columns inside the macros table
+- New columns inside the macro table
   - `<language tag>-body` ...--text-- Contains the body of a macro entry in the language set as `<language tag>`
+  - `<language tag>-description` ...--text-- Contains an optional description of a macro entry in the language set as `<language tag>`
 
 - New columns inside the metadata table
   - `<language tag>-preamble` ...--text-- Contains the preamble of a Unimarkup file entry in the language set as `<language tag>`
 
+- New columns inside the abbreviation table
+  - `<language tag>-content` ...--text-- Contains the content of an abbreviation entry in the language set as `<language tag>`
+
+- New columns inside the note table
+  - `<language tag>-content` ...--text-- Contains the content of a note entry in the language set as `<language tag>`
+
+- New columns inside the literature table
+  - `<language tag>-data` ...--text-- Contains the data of a literature entry in the language set as `<language tag>`
+
+- New columns inside the emoji table
+  - `<language tag>-unicode-glyph` ...--text-- Contains the Unicode glyph of an emoji entry in the language set as `<language tag>`
+
+- New columns inside the class table
+  - `<language tag>-classname` ...--text-- Contains the name of a class entry in the language set as `<language tag>`
+  - `<language tag>-attributes` ...--text-- Contains the attributes of a class entry in the language set as `<language tag>`
+
 ## Steps **after** content translation
 
-The modified database can now be used instead of a Unimarkup file to generate outputs defined in the preamble of the root entry of the metadata table.
+The modified database may now be used instead of a Unimarkup file to generate outputs defined in the preamble of the root entry of the metadata table.
 Two language tags must be set when executing Unimarkup, where one is used as default and the other one as fallback language.
 
 **Note:** Internally, the given database entries are copied to the internal database with the two languages being mapped to the default and fallback columns.
