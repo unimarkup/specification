@@ -40,6 +40,8 @@ Inline formatting consists of special character sequences that format an enclose
 A none-white-space character must immediately follow an opening character sequence for inline formatting.
 If the inline formatting is not closed by the same character sequence with a none-white-space character before the closing character sequence, no formatting is applied.
 
+**Note:** Verbatim formatting is an exception and is applied independent of white-space characters.
+
 **Note:** Inline formatting may also be applied inside words and stacked.
 
 **Examples:**
@@ -143,6 +145,8 @@ If the inline formatting is not closed by the same character sequence with a non
       ~~~
       *only italic **bold and italic***
       ~~~
+
+    **Note:** `****` is taken as empty bold.
 
 - No inline formatting
 
@@ -293,18 +297,18 @@ _subscripted text_
 #### **Verbatim**
 
 A text may be defined as verbatim by surrounding it with `` ` ``.
-If you want to use a `` ` `` inside, you need to use ` `` ` instead of `` ` `` with at least one character between the inner content and ` `` `.
+If you want to use a `` ` `` inside, you need to use the macro `{@plain(%<inline>content)}`.
 
-**Note:** This formatting must be the most inner formatting for stacked formatting.
+**Note:** This formatting must be the most inner formatting for stacked formatting, since every content inside is considered as plain text.
 
 **Usage:**
 
 ~~~
 `verbatim text`
 
-`` ` ``
+`{@plain(`)}`
 
-``char` ``
+`char{@plain(`)}`
 ~~~
 
 **Type:**
@@ -2550,37 +2554,13 @@ Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
 : Element type for form block elements.
 
 # Element decorations
-## Block title
-
-A title may be set for an atomic or enclosed block element except headings, by directly preceding the block with one paragraph surrounded by `===`.
-An attribute block may be set directly after the starting `===` on the same line and may span multiple lines.
-A blank line must be set before a block title.
-
-**Note:** Elements with a title must create an additional IR entry with `-title` as postfix to the Unimarkup type of the element and content and attributes being the title ones, but the ID is taken from the element.
-
-**Usage:**
-
-~~~
-==={ <optional title attributes> }
-Title for a table
-===
-+-+-+
-| table | row |
-+-+-+
-
-===
-Another title for a numbered list
-===
-1. Numbered list
-1. Some list
-~~~
-
 ## Caption
 
-It is possible to set a caption at the end of an atomic or enclosed block element except headings. A caption may only have one paragraph.
-To set a caption to a block, set `+++` on a new line immediately after the block end. To close the caption, set `+++` at a new line after the caption paragraph.
+It is possible to set a caption directly above or below an atomic or enclosed block element except headings. No blank line must be between caption and block.
+A caption may only have one paragraph.
+To set a caption to a block, set `+++` on a new line. To close the caption, set `+++` at a new line after the caption paragraph.
 An attribute block may be set directly after the starting `+++` on the same line and may span multiple lines.
-A blank line must follow a caption.
+A blank line must be set before the caption, if it is set before the block, or after the caption, if it is set after the block.
 
 **Note:** Elements with a caption must create an additional IR entry with `-caption` as postfix to the Unimarkup type of the element and content and attributes being the caption ones, but the ID is taken from the element.
 
@@ -2602,7 +2582,7 @@ Caption of a table
 
 # Preamble
 
-It is possible to define a preamble block at the start of a Unimarkup file by surrounding the block with `;;;`
+It is possible to define a preamble block at the start of a Unimarkup file by surrounding the block with `===`
 followed by a blank line. Only one preamble is allowed and must start at the first line.
 
 Possible options and alternative configurations ways are defined in the [configuration reference](Configuration_Reference.md).
@@ -2610,10 +2590,31 @@ Possible options and alternative configurations ways are defined in the [configu
 **Usage:**
 
 ~~~
-;;;
+===
 <preamble>
-;;;
+===
+~~~
 
+**Using JSON:**
+
+~~~
+===
+{
+    "output-file": "output.html",
+    "output-formats": ["Html"],
+    "html_embed_svg": true
+}
+===
+~~~
+
+**Using YAML:**
+
+~~~
+===
+output-file: "output.html"
+output-formats: ["Html"]
+html_embed_svg: true
+===
 ~~~
 
 # Escaping special characters

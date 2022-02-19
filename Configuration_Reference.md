@@ -36,6 +36,10 @@ The following options are available for all configuration variants.
 
 - `relative-insert-prefix` ...--`folderpath`-- This prefix will be set before inserts in the rendered document to inserts that use relative paths. **Note:** During rendering, the original relative path is taken.
 
+- `title` ...--`string`-- The title of the document.
+
+- `authors` ...--`list<string>`-- The authors of the document.
+
 ### Boolean options
 
 - `overwrite-out-files` ... Overwrite files set with `out-file` if already existing.
