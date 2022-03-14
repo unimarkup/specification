@@ -68,18 +68,6 @@ If the inline formatting is not closed by the same character sequence with a non
   Combining ^^_overlined superscript^_^ text.
   ~~~
 
-  **Note:** If a special sequence starts inside another one and an closing sequence for an upper formatting is encountered, the inner formatting is not considered, and the outer formatting is closed.
-
-  ~~~
-  *outer **only italic*non-bold** non-italic*
-  ~~~
-
-  The above renders to the following abstract form
-
-  ~~~
-  <italic start>outer **only italic<italic end>non-bold** non-italic*
-  ~~~
-
   **Special cases:**
 
   - Fallback handling
@@ -88,7 +76,17 @@ If the inline formatting is not closed by the same character sequence with a non
     The inner sequence is first tried to be completed, but if an end sequence of the outer format is encountered before the inner sequence is completed, the inner is not formatted, and the outer is applied.
     If a formatting is not closed at the end of an inline content, it fails and must not be applied. 
 
-    **Example:**
+    **Examples:**
+
+    ~~~
+    *outer **only italic*non-bold** non-italic*
+    ~~~
+
+    The above renders to the following abstract form
+
+    ~~~
+    <italic start>outer **only italic<italic end>non-bold** non-italic*
+    ~~~
 
     ~~~
     *only italic **bold fails* plain text
@@ -105,6 +103,8 @@ If the inline formatting is not closed by the same character sequence with a non
 
     If `bold` and `italic` are directly stacked, the order depends on the closing sequence.
     Otherwise, `**` is always taken as `bold` and not as opening and/or closing `italic` sequence.
+
+    **Note:** The same applies for `subscript` and `underline`.
 
     1. Start and end are stacked
 
@@ -146,7 +146,49 @@ If the inline formatting is not closed by the same character sequence with a non
       *only italic **bold and italic***
       ~~~
 
-    **Note:** `****` is taken as empty bold.
+  - Four contiguous `*` or `_`
+
+    **Note:** With contiguous, it is meant that no character of the four is taken as close sequence up until now.
+
+    The following definition is using `*` for `bold` and `italic`,
+    but the same manner applies for `_` and `subscript` and `underline`.
+
+    The leftmost `*` is taken as plain text and the remaining three are taken as combined open.
+    If open is not allowed due to open constraints, those three `*` are also taken as plain.
+
+    ~~~
+    ****bold and italic***
+    ~~~
+
+    The above renders to
+
+    ~~~
+    *<combined start>bold and italic<combined end>
+    ~~~
+
+  - Four none-contiguous `*` or `_`
+
+    Here, the rendered result depends on previous open sequences.
+    The following definition is using `*` for `bold` and `italic`,
+    but the same manner applies for `_` and `subscript` and `underline`.
+
+    If no whitespace is before the leftmost `*`, then the characters are used as closing sequences
+    for bold, italic and combined. The remaining characters are then used as open sequences respectively.
+
+    **Note:** Two consecutive sequences are always treated as `bold`.
+
+    ~~~
+    ***bold and italic****italic*
+    ~~~
+
+    The above renders to
+
+    ~~~
+    *<combined start>bold and italic<combined end><italic start>italic<italic end>
+    ~~~
+
+    **Note:** The above could be written as `***bold and italic**italic*`.
+
 
 - No inline formatting
 
