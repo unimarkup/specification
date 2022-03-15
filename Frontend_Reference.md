@@ -339,7 +339,10 @@ _subscripted text_
 #### **Verbatim**
 
 A text may be defined as verbatim by surrounding it with `` ` ``.
-If you want to use a `` ` `` inside, you need to use the macro `{@plain(%<inline>content)}`.
+If you want to use a `` ` `` inside, you can either escape `` ` `` using `\`,
+or using the macro `{@um.plain()}`.
+
+**Note:** Use `\\` to render a single backslash.
 
 **Note:** This formatting must be the most inner formatting for stacked formatting, since every content inside is considered as plain text.
 
@@ -348,9 +351,9 @@ If you want to use a `` ` `` inside, you need to use the macro `{@plain(%<inline
 ~~~
 `verbatim text`
 
-`{@plain(`)}`
+`{@plain(`)}` or `\``
 
-`char{@plain(`)}`
+`char{@plain(`)}` or `char\``
 ~~~
 
 **Type:**
@@ -2661,8 +2664,13 @@ html_embed_svg: true
 
 # Escaping special characters
 
-All characters may be escaped using a backslash before them. Escaping characters always means that the escaped character is taken literally.
+All characters may be escaped using a backslash before them.
+Escaping characters always means that the escaped character is taken literally.
 For example, there is no special meaning for `\n` or `\t`.
+
+**Note:** Backslash escaping may also be used for inline verbatim to render `` ` ``.
+
+**Note:** It is also possible to escape spaces and tabs, which are then kept as is during rendering.
 
 **Examples:**
 
@@ -2670,6 +2678,10 @@ For example, there is no special meaning for `\n` or `\t`.
 \\ gets rendered to \
 \$ gets rendered to $
 \n gets rendered to n
+
+\  escapes one space
+
+`\`` gets rendered to <verbatim start>`<verbatim end>
 ~~~
 
 # Attributes
