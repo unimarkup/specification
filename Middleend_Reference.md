@@ -99,8 +99,7 @@ The table consists of the following columns:
 - `name` ...--not null text-- The name of the macro
 - `um_type` ...--not null text-- The Unimarkup type of the macro
 - `parameters` ...--text-- The parameters of the macro
-- `body` ...--text-- The body of the macro
-- `fallback-body` ...--text-- The body of the macro that is used if `body` is empty, which may happen in multi-language context
+- `body-startline` ...--not null bigint-- The line number inside the `content` table where the body of the macro starts
 - `description` ...--text-- An optional description of the macro
 - `fallback-description` ...--text-- The description of the macro table that is used, if `description´ is empty, which may happen in multi-language context
 
