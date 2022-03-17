@@ -23,12 +23,12 @@ Those types must be defined in the [general types](TypeSystem.md#general-types) 
 
 **Format for a general type definition:**
 
-~~~
+```
 : `<type name>` :
 :-- `General`
 :
 : <general type description>
-~~~
+```
 
 ## EBNF overview
 
@@ -61,7 +61,7 @@ Nested attributes must be defined in nested definition blocks.
 
 **Format for an attribute definition:**
 
-~~~
+```
 : `"<attribute name>"` :
 :-- `<attribute type>`
 :
@@ -72,7 +72,7 @@ Nested attributes must be defined in nested definition blocks.
 :-- not covered by any other type.
 :
 : <attribute description>
-~~~
+```
 
 ## Attribute type definition
 
@@ -80,18 +80,18 @@ Attribute types must be defined in [definition blocks](Frontend_Reference.md#def
 
 **Format for an attribute type definition:**
 
-~~~
+```
 : `<attribute type name>` :
 :-- `Attribute`
 :
 : <attribute type description>
-~~~
+```
 
 ## Element definition
 
 The element definition must describe the syntax and usage of an element in English.
 For a more precise definition, especially for complex elements, the [Extended Backus Naur Form](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) should be used additionally.
-If EBNF is used, it should be placed inside one verbatim block. Syntax highlighting may be set for the verbatim block by setting `~~~ebnf` as block starting.
+If EBNF is used, it should be placed inside one verbatim block. Syntax highlighting may be set for the verbatim block by setting ````ebnf` as block starting.
 
 ### Element usage definition
 
@@ -102,13 +102,13 @@ If any other definition is between two usage verbatim blocks, `**Usage:**` must 
 
 **Example:**
 
-~~~~
+````
 **Usage:**
 
-~~~
+```
 <one or more examples showing the usage of an element>
-~~~
-~~~~
+```
+````
 
 ### Element type definition
 
@@ -121,16 +121,16 @@ Element types of type class `Single` must be defined in nested definition blocks
 
 **Format for an element type definition:**
 
-~~~
+```
 : `<type name>` :
 :-- `<element type class>`
 :
 : <type description>
-~~~
+```
 
 **Example:**
 
-~~~
+```
 **Types:**
 
 : `my_type` :
@@ -142,7 +142,7 @@ Element types of type class `Single` must be defined in nested definition blocks
 : :-- `Single`
 : :
 : : sub_type description.
-~~~
+```
 
 ### Element attribute definition
 
@@ -151,7 +151,7 @@ General or element group attributes that are supported, are referenced in a bull
 
 **Example:**
 
-~~~
+```
 **Attributes:**
 
 - [Block attributes](#block-attributes)
@@ -165,7 +165,7 @@ General or element group attributes that are supported, are referenced in a bull
 : :-- `number`
 : :
 : : Description of the sub-attribute.
-~~~
+```
 
 ### Element preamble options definition
 
@@ -177,22 +177,22 @@ Available preamble options must be set in definition blocks in the same format a
 
 The general layout for all element definitions should follow the structure below.
 
-~~~~
+````
 # <element name>
 
 <element definition>
 
-~~~ebnf
+```ebnf
 <optional EBNF>
-~~~
+```
 
 <optional content>
 
 **Usage:**
 
-~~~
+```
 <element usage>
-~~~
+```
 
 <optional content>
 
@@ -207,7 +207,7 @@ The general layout for all element definitions should follow the structure below
 **Preamble options:**
 
 <element preamble options>
-~~~~
+````
 
 **Note:** In the layout above, `<optional content>` may contain any Unimarkup content, but should be restricted to short paragraphs and notes.
 

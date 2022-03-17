@@ -30,11 +30,11 @@ The remaining name may consist of Latin characters, digits and `_`.
 
 **Example:**
 
-~~~
+```
 {@renderSomething}
 
 {@__internalMacro}
-~~~
+```
 
 ## Variable naming
 
@@ -45,11 +45,11 @@ The remaining name may consist of Latin characters, digits and `_`.
 
 **Example:**
 
-~~~
+```
 {%someVariable}
 
 {%CONSTANT_VARIABLE}
-~~~
+```
 
 ## Flag naming
 
@@ -60,11 +60,11 @@ The remaining name may consist of Latin characters, digits and `_`.
 
 **Example:**
 
-~~~
+```
 {?someFlag?}
 
 [?__internalFlag?]
-~~~
+```
 
 ## Attribute naming
 
@@ -73,11 +73,11 @@ The remaining name may consist of Latin characters, digits and `-`.
 
 **Example:**
 
-~~~json
+```json
 { "some-attribute" : "some-value" }
 
 { "some-numerical-attribute" : 2 }
-~~~
+```
 
 ## Element naming
 
@@ -85,11 +85,11 @@ Element names should always be in singular form and must only consist of words w
 
 **Example:**
 
-~~~
+```
 Bullet list
 
 Render block
-~~~
+```
 
 ## Type naming
 
@@ -100,13 +100,13 @@ The name of element types should reflect the element name and must only consist 
 
 **Example:**
 
-~~~
+```
 paragraph
 
 block_quotation
 
 list_bullet
-~~~
+```
 
 ## EBNF rules naming
 
@@ -115,6 +115,6 @@ The name must only consist of Latin characters, digits and `_`.
 
 **Example:**
 
-~~~ebnf
+```ebnf
 ebnf_rule = ? <some ebnf rule> ? ;
-~~~
+```

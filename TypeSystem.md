@@ -21,9 +21,9 @@ To use a generic type, a type must be set between `<>`.
 
 **Example:**
 
-~~~
+```
 list<paragraph>
-~~~
+```
 
 # General types
 
@@ -98,9 +98,9 @@ General types may be used for element, attribute, variable and macro types.
 
 **Example:**
 
-~~~
+```
 range[20 : 30]
-~~~
+```
 
 **Note:** The range type is internally treated as `list<integer>`.
 
@@ -112,7 +112,7 @@ range[20 : 30]
 
 **Example:**
 
-~~~
+```
 : `some_enum` :
 :-- `enum`
 :
@@ -120,4 +120,4 @@ range[20 : 30]
 :
 : - `value1` ... some description
 : - `value2` ... some description
-~~~
+```

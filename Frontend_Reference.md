@@ -22,9 +22,9 @@ An optional attribute block may be given at the end of an inline element and may
 
 **Example:**
 
-~~~
+```
 **bold text**, [hyperlink text](url), :D 
-~~~
+```
 
 **Type:**
 
@@ -48,15 +48,15 @@ If the inline formatting is not closed by the same character sequence with a non
 
 - Inline formatting within words
 
-  ~~~
+  ```
   For*matt*ing inside __word__s is possible.
-  ~~~
+  ```
 
 - Stacking inline formatting by nesting them
 
   **Note:** Not all formatting may be combined and some require certain order. Those restrictions are noted at the corresponding formatting definitions.
 
-  ~~~
+  ```
   Stacking this **__text to be bold and underlined__**.
 
   The opposite way __**is also bold and underlined**__.
@@ -66,7 +66,7 @@ If the inline formatting is not closed by the same character sequence with a non
   Having a **`bold verbatim text`**.
 
   Combining ^^_overlined superscript^_^ text.
-  ~~~
+  ```
 
   **Special cases:**
 
@@ -78,19 +78,19 @@ If the inline formatting is not closed by the same character sequence with a non
 
     **Examples:**
 
-    ~~~
+    ```
     *outer **only italic*non-bold** non-italic*
-    ~~~
+    ```
 
     The above renders to the following abstract form
 
-    ~~~
+    ```
     <italic start>outer **only italic<italic end>non-bold** non-italic*
-    ~~~
+    ```
 
-    ~~~
+    ```
     *only italic **bold fails* plain text
-    ~~~
+    ```
 
     The above goes through the following steps:
 
@@ -110,41 +110,41 @@ If the inline formatting is not closed by the same character sequence with a non
 
       The order does not matter, since all `*` are part of special sequences and the containing text gets both formats.
 
-      ~~~
+      ```
       ***bold and italic***
-      ~~~
+      ```
 
     2. Start is stacked, but `bold` ends before `italic`
 
       The outer `*` is considered part of `italic` and the inner `**` part of `bold`.
 
-      ~~~
+      ```
       ***bold and italic** only italic*
-      ~~~
+      ```
 
     3. Start is stacked, but `italic` ends before `bold`
 
       The outer `**` is considered part of `bold` and the inner `*` part of `italic`.
 
-      ~~~
+      ```
       ***bold and italic* only bold**
-      ~~~
+      ```
 
     4. End is stacked, but `bold` starts before `italic`
 
       The outer `**` is considered part of `bold` and the inner `*` part of `italic`.
 
-      ~~~
+      ```
       **only bold *bold and italic***
-      ~~~
+      ```
 
     5. End is stacked, but `italic` starts before `bold`
 
       The outer `*` is considered part of `italic` and the inner `**` part of `bold`.
 
-      ~~~
+      ```
       *only italic **bold and italic***
-      ~~~
+      ```
 
   - Four contiguous `*` or `_`
 
@@ -156,15 +156,15 @@ If the inline formatting is not closed by the same character sequence with a non
     The leftmost `*` is taken as plain text and the remaining three are taken as combined open.
     If open is not allowed due to open constraints, those three `*` are also taken as plain.
 
-    ~~~
+    ```
     ****bold and italic***
-    ~~~
+    ```
 
     The above renders to
 
-    ~~~
+    ```
     *<combined start>bold and italic<combined end>
-    ~~~
+    ```
 
   - Four none-contiguous `*` or `_`
 
@@ -177,15 +177,15 @@ If the inline formatting is not closed by the same character sequence with a non
 
     **Note:** Two consecutive sequences are always treated as `bold`.
 
-    ~~~
+    ```
     ***bold and italic****italic*
-    ~~~
+    ```
 
     The above renders to
 
-    ~~~
+    ```
     *<combined start>bold and italic<combined end><italic start>italic<italic end>
-    ~~~
+    ```
 
     **Note:** The above could be written as `***bold and italic**italic*`.
 
@@ -194,7 +194,7 @@ If the inline formatting is not closed by the same character sequence with a non
 
   The following examples show text with formatting character sequences, but no/partial formatting is applied, because not all requirements are fulfilled.
 
-  ~~~
+  ```
   Text with* starting sequence followed by a white-space.
 
   Text *with correct starting sequence, but paragraph ends without closing sequence.
@@ -204,7 +204,7 @@ If the inline formatting is not closed by the same character sequence with a non
   Text ***with correct bold and italic starting sequence, but* only italic closing sequence is correct with bold being ignored.
 
   Text ***with correct bold and italic starting sequence, but** only bold closing sequence is correct with italic being ignored.
-  ~~~
+  ```
 
 **Type:**
 
@@ -219,9 +219,9 @@ A text is bold by surrounding it with `**`.
 
 **Usage:**
 
-~~~
+```
 **bold text**
-~~~
+```
 
 **Type:**
 
@@ -236,9 +236,9 @@ A text is italic by surrounding it with `*`.
 
 **Usage:**
 
-~~~
+```
 *italic text*
-~~~
+```
 
 **Type:**
 
@@ -253,9 +253,9 @@ A text is underlined by surrounding it with `__`.
 
 **Usage:**
 
-~~~
+```
 __underlined text__
-~~~
+```
 
 **Type:**
 
@@ -270,9 +270,9 @@ A text is overlined by surrounding it with `^_`.
 
 **Usage:**
 
-~~~
+```
 ^_overlined text^_
-~~~
+```
 
 **Type:**
 
@@ -287,9 +287,9 @@ A text is strike through by surrounding it with `~~`.
 
 **Usage:**
 
-~~~
+```
 ~~strike through text~~
-~~~
+```
 
 **Type:**
 
@@ -306,9 +306,9 @@ A text is superscripted by surrounding it with `^`.
 
 **Usage:**
 
-~~~
+```
 ^superscripted text^
-~~~
+```
 
 **Type:**
 
@@ -325,9 +325,9 @@ A text is subscripted by surrounding it with `_`.
 
 **Usage:**
 
-~~~
+```
 _subscripted text_
-~~~
+```
 
 **Type:**
 
@@ -348,13 +348,13 @@ or using the macro `{@um.plain()}`.
 
 **Usage:**
 
-~~~
+```
 `verbatim text`
 
 `{@plain(`)}` or `\``
 
 `char{@plain(`)}` or `char\``
-~~~
+```
 
 **Type:**
 
@@ -385,9 +385,9 @@ A text may be highlighted by surrounding it with `||`.
 
 **Usage:**
 
-~~~
+```
 ||highlighted text||
-~~~
+```
 
 **Type:**
 
@@ -402,9 +402,9 @@ A text may be quoted by surrounding it with `""`.
 
 **Usage:**
 
-~~~
+```
 ""quoted text""
-~~~
+```
 
 **Type:**
 
@@ -420,9 +420,9 @@ More information about math mode may be found in the [math mode definition secti
 
 **Usage:**
 
-~~~
+```
 $\frac{1}{n}$
-~~~
+```
 
 **Type:**
 
@@ -440,11 +440,15 @@ $\frac{1}{n}$
 Text inside one paragraph may be grouped by surrounding it with `[]`. Only inline elements may be used inside a text group.
 Attributes may be set after the closing `]` of the text group.
 
+**Note:** Any `[` must be closed with `]`. Otherwise, rendering must fail.
+
+**Note:** To use `[` without `]`, it must be escaped like `\[`.
+
 **Usage:**
 
-~~~
+```
 A paragraph with [grouped text]{ "size" : "20pt" }. Also grouping within one w[or]{ "color" : "rgb(255,0,0)" }d is possible.
-~~~
+```
 
 **Type:**
 
@@ -466,11 +470,13 @@ Attributes may be set after the closing `)` of the URL.
 
 Elements of other documents can be linked, by setting `<link to other document>#<element id>` as link.
 
+**Note:** As with text groups, any `(` must be closed with `)`. Otherwise, rendering must fail.
+
 **Note:** Hyperlinks with IDs as sources should only be used, if an explicit text is wanted. Otherwise, [ID referencing](#id-referencing) should be used.
 
 **Usage:**
 
-~~~
+```
 [Text represented as hyperlink](/some/url)
 
 [Explicit hyperlink text for some element](#element-id)
@@ -480,7 +486,7 @@ Elements of other documents can be linked, by setting `<link to other document>#
 [https://github.com/]()
 
 [Requirements.md#stick-to-unimarkup]()
-~~~
+```
 
 **Type:**
 
@@ -500,18 +506,20 @@ Elements of other documents can be linked, by setting `<link to other document>#
 
 ### Inline image
 
-Images may be inserted inside a paragraph using `![<alternate text>](<image url>)`.
+Images may be inserted inside a paragraph using `[!!<alternate text>](<image url>)`.
 The alternate text is shown if the image may not be found, or may be used by screen readers.
 It is only possible to use plain text as alternate text.
 Optional attributes are set after the closing `)` of the URL.
 
+**Note:** Same restrictions regarding closing as with hyperlinks apply.
+
 **Usage:**
 
-~~~
-Some paragraph text with ![some image](<image url>).
+```
+Some paragraph text with [!!some image](<image url>).
 
-![<alternate text for this image>](<image url>){<inline image attributes>}
-~~~
+[!!<alternate text for this image>](<image url>){<inline image attributes>}
+```
 
 **Type:**
 
@@ -540,16 +548,12 @@ Some paragraph text with ![some image](<image url>).
 ### Inline file insert
 
 There are two different ways to insert files inside a paragraph.
-The general form of an inline file insert looks like a hyperlink with a **special character** set before `[`.
+The general form of an inline file insert looks like a hyperlink with a **special character sequence** set immediately after `[`.
 Optional attributes are set after the closing `)` of the URL.
 
 **Note:** If the inserted content does not fit inside a paragraph, no content is inserted.
 
 **Note:** The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
-
-~~~ebnf
-inline_insert = hyperlink , [ attribute_block ] ;
-~~~
 
 **Type:**
 
@@ -568,16 +572,16 @@ inline_insert = hyperlink , [ attribute_block ] ;
 
 #### Rendered inline file insert
 
-Using `'` as special character renders the inserted file depending on the file type.
+Using `''` as special character sequence renders the inserted file depending on the file type.
 Supported file types depend on the available renderer. See [additional renderer](#additional-renderer) for more information.
 
 **Usage:**
 
-~~~
-'[<description for the file content that is inserted>](<file path>){<attributes>}
+```
+[''<description for the file content that is inserted>](<file path>){<attributes>}
 
-'[First heading note](Unimarkup_Language_ReferenceManual.md){ "insert-id" : "first-heading-note" }
-~~~
+[''First heading note](Unimarkup_Language_ReferenceManual.md){ "insert-id" : "first-heading-note" }
+```
 
 **Type:**
 
@@ -604,16 +608,22 @@ Supported file types depend on the available renderer. See [additional renderer]
 
 #### Verbatim inline file insert
 
-Using `~` as special character inserts the text of a file as is like inline verbatim formatting. Every plain text format may be inserted.
+Using ` `` ` as special character sequence inserts the text of a file as is like inline verbatim formatting. Every plain text format may be inserted.
 An optional text highlighter may be set as attribute. See [additional highlighter](#additional-highlighter) for more information on available highlighter.
+
+**Note:** To have `[` at the end of an inline verbatim, you must not set another open verbatim immediately afterwards.
 
 **Usage:**
 
-~~~
-~[<description for the file content that is inserted>](<file path>){<attributes>}
+```
+[``<description for the file content that is inserted>](<file path>){<attributes>}
 
-Some paragraph text with ~[First heading note](Unimarkup_Language_ReferenceManual.md){ "insert-id" : "first-heading-note" }.
-~~~
+Some paragraph text with [``First heading note](Unimarkup_Language_ReferenceManual.md){ "insert-id" : "first-heading-note" }.
+
+`[`open bracket is part of inline verbatim]()
+
+`[``verbatim insert]() -> open verbatim is never closed
+```
 
 **Type:**
 
@@ -641,8 +651,10 @@ Some paragraph text with ~[First heading note](Unimarkup_Language_ReferenceManua
 ### Emoji substitution
 
 Some special character sequences are reserved for direct emoji conversion. Those sequences must be surrounded by white-spaces, or they are kept as is.
-It is also possible to use [emoji shortcuts](https://github.com/github/gemoji/blob/master/db/emoji.json) with the alias being surrounded by `:`.
+It is also possible to use [emoji shortcuts](https://github.com/github/gemoji/blob/master/db/emoji.json) with the alias being surrounded by `::`.
 Emoji shortcuts, unlike direct emojis, may appear inside words. The list of supported emoji shortcuts may be increased using the macro `{@<definition> um.addEmoji (%<text>alias%<text>emoji_glyph)}`.
+
+**Note:** The alias must not contain whitespaces.
 
 **Full list of available direct emojis:**
 
@@ -667,25 +679,26 @@ Emoji shortcuts, unlike direct emojis, may appear inside words. The list of supp
 
 **Usage:**
 
-~~~
+```
 {@um.addEmoji (%alias{grin}%emoji_glyph{😁})}
 {@um.addEmoji (%alias{slight_smile}%emoji_glyph{&U+1F642;})}
 
 A text with an emoji :D in it!
 
-Using :monocle_face:'s predefined emoji shortcut and the manual :grin: using the macro.
+Using ::monocle_face::'s predefined emoji shortcut and the manual ::grin:: using the macro.
 
-Multiple :grin::grin:
-~~~
+Multiple ::grin::::grin::
+```
 
 Rendered to:
-~~~
+
+```
 A text with an emoji 😃 in it!
 
 Using 🧐's predefined emoji shortcut and the manual 😁 using the macro.
 
 Multiple 😁😁
-~~~
+```
 
 **Type:**
 
@@ -721,15 +734,15 @@ Some character sequences are translated to certain Unicode arrows. Those sequenc
 
 **Usage:**
 
-~~~
+```
 A text --> using an arrow!
-~~~
+```
 
 Rendered to:
 
-~~~
+```
 A text 🠖 using an arrow!
-~~~
+```
 
 **Type:**
 
@@ -760,9 +773,9 @@ A note may be referenced inside a paragraph with `[^^<note-id>]`.
 
 **Usage:**
 
-~~~
+```
 Referencing a note [^^note-id] and [^^myNote].
-~~~
+```
 
 **Type:**
 
@@ -784,12 +797,12 @@ Attributes are set after the closing `]`.
 
 **Usage:**
 
-~~~
-![Some image](<image url>){ "id" : "some-image-id", "ref" : { "label" : "Some image" } }
+```
+[!!Some image](<image url>){ "id" : "some-image-id", "ref" : { "label" : "Some image" } }
 
 A paragraph that references [##some-image-id]{ "refOption" : "label" }. 
 The referenced text looks like: Some image
-~~~
+```
 
 **Type:**
 
@@ -837,10 +850,10 @@ Referenced literatures, used up to the current position in the document, are sto
 
 **Usage:**
 
-~~~
+```
 This text has some literature reference [&&literature-id]
 This text has more than one literature reference [&&id-1&&id-2].
-~~~
+```
 
 **Type:**
 
@@ -853,19 +866,21 @@ This text has more than one literature reference [&&id-1&&id-2].
 
 Abbreviations may be used as substitution or tooltip with the syntax `[::<abbreviation>]`. The full text of an abbreviation may then be displayed as tooltip or substituted by setting the `display` attribute either to `tooltip` or `substitute`.
 
-**Note:** If an abbreviation is defined more than once, Unimarkup returns and error.
+**Note:** If an abbreviation is defined more than once, rendering must fail.
+
+**Note:** An abbreviation must not end with `::`, as it would be taken as an emoji substitution.
 
 The list `{%um.abbreviations}` holds all used abbreviations in the document up to the current position.
 
 **Usage:**
 
-~~~
+```
 Some text using an [::abbr]. 
 
 Text using abbreviations [::xml], [::html] and [::OPC UA TSN].
 
 [::mult]{ "display" : "substitute" }
-~~~
+```
 
 **Type:**
 
@@ -893,9 +908,9 @@ Any Unicode code point may be inserted in Unimarkup with `&<Unicode code point>;
 
 **Usage:**
 
-~~~
+```
 &U+1F642;
-~~~
+```
 
 **Type:**
 
@@ -913,14 +928,14 @@ Optionally, a comment can be ended using `;;`, to end a comment before the end o
 
 **Usage:**
 
-~~~
+```
 ;; comment to end of line
 
 A comment may be ;; end of line comment
 at the end of a line
 
 Comment ;;this is a comment;; inside one line.
-~~~
+```
 
 **Type:**
 
@@ -940,11 +955,11 @@ is treated as a normal [inline text group](#inline-text-group). Optional flags m
 
 **Usage:**
 
-~~~
+```
 [<field name> Some inline content]
 
 [?someFlag?<someField> Some inline content]
-~~~
+```
 
 **Type:**
 
@@ -961,11 +976,11 @@ None line breaking spaces are allowed before the attribute opening.
 
 **Example:**
 
-~~~
+```
 # 1 Heading
 ## 1.1 Subheading
 { <optional heading attributes for "1.1 Subheading"> }
-~~~
+```
 
 **Type:**
 
@@ -987,19 +1002,6 @@ A heading prefix may be set in the [preamble](#preamble) and may be changed at a
 Another overloaded version of this macro may be used to set heading numbering in a more convenient way using `{@setHeadingPrefix{%numbering%startNr%lvlSeparator}}`.
 The overloaded macro should only be used before a new level 1 heading is set. The macro `{@renderHeadingNumber}` uses the parameters set in the overloaded macro and may be used to render the heading numbers.
 
-~~~ebnf
-heading_end = spaces , none_white_space , paragraph , [ attribut_block ] , blank_line ;
-
-heading_level_1 = blank_line , "#" , heading_end ;
-heading_level_2 = blank_line , "##" , heading_end ;
-heading_level_3 = blank_line , "###" , heading_end ;
-heading_level_4 = blank_line , "####" , heading_end ;
-heading_level_5 = blank_line , "#####" , heading_end ;
-heading_level_6 = blank_line , "######" , heading_end ;
-
-heading = heading_level_1 | heading_level_2 | heading_level_3 | heading_level_4 | heading_level_5 | heading_level_6 ; 
-~~~
-
 **Note:** IDs are created implicitly for headings, by setting Latin characters to lower case, spaces between characters get replaced by `-` and other characters are removed.
 If the resulting ID is already present, it must be set explicitly.
 
@@ -1007,7 +1009,7 @@ If the resulting ID is already present, it must be set explicitly.
 
 **Usage:**
 
-~~~
+```
 {@um.setHeadingPrefix(%numbering[roman-upper]%startNr[I])}
 
 # First main heading
@@ -1042,30 +1044,30 @@ additional attributes
 
 # Heading with explicit identifier
 { "id" : "explicit-heading-id" }
-~~~
+```
 
 **Examples of invalid headings:**
 
 - Wrong heading level of follow-up heading
 
-  ~~~
+  ```
   # Heading
   # Bad follow-up heading
-  ~~~
+  ```
 
 - No blank lines
 
-  ~~~
+  ```
   Some text...
   ## No blank lines around heading
   More text...
-  ~~~
+  ```
 
 - No space after `#`
 
-  ~~~
+  ```
   #No space between # and heading text
-  ~~~
+  ```
 
 **Types:**
 
@@ -1124,13 +1126,9 @@ additional attributes
 A text starting with at least one none white-space character followed by one or more blank lines is considered as one paragraph. All white-space characters between none white-space characters are replaced by exactly one space.
 A backslash `\` at the end of a paragraph line, creates a new line explicitly inside one paragraph.
 
-~~~ebnf
-paragraph = blank_line, { any_character } , none_white_space , { any_character } , blank_line ;
-~~~
-
 **Usage:**
 
-~~~
+```
 This is a paragraph.
 New lines, tabs and spaces are treated as one space.
 
@@ -1138,7 +1136,7 @@ This is a new paragraph.
 
 This is a paragraph\
 with an explicit new line.
-~~~
+```
 
 **Type:**
 
@@ -1175,7 +1173,7 @@ The macro `{@breakLists}` at start of a line between two lists separates those t
 
   **Examples:**
 
-  ~~~
+  ```
   - Main list entry
     - Two spaces before the list start mark a nested list
       - Another two mark a nested list of a nested list. And so on.
@@ -1184,7 +1182,7 @@ The macro `{@breakLists}` at start of a line between two lists separates those t
     This text is part of the main list entry
 
   This is some independent paragraph.
-  ~~~
+  ```
 
 - **Combining lists:**
 
@@ -1192,13 +1190,13 @@ The macro `{@breakLists}` at start of a line between two lists separates those t
 
   **Examples:**
 
-  ~~~
+  ```
   - Bullet list
     1. Sub numbered list
 
   1. New numbered list
     - Sub bullet list
-  ~~~
+  ```
 
 - **Setting list attributes:**
 
@@ -1208,7 +1206,7 @@ The macro `{@breakLists}` at start of a line between two lists separates those t
 
   **Examples:**
 
-  ~~~
+  ```
   - list entry
   { <some list entry attributes> }
   { <some list attributes> }
@@ -1216,7 +1214,7 @@ The macro `{@breakLists}` at start of a line between two lists separates those t
   1. numbered list entry
   {}
   { <some list attributes> }
-  ~~~
+  ```
 
 #### **Bullet list**
 
@@ -1226,17 +1224,9 @@ As an exception, a nested list may directly follow an entry heading. A blank lin
 Attributes for list entries are set starting at a new line of the entries heading.
 List entry attributes only apply to the entry heading. If additional content is given, they must be styled in another way. 
 
-~~~ebnf
-bullet_list_start_character = "-" | "+" | "*" ;
-bullet_list_entry_heading = list_depth_spaces , bullet_list_start_character , space , heading_end ;
-bullet_list_entry = bullet_list_entry_heading , line_break , [ ( blank_line , { ( list_depth_spaces , any_character , blank_line ) } ) ] ;
-
-bullet_list = blank_line , bullet_list_entry , { bullet_list_entry } , [ ( new_line , attribute_block ) ] , blank_line ;
-~~~
-
 **Usage:**
 
-~~~~
+````
 - Bullet list
   - Sub bullet list
 
@@ -1246,9 +1236,9 @@ bullet_list = blank_line , bullet_list_entry , { bullet_list_entry } , [ ( new_l
 
   Other paragraph for this bullet list
 
-  ~~~
+  ```
   Verbatim block for this bullet list
-  ~~~
+  ```
 
   - Sub bullet list
   { <bullet list entry attributes> }
@@ -1272,7 +1262,7 @@ Paragraph not for a bullet list
 {@breakLists}
 
 - Macro above defines this as a new bullet list
-~~~~
+````
 
 **Types:**
 
@@ -1316,7 +1306,7 @@ Otherwise, a new list at this level will be created.
 
 **Usage:**
 
-~~~~
+````
 1. Start of numbered list
   1. Sub numbered list
 
@@ -1326,9 +1316,9 @@ Otherwise, a new list at this level will be created.
 
   Other paragraph for this numbered list
 
-  ~~~
+  ```
   Verbatim block for this numbered list
-  ~~~
+  ```
 
   1. Sub numbered list
 
@@ -1378,7 +1368,7 @@ Paragraph not for a numbered list
 
 3. Numbered list starting at specific number
 3. Numbered list element that gets incremented automatically
-~~~~
+````
 
 **Types:**
 
@@ -1425,7 +1415,7 @@ The following list is parsed from 1. to 5. to get the higher task state:
 
 **Usage:**
 
-~~~
+```
 -[ ] Open task
 -[x] Completed task
 -[a] Active task that is worked on
@@ -1458,7 +1448,7 @@ The following list is parsed from 1. to 5. to get the higher task state:
     -[x] Completed task
     -[x] Completed task2
   -[ ] Open task
-~~~
+```
 
 **Types:**
 
@@ -1490,7 +1480,7 @@ It is also possible to set a **definition class** directly after `...` by surrou
 
 **Usage:**
 
-~~~
+```
 - Bullet list ... Gets transformed to a definition list
 - Possible `option` ... Content is indented to the right, to start at the same position as the content from all other definition list elements.
 - Multiple `-paragraphs` ... As with bullet lists
@@ -1502,15 +1492,15 @@ It is also possible to set a **definition class** directly after `...` by surrou
   + Works ... too
 
 - Definition ...--With a class-- And here is the description
-~~~
+```
 
 **Note:** The list remains a bullet or numbered list, if `...` does not appear in the list heading entry.
 
-~~~
+```
 - Bullet list
 
   That remains ... a bullet list
-~~~
+```
 
 **Types:**
 
@@ -1636,7 +1626,7 @@ By default, all table [captions](#caption) are added to the list `{%tableCaption
 
 **Usage:**
 
-~~~
+```
 +--+-+--+
 | Top left column of table | 1/2 length | same length as top left |
 +-------+
@@ -1725,7 +1715,7 @@ By default, all table [captions](#caption) are added to the list `{%tableCaption
 + | r2c1.1 | +----------+ | +------+
 | +--------+-| r2c1.2.1 |-+ | r3c2 |
 +-| r3c1.1 |    r3c1.2    |-+------+
-~~~
+```
 
 **Type:**
 
@@ -1745,14 +1735,14 @@ By default, all figure [captions](#caption) are added to the list `{%figureCapti
 
 **Usage:**
 
-~~~
+```
 !!![some image](<image url>).
 +++
 Image caption that shows something.
 +++
 
 !!![<alternate text for this image>](<image url>){<image insert attributes>}
-~~~
+```
 
 **Type:**
 
@@ -1773,11 +1763,11 @@ With media inserts allowed, it is possible to insert video and audio files in ad
 
 **Usage:**
 
-~~~
+```
 !!![<Alternative text if media file is not supported>](<media to use>)(<alternative media to use>)
 
 !!![Some video](someVideo.mp4)(someVideo.ogg)(someVideo.webm)
-~~~
+```
 
 **Type:**
 
@@ -1789,7 +1779,7 @@ With media inserts allowed, it is possible to insert video and audio files in ad
 ### Block file insert
 
 There are two different ways to insert files as block elements.
-The general form of a block file insert looks like a hyperlink with a **special character** repeated three or more times before `[`.
+The general form of a block file insert looks like a hyperlink with a **special character** repeated three times before `[`.
 Block file inserts must be surrounded by blank lines.
 
 **Note:** The description given inside `[]` is only used as information about the content of the inserted file. The text will not be in the rendered document.
@@ -1825,11 +1815,11 @@ See [additional renderer](#additional-renderer) for more information on availabl
 
 **Usage:**
 
-~~~
+```
 '''[<Description for the file content that is inserted>](<file path>){<attributes>}
 
 '''[The whole style guide for Unimarkup](StyleGuide.md)
-~~~
+```
 
 **Type:**
 
@@ -1858,17 +1848,17 @@ See [additional renderer](#additional-renderer) for more information on availabl
 
 #### Verbatim block file insert
 
-Using `~` as special character inserts the text of a file as is like a verbatim block. Every plain text format may be inserted.
+Using `` ` `` as special character inserts the text of a file as is like a verbatim block. Every plain text format may be inserted.
 If no highlighter is available for the inserted file type, the content is inserted as is.
 See [additional highlighter](#additional-highlighter) for more information on available highlighter.
 
 **Usage:**
 
-~~~~
-~~~[<Description for the file content that is inserted>](<file path>){<attributes>}
+````
+```[<Description for the file content that is inserted>](<file path>){<attributes>}
 
-~~~[The whole style guide for Unimarkup](StyleGuide.md)
-~~~~
+```[The whole style guide for Unimarkup](StyleGuide.md)
+````
 
 **Type:**
 
@@ -1908,7 +1898,7 @@ An author text may optionally be set at the end of a quotation block by starting
 
 **Usage:**
 
-~~~
+```
 > Block quote
 > with new lines
 > *treated* as spaces
@@ -1927,7 +1917,7 @@ An author text may optionally be set at the end of a quotation block by starting
 >-- by someone
 >-- and many others
 >--{<author paragraph attributes>}
-~~~
+```
 
 **Type:**
 
@@ -1956,21 +1946,21 @@ Like with [text blocks](#text-block), it is possible to set attributes for all U
 
 **Usage:**
 
-~~~
+```
 | Text where *spaces* are preserved as is.
 |    All other **markup** however, is considered as **Unimarkup text**.
 
 | A verbatim block may be used inside a line block
 |
-| ~~~
+| ```
 | Some verbatim text
-| ~~~
+| ```
 |
 | Since spaces are already kept, a verbatim block inside a line block
 | is only necessary to get code highlighting.
 |
 |{<Line block attributes>}
-~~~
+```
 
 **Type:**
 
@@ -2004,7 +1994,7 @@ Like with [text blocks](#text-block), it is possible to set attributes for all U
 
 **Usage:**
 
-~~~
+```
 : Definition term :
 :
 : Definition of this term
@@ -2038,7 +2028,7 @@ Like with [text blocks](#text-block), it is possible to set attributes for all U
 : Other paragraph for the main term definition
 :
 :{<definition block attributes>}
-~~~
+```
 
 **Type:**
 
@@ -2063,13 +2053,13 @@ Set `-` 3 or more times on a new line that is surrounded by blank lines to creat
 
 **Usage:**
 
-~~~
+```
 ---
 
 Another horizontal line after this text.
 
 ---
-~~~
+```
 
 **Type:**
 
@@ -2087,7 +2077,7 @@ It is possible to set attributes for Unimarkup elements, but they are only valid
 
 **Usage:**
 
-~~~
+```
 :::
 
 :::{<new page with attributes>}
@@ -2102,7 +2092,7 @@ Every text on this page has a *sans-serif* font. Additional styling might be giv
 :::
 
 This text has the default font again.
-~~~
+```
 
 **Type:**
 
@@ -2121,11 +2111,11 @@ The attribute block must start at the same line as the start character sequence,
 
 **Example:**
 
-~~~~
-~~~
+````
+```
 verbatim block
-~~~
-~~~~  
+```
+```` 
 
 **Type:**
 
@@ -2136,43 +2126,43 @@ verbatim block
 
 ### Verbatim blocks
 
-A verbatim block is opened by three or more `~` at the start of a new line and closed with the same number of `~` at a following new line.
+A verbatim block is opened by three or more `` ` `` at the start of a new line and closed with the same number of `` ` `` at a following new line.
 The block must be surrounded by blank lines. Content inside a verbatim block is treated as is. No rendering is done and all white-space characters are preserved.
 The only exception is a variable of type `text`. The content of a variable of this type is inserted as is inside the verbatim block.
 To prevent this, the variable must be escaped with a backslash at any position of the variable.
 
 If a verbatim block must be displayed inside a verbatim block,
-the outer block must have at least one `~` more than the inner block.
+the outer block must have at least one `` ` `` more than the inner block.
 
-A highlighter may be set at the start of a verbatim block, by setting the name of an highlighter after `~` with optional spaces between.
-Attributes may be set after the highlighter name.
+A highlighter may be set at the start of a verbatim block, by setting the name of an highlighter directly after `` ` ``.
+Alternatively, attributes may be set instead of the highlighter name.
 
 **Usage:**
 
-~~~~~
-~~~
+`````
+```
 Verbatim block, where nothing is rendered
-~~~
+```
 
-~~~~
+````
 Outer verbatim block.
 
-~~~
+```
 Inner verbatim block.
-~~~
+```
 
-~~~~
+````
 
-~~~{<Attributes for the verbatim block>}
+```{<Attributes for the verbatim block>}
 Verbatim block with given attributes
-~~~
+```
 
-~~~ C
+```C
 int add(int a,  int b) {
   return a + b;
 }
-~~~
-~~~~~
+```
+`````
 
 **Type:**
 
@@ -2199,7 +2189,7 @@ To prevent this, the variable must be escaped with a backslash at any position o
 
 **Usage:**
 
-~~~
+```
 '''mermaid
 graph TB
     A & B--> C & D
@@ -2213,7 +2203,7 @@ Converting is informatical and systemic.
 Converting consumes Unimarkup.
 Converting yields Html and Pdf.
 '''
-~~~
+```
 
 **Type:**
 
@@ -2238,7 +2228,7 @@ By default, all math block [captions](#caption) are added to the list `{%mathCap
 
 **Usage:**
 
-~~~
+```
 Blocked math mode
 
 $$$
@@ -2252,7 +2242,7 @@ $$$
 $$$
 \sum_{i = 1}^{\infty}{i^2}
 $$$
-~~~
+```
 
 **Type:**
 
@@ -2277,7 +2267,7 @@ Elements are identified by setting their type name as attribute name.
 
 **Usage:**
 
-~~~~
+````
 [[[{<Attributes for the text block>}
 Everything inside is treated as Unimarkup content.
 Provided attributes apply to all text inside this block
@@ -2306,12 +2296,12 @@ This paragraph has the default background.
 [[[
 Any Unimarkup text may be inside a text block
 
-~~~
+```
 Verbatim block inside a text block
-~~~
+```
 
 ]]]
-~~~~
+````
 
 **Type:**
 
@@ -2343,7 +2333,7 @@ Nested explicit column blocks are possible by adding at least one more `|` to th
 
 **Usage:**
 
-~~~
+```
 |||
 This content is part of the **first** column.
 
@@ -2390,7 +2380,7 @@ Second column of the nested column block
 |||
 
 ||||
-~~~
+```
 
 **Type:**
 
@@ -2417,7 +2407,7 @@ To create nested implicit column blocks, add at least one more `|` to the left s
 
 **Usage:**
 
-~~~
+```
 |||<number of columns>|{<implicit column block attributes>}
 content that is evenly distributed over the given columns
 |||#|
@@ -2458,7 +2448,7 @@ This content is inside a nested column block.
 |||#|
 
 ||||#|
-~~~
+```
 
 **Type:**
 
@@ -2478,7 +2468,7 @@ is treated as a normal [text block](#text-block). Optional flags may be set befo
 
 **Usage:**
 
-~~~
+```
 [[[<field name>
 
 Any Unimarkup content.
@@ -2490,7 +2480,7 @@ Any Unimarkup content.
 Any Unimarkup content.
 
 ]]]
-~~~
+```
 
 **Type:**
 
@@ -2506,11 +2496,11 @@ Output blocks must be surrounded by blank lines and do not allow nesting.
 
 **Usage:**
 
-~~~
+```
 <<<
 <script src="someScript.js"></script>
 >>>
-~~~
+```
 
 **Type:**
 
@@ -2552,9 +2542,9 @@ A form block must be surrounded by blank lines.
 
 **Usage:**
 
-~~~
+```
 ///{ "send-to" : "<some url>"}
-**Unimarkup** content may be used like always!
+**Unimarkup** content may be used like usual!
 
 +-+-+
 | {@formLabel{First name:}} | {@formText{Sam}}{ "id" : "fname" } |
@@ -2571,14 +2561,13 @@ Radio buttons may flow freely: {@formRadio{%text{Option1}%group{grp1}}}.
 Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
 
 {@formSet{%name{Feedback:}%content{
-  ===  
-  {@formLabel{Write something below}}
-  ===
+   
+  {@formLabel{Write something below}} 
   {@formTextarea{Enter some text...}}
 
-  ===  
+  
   Provide contact information
-  ===
+  
   {@formLabel{Email:}} {@formEmail{sam.simpleman@mail.com}}\
   {@formLabel{Tel:}} {@formTel{}}
 }}}
@@ -2589,7 +2578,7 @@ Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
 <input type="range" id="happiness" name="happiness" min="0" max="100">
 >>>
 ///
-~~~
+```
 
 **Type:**
 
@@ -2611,7 +2600,7 @@ A blank line must be set before the caption, if it is set before the block, or a
 
 **Usage:**
 
-~~~
+```
 !!![figure insert](image.png)
 +++{ <optional caption attributes> }
 Caption of a figure
@@ -2623,44 +2612,44 @@ Caption of a figure
 +++
 Caption of a table
 +++
-~~~
+```
 
 # Preamble
 
-It is possible to define a preamble block at the start of a Unimarkup file by surrounding the block with `===`
+It is possible to define a preamble block at the start of a Unimarkup file by surrounding the block with `;;;`
 followed by a blank line. Only one preamble is allowed and must start at the first line.
 
 Possible options and alternative configurations ways are defined in the [configuration reference](Configuration_Reference.md).
 
 **Usage:**
 
-~~~
-===
+```
+;;;
 <preamble>
-===
-~~~
+;;;
+```
 
 **Using JSON:**
 
-~~~
-===
+```
+;;;
 {
     "output-file": "output.html",
     "output-formats": ["Html"],
     "html_embed_svg": true
 }
-===
-~~~
+;;;
+```
 
 **Using YAML:**
 
-~~~
-===
+```
+;;;
 output-file: "output.html"
 output-formats: ["Html"]
 html_embed_svg: true
-===
-~~~
+;;;
+```
 
 # Escaping special characters
 
@@ -2674,7 +2663,7 @@ For example, there is no special meaning for `\n` or `\t`.
 
 **Examples:**
 
-~~~
+```
 \\ gets rendered to \
 \$ gets rendered to $
 \n gets rendered to n
@@ -2682,7 +2671,7 @@ For example, there is no special meaning for `\n` or `\t`.
 \  escapes one space
 
 `\`` gets rendered to <verbatim start>`<verbatim end>
-~~~
+```
 
 # Attributes
 
@@ -2699,15 +2688,17 @@ An attribute block is opened with `{` and closed with `}`.
 The allowed positions of attribute blocks is defined in the attribute section of each element definition.
 The attribute format, attribute groups and hierarchy are described in the [attributes section](#attributes). 
 
+**Note:** Any `{` must be closed with `}`, if `{` opens an attribute block. Otherwise, rendering must fail.
+
 **Usage:**
 
-~~~
+```
 ## heading
 {<heading attributes>}
 
 Paragraph text with `**verbatim**`{ "language" : "unimarkup" }
 {<paragraph attributes>}
-~~~
+```
 
 **Type:**
 
@@ -2728,31 +2719,31 @@ if both attribute blocks are taken.
 
 - Using different flags for attribute blocks
 
-  ~~~
+  ```
   ## heading
   {?pdf? "color" : "rgb(0,255,0)" }{?html? "color" : "rgb(255,0,0)" }
-  ~~~
+  ```
 
 - Using a base attribute block followed by a flagged attribute block
 
-  ~~~
+  ```
   # heading with text color blue and red background for the html output
   { "color" : "rgb(0,255,0)" }{?html? "background" : { "color" : "rgb(255,0,0)" }}
-  ~~~
+  ```
 
 - Attribute overlapping
 
-  ~~~
+  ```
   # heading with in general blue text color except for html output, where it is red
   { "color" : "rgb(0,255,0)" }{?html? "color" : "rgb(255,0,0)" }
-  ~~~
+  ```
 
   **Note:** The following will always generate red text color!
 
-  ~~~
+  ```
   # heading with red text color (html attribute is overwritten)
   {?html? "color" : "rgb(0,255,0)" }{ "color" : "rgb(255,0,0)" }
-  ~~~
+  ```
 
 ## General attribute units
 
@@ -3097,12 +3088,12 @@ The logical formula is entered between the two `?`.
 
 **Usage:**
 
-~~~
+```
 [?flag1? Text that gets rendered, if flag1 is set]
 {?flag1? Attributes that are applied, if flag1 is set}
 
 [?flag1 | (!flag2 & flag3)? Inline text block with logical formula]
-~~~
+```
 
 # Macros
 
@@ -3117,21 +3108,21 @@ A macro may be defined using the following syntax:
 
 - Macro returning inline elements
 
-  ~~~
-  ;; Description for this macro
+  ```
+  ;;; Description for this macro
   {@ <return type> macroname (%<parameter type>param1 %<parameter type>param2) => macro body}
-  ~~~
+  ```
 
   **Note:** The first space after `=>` is mandatory and not considered as part of the body.
 
 - Macro returning block elements
 
-  ~~~
-  ;; Description for this macro
+  ```
+  ;;; Description for this macro
   {@ <return type> macroname (%<parameter type>param1 %<parameter type>param2) =>
   macro body
   }
-  ~~~
+  ```
 
 A macro definition is not allowed inside a nested block and may only be surrounded by blank lines or other macro definitions.
 
@@ -3143,17 +3134,17 @@ A macro definition is not allowed inside a nested block and may only be surround
 
 - Defining macros:
 
-  ~~~
+  ```
   {@<paragraph> macroname(%<paragraph> param1) =>
   Some text: {%param1} (as one paragraph).
   }
-  ~~~
+  ```
 
 - Using macros:
 
-  ~~~
+  ```
   {@macroname(%param1{using a parameter})}
-  ~~~
+  ```
 
 ## Namespaces and macro names
 

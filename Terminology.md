@@ -11,7 +11,7 @@ Digit characters are all Unicode code points from `U+0030` (zero) to `U+0039` (n
 Latin characters are all Unicode code points from `U+0041` (capital `A`) to `U+005A` (capital `Z`) and from `U+0061` (lower `a`) to `U+007A` (lower `z`)
 which are all characters from the [Latin alphabet](https://en.wikipedia.org/wiki/Latin_alphabet).
 
-~~~ebnf
+```ebnf
 character = ? any Unicode glyph ? ;
 
 white_space_character = ? any white-space character ? ;
@@ -23,7 +23,7 @@ any_character = white_space_character | none_white_space_character ;
 digit = ? 0-9 ? ;
 
 latin_character = ? a-zA-Z ? ;
-~~~
+```
 
 # Space
 
@@ -31,13 +31,13 @@ A space in Unimarkup is one or more [Unicode spaces](https://util.unicode.org/Un
 
 **Note:** Multiple spaces or tabs are treated as one Unicode space.
 
-~~~ebnf
+```ebnf
 tab = ? Unicode code point U+0009 ? ;
 
 tab_or_space = tab | ? Unicode code point U+0020 ? ; 
 
 space = tab_or_space , { tab_or_space } ;
-~~~
+```
 
 # Line break
 
@@ -46,17 +46,17 @@ The sequence depends on the used OS.
 
 **Note:** An explicit new line using a backslash `\` at the end of a line is not considered as line break.
 
-~~~ebnf
+```ebnf
 line_break = ? any character sequence forcing a new line (OS dependent) ? ;
-~~~
+```
 
 # Line
 
 A line is a sequence of characters except [line break](#line-break) characters.
 
-~~~ebnf
+```ebnf
 line = { any_character } - line_break ;
-~~~
+```
 
 # Blank line
 
@@ -65,12 +65,12 @@ An empty line is either a line that only consists of white-space characters, or 
 
 **Note:** Multiple blank lines are treated as one blank line.
 
-~~~ebnf
+```ebnf
 empty_line = [ line_break ] , { white_space_character } , [ line_break ] 
              | ? start of file ? | ? end of file ? ;
 
 blank_line = empty_line , { empty_line } ;
-~~~
+```
 
 # Element
 
