@@ -1602,15 +1602,9 @@ This means, that the last line has at least the form `+-+` with additional `+` a
   An optional row attribute of the last nested row may be set between `|` and `-`. The attribute block for the whole nested table may be set between `-` and `+`.
   The inner table is always scaled to fill the column width of the outer table. If the top left entry has a nested table, the rendered width of the top left entry of the nested table is used.
 
-- **Lists inside tables**
-
-  List entry headings of bullet, numbered or task lists may be used inside tables and may be nested and combined using multi-columns.
-
 - **Table attributes**
 
   Attributes may be set for the whole table, by setting the attribute block at the end of the closing table row.
-  Row attributes may be set after the last `|`. Column attributes may be set at the end of the column definition before a `+` inside a row definition line.
-  If another column attribute is set for the same column, all columns above have the original column attribute and all further columns get the new one.
 
 - **Horizontal entry alignment**
 
@@ -1668,10 +1662,10 @@ By default, all table [captions](#caption) are added to the list `{%tableCaption
 | the combined | columns from the line above |
 +-----+
 
-+-{<column1 attributes>}+-{<column2 attributes>}+{<row1 attributes>}
++-+-+
 | column1 row1 | column2 row1 |
-+-{<overwrite column1 attributes for later columns>}+-+
-| column1 row2 | column2 row2 {<column2 row2 attributes>}|
++-+-+
+| column1 row2 | column2 row2 |
 +---+{<table attributes>}
 
 **Excluding specifiers:**
@@ -1686,25 +1680,15 @@ By default, all table [captions](#caption) are added to the list `{%tableCaption
 | normal row               | line 4 |
 +-----------------(-------)+--------+
 
-**List inside table:**
-
-+---------------+-------+
-| - first       | entry |
-+               +-------+
-|   - first-sub | entry |
-+               +-------+
-| - second      | entry |
-+---------------+-------+
-
 **Multiline table:**
 
-+---------------------+--------{ "v-alignment" : "center" }+
-| paragraph with\     |        |
-| explicit new lines\ | center |
-| inside a table      |        |
-+---------------------+--------{ "v-alignment" : "top" }+
-| single row          | row    |
-+---------------------+--------+
++---------------------+
+| paragraph with\     |
+| explicit new lines\ |
+| inside a table      |
++---------------------+
+| single row          |
++---------------------+
 
 **Nested table:**
 
