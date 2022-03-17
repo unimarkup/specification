@@ -55,12 +55,6 @@ The following options are available for all configuration variants.
                       Styling, fonts and scripts will be inserted at `{{ head }}` and the rendered Unimarkup content is placed inside `{{ body }}`.
                       Optionally, `{{ toc }}` can be set to get the table of contents (**Note:** This will not remove a rendered table of contents inside the rendered Unimarkup content if present).
 
-- `html-mathmode` ...--`(svg|embed|cdn)`-- Set the mathmode of MathJax to be used for rendered HTML documents.
-
-### Boolean options
-
-- `html-embed-svg` ... Set if svgs should be embedded into html instead of inserted as regular images.
-
 # Configuration per CLI
 
 Unimarkup configurations set as command line arguments take the highest precedence over all configuration options.
