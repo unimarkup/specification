@@ -65,7 +65,7 @@ If the inline formatting is not closed by the same character sequence with a non
 
   Having a **`bold verbatim text`**.
 
-  Combining ^^_overlined superscript^_^ text.
+  Combining ^‾overlined superscript‾^ text.
   ```
 
   **Special cases:**
@@ -266,13 +266,15 @@ __underlined text__
 
 #### **Overline**
 
-A text is overlined by surrounding it with `^_`.
+A text is overlined by surrounding it with `‾` (U+203E).
 
 **Usage:**
 
 ```
-^_overlined text^_
+‾overlined text‾
 ```
+
+**Note:** This non-ASCII based character was chosen, since no ASCII based combination was intuitive enough.
 
 **Type:**
 
