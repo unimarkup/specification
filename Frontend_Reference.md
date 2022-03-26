@@ -418,7 +418,7 @@ A text may be quoted by surrounding it with `""`.
 ### Inline math mode
 
 Inline math mode may be used by surrounding formulas with `$`.
-More information about math mode may be found in the [math mode definition section](#math-mode)
+More information about math mode may be found in the [math mode definition section](#math-mode).
 
 **Usage:**
 
@@ -848,7 +848,7 @@ Referenced literatures, used up to the current position in the document, are sto
 
 **Note:** If a literature has more than one definition, the behavior depends on the used CSL processor tool.
 
-**Note:** Literature ID restrictions depend on the used CSL processor tool, but must not include `&` and `]`.
+**Note:** Literature ID restrictions depend on the used CSL processor tool, but must not include `&`, `.` and `]`.
 
 **Usage:**
 
@@ -863,6 +863,33 @@ This text has more than one literature reference [&&id-1&&id-2].
 :-- `Single`
 :
 : Element type for literature references.
+
+#### Distinct Reference
+
+A distinct reference may be used to explicitly state the property of a literature reference that is to be inserted.
+For this, the literature ID must be surrounded by `&&`. The property may optionally be set following a `.` after the ID.
+If no property is set, `authors` is chosen as fallback.
+
+**Note:** The same ID constraints apply as defined for [literature referencing](#literature-referencing).
+
+**Usage:**
+
+```
+&&Gruber2004&& invented &&Gruber2004.title&& in &&Gruber2004.year&&.
+
+The above is converted into:
+
+John Gruber invented Markdown in 2004.
+```
+
+**Note:** The ID Gruber2004 must be set accordingly in the given references for the above example.
+
+**Type:**
+
+: `distinct-reference` :
+:-- `Single`
+:
+: Element type for distinct referencing.
 
 ### Abbreviation
 
