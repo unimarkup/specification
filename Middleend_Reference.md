@@ -83,8 +83,8 @@ The table consists of the following columns:
 
 - `name` ...--not null text-- The name of the variable
 - `um_type` ...--not null text-- The Unimarkup type of the variable
-- `value` ...--text-- The value of the variable
-- `fallback-value` ...--text-- The value of the variable that is used if `variable` is empty, which may happen in multi-language context
+- `value` ...--text-- The initial value of the variable
+- `fallback-value` ...--text-- The initial value of the variable that is used if `variable` is empty, which may happen in multi-language context
 - `description` ...--text-- An optional description of the variable
 - `fallback-description` ...--text-- The description of the variable that is used, if `description´ is empty, which may happen in multi-language context
 
