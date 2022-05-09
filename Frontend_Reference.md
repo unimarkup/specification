@@ -1569,14 +1569,22 @@ It is also possible to set a **definition class** directly after `...` by surrou
 
 ### Table
 
-Unimarkup uses grid tables with extended flexibility. A table is started by a row definition line with `+` followed by a combination of table entry specifiers
-being `-`, `_`, `=` or spaces and `+`, where a `+` marks a column separation and `-`, `_`, `=` or spaces mark the column width.
+Tables are inspired by [Asciidoctor tables](https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/).
+A table is started on a newline with three or more `=`, with the possibility to add an explicit table definition,
+that is enclosed in parentheses. The closing sequence must be exactly like the opening one.
+The table definition provides short variants for commonly used attributes and allows applying individual attributes per column.
+Every content row must either start with `|`, or exactly one of `#`, `+` or `_` followed by `|`.
+A row must be closed with `|`, followed by optional row attributes.
+At least one whitespace must be between `|` and the content of a table entry.
+Every new line is treated as a new table row, except tables starting with `+|`, denoting a multi row.
+An optional table division may be added with three or more `-`, followed by a table division definition that must be enclosed in parentheses.
+Heading rows start with `#|` and footer rows with `_|`.
 
-**Note:** The first row definition line may not have `_` for all columns or spaces for any column.
+**Note:** Header rows are only allowed before the first normal or footer row.
 
-Table content is placed between `|` with at least one space difference to a `|`. Each table content row must start and end with one `|`.
-A table must be ended by a row definition line that only uses `+` or `-` and the table must be surrounded by blank lines.
-This means, that the last line has at least the form `+-+` with additional `+` and `-` added between.
+**Note:** Footer rows are only allowed at the end of table.
+
+By default, all table [captions](#caption) are added to the list `{%tableCaptions}`.
 
 - **Table entry**
 
@@ -1586,148 +1594,147 @@ This means, that the last line has at least the form `+-+` with additional `+` a
 
   A table entry only allows inline elements and list entry headings of bullet, numbered and task lists.
 
+- **Explicit table definition**
+
+  The table definition allows to set the column width distribution, alignment and attributes.
+  It must be enclosed in parentheses and immediately follow the last `=` of the table start.
+  Positive numbers may be used to set the distribution ratio per column. The sum of all columns
+  must remain constant for all rows a table. Columns are separated by `,`.
+  Column attributes may be used instead of positive numbers.
+
+  - **Alignment options**
+
+    For easier horizontal alignment, `:` may be used in table definitions using numbers.
+    
+    There are 3 alignment options:
+
+    - `:<number>` ... Left alignment
+    - `<number>:` ... Right alignment
+    - `:<number>:` ... Center alignment
+
+    **Usage:**
+
+    ```
+    ===(2:, :2, 3, :2:)
+    | right aligned | left aligned | default alignment | center aligned |
+    ===
+    ```
+
+  - **Column header/footer**
+
+    A column may be turned into a header column by surrounding the number with `#`, or into a footer with `_`.
+
+    **Note:** This setting applies to the complete column of the table and cannot be changed in a table division definition.
+
+    **Usage:**
+
+    ```
+    ===(#2#, 4, _2_)
+    | header column | normal column | footer column |
+    | header column | normal column | footer column |
+    ===
+    ```
+
+- **Table division definition**
+
+  A table division definition is similar to an explicit table definition, but may be set between any two rows that are not merged.
+  Three or more `-` followed by positive numbers or column attributes enclosed in parentheses may be used to adapt all further rows.
+  Alignment options may be set as defined for the explicit table definition. In addition, it is possible to mark certain columns
+  to be merged with the column of the previous row, by using `+`. All columns that should not be merged must be marked with `-`,
+  if they remain unchanged, or a positive number or column attribute must be given.
+
+  **Note:** The merged column(s) must remain aligned to the previous column(s) they are merged with.
+
+  **Usage:**
+
+  ```
+  ===
+  | column 1 | column 2 | column 3 |
+  ---(-,+,-)
+  | column 1 | merged column 2 | column 3 |
+  ===
+  ```
+
 - **Column width calculation**
 
-  Extended flexibility means that columns do not need to align. This helps for easier styling, since some characters are used as keywords, so the table might have more text in Unimarkup,
-  than what is displayed after rendering. A side effect of this is, that `|` must be escaped when used inside a table, except in verbatim and math context, to get the possibility of multi-column rows.
+  If no explicit table definition is set, every column is evenly distributed according to the maximum width of the table.
+  Otherwise, the ratios between the positive numbers from the definition are used, by summing up all numbers.
+  All further table division definitions must keep the same total sum, but may rearrange the numbers.
 
-  The rendered width of one `-`, `=` or `_` is automatically defined by taking the rendered width of the top left table element and scaling other elements according to the specifier ratio of the other column definitions.
-  The width of a column specifier may be overwritten by the `"column-specifier-width"` attribute of the table if needed.
-  Optionally, specifiers may be excluded from this calculation, by encapsulating them inside `()`, but at least one specifier must be set per column.
+- **Shorthand table definitions**
 
-  **Note:** The number of entry specifiers between the two outer `+`, that are not explicitly excluded, must be the same for all row definition lines to get the same width for all rows.
-
-- **Multi-column multi-row**
-
-  Multi-column rows are defined by replacing `+` with `-`, `=` or `_`. The number of `+` defines the number of `|` that are expected per row.
-
-  One space instead of `-` marks that no line will be created between two rows, creating a multi-row. The number of `-` and spaces between the two rows must match per column.
-  This means that only adjacent columns of rows may be combined. If all columns are combined to multi-rows, the next line may directly be started with `|`.
-
-  **Note:** Column attributes may not be set on multi-row columns, since they take their style from the column above.
-
-- **Table header and footer rows**
-
-  Header rows are marked by setting `=` instead of `-` in the row description line above the content for all columns.
-  Footer rows are marked by setting `_` instead of `-` in the row description line above the content for all columns.
-  Spaces above may also mark header or footer rows, if the previous row is already marked as header or footer.
-
-  **Note:** The table is not rendered, if not all characters per column in a row definition line have the same character.
-
-- **Table header column**
-
-  It is also possible to set header columns by setting `=` or spaces instead of `-` for the column in each row definition line above.
-  Spaces are only allowed, if the column was set as a header column before, making it a multi-row header column.
-
-  **Note:** The table is not rendered, if a header column has `-` or `_` in one of its columns in a row definition line.
-
-- **Nested table**
-
-  It is possible to have nested tables, by starting a row definition line inside a table entry.
-  The nested table content is then set in the next row definition line of the outer table.
-  This requires a multi-column outer table, but the content between the column definitions is not considered for the outer column width.
-  Since this shifts the row content of the inner to be one half row lower compared to the outer, the last nested content row must mark the end of the nested table,
-  by setting `+-|` at the start and `|-+` at the end of the column entry in the outer row definition line. Setting more `-` between `|` and `+` is possible.
-  An optional row attribute of the last nested row may be set between `|` and `-`. The attribute block for the whole nested table may be set between `-` and `+`.
-  The inner table is always scaled to fill the column width of the outer table. If the top left entry has a nested table, the rendered width of the top left entry of the nested table is used.
-
-- **Table attributes**
-
-  Attributes may be set for the whole table, by setting the attribute block at the end of the closing table row.
-
-- **Horizontal entry alignment**
-
-  For easier horizontal alignment options, `:` may be used at start and end of a column definition, having no effect on the width scaling of columns.
-  
-  There are 3 alignment options:
-
-  - `+:--+` ... Left alignment
-  - `+--:+` ... Right alignment
-  - `+:--:+` ... Center alignment
-
-By default, all table [captions](#caption) are added to the list `{%tableCaptions}`.
+  As convenience feature, it is possible to combine several columns either in an explicit table definition or table division definition,
+  by setting a positive number followed by `x` before the actual column value, which is either a positive number or column attribute.
+  The number given before the `x` is the number of columns that are spanned by the given setting.
+  If only a single column setting is given, it applies to all columns without the need to apply a multiplication factor.
 
 **Usage:**
 
 ```
-+--+-+--+
-| Top left column of table | 1/2 length | same length as top left |
-+-------+
+===(2:, :2, 3, :2:)
+| right aligned | left aligned | spanning | center aligned |
+---(-, -, +, -)
+| settings kept | settings kept | two rows | settings kept |
+---
+| settings kept | settings kept | new row | settings kept |
+===
 
-+=+=+
-| Header column 1 | Header column 2 |
-+-+-+
-| Normal column 1 | Normal column 2 |
-+---+
+===
+#| header row |
+#| 2nd header row |
+| normal row |
+_| footer row |
+===
 
-+=+-+
-| Header column | Normal column |
-+=+-+
-| Header column | Normal column |
-+---+
+===
+#| header row |
++| merged header row |
+| normal row |
+_| footer row |
++| merged footer row |
+===
 
-+-+-+
-| Multi row | row 1 |
-+ +-+
-| paragraph | row 2 |
-+---+
+===(#2#, 4, _2_)
+| header column | normal column | footer column |
+| header column | normal column | footer column |
+===
 
-+-+-+
-| multi row | also multi row |
-| for column1 | for column2 |
-+---+
+===(2, 4)
+| small column | wide column  |
+---(4, 2)
+| wide column  | small column |
+===
 
-+:-+:-:+-:+
-| left alignment with `+:--+` | center alignment with `+:--:+` | right alignment with `+--:+` | 
-+_+_+_+
-| footer1 | footer2 | footer3 |
-+---------+
+===
+| merged | merged |
++| rows  | rows   |
+===
 
-+-+-+-+
-| number of `|` | must match | to create |
-+---+-+
-| multi column | that gets |
-+-+---+
-| the combined | columns from the line above |
-+-----+
+===
+| row 1 | row 1 |
+| row 2 | row 2 |
+===
 
-+-+-+
-| column1 row1 | column2 row1 |
-+-+-+
-| column1 row2 | column2 row2 |
-+---+{<table attributes>}
+===({<column 1 attributes>}, {<column 2 attributes>}, {<column 3 attributes>}){<table attributes>}
+| row 1 | row 1 | row 1 |{<row 1 attributes>}
+| row 2 | row 2 | row 2 |{<row 2 attributes>}
+===
 
-**Excluding specifiers:**
+===(2x1, 4)
+| small column | small column | wide column  |
+---(1, 4, 1)
+| small column | wide column  | small column |
+===
 
-+-----------------(-------)+--------+
-| Some **markup**          | line 1 |
-+                 (       )+--------+
-| \|\|inside\|\|           | line 2 |
-+                 (       )+--------+
-| a table                  | line 3 |
-+-----------------(-------)+--------+
-| normal row               | line 4 |
-+-----------------(-------)+--------+
+===(2x{<attributes for column 1 and 2>}, {<column 3 attributes>})
+| row 1 | row 1 | row 1 |
+| row 2 | row 2 | row 2 |
+===
 
-**Multiline table:**
-
-+---------------------+
-| paragraph with\     |
-| explicit new lines\ |
-| inside a table      |
-+---------------------+
-| single row          |
-+---------------------+
-
-**Nested table:**
-
-+---------------------------+------+
-| +--------+--------------+ | r1c2 |
-+ | r1c1.1 | +----------+ | +------+
-| +--------+ | r1c1.2.1 | + | r2c2 |
-+ | r2c1.1 | +----------+ | +------+
-| +--------+-| r2c1.2.1 |-+ | r3c2 |
-+-| r3c1.1 |    r3c1.2    |-+------+
+===({<attributes for all columns>})
+| row 1 | row 1 | row 1 |
+| row 2 | row 2 | row 2 |
+===
 ```
 
 **Type:**
