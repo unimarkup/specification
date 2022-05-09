@@ -2566,17 +2566,16 @@ A form block must be surrounded by blank lines.
 ///{ "send-to" : "<some url>"}
 **Unimarkup** content may be used like usual!
 
-+-+-+
+===
 | {@formLabel{First name:}} | {@formText{Sam}}{ "id" : "fname" } |
-+-+-+
 | {@formLabel{Last name:}} | {@formText{Simpleman}}{ "id" : "lname" } |
-+---+
+===
 
 Radio buttons may flow freely: {@formRadio{%text{Option1}%group{grp1}}}.
 
-+-+-+
+===
 | {@formSubmit{Press to submit}} | {@formReset{Press to reset}} |
-+-+-+
+===
 
 Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
 
@@ -2626,9 +2625,9 @@ A blank line must be set before the caption, if it is set before the block, or a
 Caption of a figure
 +++
 
-+-+-+
+===
 | some table | with columns |
-+---+
+===
 +++
 Caption of a table
 +++
