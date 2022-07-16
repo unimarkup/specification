@@ -1,7 +1,7 @@
 # Inline Elements
 
 Inline elements may be part of the content of other elements. They must not contain blank lines themselves.
-An optional attribute block may be given at the end of an inline element and may span multiple lines.
+An optional attribute block may be given at the end of an inline element, and may span multiple lines, if attributes are defined for it.
 
 **Example:**
 
@@ -82,7 +82,10 @@ If the inline formatting is not closed by the same character sequence with a non
     3. `<italic start>(only italic **bold fails)<italic end>`
     4. `<italic start>(only italic **bold fails)<italic end> plain text`
 
-  - Order of `bold` and `italic`
+  - Order of formattings sharing the same character
+
+    `bold` and `italic` share `*` and `subscript` and `underline` share `_`.
+    This section handles the different combinations for those inline formats.
 
     If `bold` and `italic` are directly stacked, the order depends on the closing sequence.
     Otherwise, `**` is always taken as `bold` and not as opening and/or closing `italic` sequence.
@@ -129,49 +132,23 @@ If the inline formatting is not closed by the same character sequence with a non
       *only italic **bold and italic***
       ```
 
-  - Four contiguous `*` or `_`
+  - Exceeding defined sequence length of inline formats 
 
-    **Note:** With contiguous, it is meant that no character of the four is taken as close sequence up until now.
+    If a character sequence exceeds the length usable for inline formats, the sequence is treated as plain text.
+    For example, having four or more contiguous `*` or `_` exceeds the maximum length that leads to a valid inline formatting.
+    In case of characters like `|` and `~`, the maximum length would be two, and so on.
 
-    The following definition is using `*` for `bold` and `italic`,
-    but the same manner applies for `_` and `subscript` and `underline`.
-
-    The leftmost `*` is taken as plain text and the remaining three are taken as combined open.
-    If open is not allowed due to open constraints, those three `*` are also taken as plain.
+    **Note:** Contiguous means the same character without any whitespace between.
 
     ```
-    ****bold and italic***
+    ****plain**bold**
     ```
 
     The above renders to
 
     ```
-    *<combined start>bold and italic<combined end>
+    ****plain<bold start>bold<bold end>
     ```
-
-  - Four none-contiguous `*` or `_`
-
-    Here, the rendered result depends on previous open sequences.
-    The following definition is using `*` for `bold` and `italic`,
-    but the same manner applies for `_` and `subscript` and `underline`.
-
-    If no whitespace is before the leftmost `*`, then the characters are used as closing sequences
-    for bold, italic and combined. The remaining characters are then used as open sequences respectively.
-
-    **Note:** Two consecutive sequences are always treated as `bold`.
-
-    ```
-    ***bold and italic****italic*
-    ```
-
-    The above renders to
-
-    ```
-    *<combined start>bold and italic<combined end><italic start>italic<italic end>
-    ```
-
-    **Note:** The above could be written as `***bold and italic**italic*`.
-
 
 - No inline formatting
 
@@ -325,7 +302,7 @@ _subscripted text_
 
 A text may be defined as verbatim by surrounding it with `` ` ``.
 If you want to use a `` ` `` inside, you can either escape `` ` `` using `\`,
-or using the macro `{@um.plain()}`.
+or using the macro `{@um.plain}`.
 
 **Note:** Use `\\` to render a single backslash.
 
@@ -424,8 +401,9 @@ $\frac{1}{n}$
 
 Text inside one paragraph may be grouped by surrounding it with `[]`. Only inline elements may be used inside a text group.
 Attributes may be set after the closing `]` of the text group.
+If no attribute block is set after the text group, the content inside the text group is taken as plain text.
 
-**Note:** Any `[` must be closed with `]`. Otherwise, rendering must fail.
+Any `[` must be closed with `]`. Otherwise, the remaining inline content is taken as plain.
 
 **Note:** To use `[` without `]`, it must be escaped like `\[`.
 
@@ -433,6 +411,10 @@ Attributes may be set after the closing `]` of the text group.
 
 ```
 A paragraph with [grouped text]{ "size" : "20pt" }. Also grouping within one w[or]{ "color" : "rgb(255,0,0)" }d is possible.
+
+[Text *group*] without attribute block => no formatting applied inside the text group.
+
+**bold**, but [text group *content* taken as plain, because it is not closed.
 ```
 
 **Type:**
@@ -444,7 +426,7 @@ A paragraph with [grouped text]{ "size" : "20pt" }. Also grouping within one w[o
 
 **Attributes:**
 
-- [Text attributes](#text-attributes)
+- [Text attributes](Attributes.md/#text-attributes)
 
 ## Hyperlink
 
