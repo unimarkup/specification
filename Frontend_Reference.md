@@ -3125,44 +3125,87 @@ A macro is uniquely identified by a namespace and the macro name. Every macro is
 
 A macro may be defined using the following syntax:
 
-- Macro returning inline elements
-
-  ```
-  ;;; Description for this macro
-  {@ <return type> macroname (%<parameter type>param1 %<parameter type>param2) => macro body}
-  ```
-
-  **Note:** The first space after `=>` is mandatory and not considered as part of the body.
-
-- Macro returning block elements
-
-  ```
-  ;;; Description for this macro
-  {@ <return type> macroname (%<parameter type>param1 %<parameter type>param2) =>
+```
+;;; Description for this macro
+;;; optional multiple description lines
+{@macroname<optional generics>(param1:parameter type, param2 : parameter type) return type =>
   macro body
-  }
-  ```
-
-A macro definition is not allowed inside a nested block and may only be surrounded by blank lines or other macro definitions.
+  first line in body defines number of leading spaces that are not part of the body content.
+}
+```
 
 **Note:** `<>` are mandatory and no placeholders.
 
-**Note:** If no parameter is set, empty parentheses must be used like `{@<inline> macroname()}`.
+Parameters may be accessed in the body like Unimarkup variables.
+If no parameter is set, empty parentheses must be used like `{@macroname()}`.
+
+A macro definition is not allowed inside a nested block and may only be surrounded by blank lines or other macro definitions.
+
+### Parameter and return types
+
+A macro parameter type may consist of one or more types allowed in Unimarkup, or using one of the defined generics defined for the macro.
+Multiple types must be enclosed in parentheses and separated by `|`.
+It is not allowed to use a generic for parameters with multiple types.
+
+The return type is restricted to a single type or generic. If the return type is generic, the generic must
+be used as one of the parameter types.
 
 **Usage:**
+
+```
+{@myMacro(param1:text, param2:(paragraph|table)) paragraph =>
+  body
+}
+
+{@myGenericMacro<T>(param1:T) T =>
+  {%param1}
+}
+```
+
+### Generics
+
+Generics may be defined after the macroname. Multiple generics must be separated by `,`.
+To restrict the types a generic may have, enclose allowed types in parentheses after the generic.
+Allowed types must be separated by `|`.
+
+The name of a generic must not conflict with any allowed Unimarkup type, and only consist of alphanumeric characters.
+
+**Usage:**
+
+```
+{@myRestrictedMacro<T(paragraph|table)>(param1:T) T =>
+  {%param1}
+}
+```
+
+### Macro usage
+
+Parameters defined may be set in any order when using the macro.
+The parameter name must be given and the value to be assigned to the parameter enclosed in curly braces.
+Multiple parameters are separated by `,`.
+
+`parameter name{content assigned to the parameter}`
+
+**Note:** If a type violation is found, rendering should fail with an error indicating the type violation.
 
 - Defining macros:
 
   ```
-  {@<paragraph> macroname(%<paragraph> param1) =>
-  Some text: {%param1} (as one paragraph).
+  {@myMacro(a: paragraph) paragraph =>
+    Some text: {%a} (as one paragraph).
+  }
+
+  {@myMultiMacro(a: paragraph, b: paragraph) paragraph =>
+    Some text: {%a} and {%b} (as one paragraph).
   }
   ```
 
 - Using macros:
 
   ```
-  {@macroname(%param1{using a parameter})}
+  {@myMacro(a{using a parameter})}
+
+  {@myMultiMacro(b{b parameter}, a{using a parameter})}
   ```
 
 ## Namespaces and macro names
