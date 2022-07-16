@@ -432,7 +432,8 @@ A paragraph with [grouped text]{ "size" : "20pt" }. Also grouping within one w[o
 
 A hyperlink is set with `[<displayed text>](<link> <optional title>)`, where the displayed text may only have inline elements.
 Hyperlinks may be set to external sources by setting a URI as link, or IDs. For IDs, the given link must start with a `#` followed by the ID.
-It is possible to set an optional link title after the link. If no title is set, the URL is shown. If no character is set inside `()`, the displayed text is taken as link.
+It is possible to set an optional link title after the link. At least one whitespace must be between link and title.
+If no title is set, the URL is shown. If no character is set inside `()`, the displayed text is taken as link.
 Attributes may be set after the closing `)` of the URI.
 
 Elements of other documents can be linked, by setting `<link to other document>#<element id>` as link.
