@@ -430,25 +430,25 @@ A paragraph with [grouped text]{ "size" : "20pt" }. Also grouping within one w[o
 
 ## Hyperlink
 
-A hyperlink is set with `[<displayed text>](<link>)`, where the displayed text may only have inline elements.
-Hyperlinks may be set to external sources by setting a URL as link, or IDs. For IDs, the given link must start with a `#` followed by the ID.
-It is possible to set a link title using the `"title"` attribute. If it is not set, the URL is shown. If no character is set inside `()`, the displayed text is taken as link.
-Attributes may be set after the closing `)` of the URL.
+A hyperlink is set with `[<displayed text>](<link> <optional title>)`, where the displayed text may only have inline elements.
+Hyperlinks may be set to external sources by setting a URI as link, or IDs. For IDs, the given link must start with a `#` followed by the ID.
+It is possible to set an optional link title after the link. If no title is set, the URL is shown. If no character is set inside `()`, the displayed text is taken as link.
+Attributes may be set after the closing `)` of the URI.
 
 Elements of other documents can be linked, by setting `<link to other document>#<element id>` as link.
 
-**Note:** As with text groups, any `(` must be closed with `)`. Otherwise, rendering must fail.
+**Note:** Any `(` must be closed with `)`. Otherwise, rendering must fail.
 
 **Note:** Hyperlinks with IDs as sources should only be used, if an explicit text is wanted. Otherwise, [ID referencing](#id-referencing) should be used.
 
 **Usage:**
 
 ```
-[Text represented as hyperlink](/some/url)
+[Text represented as hyperlink](/some/uri)
 
 [Explicit hyperlink text for some element](#element-id)
 
-[Hyperlink with an explicit title](some-url){ "title" : "Explicit hyperlink title" }
+[Hyperlink with an explicit title](some-url Explicit hyperlink title)
 
 [https://github.com/]()
 
@@ -464,12 +464,7 @@ Elements of other documents can be linked, by setting `<link to other document>#
 
 **Attributes:**
 
-- [Text attributes](#text-attributes)
-
-: `title` :
-:-- `text`
-:
-: Optional link title that is displayed instead of the URL.
+- [Text attributes](Attributes.md/#text-attributes)
 
 ## Inline image
 
