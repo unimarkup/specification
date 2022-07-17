@@ -25,7 +25,7 @@ verbatim block
 
 A verbatim block is opened by three or more `` ` `` at the start of a new line and closed with the same number of `` ` `` at a following new line.
 The block must be surrounded by blank lines. Content inside a verbatim block is treated as is. No rendering is done and all white-space characters are preserved.
-The only exception is a variable of type `text`. The content of a variable of this type is inserted as is inside the verbatim block.
+The only exceptions are backslash escapes and variables of type `text`. The content of a variable of this type is inserted as is inside the verbatim block.
 To prevent this, the variable must be escaped with a backslash at any position of the variable.
 
 If a verbatim block must be displayed inside a verbatim block,
@@ -70,19 +70,19 @@ int add(int a,  int b) {
 
 **Attributes:**
 
-- [Block attributes](#block-attributes)
-- [Text attributes](#text-attributes)
+- [Block attributes](Attributes.md/#block-attributes)
+- [Text attributes](Attributes.md/#text-attributes)
 
 ## Render blocks
 
 A render block is opened by three or more `'` at the start of a new line and closed with the same number of `'` at a following new line.
-A renderer must be set at the start of a render block, by setting the name of an renderer after the last `'` with optional spaces between.
+A renderer must be set at the start of a render block, by setting the name of a renderer after the last `'` with optional spaces between.
 Attributes may be set after the renderer name. The block must be surrounded by blank lines.
 Content inside a render block is rendered depending on the set renderer. See [additional renderer](#additional-renderer) for more information on available renderer.
-The only exception is a variable of type `text`. The content of a variable of this type is inserted as is inside the render block.
+The only exceptions are backslash escapes and variables of type `text`. The content of a variable of this type is inserted as is inside the render block.
 To prevent this, the variable must be escaped with a backslash at any position of the variable.
 
-**Note:** Render blocks may not be nested.
+**Note:** Render block nesting is not allowed.
 
 **Usage:**
 
@@ -92,7 +92,7 @@ graph TB
     A & B--> C & D
 '''
 
-'''opl{<render block attributes>}
+'''{<render block attributes>}
 Unimarkup is informatical and systemic.
 Pdf is informatical and systemic.
 Html is informatical and systemic.
@@ -111,7 +111,7 @@ Converting yields Html and Pdf.
 
 **Attributes:**
 
-- [Block attributes](#block-attributes)
+- [Block attributes](Attributes.md/#block-attributes)
 
 ## Math blocks
 
@@ -121,7 +121,7 @@ The block must be surrounded by blank lines. Content may be passed inside a math
 The content of a variable of this type is inserted as is inside the math block.
 To use the variable without inserting any content, it must be escaped with a backslash at any position.
 
-By default, all math block [captions](#caption) are added to the list `{%mathCaptions}`.
+By default, all math block [captions](README.md/#caption) are added to the list `{%mathCaptions}`.
 
 **Usage:**
 
@@ -150,8 +150,8 @@ $$$
 
 **Attributes:**
 
-- [Block attributes](#block-attributes)
-- [Text attributes](#text-attributes)
+- [Block attributes](Attributes.md/#block-attributes)
+- [Text attributes](Attributes.md/#text-attributes)
 
 ## Text block
 
@@ -209,8 +209,8 @@ Verbatim block inside a text block
 
 **Attributes:**
 
-- [Block attributes](#block-attributes)
-- [Element attributes](#element-attributes)
+- [Block attributes](Attributes.md/#block-attributes)
+- [Element attributes](Attributes.md/#element-attributes)
 
 ## Column blocks
 
@@ -219,7 +219,7 @@ There are two ways to create column blocks in Unimarkup.
 ### Explicit column block
 
 Columns with Unimarkup content may be created explicitly by setting 3 or more `|` at the start of a new line with a blank line before the block start and after the block end.
-A new column is created using the [page break](#page-break) syntax. Therefore, it is not possible to create a new page inside an explicit column block.
+A new column is created using the [page break](AtomicBlocks.md/#page-break) syntax. Use the macro `{@pageBreak}` to create a new page inside an explicit column block.
 
 The column orientation may be set using the attribute `"orientation"` with options
 
@@ -289,8 +289,8 @@ Second column of the nested column block
 ### Implicit column block
 
 An implicit column block automatically splits its content by a given number of columns. The block is started with `|||<number of columns>|` and ended with `|||#|`.
-A blank line must be before the start and end of a block. In contrast to [explicit column blocks](#explicit-column-blocks), all columns have the same width which may not be
-changed with attributes and the [page break](#page-break) syntax creates a new page.
+A blank line must be before the start and end of a block. In contrast to [explicit column blocks](#explicit-column-blocks), all columns have the same width,
+and the [page break](AtomicBlocks.md/#page-break) syntax creates a new page.
 
 The content distribution may be defined with the attribute `"distribution"` and options
 
@@ -359,7 +359,12 @@ This content is inside a nested column block.
 This element adds a field name at the start of a text block that is enclosed inside `<>`.
 This field name may be used for certain output formats or extensions.
 If a field name is not known by an output format, or no extension is available to handle the field name, the field block
-is treated as a normal [text block](#text-block). Optional flags may be set before the field name. 
+is treated as a normal [text block](#text-block) without the field name.
+
+If text blocks are used inside field blocks, or field blocks allow nesting, the outer block must have
+at least one more `[` and `]` than the nested one.
+
+**Note:** Available attributes may vary between different field blocks.
 
 **Note:** `<>` is not a placeholder in the usage examples.
 
@@ -372,7 +377,7 @@ Any Unimarkup content.
 
 ]]]
 
-[[[?someFlag?<someField>
+[[[<someField>{<optional attributes>}
 
 Any Unimarkup content.
 
@@ -408,72 +413,73 @@ Output blocks must be surrounded by blank lines and do not allow nesting.
 
 ## Form block
 
-If form blocks are allowed, predefined form macros may be used next to other Unimarkup content inside a form block to get user input that may be submitted to a URL that is set using the `send-to` attribute.
-A form block must be surrounded by blank lines.
+A form block is a variant of a field block that should be supported by all output formats.
+Inside a form block, predefined form macros may be used next to other Unimarkup elements to get user input
+that may be submitted to a URI that is set using the `send-to` attribute.
 
 **Note:** It is not possible to nest form blocks.
 
 **The following form macros are supported:**
 
-- `{@formText{}}`
-- `{@formRadio{}}`
-- `{@formSubmit{}}`
-- `{@formCheckbox{}}`
-- `{@formDate{}}`
-- `{@formDatetime{}}`
-- `{@formEmail{}}`
-- `{@formImage{}}`
-- `{@formMonth{}}`
-- `{@formNumber{}}`
-- `{@formPassword{}}`
-- `{@formReset{}}`
-- `{@formSearch{}}`
-- `{@formTel{}}`
-- `{@formTime{}}`
-- `{@formUrl{}}`
-- `{@formWeek{}}`
-- `{@formLabel{}}`
-- `{@formSelect{}}`
-- `{@formTextarea{}}`
-- `{@formSet{}}`
+- `{@form.Text}`
+- `{@form.Radio}`
+- `{@form.Submit}`
+- `{@form.Checkbox}`
+- `{@form.Date}`
+- `{@form.Datetime}`
+- `{@form.Email}`
+- `{@form.Image}`
+- `{@form.Month}`
+- `{@form.Number}`
+- `{@form.Password}`
+- `{@form.Reset}`
+- `{@form.Search}`
+- `{@form.Tel}`
+- `{@form.Time}`
+- `{@form.Url}`
+- `{@form.Week}`
+- `{@form.Label}`
+- `{@form.Select}`
+- `{@form.Textarea}`
+- `{@form.Set}`
 
 **Usage:**
 
 ```
-///{ "send-to" : "<some url>"}
+[[[<form>{ "send-to" : "<some url>"}
 **Unimarkup** content may be used like usual!
 
 ===
-| {@formLabel{First name:}} | {@formText{Sam}}{ "id" : "fname" } |
-| {@formLabel{Last name:}} | {@formText{Simpleman}}{ "id" : "lname" } |
+| {@form.Label(First name:)} | {@form.Text(text{Sam}, attributes{ "id" : "fname" })} |
+| {@form.Label(Last name:)} | {@form.Text(text{Simpleman}, attributes{ "id" : "lname" })} |
 ===
 
-Radio buttons may flow freely: {@formRadio{%text{Option1}%group{grp1}}}.
+Radio buttons may flow freely: {@form.Radio(text{Option1}, group{grp1})}.
 
 ===
-| {@formSubmit{Press to submit}} | {@formReset{Press to reset}} |
+| {@form.Submit(Press to submit)} | {@form.Reset(Press to reset)} |
 ===
 
-Both radio buttons belong together: {@formRadio{%text{Option2}%group{grp1}}}.
+Both radio buttons belong together: {@form.Radio(text{Option2},group{grp1})}.
 
-{@formSet{%name{Feedback:}%content{
+{@form.Set(name{Feedback:}, content{
    
-  {@formLabel{Write something below}} 
-  {@formTextarea{Enter some text...}}
+  {@form.Label(Write something below)} 
+  {@form.Textarea(Enter some text...)}
 
   
   Provide contact information
   
-  {@formLabel{Email:}} {@formEmail{sam.simpleman@mail.com}}\
-  {@formLabel{Tel:}} {@formTel{}}
-}}}
+  {@form.Label(Email:)} {@form.Email(sam.simpleman@mail.com)}\
+  {@form.Label(Tel:)} {@form.Tel()}
+})}
 
-{@formLabel{How do you like Unimarkup so far?}}
+{@form.Label(How do you like Unimarkup so far?)}
 
 <<<
 <input type="range" id="happiness" name="happiness" min="0" max="100">
 >>>
-///
+]]]
 ```
 
 **Type:**
