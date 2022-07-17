@@ -18,7 +18,7 @@ An optional attribute block may be given at the end of an inline element, and ma
 
 ## Inline formatting
 
-Inline formatting consists of special character sequences that format an enclosed text in a certain way. For multi-block formatting see [text blocks](#text-blocks).
+Inline formatting consists of special character sequences that format an enclosed text in a certain way. For multi-block formatting see [text blocks](EnclosedBlocks.md/#text-blocks).
 
 A none-white-space character must immediately follow an opening character sequence for inline formatting.
 If the inline formatting is not closed by the same character sequence with a none-white-space character before the closing character sequence, no formatting is applied.
@@ -139,6 +139,8 @@ If the inline formatting is not closed by the same character sequence with a non
     In case of characters like `|` and `~`, the maximum length would be two, and so on.
 
     **Note:** Contiguous means the same character without any whitespace between.
+
+    **Note:** This rule prevents empty formatting elements, because `****` is treated as plain.
 
     ```
     ****plain**bold**
@@ -306,16 +308,16 @@ or using the macro `{@um.plain}`.
 
 **Note:** Use `\\` to render a single backslash.
 
-**Note:** This formatting must be the most inner formatting for stacked formatting, since every content inside is considered as plain text.
+**Note:** This formatting must be the most inner formatting for stacked formatting, since every format inside is considered as plain text.
 
 **Usage:**
 
 ```
 `verbatim text`
 
-`{@plain(`)}` or `\``
+`{@um.plain(`)}` or `\``
 
-`char{@plain(`)}` or `char\``
+`char{@um.plain(`)}` or `char\``
 ```
 
 **Type:**
@@ -378,7 +380,7 @@ A text may be quoted by surrounding it with `""`.
 ## Inline math mode
 
 Inline math mode may be used by surrounding formulas with `$`.
-More information about math mode may be found in the [math mode definition section](#math-mode).
+More information about math mode may be found in the [math mode definition section](EnclosedBlocks.md/#math-blocks).
 
 **Usage:**
 
@@ -469,9 +471,10 @@ Elements of other documents can be linked, by setting `<link to other document>#
 
 ## Inline image
 
-Images may be inserted inside a paragraph using `[!!<alternate text>](<image url>)`.
+Images may be inserted inside a paragraph using `[!!<alternate text>](<image uri> <optional title>)`.
 The alternate text is shown if the image may not be found, or may be used by screen readers.
-It is only possible to use plain text as alternate text.
+It is only possible to use plain text as alternate text. The image URI and optional link title must be separated
+by at least one whitespace.
 Optional attributes are set after the closing `)` of the URL.
 
 **Note:** Same restrictions regarding closing as with hyperlinks apply.
@@ -479,9 +482,9 @@ Optional attributes are set after the closing `)` of the URL.
 **Usage:**
 
 ```
-Some paragraph text with [!!some image](<image url>).
+Some paragraph text with [!!some image](<image uri> link title).
 
-[!!<alternate text for this image>](<image url>){<inline image attributes>}
+[!!<alternate text for this image>](<image uri>){<inline image attributes>}
 ```
 
 **Type:**
@@ -502,11 +505,6 @@ Some paragraph text with [!!some image](<image url>).
 :-- `unit_size`
 :
 : Height of the displayed image.
-
-: `title` :
-:-- `text`
-:
-: Optional link title that is displayed instead of the URL.
 
 ## Inline file insert
 
@@ -631,7 +629,7 @@ Some special character sequences are reserved for direct emoji conversion. Those
 - `:)` ... 🙂 (U+1F642) has aliases: `slightly_smiling_face`
 - `;)` ... 😉 (U+1F609) has aliases: `wink` 
 - `:D` ... 😃 (U+1F603) has aliases: `smiley`
-- `^^` ... 😄 (U+1F604) has aliases: `smile` **Note:** Must not be treated as superscript open/close.
+- `^^` ... 😄 (U+1F604) has aliases: `smile`
 - `=)` ... 😊 (U+1F60A) has aliases: `blush`
 - `:(` ... 🙁 (U+1F641) has aliases: `slightly_frowning_face`
 - `;(` ... 😢 (U+1F622) has aliases: `cry`
@@ -728,7 +726,7 @@ The `{%um.notes}` list contains all notes that have been referenced up until the
 
 A note may be referenced inside a paragraph with `[^^<note-id>]`.
 
-**Note:** The macro [`{@<definition> um.addNote{%id%content}}`](#predefined-macros) must be used to define the note content. 
+**Note:** The macro [`{@um.addNote}`](Macros.md/#predefined-macros) must be used to define the note content. 
 
 **Usage:**
 
@@ -745,7 +743,7 @@ Referencing a note [^^note-id] and [^^myNote].
 
 ### ID referencing
 
-Every heading and block element of an Unimarkup file may be referenced by its ID using `[##<element-id>]`.
+Every block element of an Unimarkup file may be referenced by its ID using `[##<element-id>]`.
 To reference an element that is part of the Unimarkup document, but not in the same Unimarkup file,
 the namespace of the Unimarkup file of the element must be set like `[##<namespace>##<element-id>]`.
 
@@ -772,28 +770,22 @@ The referenced text looks like: Some image
 
 **Attributes:**
 
-- [Text attributes](#text-attributes)
+- [Text attributes](Attributes.md/#text-attributes)
 
 : `ref-option` :
 :-- `enum`
 :
 : This attribute defines the text the reference is substituted with in the rendered document.
 :
-: Below are the options every heading and block element has:
-:
-: - `heading-lvl<level number>-nr` ... Shows the number of the heading the referenced element is in (The heading level is from 1 to 6)
+: - `heading-lvl<level number>-nr` ... Shows the full number sequence of the heading the referenced element is in (The heading level is from 1 to 6)
 : - `heading-lvl<level number>-text` ... Shows the text of the heading the referenced element is in (The heading level is from 1 to 6)
 : - `label` ... Shows the label text of the referenced element
-:
-: The following options are only allowed if the referenced element is a block element:
-:
-: - `caption` ... Shows the caption paragraph of the referenced block element, if a caption was set
-: - `title` ... Shows the title paragraph of the referenced block element, if a title was set
+: - `caption` ... Shows the caption paragraph of the referenced block element if a caption was set
 
 ### Literature referencing
 
 Literature references are used to reference books, articles, journals or websites and use the [Citation Style Language](https://citationstyles.org/) to render literature depending on the provided CSL file.
-To reference a literature, the literature meta-data and CSL file must be provided using one of the [configuration options](Configuration_Reference.md).
+To reference a literature, the literature meta-data and CSL file must be provided using one of the [configuration options](../Configuration_Reference.md).
 The literature meta-data must be in a format that is supported by the used CSL processing tool. See the documentation of the used Unimarkup implementation for more information.
 
 A literature is referenced using the ID (called *label* in BibTeX) of a literature entry in the form `[&&<literature-id>]`.
@@ -895,7 +887,7 @@ Any Unicode code point may be inserted in Unimarkup with `&<Unicode code point>;
 Unimarkup provides line comments using `;;` to start a comment.
 Optionally, a comment can be ended using `;;`, to end a comment before the end of a line. 
 
-**Note:** It is not possible to have a backslash at the end of a line to get an explicit new line, if a comment is not closed.
+**Note:** It is not possible to have a backslash at the end of a line to get an explicit new line if a comment is not closed.
 
 **Usage:**
 
@@ -920,7 +912,7 @@ Comment ;;this is a comment;; inside one line.
 This element adds a field name at the start of an inline text group that is enclosed inside `<>`.
 This field name may be used for certain output formats or extensions.
 If a field name is not known by an output format, or no extension is available to handle the field name, the inline field
-is treated as a normal [inline text group](#inline-text-group). Optional flags must be set before the field name. 
+is treated as a normal [inline text group](#inline-text-group) without the field name.
 
 **Note:** `<>` is not a placeholder in the usage examples.
 
@@ -929,7 +921,7 @@ is treated as a normal [inline text group](#inline-text-group). Optional flags m
 ```
 [<field name> Some inline content]
 
-[?someFlag?<someField> Some inline content]
+[<someField> Some inline content]
 ```
 
 **Type:**
