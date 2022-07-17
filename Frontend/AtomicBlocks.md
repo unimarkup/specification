@@ -2,7 +2,6 @@
 
 Atomic block elements must be surrounded by blank lines and must not contain blank lines themselves.
 An optional attribute block may be given starting at a new line at the end of an atomic block and may span multiple lines.
-None line breaking spaces are allowed before the attribute opening.
 
 **Example:**
 
@@ -26,21 +25,21 @@ A `#` at start of a line followed by a space and a paragraph marks a heading. Ad
 
 A heading must be surrounded by blank lines, or followed by another heading that is exactly one level lower.
 Text after a heading without a blank line is treated as heading text, allowing multiline heading text.
-Heading attributes are set at the end of the heading text. 
+Heading attributes are set at the next line after the heading text end. 
 
-A heading prefix may be set in the [preamble](#preamble) and may be changed at any point in the document, using the macro `{@setHeadingPrefix{%prefix}}`.
-Another overloaded version of this macro may be used to set heading numbering in a more convenient way using `{@setHeadingPrefix{%numbering%startNr%lvlSeparator}}`.
-The overloaded macro should only be used before a new level 1 heading is set. The macro `{@renderHeadingNumber}` uses the parameters set in the overloaded macro and may be used to render the heading numbers.
+A heading prefix may be set using the macro `{@setHeadingPrefix}`.
+The macro `{@setNumberedHeadingPrefix}` may be used as an alternative to set heading numbering in a more convenient way.
 
-**Note:** IDs are created implicitly for headings, by setting Latin characters to lower case, spaces between characters get replaced by `-` and other characters are removed.
-If the resulting ID is already present, it must be set explicitly.
+**Note:** IDs are created implicitly for headings, by setting Latin characters to lower case, spaces between characters get replaced by `-` and other characters
+besides numbers are removed.
+If the resulting ID is already present, it must be set explicitly to prevent collision.
 
 **Note:** A heading text may have any element that is allowed inside a paragraph.
 
 **Usage:**
 
 ```
-{@um.setHeadingPrefix(%numbering[roman-upper]%startNr[I])}
+{@um.setNumberedHeadingPrefix(numbering{roman-upper}, startNr{1})}
 
 # First main heading
 
@@ -56,9 +55,9 @@ More unimarkup text for the nested heading...
 Even more Unimarkup text...
 Reference to the first heading [##first-main-heading]
 
-{@um.setHeadingPrefix(%numbering[numeric])}
+{@um.setNumberedHeadingPrefix(numbering{numeric})}
 
-# Heading with numeric 3 prefixed
+# Heading with numeric 1 prefixed
 
 # Heading with attributes
 {<heading attributes>}
@@ -138,18 +137,20 @@ additional attributes
 
 **Attributes:**
 
-- [Block attributes](#block-attributes)
-- [Text attributes](#text-attributes)
+- [Block attributes](Attributes.md/#block-attributes)
+- [Text attributes](Attributes.md/#text-attributes)
 
 : `show-prefix` :
 :-- `bool`
 :
 : Defines if the heading prefix is shown (`true`), or hidden (`false`).
+: Default is `true`.
 
 : `in-toc` :
 :-- `bool`
 :
 : Defines if the heading is added (`true`) to the table of contents, or not (`false`).
+: Default is `true`.
 
 ## Paragraph
 
@@ -177,17 +178,16 @@ with an explicit new line.
 :
 : **Note:** Every element of group type `inline` is also of type `paragraph`.
 
-**Note:** A paragraph is part of the `block` type, but without prefix for simplicity.
-
 **Attributes:**
 
-- [Block attributes](#block-attributes)
-- [Text attributes](#text-attributes)
+- [Block attributes](Attributes.md/#block-attributes)
+- [Text attributes](Attributes.md/#text-attributes)
 
 ## List elements
 
 The following elements are all list elements.
-The macro `{@breakLists}` at start of a line between two lists separates those two lists at the highest depth.
+The macro `{@breakLists}` may be used to separate two lists of equal depth.
+The depth depends on the placement of the macro. The macro must be on a new line and surrounded by blank lines.
 
 **Type:**
 
@@ -249,7 +249,9 @@ The macro `{@breakLists}` at start of a line between two lists separates those t
 ### Bullet list
 
 Any of the characters `-+*` at start of a line followed by a space and any none space character, is treated as the start of a bullet list.
-A list entry heading consists of one paragraph. Indented text at subsequent lines is part of a list entry, but a blank line must be between entry heading and additional entry content.
+`-+*` may be switched freely in a bullet list without creating a new bullet list.
+A list entry heading only allows inline elements. Indented text at subsequent lines is part of a list entry,
+but a blank line must be between entry heading and additional entry content.
 As an exception, a nested list may directly follow an entry heading. A blank line must follow an additional entry content.
 Attributes for list entries are set starting at a new line of the entries heading.
 List entry attributes only apply to the entry heading. If additional content is given, they must be styled in another way. 
@@ -260,7 +262,7 @@ List entry attributes only apply to the entry heading. If additional content is 
 - Bullet list
   - Sub bullet list
 
-- Other bullet list
+- Second main bullet list entry
 
   Paragraph for this bullet list
 
@@ -275,7 +277,7 @@ List entry attributes only apply to the entry heading. If additional content is 
 
     Paragraph for this sub bullet list
 
-+ Bullet list with different symbol
++ Bullet list entry with different symbol
   * Sub bullet list with different symbol
 
 * Bullet list with id
@@ -309,15 +311,16 @@ Paragraph not for a bullet list
 **Attributes:**
 
 - Attributes for the bullet list
-  - [Block attributes](#block-attributes)
-  - [Text attributes](#text-attributes)
+  - [Block attributes](Attributes.md/#block-attributes)
+  - [Text attributes](Attributes.md/#text-attributes)
 
 - Attributes for bullet list entries
-  -  [Text attributes](#text-attributes)
+  - [Text attributes](Attributes.md/#text-attributes)
 
 ### Numbered list
 
-Numbered lists have the same behavior as bullet lists, except that enumeration elements are used to start a list entry. Numbered lists also get automatically incremented per new entry in the list
+Numbered lists have the same behavior as bullet lists, except that enumeration elements are used to start a list entry.
+Numbered lists also get automatically incremented by 1 per new entry in the list
 and allow to have the parent number prefixed to the sub list.
 If the number is manually increased per entry, no new list is created until the numbering is wrong, at which point a new list is created that starts at this number.
 
@@ -331,7 +334,8 @@ If the number is manually increased per entry, no new list is created until the 
 
 Besides a `.`, it is also possible to use `)`, or surround it like `(1)`, but it must be consistent inside a list.
 
-A parent list entry is prefixed, by concatenating the parent enumeration and the nested enumeration. If the prefixed enumeration is used at a certain level, all other entries at this level must also use the prefixed enumeration.
+A nested numbered list entry is prefixed, by concatenating the parent enumeration and the nested enumeration.
+If the prefixed enumeration is used at a certain level, all other entries at this level must also use the prefixed enumeration.
 Otherwise, a new list at this level will be created.
 
 **Usage:**
@@ -391,7 +395,7 @@ Paragraph not for a numbered list
 1) Numbered list with different style
   1)1) Sub list with parent number
 1) Second element of this list
-1. doesn't create a new list, but treats it as the paragraph of the element above
+1. doesn't create a new list, but treats it as multiline entry content of the element above
 
 (a) Numberbered list
   (a)(a) Sub numbered list with parent number
@@ -415,11 +419,11 @@ Paragraph not for a numbered list
 **Attributes:**
 
 - Attributes for the numbered list
-  - [Block attributes](#block-attributes)
-  - [Text attributes](#text-attributes)
+  - [Block attributes](Attributes.md/#block-attributes)
+  - [Text attributes](Attributes.md/#text-attributes)
 
 - Attributes for numbered list entries
-  -  [Text attributes](#text-attributes)
+  - [Text attributes](Attributes.md/#text-attributes)
 
 ### Task list
 
@@ -495,18 +499,21 @@ The following list is parsed from 1. to 5. to get the higher task state:
 **Attributes:**
 
 - Attributes for the task list
-  - [Block attributes](#block-attributes)
-  - [Text attributes](#text-attributes)
+  - [Block attributes](Attributes.md/#block-attributes)
+  - [Text attributes](Attributes.md/#text-attributes)
 
 - Attributes for task list entries
-  -  [Text attributes](#text-attributes)
+  - [Text attributes](Attributes.md/#text-attributes)
 
 ### Definition list
 
-A bullet or numbered list may become a definition list, if `...` is set after a space in a list entry heading. Any none-white-space character must be set between the start of the list entry and `...`.
-Multiple paragraphs may be set as with other list elements. The content on the left of `...` is called **definition term** and the content on the right **definition description**.
-The term and description only allow inline elements. However, all Unimarkup elements are allowed for the entry body.
-It is also possible to set a **definition class** directly after `...` by surrounding it with `--`. The definition class only allows inline elements and at least one space must come after the closing `--`.
+A bullet or numbered list may become a definition list, if `...` is set after a space in a list entry heading.
+Any none-white-space character must be set between the start of the list entry and `...`.
+Multiple paragraphs may be set as with other list elements. The content to the left of `...` is called **definition term**,
+and the content to the right **definition description**.
+Term and description only allow inline elements. However, all Unimarkup elements are allowed for the entry body.
+It is also possible to set a **definition class** directly after `...` by surrounding it with `--`.
+The definition class only allows inline elements, and at least one space must come after the closing `--`.
 
 **Usage:**
 
@@ -524,7 +531,7 @@ It is also possible to set a **definition class** directly after `...` by surrou
 - Definition ...--With a class-- And here is the description
 ```
 
-**Note:** The list remains a bullet or numbered list, if `...` does not appear in the list heading entry.
+**Note:** The list remains a bullet or numbered list if `...` does not appear in the list heading entry.
 
 ```
 - Bullet list
@@ -562,11 +569,11 @@ It is also possible to set a **definition class** directly after `...` by surrou
 **Attributes:**
 
 - Attributes for the definition list
-  - [Block attributes](#block-attributes)
-  - [Text attributes](#text-attributes)
+  - [Block attributes](Attributes.md/#block-attributes)
+  - [Text attributes](Attributes.md/#text-attributes)
 
 - Attributes for definition list entries
-  -  [Text attributes](#text-attributes)
+  - [Text attributes](Attributes.md/#text-attributes)
 
 ## Table
 
@@ -578,18 +585,18 @@ Every content row must either start with `|`, or exactly one of `#`, `+` or `_` 
 A row must be closed with `|`, followed by optional row attributes.
 At least one whitespace must be between `|` and the content of a table entry.
 Every new line is treated as a new table row, except tables starting with `+|`, denoting a multi row.
-An optional table division may be added with three or more `-`, followed by a table division definition that must be enclosed in parentheses.
+An optional table division may be added with three or more `-`, followed by an optional table division definition that must be enclosed in parentheses.
 Heading rows start with `#|` and footer rows with `_|`.
 
 **Note:** Header rows are only allowed before the first normal or footer row.
 
-**Note:** Footer rows are only allowed at the end of table.
+**Note:** Footer rows are only allowed at the end of a table.
 
 By default, all table [captions](#caption) are added to the list `{%tableCaptions}`.
 
 - **Table entry**
 
-  A table entry is identified by the combining the row and column number. Row numbering starts at the top with 1 and increases by one for every new row.
+  A table entry is identified by combining the row and column number. Row numbering starts at the top with 1 and increases by one for every new row.
   Column numbering starts at the left with 1 and increases by one for every new column.
   With this numbering, the entry at row=1 column=1 is the top left entry.
 
@@ -600,12 +607,12 @@ By default, all table [captions](#caption) are added to the list `{%tableCaption
   The table definition allows to set the column width distribution, alignment and attributes.
   It must be enclosed in parentheses and immediately follow the last `=` of the table start.
   Positive numbers may be used to set the distribution ratio per column. The sum of all columns
-  must remain constant for all rows a table. Columns are separated by `,`.
+  must remain constant for all rows of a table. Columns are separated by `,`.
   Column attributes may be used instead of positive numbers.
 
   - **Alignment options**
 
-    For easier horizontal alignment, `:` may be used in table definitions using numbers.
+    For easier horizontal alignment, `:` may be used in table definitions that use numbers.
     
     There are 3 alignment options:
 
@@ -625,7 +632,7 @@ By default, all table [captions](#caption) are added to the list `{%tableCaption
 
     A column may be turned into a header column by surrounding the number with `#`, or into a footer with `_`.
 
-    **Note:** This setting applies to the complete column of the table and cannot be changed in a table division definition.
+    **Note:** This setting including the number applies to the complete column of the table and cannot be changed in a table division definition.
 
     **Usage:**
 
@@ -642,7 +649,7 @@ By default, all table [captions](#caption) are added to the list `{%tableCaption
   Three or more `-` followed by positive numbers or column attributes enclosed in parentheses may be used to adapt all further rows.
   Alignment options may be set as defined for the explicit table definition. In addition, it is possible to mark certain columns
   to be merged with the column of the previous row, by using `+`. All columns that should not be merged must be marked with `-`,
-  if they remain unchanged, or a positive number or column attribute must be given.
+  to remain unchanged, or given a positive number or column attribute.
 
   **Note:** The merged column(s) must remain aligned to the previous column(s) they are merged with.
 
@@ -747,9 +754,10 @@ _| footer row |
 
 ## Figure insert
 
-Images may be inserted as figures using `!!![<alternate text>](<image url>)`.
-A figure insert may not be used inside a paragraph. Use [inline image insert](#inline-image-insert) instead to insert an image inside a paragraph.
+Images may be inserted as figures using `!!![<alternate text>](<image uri> <optional title>)`.
+A figure insert may not be used inside a paragraph. Use [inline image insert](Inlines.md/#inline-image-insert) instead to insert an image inside a paragraph.
 The alternate text is used if the image may not be found or for screen readers.
+An optional link title may be set after the image URI separated by at least one whitespace.
 Attributes may be set after the closing `)`.
 
 By default, all figure [captions](#caption) are added to the list `{%figureCaptions}`.
@@ -757,12 +765,12 @@ By default, all figure [captions](#caption) are added to the list `{%figureCapti
 **Usage:**
 
 ```
-!!![some image](<image url>).
+!!![some image](<image uri> myImageTitle).
 +++
-Image caption that shows something.
+Image caption.
 +++
 
-!!![<alternate text for this image>](<image url>){<image insert attributes>}
+!!![<alternate text for this image>](<image uri>){<figure insert attributes>}
 ```
 
 **Type:**
@@ -774,13 +782,15 @@ Image caption that shows something.
 
 **Attributes:**
 
-- [Block attributes](#block-attributes)
+- [Block attributes](Attributes.md/#block-attributes)
 
 ## Media insert
 
 With media inserts allowed, it is possible to insert video and audio files in addition to images using an extended figure insert syntax that allows to specify multiple sources, in case a media format is not supported, by adding them with `(<alternative source>)` directly after the first source entry.
 
 **Note:** The given sources must all be from the same media type. It is not possible to mix sources for video, media or image types.
+
+**Note:** A link title may only be set on the first URI and is shared for all sources.
 
 **Usage:**
 
@@ -817,13 +827,13 @@ Block file inserts must be surrounded by blank lines.
 : `insert-ids` :
 :-- `list<text>`
 :
-: A list of IDs of Unimarkup elements of the inserted file may be set, to only include content of elements with set IDs,
-: even if the file itself would have more content. 
+: A list of IDs of Unimarkup elements of the inserted file may be set to only include content of elements with set IDs,
+: even if the file itself would have more content.
 
 : `insert-classes` :
 :-- `list<text>`
 :
-: A list of classes of Unimarkup elements of the inserted file may be set, to only include content of elements,
+: A list of classes of Unimarkup elements of the inserted file may be set to only include content of elements
 : that have at least one of those classes set, even if the file itself would have more content.
 
 **Note:** The inserted order of elements depends on the position inside the inserted file.
@@ -851,7 +861,7 @@ See [additional renderer](#additional-renderer) for more information on availabl
 
 **Attributes:**
 
-- [Block attributes](#block-attributes)
+- [Block attributes](Attributes.md/#block-attributes)
 
 : `language` :
 :-- `text` Default = `plain`
@@ -890,7 +900,7 @@ See [additional highlighter](#additional-highlighter) for more information on av
 
 **Attributes:**
 
-- [Block attributes](#block-attributes)
+- [Block attributes](Attributes.md/#block-attributes)
 
 : `language` :
 :-- `text` Default = `plain`
@@ -908,14 +918,17 @@ See [additional highlighter](#additional-highlighter) for more information on av
 
 ## Quotation block
 
-Quotation blocks may be used to quote longer text sections. A block is started by starting a new line with `>` followed by one space. Multiple lines may be added by starting them with `>` followed by one space. A quotation block must be surrounded by blank lines.
+Quotation blocks may be used to quote longer text sections. A block is started by starting a new line with `>` followed by one space.
+Multiple lines may be added by starting them with `>` followed by one space. A quotation block must be surrounded by blank lines.
 It is possible to use all Unimarkup elements inside a block quote, but headings are not considered as headings of the document.
-Attribute blocks are set at the end of a quotation block.
-Like with [text blocks](#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a quotation block. 
+An attribute block may be set at a new line at the end of a quotation block, and may span multiple lines.
+Like with [text blocks](EnclosedBlocks.md/#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a quotation block. 
 
-Quotation blocks may be nested, by setting `>` followed by one space at a new line of a quotation block. Empty quotation lines or blank lines must surround the nested block.
+Quotation blocks may be nested, by setting `>` followed by one space at a new line of a quotation block.
+Empty quotation lines or blank lines must surround the nested block.
 
-An author text may optionally be set at the end of a quotation block by starting a new line with `>--` followed by one space after an empty quotation line. To get multiple author text lines, start each with `>--`. Only paragraphs may be used for author texts.
+An author text may optionally be set at the end of a quotation block by starting a new line with `>--` followed by one space after an empty quotation line.
+To get multiple author text lines, start each with `>--`. Only inline elements may be used for author texts.
 
 **Usage:**
 
@@ -930,8 +943,7 @@ An author text may optionally be set at the end of a quotation block by starting
 > > A backslash at the end of a line creates a new line.
 > >
 > >-- Author
->
->{<Quotation block attributes>}
+{<Quotation block attributes>}
 
 > Some quoted text
 >
@@ -949,15 +961,15 @@ An author text may optionally be set at the end of a quotation block by starting
 
 **Attributes:**
 
-- [Block attributes](#block-attributes)
-- [Element attributes](#element-attributes)
+- [Block attributes](Attributes.md/#block-attributes)
+- [Element attributes](Attributes.md/#element-attributes)
 
 ## Line block
 
 Line blocks preserve all spaces, tabs and new lines. A line block is started with `|` per new line followed by one space.
 A block must be surrounded by blank lines. It is possible to use all Unimarkup elements inside line blocks, except other line blocks.
-Attribute blocks are set at the end of a line block with a blank line above and may span multiple lines.
-Like with [text blocks](#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a line block. 
+An attribute block may be set at a new line at the end of a line block, and may span multiple lines.
+Like with [text blocks](EnclosedBlocks.md/#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a line block. 
 
 **Note:** There is no nesting for line blocks.
 
@@ -978,9 +990,8 @@ Like with [text blocks](#text-block), it is possible to set attributes for all U
 | ```
 |
 | Since spaces are already kept, a verbatim block inside a line block
-| is only necessary to get code highlighting.
-|
-|{<Line block attributes>}
+| is only necessary to get code highlighting and prevent rendering.
+{<Line block attributes>}
 ```
 
 **Type:**
@@ -992,8 +1003,8 @@ Like with [text blocks](#text-block), it is possible to set attributes for all U
 
 **Attributes:**
 
-- [Block attributes](#block-attributes)
-- [Element attributes](#element-attributes)
+- [Block attributes](Attributes.md/#block-attributes)
+- [Element attributes](Attributes.md/#element-attributes)
 
 ## Definition block
 
@@ -1010,8 +1021,9 @@ Lists are allowed for the classifier besides the supported Unimarkup elements in
 The last classifier line may contain an attribute block.
 A blank definition line must follow the classifier.
 
-The definition section allows any Unimarkup element. Attribute blocks are set at the end of a definition section with a blank line above.
-Like with [text blocks](#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a definition section. 
+The definition section allows any Unimarkup element.
+An attribute block may be set at a new line at the end of a definition block, and may span multiple lines.
+Like with [text blocks](EnclosedBlocks.md/#text-block), it is possible to set attributes for all Unimarkup elements in the attribute block of a definition section. 
 
 **Usage:**
 
@@ -1047,8 +1059,7 @@ Like with [text blocks](#text-block), it is possible to set attributes for all U
 : : Paragraph for the sub term definition
 :
 : Other paragraph for the main term definition
-:
-:{<definition block attributes>}
+{<definition block attributes>}
 ```
 
 **Type:**
@@ -1094,7 +1105,7 @@ Another horizontal line after this text.
 At least 3 `:` at start of a line surrounded by blank lines set a page break. How a page break is rendered depends on the output format.
 It is possible to set attributes for Unimarkup elements, but they are only valid until the next page break is set.
 
-**Note:** A page break inside an [explicit column block](#explicit-column-block) creates a new column.
+**Note:** A page break inside an [explicit column block](EnclosedBlocks.md/#explicit-column-block) creates a new column.
 
 **Usage:**
 
