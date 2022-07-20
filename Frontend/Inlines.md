@@ -613,11 +613,37 @@ Some paragraph text with [``First heading note](Unimarkup_Language_ReferenceManu
 
 Explicit substitution may be used to replace a word by inline content.
 For this, the word to be substituted must be enclosed by `::`.
+If whitespaces appear between `::` (more than one word between),
+no substitution is applied. Therefore, substitutions are only possible per word.
 
 [Emoji aliases](https://github.com/github/gemoji/blob/master/db/emoji.json)
 are already predefined for substitution, substituting the alias with the respective Unicode glyph.
 
 Additional words may be defined for substitution using the `um.addSubstitution` macro.
+
+**Usage:**
+
+```
+Standalone substitution: ::wink::
+
+Inside a wo::smiley::rd
+```
+
+Rendered to
+
+```
+Standalone substitution: 😉
+
+Inside a wo😃rd
+```
+
+**Type:**
+
+: `substitution` :
+:-- `Single`
+:
+: Type for explicit substitution.
+
 
 ## Direct substitution
 ### Emoji substitution
@@ -662,7 +688,7 @@ A text with an emoji 😃 in it!
 : `emoji` :
 :-- `Single`
 :
-: Type for direct emojis or emoji shortcuts.
+: Type for direct emojis.
 
 ### Arrow substitution
 
