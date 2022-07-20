@@ -1,29 +1,58 @@
 # Variables
 
-;; mhatzl
+It is possible to use variables in Unimarkup either global per Unimarkup document,
+or inside macros. A variable may be of any supported Unimarkup type.
 
-## Flags
+A variable is uniquely identified by a namespace and the variable name.
+Every variable is inside the namespace of the Unimarkup file in which it is defined.
 
-Flags are given in the [preamble](README.md) and provide the possibility to control the rendered output.
-They may be used at the start of inline text groups, text blocks, or attribute blocks by setting `?` directly after the opening character.
-Flags may contain any character except `?\&()` and spaces. A second `?` closes the flag section. 
+## Variable definition
 
-Since flags represent a boolean condition, it is possible to combine several flags using boolean logic.
-The logical formula is entered between the two `?`.
-
-**Logical operations with flags:**
-
-- **OR** ... `?flag1 | flag2?` means (flag1 OR flag2)
-- **AND** ... `?flag1 & flag2?` means (flag1 AND flag2) 
-- **NOT** ... `? !flag1 ?` means (NOT flag1)
-- **Precedence** ... `?(flag1 & flag2) | flag3?` means (Either flag1 AND flag2, OR flag3)
-
-**Usage:**
+A variable may be defined using the following syntax:
 
 ```
-[?flag1? Text that gets rendered, if flag1 is set]
-{?flag1? Attributes that are applied, if flag1 is set}
+{%<variable name>: <type> {<optional initial value>}}
 
-[?flag1 | (!flag2 & flag3)? Inline text block with logical formula]
+{%myVar: text {Some initial text}}
 ```
 
+A global variable definition is not allowed inside a nested block and may only be surrounded by blank lines or other global variable definitions.
+
+Variable definitions inside macros must be separated by blank lines from other Unimarkup elements, and must only be accessed inside a macro scope after they are defined.
+Variables defined inside macros are called *local variables* and are bound to the scope of the macro. 
+
+## Variable usage
+### Global variable usage
+
+Global variables may be accessed anywhere in a Unimarkup document depending on the variable type.
+
+```
+{%author: text {Manuel Hatzl}}
+
+Some paragraph written by {%author}.
+```
+
+### Local variable usage
+
+Local variables are defined inside a macro and are bound by the scope of the macro.
+It is not possible to access them before they are defined.
+
+```
+{@myMacro(a:positive, b:positive) positive =>
+  {%localVar: positive}
+
+  {#:=({%localVar}, {#+({%a}, {%b})}}
+  
+  {#return({%localVar})}
+}
+```
+
+## Namespace and variable names
+
+The same rules apply as defined for [macros](Macros.md/#namespaces-and-macro-names).
+
+## Predefined variables
+
+The following global variables are predefined, and may be used inside a Unimarkup document.
+
+;;mhatzl

@@ -22,7 +22,7 @@ The following options are available for all configuration variants.
 
 - `theme` ...--`filepath`-- Set a Unimarkup theme file to be used for rendering.
 
-- `flag` ...--`list<string>`-- Set flags that will be set for rendering.
+- `flag` ...--`list<string>`-- Given flags are available as boolean variables in a Unimarkup document that are set to `true`.
 
 - `enable-elements` ...--`list<Unimarkup block elements>`-- Explicitly set Unimarkup block elements that can be used inside the given Unimarkup document. If this option is set, all Unimarkup elements that are not given are disabled.
 
