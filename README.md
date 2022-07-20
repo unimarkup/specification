@@ -2,7 +2,7 @@
 
 This repository contains the specification for the Unimarkup markup language.
 
-The goal of Unimarkup is to combine conventions of other well-known markup languages and combining them to create a markup language that can easily scale from simple README files to scientific papers or full program documentation.
+The goal of Unimarkup is to combine conventions of other well-known markup languages, and create a markup language that can easily scale from simple README files to scientific papers and full program documentation.
 
 The focus of Unimarkup is
 
@@ -14,7 +14,7 @@ The focus of Unimarkup is
 Since Unimarkup is a markup language, it should be converted to other formats like PDF or HTML. For this, Unimarkup text is first converted to an intermediate representation, and then converted to any of the supported [output formats](Unimarkup_Language_ReferenceManual.md).
 
 Unimarkup works with an implicit type system to provide a more granular control for macros.
-See [Unimarkup type system](Unimarkup_Language_ReferenceManual.md).
+See [Unimarkup type system](TypeSystem.md).
 
 # Credit
 
@@ -27,8 +27,8 @@ There are several terms used inside the Unimarkup specification that are defined
 # Structure 
 ## Frontend
 
-The frontend part of Unimarkup defines available Unimarkup elements and how to use them.
-The [frontend reference](Frontend_Reference.md) contains the frontend specification.
+The frontend part of Unimarkup defines available elements and constructs in Unimarkup, and how to use them.
+The [frontend reference directory](Frontend/README.md.md) contains the frontend specification.
 
 ## Middle end
 
@@ -46,11 +46,11 @@ The `OutputFormats` folder contains various references on how the intermediate r
 
 For multi-language support, Unimarkup sets a unique ID for every block element and stores those block elements with their IDs inside a table that can be exported.
 Other languages can then be added as new columns next to the respective entries in the table and replace the text on block element level.
-For more details, read the [multi-language section](/Middleend_Reference.md#multi-language) inside the middle end reference.
+For more details, read the [multi-language section](Middleend_Reference.md#multi-language) inside the middle end reference.
 
 Using the attribute block, it is possible to specify identifiers for block elements explicitly. Otherwise, identifiers are added implicitly by Unimarkup.
 
 ## Localization
 
-In addition to the multi-language concept, [flags](/Frontend_Reference.md#flags), [variables](/Frontend_Reference.md#variables) and [macros](/Frontend_Reference.md#macros)
-can be used to add localization capabilities.
+In addition to the multi-language concept, [variables](Frontend/Variables.md) and [macros](Frontend/Macros.md)
+may be used to add localization capabilities.
