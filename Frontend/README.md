@@ -23,6 +23,22 @@ All elements are grouped in three main element types:
 
   Enclosed blocks have start and end character sequences and allow blank lines as part of their content.
 
+# Language constructs
+
+Besides Unimarkup elements, there are also some programming language constructs available in Unimarkup.
+
+- [Macros](Macros.md)
+
+  Macros are similar to functions in most programming languages, and offer extended flexibility.
+
+- [Variables](Variables.md)
+
+  Variables may be defined either globally in a Unimarkup document, or locally inside a macro.
+
+- [Operators](Operators.md)
+
+  Operators are a special form of macros, offering common programming language functionalities.
+
 # Preamble
 
 It is possible to define a preamble block at the start of a Unimarkup file by surrounding the block with `;;;`
