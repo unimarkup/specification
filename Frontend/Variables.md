@@ -41,7 +41,7 @@ It is not possible to access them before they are defined.
 {@myMacro(a:positive, b:positive) positive =>
   {%localVar: positive}
 
-  {#:=({%localVar}, {#+({%a}, {%b})}}
+  {#:=({%localVar}, {#+({%a}, {%b})})}
   
   {#return({%localVar})}
 }
