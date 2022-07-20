@@ -89,7 +89,7 @@ Unimarkup has an implicit type system for Unimarkup elements. Every element and 
 
 # Type class
 
-A type class identifies where a type of this class is allowed to be used.
+Every Unimarkup type is assigned to one type class.
 Available type classes are listed in the [type system](TypeSystem.md#type-class).
 
 # Content
