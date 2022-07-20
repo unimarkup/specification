@@ -1,35 +1,24 @@
 # Introduction
 
-Unimarkup has an implicit type system for Unimarkup elements. Every element has a unique type to restrict the usage of elements in certain context.
+Unimarkup has an implicit type system for Unimarkup elements, but an explicit type system
+for macros, variables and operators. Every element has a unique type to restrict the usage of elements in certain contexts.
+Besides element types, there are also some general types that may be used for attributes, macros, variables and operators.
+In addition, group types provide the possibility to types in a hierarchical manner.
+This helps with generalisation of macro and variable parameters.
 
 # Type class
 
-A type class identifies where a type of this class is allowed to be used.
+A type is assigned to one of the following classes:
 
-**The following type classes are possible:**
+- `Element` ... Type of a Unimarkup element
+- `General` ... Non-element type that may be used for attributes, macros, variables and operators 
+- `Group` ... Type that groups several types of `Element` or `General` class
 
-- `General` ... This type may be used for elements, attributes, macros and variables
-- `Attribute` ... This type may only be used for attributes and inside the preamble
-- Type classes for elements
-	- `Group` ... Referring to an element group
-	- `Single` ... Referring to a single element
-
-# Generic type
-
-Generic types are marked with `<>` at the end of the type name in the type definition.
-To use a generic type, a type must be set between `<>`.
-
-**Example:**
-
-```
-list<paragraph>
-```
+**Note:** A group must only group types of the same class, or another group type with types of the same class.
 
 # General types
 
-General types may be used for element, attribute, variable and macro types.
-
-**Available general types:**
+The following types are of class `General`:
 
 : `bool` :
 :-- `General`
@@ -46,78 +35,77 @@ General types may be used for element, attribute, variable and macro types.
 :-- `General`
 :
 : This type accepts zero or more characters.
-
-**Note:** Elements, macros and variables of type `text` output the characters as is without rendering.
-
-**Note:** The `text` type internally is of type `list<character>`.
+:
+: **Note:** The `text` type internally should be of type `list<character>`.
 
 : `word` :
 :-- `General`
 :
 : This type accepts a sequence of none-white-space characters.
-
-**Note:** The `word` type internally is of type `list<character>`.
+:
+: **Note:** The `word` type internally should be of type `list<character>`.
 
 : `number` :
-:-- `General`
+:-- `Group`
 :
 : This type accepts [JSON numbers](https://restfulapi.net/json-data-types/).
-
-: `integer` :
-:-- `General`
 :
-: This type accepts integer numbers.
-
-: `natural` :
-:-- `General`
-:
-: This type accepts natural numbers starting at zero.
-
-: `positive` :
-:-- `General`
-:
-: This type accepts natural numbers starting at one.
-
-: `negative` :
-:-- `General`
-:
-: This type accepts negative integer numbers.
+: : `integer` :
+: :-- `General`
+: :
+: : This type accepts integer numbers.
+: 
+: : `natural` :
+: :-- `General`
+: :
+: : This type accepts natural numbers starting at zero.
+: 
+: : `positive` :
+: :-- `General`
+: :
+: : This type accepts natural numbers starting at one.
+: 
+: : `negative` :
+: :-- `General`
+: :
+: : This type accepts negative integer numbers.
 
 : `list<>` :
 :-- `General`
 :
-: This generic type accepts a list of the type given between `<>`.
+: This generic type defines a list of the type given between `<>`.
 
-: `range[<from>:<to>]` :
+: `range[<from> .. <to>]` :
 :-- `General`
 :
-: This type accepts a range of integer values starting from the integer value set instead of `<from>`
-: up to the included integer value set instead of `<to>`. The value of `to` must be at least as high as `from`.
-:
+: This type defines a range of integer values starting from the integer value set for `<from>`
+: up to the included integer value set for `<to>`.
 : Spaces are allowed to separate the integer values.
-
-**Example:**
-
-```
-range[20 : 30]
-```
-
-**Note:** The range type is internally treated as `list<integer>`.
+:
+: **Note:** The value of `to` must be at least as high as `from`.
+:
+: **Note:** The range type internally should be of type `list<integer>`.
+:
+: **Example:**
+: 
+: ```
+: range[20 .. 30]
+: ```
 
 : `enum` :
 :-- `General`
 :
 : This type only accepts certain values.
-: Allowed values must be set in the type description.
-
-**Example:**
-
-```
-: `some_enum` :
-:-- `enum`
-:
-: This type only allows:
-:
-: - `value1` ... some description
-: - `value2` ... some description
-```
+: Allowed values must be defined in the type description.
+: 
+: **Example:**
+: 
+: ```
+: : `some_enum` :
+: :-- `enum`
+: :
+: : This type only allows to set values to:
+: :
+: : - `uni` ... some description
+: : - `markup` ... some description
+: ```
