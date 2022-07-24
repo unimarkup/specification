@@ -73,7 +73,7 @@ There are several terms used inside the Unimarkup specification that are defined
 ## Frontend
 
 The frontend part of Unimarkup defines available elements and constructs in Unimarkup, and how to use them.
-The [frontend reference directory](Frontend/README.md.md) contains the frontend specification.
+The [frontend reference directory](Frontend/README.md) contains the frontend specification.
 
 ## Middle end
 

@@ -2,7 +2,7 @@
 # Unimarkup configuration
 
 A configuration can be set per Unimarkup document, that defines several options, including the output formats that should be rendered.
-The configuration can be set either per [CLI](#configuration-per-cli), per [preamble](Frontend_Reference.md#preamble), or by creating a `config.json` or `config.yaml` file inside a directory that is set with the environmental variable `UNIMARKUP_CONFIG`. 
+The configuration can be set either per [CLI](#configuration-per-cli), per [preamble](Frontend/README.md#preamble), or by creating a `config.json` or `config.yaml` file inside a directory that is set with the environmental variable `UNIMARKUP_CONFIG`. 
 The environmental variable will per default point to a `.unimarkup` directory in the current working directory. 
 
 ## General options
