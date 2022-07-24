@@ -16,6 +16,51 @@ Since Unimarkup is a markup language, it should be converted to other formats li
 Unimarkup works with an implicit type system to provide a more granular control for macros.
 See [Unimarkup type system](TypeSystem.md).
 
+# Example
+
+The following example uses some Unimarkup elements.
+Detailed description about those elements, and others may be found under the [Frontend](Frontend/) section. 
+
+```
+# Heading
+## Sub-Heading
+
+Some pragraph inside the sub-heading section.
+Common **inline** ||markup|| that *all*ows ***inner* word** and `nesting`. 
+
+## Escaping, links, references and text groups
+
+Escape any character using a single backslash.
+Also inside `verbatim \` text`.
+
+[links](uri) should look familiar.
+
+Reference [##unimarkup-elements], [^^notes], or [&&literature].
+
+Use [text groups]{ "color":"red" } to apply additional styling.
+
+# Blocks
+
+|||
+
+First column with a task list:
+
+-[] Main task (still open)
+  -[x] Completed sub-task
+  -[ ] Remaining task
+
+:::
+
+Second column with a table:
+
+===
+| column 1 row 1 | column 2 row 1 |
+| column 2 row 2 | column 2 row 2 |
+===
+
+|||
+```
+
 # Credit
 
 This language was heavily influenced by the Pandoc-Flavor of Markdown, reStructuredText and Latex.
