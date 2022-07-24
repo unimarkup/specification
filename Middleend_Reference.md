@@ -49,10 +49,10 @@ This Unimarkup file is referred to as **root** in all further sections.
   This table stores all literature, that are defined for the Unimarkup file.
   See [literature table](#literature-table) for more details.
 
-- **Emojis**
+- **Substitutions**
 
-  This table stores emojis, additionally added to the Unimarkup file.
-  See [emoji table](#emoji-table) for more details.
+  This table stores substitutions, additionally added to the Unimarkup file.
+  See [substitution table](#substitutions-table) for more details.
 
 ## Content table
 
@@ -170,15 +170,15 @@ The table consists of the following columns:
 
 The primary key for this table is the `id` field.
 
-## Emoji table
+## Substitutions table
 
-The emoji table stores emojis, additionally added to the Unimarkup file.
+The substitution table stores substitutions, additionally added to the Unimarkup file.
 
 The table consists of the following columns:
 
-- `alias` ...--not null text-- The alias that is used to identify and emoji
-- `unicode-glyph` ...--not null text-- The Unicode glyph representing the emoji
-- `fallback-glyph` ...--text-- The Unicode glyph that is used if `unicode-glyph` is empty, which may happen in multi-language context
+- `alias` ...--not null text-- The alias that is used to identify a substitution
+- `substitution` ...--not null text-- The text used to replace the alias in a substitution
+- `fallback-substitution` ...--text-- The text that is used if `substitution` is empty, which may happen in multi-language context
 
 The primary key for this table is the `alias` field.
 
