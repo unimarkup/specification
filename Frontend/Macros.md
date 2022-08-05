@@ -62,6 +62,20 @@ The name of a generic must not conflict with any allowed Unimarkup type, and onl
 }
 ```
 
+### Default parameter values
+
+It is possible to set default values for parameters, making those parameters optional.
+The default value may be set after the parameter type, and must be enclosed in curly braces.
+If no default value is set, the parameter is mandatory when using the macro.
+
+**Usage:**
+
+```
+{@myDefaultMacro(param1:paragraph, param2:paragraph {some default text}) paragraph =>
+  {%param1}: {%param2}
+}
+```
+
 ### Macro usage
 
 Parameters defined may be set in any order when using the macro.
