@@ -41,7 +41,7 @@ Besides Unimarkup elements, there are also some programming language constructs 
 
 # Preamble
 
-It is possible to define a preamble block at the start of a Unimarkup file by surrounding the block with `;;;`
+It is possible to define a preamble block at the start of a Unimarkup file by surrounding the block with `+++`
 followed by a blank line. Only one preamble is allowed per Unimarkup file and must start at the first line.
 
 Possible options and alternative configurations are defined in the [configuration reference](../Configuration_Reference.md).
@@ -49,31 +49,31 @@ Possible options and alternative configurations are defined in the [configuratio
 **Usage:**
 
 ```
-;;;
++++
 <preamble>
-;;;
++++
 ```
 
 **Using JSON:**
 
 ```
-;;;
++++
 {
     "output-file": "output.html",
     "output-formats": ["Html"],
     "html_embed_svg": true
 }
-;;;
++++
 ```
 
 **Using YAML:**
 
 ```
-;;;
++++
 output-file: "output.html"
 output-formats: ["Html"]
 html_embed_svg: true
-;;;
++++
 ```
 
 # Escaping special characters
