@@ -48,12 +48,7 @@ The following options are available for all configuration variants.
 
 - `rebuild` ... Ignores all previously rendered documents stored inside the `dot-unimarkup` path and renders the given Unimarkup file.
 
-## HTML options
-### Taking values
-
-- `html-template` ...--`filepath`-- Set a template HTML file with `{{ head }}` set inside the `head` element and `{{ body }}` set inside the body element.
-                      Styling, fonts and scripts will be inserted at `{{ head }}` and the rendered Unimarkup content is placed inside `{{ body }}`.
-                      Optionally, `{{ toc }}` can be set to get the table of contents (**Note:** This will not remove a rendered table of contents inside the rendered Unimarkup content if present).
+- `keep-comments` ... Keep comments set in a Unimakup file in the output format.
 
 # Configuration per CLI
 
