@@ -159,8 +159,8 @@ Combining ^‾overlined superscript‾^ text.
 
 ## Attribute positioning
 
-Attributes may be set after a closing keyword.
-The allowed attributes may depend on the output format, and only special attributes are defined for formats.
+Attributes may be set directly after a closing keyword.
+The allowed attributes may depend on the output format, and only special attributes are defined explicitly.
 
 **Example:**
 
@@ -330,6 +330,8 @@ These expressions are then placed alongside other inline content.
 ```
 $sum_(i=1)^n i^3=((n(n+1))/2)^2$
 ```
+
+**Type:** `math-formatting`
 
 **Attribute:**
 
