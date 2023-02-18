@@ -2,24 +2,24 @@
 
 This repository contains the specification for the Unimarkup markup language.
 
-The goal of Unimarkup is to combine conventions of other well-known markup languages, and create a markup language that can easily scale from simple README files to scientific papers and full program documentation.
+The goal of Unimarkup is to combine conventions of other well-known markup languages, and create a markup language that can easily scale from simple README files to scientific papers, and full program documentation.
 
 The focus of Unimarkup is
 
 - Usability
 - Consistency
 - Internationalization
-- Flexibility
 
-Since Unimarkup is a markup language, it should be converted to other formats like PDF or HTML. For this, Unimarkup text is first converted to an intermediate representation, and then converted to any of the supported [output formats](Unimarkup_Language_ReferenceManual.md).
+Since Unimarkup is a markup language, the content will mostly be converted to other formats like PDF or HTML as defined in the [output-formats](output-formats/README) folder.
+Besides those more final formats, the [i18n](i18n/README) folder defines intermediate formats to help with content localization.
 
-Unimarkup works with an implicit type system to provide a more granular control for macros.
-See [Unimarkup type system](TypeSystem.md).
+Unimarkup also integrates a more programming language like markup that is defined in the [markup/logic](/markup/logic/README) folder.
+This makes the construction of more complex content easier, and improves content reusability.
 
 # Example
 
 The following example uses some Unimarkup elements.
-Detailed description about those elements, and others may be found under the [Frontend](Frontend/) section. 
+Detailed description about those elements, and others may be found in the [markup](markup/README) section. 
 
 ```
 # Heading
@@ -28,21 +28,20 @@ Detailed description about those elements, and others may be found under the [Fr
 Some pragraph inside the sub-heading section.
 Common **inline** ||markup|| that *all*ows ***inner* word** and `nesting`. 
 
-## Escaping, links, references and text groups
+## Escaping, links, references and text-box
 
 Escape any character using a single backslash.
 Also inside `verbatim \` text`.
 
-[links](uri) should look familiar.
+[links](uri) should look familiar if you know Markdown.
 
 Reference [##unimarkup-elements], [^^notes], or [&&literature].
 
-Use [text groups]{ "color":"red" } to apply additional styling.
+Use a [text-box]{ color : red } to apply additional styling.
 
 # Blocks
 
 |||
-
 First column with a task list:
 
 -[] Main task (still open)
@@ -57,49 +56,47 @@ Second column with a table:
 | column 1 row 1 | column 2 row 1 |
 | column 2 row 2 | column 2 row 2 |
 ===
-
 |||
 ```
 
 # Credit
 
-This language was heavily influenced by the Pandoc-Flavor of Markdown, reStructuredText and Latex.
+This language was inspired by many other markup and programming languages.
 
-# Terminology
+Other great markup languages (given in alphabetical order):
 
-There are several terms used inside the Unimarkup specification that are defined in [Terminology.md](Terminology.md).
+- [AsciiDoc](https://asciidoc.org/)
+- [CommonMark](https://commonmark.org/)
+- [HTML](https://www.w3.org/html/)
+- [LaTeX](https://www.latex-project.org/)
+- [Markdown by John Gruber](https://daringfireball.net/projects/markdown/)
+- [Pandoc-Flavor of Markdown](https://pandoc.org/MANUAL.html)
+- [reStructuredText](https://docutils.sourceforge.io/rst.html)
 
 # Structure 
-## Frontend
 
-The frontend part of Unimarkup defines available elements and constructs in Unimarkup, and how to use them.
-The [frontend reference directory](Frontend/README.md) contains the frontend specification.
+The following structure of the Unimarkup specification is given in alphabetical order.
 
-## Middle end
+- [addons](addons/README) ... contains language addons that are not part of the core specification
+- [configuration](configuration/README) ... contains the configuration options for Unimarkup files that must be supported by Unimarkup implementations
+- [glossary](glossary) ... contains definitions for terms used in the Unimarkup specification
+- [i18n](i18n/README) ... contains internationalization aspects of the Unimarkup specification that must be supported by Unimarkup implementations
+- [markup](markup/README) ... contains the core markup syntax for the Unimarkup language
+- [output-formats](output-formats/README) ... contains the output formats that must be supported by Unimarkup implementations, and defines the conversion from Unimarkup markup to the output format 
 
-The middle end part of Unimarkup defines how a Unimarkup document is stored in an intermediate representation.
-This part also covers multi-language support for Unimarkup documents.
-The [middle end reference](Middleend_Reference.md) contains the middle end specification.
+# Specification notes
+## Placeholder text
 
-## Output format
+Any verbatim text that is between `<>` is used as placeholder value that may be replaced by any other text.
+The `<>` graphemes are also part of the placeholder value.
 
-Different output formats are defined for Unimarkup documents.
-The `OutputFormats` folder contains various references on how the intermediate representation is converted to an output format.
+If an element breaks this convention, it must be stated explicitly.
 
-# Internationalization and localization
-## Multi-language
+## Notes
 
-For multi-language support, Unimarkup sets a unique ID for every block element and stores those block elements with their IDs inside a table that can be exported.
-Other languages can then be added as new columns next to the respective entries in the table and replace the text on block element level.
-For more details, read the [multi-language section](Middleend_Reference.md#multi-language) inside the middle end reference.
+A note is used to highlight information concerning usage restrictions, to prevent wrong usage, or about the rendering behavior of an element.
 
-Using the attribute block, it is possible to specify identifiers for block elements explicitly. Otherwise, identifiers are added implicitly by Unimarkup.
-
-## Localization
-
-In addition to the multi-language concept, [variables](Frontend/Variables.md) and [macros](Frontend/Macros.md)
-may be used to add localization capabilities.
-
+**Note:** Notes are set by starting a new line with `**Note:**` followed by one space and surrounded by blank lines.
 
 # License
 
