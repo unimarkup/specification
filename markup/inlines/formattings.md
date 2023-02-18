@@ -330,3 +330,9 @@ These expressions are then placed alongside other inline content.
 ```
 $sum_(i=1)^n i^3=((n(n+1))/2)^2$
 ```
+
+**Attribute:**
+
+- `markup-syntax` ... Sets the name of the markup syntax that is used inside math formatting.
+
+  **Note:** If the given name is not supported by the implementation, the text including the keywords must be treated as plain text.
