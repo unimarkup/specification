@@ -17,6 +17,8 @@ To define new named substitutions, set `:` after the word to substitute, followe
 
 **Note:** The first substitution in document flow for a word must be used for all further substitutions. Ignoring all other substitution texts.
 
+**Note:** If a substitution text is set for a word that already has a substitution, the implementation must output a warning.
+
 **Usage:**
 
 ```
