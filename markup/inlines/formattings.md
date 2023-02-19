@@ -278,7 +278,7 @@ If you want to use a `` ` `` inside, you may escape `` ` `` using `\`.
 
 **Type:** `verbatim-formatting`
 
-**Attribute:**
+**Attributes:**
 
 - `language` ... Sets the name of the markup/programming language that is displayed in the verbatim body
 
@@ -291,6 +291,8 @@ If you want to use a `` ` `` inside, you may escape `` ` `` using `\`.
   **Note:** The name must not contain any whitespace.
 
   **Note:** Supported highlighters may vary between Unimarkup implementations.
+
+**Note:** Implementations may allow additional attributes.
 
 ## Highlight
 
@@ -338,3 +340,5 @@ $sum_(i=1)^n i^3=((n(n+1))/2)^2$
 - `markup-syntax` ... Sets the name of the markup syntax that is used inside math formatting.
 
   **Note:** If the given name is not supported by the implementation, the text including the keywords must be treated as plain text.
+
+**Note:** Implementations may allow additional attributes.

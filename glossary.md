@@ -86,7 +86,7 @@ A section refers to the content between two headings.
 
 ## Verbatim text
 
-A verbatim text is a sequence of characters that is taken as is without any interpretation of those characters.
+A verbatim text is a sequence of graphemes that is taken as is without any interpretation of those graphemes.
 
 ## List entry
 

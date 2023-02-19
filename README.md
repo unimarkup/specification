@@ -78,6 +78,7 @@ Other great markup languages (given in alphabetical order):
 The following structure of the Unimarkup specification is given in alphabetical order.
 
 - [addons](addons/README) ... contains language addons that are not part of the core specification
+- [associated extensions](associated-extensions) ... defines file extensions that should be associated with Unimarkup content
 - [configuration](configuration/README) ... contains the configuration options for Unimarkup files that must be supported by Unimarkup implementations
 - [glossary](glossary) ... contains definitions for terms used in the Unimarkup specification
 - [i18n](i18n/README) ... contains internationalization aspects of the Unimarkup specification that must be supported by Unimarkup implementations
