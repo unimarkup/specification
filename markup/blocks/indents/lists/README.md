@@ -4,7 +4,7 @@ This section contains all available list elements in Unimarkup.
 List elements are a subset of indented blocks in Unimarkup.
 The general syntax for indented blocks is described in the general [indented block](/markup/blocks/indents/README) section.
 
-**Type:** All list elements are part of the `list-element` type.
+**Type:** All list elements are part of the `um-list` type.
 
 ## List scope
 
@@ -14,8 +14,6 @@ A list entry may contain indented elements including other lists.
 The block content set directly after the keyword is referred to as `list entry heading`.
 
 The list implicitly ends before the first element in document flow that is not indented to the required depth.
-
-**Type:** All list entries are part of the `list-element-entry` type.
 
 ## Nesting different list types
 
