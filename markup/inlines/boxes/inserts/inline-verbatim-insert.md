@@ -30,3 +30,5 @@ Some paragraph text with [``First heading](UnimarkupContent.um){ "insert-id" : "
   **Note:** The supported highlighters depend on the used implementation.
   
   **Note:** If the highlighter is not supported by the implementation, the content must be treated as plain text.
+
+**Note:** Implementations may allow additional attributes.

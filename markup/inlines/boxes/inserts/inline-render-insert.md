@@ -35,3 +35,5 @@ Multiple parameters must be separated by `,`.
   **Note:** The supported renderer depend on the used implementation.
   
   **Note:** If the renderer is not supported by the implementation, the content must be treated as plain text.
+
+**Note:** Implementations may allow additional attributes.
