@@ -2,7 +2,7 @@
 
 The general syntax for the inline render insert is described in the general [inline insert](/markup/inlines/boxes/inserts/README) section.
 
-The keyword for render insert is `''`.
+The keyword for render inserts is `''`.
 
 This insert tries to convert the resource content into Unimarkup inline elements.
 Parameters may be set after the URL, to use them for the content conversion.
@@ -15,7 +15,7 @@ Multiple parameters must be separated by `,`.
 ```
 [''<alternative text for the file content that is inserted>](<url>)
 
-[''First heading](SomeUnimarkupContent.um){ "insert-id" : "first-heading" }
+[''First heading](SomeUnimarkupContent.um){ insert-id : first-heading }
 
 [''Insert with parameters](unimarkup-file.um param1 := 2, param2 := 10)
 ```

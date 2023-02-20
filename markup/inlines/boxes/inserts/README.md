@@ -3,7 +3,9 @@
 Inline inserts may be used to integrate external resources into a Unimarkup file.
 The general form for inline inserts looks like a hyperlink with a **keyword** set immediately after `[`.
 
-**Note:** The description given inside `[]` is used as alternative text, if the external resource could not be inserted or displayed. The text must be treated as plain text.
+**Note:** The description given inside `[]` is used as alternative text, if the external resource could not be inserted or displayed. The text may then be used as fallback content for convertible resources, or plain text for media resources.
+
+**Type:** All inline inserts are part of the `inline-insert` type.
 
 There are two different kinds of inline inserts:
 

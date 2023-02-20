@@ -2,7 +2,7 @@
 
 The general syntax for the inline media insert is described in the general [inline insert](/markup/inlines/boxes/inserts/README) section.
 
-The keyword for media insert is `!!`.
+The keyword for media inserts is `!!`.
 
 **Usage:**
 

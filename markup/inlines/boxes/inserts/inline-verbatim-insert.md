@@ -2,7 +2,7 @@
 
 The general syntax for the inline verbatim insert is described in the general [inline insert](/markup/inlines/boxes/inserts/README) section.
 
-The keyword for verbatim insert is ` `` `.
+The keyword for verbatim inserts is ` `` `.
 
 This insert applies verbatim formatting to the resource content.
 The content itself is treated as plain text, with optional syntax highlighting applied to the content.
@@ -12,7 +12,7 @@ The content itself is treated as plain text, with optional syntax highlighting a
 ```
 [``<alternative description for the file content that is inserted>](<file path>)
 
-Some paragraph text with [``First heading](UnimarkupContent.um){ "insert-id" : "first-heading" }.
+Some paragraph text with [``First heading](UnimarkupContent.um){ insert-id : first-heading }.
 ```
 
 **Type:** `inline-verbatim-insert`
