@@ -37,4 +37,6 @@ graph TB
   
   **Note:** If the renderer is not supported by the implementation, the content must be treated as plain text.
 
+- `sandbox` ... Set to `true` to exclude elements like headings from being added to the document section.
+
 **Note:** Implementations may allow additional attributes.
