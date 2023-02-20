@@ -3,7 +3,7 @@
 Render blocks use `'` as keyword.
 
 Content inside a render block is rendered according to the given language and renderer.
-The backslash escapes may be used inside render blocks as described in [/markup/escaping](/markup/escaping).
+Backslash escapes may be used inside render blocks as described in [/markup/escaping](/markup/escaping).
 
 A language may be set after the start keyword, by setting the name of a language directly after `'`. An implementation may choose the best supported renderer for the given language.
 Alternatively, attributes may be set instead of the language name.
@@ -14,12 +14,12 @@ Alternatively, attributes may be set instead of the language name.
 
 **Usage:**
 
-`````
+```
 '''mermaid
 graph TB
     A & B--> C & D
 '''
-`````
+```
 
 **Type:** `render-block`
 
