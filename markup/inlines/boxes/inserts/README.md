@@ -34,10 +34,12 @@ There are two different kinds of inline inserts:
 
       This inline element tries to interpret the given content and convert it to fitting Unimarkup inline elements.
 
-      **Note:** If conversion to inline elements is not possible, the alternative text must be used instead. In this case the implementation should set a warning.
+      **Note:** If conversion to inline elements is not possible, the alternative text must be used instead. In this case, the implementation should set a warning if the link was not empty.
+
+      **Note:** Using an empty link is a short way to get rendered inline content, since there is no render formatting.
 
    2. [inline verbatim insert](/markup/inlines/boxes/inserts/inline-verbatim-insert)
 
       This inline element applies verbatim formatting to the content.
 
-      **Note:** If the content contains a blank line, the alternative text must be used instead. In this case the implementation should set a warning.
+      **Note:** If the content contains a blank line, the alternative text must be used instead. In this case, the implementation should set a warning if the link was not empty.

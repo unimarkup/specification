@@ -38,6 +38,8 @@ There are two different kinds of block inserts:
 
       This block element tries to interpret the given content and convert it to fitting Unimarkup block elements.
 
+      **Note:** If conversion to block elements is not possible, the alternative text must be used instead. In this case, the implementation should set a warning if the link was not empty.
+
    2. [block verbatim insert](/markup/blocks/inserts/verbatim-block-insert)
 
       This block element applies verbatim formatting to the content.
