@@ -322,7 +322,7 @@ A text may be quoted by surrounding it with `""`.
 
 ## Math
 
-Markup of mathematical expressions may be surrounded by `$`.
+Markup of mathematical expressions may be surrounded by `$$`.
 These expressions are then placed alongside other inline content.
 
 **Note:** The supported markup syntax for mathematical expression may vary between Unimarkup implementations.
@@ -330,7 +330,7 @@ These expressions are then placed alongside other inline content.
 **Example using [AsciiMath](http://asciimath.org/):**
 
 ```
-$sum_(i=1)^n i^3=((n(n+1))/2)^2$
+$$sum_(i=1)^n i^3=((n(n+1))/2)^2$$
 ```
 
 **Type:** `math-formatting`
