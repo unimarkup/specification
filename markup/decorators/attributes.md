@@ -3,7 +3,8 @@
 Attributes may be set on any element that allows them, by wrapping attributes in `{}`.
 The attribute position depends on the element, and must be defined per element.
 
-Attributes must be set using CSS syntax: `<property name>: <value>;`
+Attributes must be set using CSS syntax: `<property name>: <value>;`.
+Nesting attributes must follow the proposed [CSS nesting syntax](https://www.w3.org/TR/css-nesting-1/) using `&` as identifier prefix.
 
 **Note:** The allowed attributes per element depend on the output format.
 
