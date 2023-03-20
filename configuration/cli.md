@@ -4,7 +4,9 @@ The following configuration options must be available per CLI.
 
 ## Taking values
 
-- `um-file` ... `filepath` to the Unimarkup file that must be used as root for rendering. **Note:** This is a mandatory setting to identify the Unimarkup file that should be rendered.
+- `input-file` ... `filepath` to the Unimarkup file that must be used as root for rendering
+
+  **Note:** This is a mandatory setting to identify the Unimarkup file that should be rendered.
 
 ## Boolean options
 
