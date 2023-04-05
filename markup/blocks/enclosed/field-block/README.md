@@ -24,4 +24,4 @@ Any Unimarkup content.
 ]]]
 ```
 
-**Type:** `field-block`
+**Type:** All field block elements are part of the `field-block` type.
