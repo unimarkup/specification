@@ -25,7 +25,7 @@ The general list syntax is described in the [lists](/markup/blocks/indents/lists
 
     Paragraph for this sub bullet list
 
-+ Bullet list entry with different symbol
++ Third bullet list entry with different symbol
   * Sub bullet list with different symbol
 
 Paragraph not for a bullet list
