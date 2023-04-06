@@ -10,9 +10,9 @@ Backslash escapes may be used inside render blocks as described in [/markup/esca
 **Example using [AsciiMath](http://asciimath.org/):**
 
 ```
-$$
+$$$
 sum_(i=1)^n i^3=((n(n+1))/2)^2
-$$
+$$$
 ```
 
 **Type:** `math-block`

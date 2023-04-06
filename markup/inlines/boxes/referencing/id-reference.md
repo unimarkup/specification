@@ -9,15 +9,30 @@ The section [element IDs](/markup/element-ids) describes the concept of element 
 
 As convenience feature, it must be allowed to reference local elements without setting the namespace part of the element ID.
 
-**Note:** The specification of Unimarkup elements defines if they have a default text. If none is given, the element does not have a default text. 
+**Note:** Some Unimarkup elements may have a default text that should be shown when referenced. If no default text is set, one must be set explicitly after the ID using `:` to separate ID and text. 
+
+**Note:** The reference text of an element may be overridden even for elements that have a default text.
 
 **Usage:**
 
-```
-[!!Some image](<image url>){ "id" : "some-image-id", "ref" : { "label" : "Some image" } }
+- **Element with default text**
 
-A paragraph that references [##some-image-id]{ "refOption" : "label" }. 
-The referenced text looks like: Some image
-```
+  ```
+  [!!Some image](<image url>){ id: "some-image-id" }
+
+  A paragraph that references [##some-image-id].
+  ```
+
+  **Note:** The referenced text looks like: `Some image`
+
+- **Element without default text**
+
+  ```
+  [Some text]{ id: "some-id" }
+
+  Referencing [##some-id: some text box].
+  ```
+
+  **Note:** The referenced text looks like: `some text box`
 
 **Type:** `id-referencing`
