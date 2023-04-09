@@ -12,7 +12,7 @@ Another heading that is one heading-level lower may be set directly on the next 
 
 Attributes may be used at the end of the heading text.
 
-**Note:** IDs must be created implicitly for headings, by setting Latin graphemes to lower case, spaces between graphemes must be replaced by `-`, and other graphemes besides numbers must be removed.
+**Note:** If not set manually, IDs must be created implicitly for headings, by setting Latin graphemes to lower case, spaces between graphemes must be replaced by `-`, and other graphemes besides numbers and Latin graphemes must be removed.
 If the resulting ID is already present in the document, the ID may be freely chosen by the implementation,
 but a warning must be output.
 

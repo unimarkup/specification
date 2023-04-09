@@ -12,7 +12,7 @@ The content itself is treated as plain text, with optional syntax highlighting a
 ```
 ``[<alternative description for the file content that is inserted>](<file path>)
 
-``[First and second heading](UnimarkupContent.um){ insert-ids : first-heading sec-heading }
+``[First and second heading](UnimarkupContent.um){ insert-ids : "first-heading" "sec-heading" }
 ```
 
 **Type:** `verbatim-block-insert`

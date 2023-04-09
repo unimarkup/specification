@@ -12,7 +12,7 @@ The content itself is treated as plain text, with optional syntax highlighting a
 ```
 [``<alternative description for the file content that is inserted>](<file path>)
 
-Some paragraph text with [``First heading](UnimarkupContent.um){ insert-id : first-heading }.
+Some paragraph text with [``First heading](UnimarkupContent.um){ insert-id : "first-heading" }.
 ```
 
 **Type:** `inline-verbatim-insert`

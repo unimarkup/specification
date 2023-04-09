@@ -15,7 +15,7 @@ Multiple parameters must be separated by `,`.
 ```
 ''[<alternative text for the file content that is inserted>](<url>)
 
-''[First and second heading](SomeUnimarkupContent.um){ insert-ids : first-heading sec-heading }
+''[First and second heading](SomeUnimarkupContent.um){ insert-ids : "first-heading" "sec-heading" }
 
 ''[Insert with parameters](unimarkup-file.um param1 := 2, param2 := 10)
 ```
