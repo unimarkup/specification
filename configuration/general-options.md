@@ -23,6 +23,18 @@ The following options must be available for all configuration variants.
 
 - `authors` ... `list<string>` to set the authors of the rendered document(s)
 
+- `parameter` ... `list<constant>` to set parameters for a file
+
+  All parameters must have default values and cannot be changed later, making them like [constants](/markup/logic/memorables/constants).
+
+  Parameters must be given in the form:
+  
+  ```
+  <parameter name>: <type> := <default value>
+  ```
+
+  **Note:** `: <type>` is optional if the type is defined by the given default value.
+
 ## Boolean options
 
 - `overwrite-out-files` ... Overwrite files set with `output-file` if already existing

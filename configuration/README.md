@@ -12,3 +12,5 @@ Options that additionally must be available per CLI are defined in the [CLI](/co
 
 The section [merging configurations](/configuration/merging-configurations) defines how two or more configurations must be merged.
 This may happen if CLI options and a preamble are set, or other Unimarkup files are inserted.
+
+**Note:** An implementation may provide aliases for configuration options.
