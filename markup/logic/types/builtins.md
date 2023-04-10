@@ -68,3 +68,7 @@ Assigned values may only be inside this range.
 ## `Result<T1, T2>`
 
 **Values:** `Ok(T1)`, `Err(T2)`
+
+## File/Folderpath
+
+**Value:** Valid file/folderpath for the used OS.
