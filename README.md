@@ -86,6 +86,17 @@ The following structure of the Unimarkup specification is given in alphabetical 
 - [output-formats](output-formats/README) ... contains the output formats that must be supported by Unimarkup implementations, and defines the conversion from Unimarkup markup to the output format 
 
 # Specification notes
+
+The specification is written in Unimarkup. Due to the similarity to Markdown, it is not that obvious.
+
+## Stability
+
+Most block, inline, and decorator elements are already quite stable.
+The HTML output is also stable for many elements, but some complex elements require more testing and feedback.
+
+There are still many built-in field elements missing, but this requires external feedback.
+The [logic](/markup/logic/README) section is also pretty rough, but most users won't use them excessively, but rather use predefined macros and memorables.
+
 ## Placeholder text
 
 Any verbatim text that is between `<>` is used as placeholder value that may be replaced by any other text.
@@ -99,8 +110,14 @@ A note is used to highlight information concerning usage restrictions, to preven
 
 **Note:** Notes are set by starting a new line with `**Note:**` followed by one space and surrounded by blank lines.
 
+## Indicating requirement levels
+
+The keywords **must**, **must not**, **should**, **should not**, **may** and **optional** are used as described in [rfc2119](https://datatracker.ietf.org/doc/html/rfc2119).
+
 # License
 
+[<html>
 <a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nd/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0/">Creative Commons Attribution-NoDerivatives 4.0 International License</a>.
+]
 
 **Short explanation:** The *No Derivatives* part should help to encourage people to get involved in improving the core specification, rather than spin-off their own variation.
