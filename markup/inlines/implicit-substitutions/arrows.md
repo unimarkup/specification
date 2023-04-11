@@ -1,7 +1,7 @@
 # Arrows
 
 Certain keywords may be substituted for Unicode code points representing arrows.
-For the keywords to be substituted, they must only be surrounded by whitespace or punctuation graphemes, or other arrow keywords.
+For the keywords to be substituted, they must only be surrounded by whitespace, punctuation graphemes, or other arrow keywords.
 
 **List of supported arrow substitutions:**
 

@@ -7,5 +7,6 @@ The following list shows the element precedence with lower number meaning higher
 
 1. [Comments](/markup/inlines/comments)
 2. [Verbatim-formatting](/markup/inlines/formattings#verbatim) and [math-formatting](/markup/inlines/formattings#math)
-3. [Boxes](/markup/inlines/boxes/README)
-4. All other inline elements
+3. [Implicit substitutions](/markup/inlines/implicit-substitutions/README) and [explicit substitutions](/markup/inlines/explicit-substitutions/README)
+4. [Boxes](/markup/inlines/boxes/README)
+5. All other inline elements

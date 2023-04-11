@@ -1,7 +1,7 @@
 # Emojis
 
 Certain keywords may be substituted for Unicode code points representing emojis.
-For the keywords to be substituted, they must only be surrounded by whitespace or punctuation graphemes, or other emoji keywords.
+For the keywords to be substituted, they must only be surrounded by whitespace, punctuation graphemes, or other emoji keywords.
 
 **List of supported emoji substitutions:**
 
