@@ -37,6 +37,8 @@ The rendered output may then depend on the media kind.
 Multiple resources may be set for one media insert, by adding one or more `()` at the end of the media insert.
 This is useful for e.g. the HTML output, where a browser may choose the best fitting resource.
 
+In addition, a media type and media query may be set per `()` at the end using the attribute syntax. The `type` attribute sets the media type for all resources in the same `()`. The `media` attribute allows to set a media query like `@media` in CSS.
+
 ```
 [!!some resource](<default link>)(<other source link>, <other source link> { type: <media type>; media: <media query> })(<other source link> { type: <media type> })
 ```

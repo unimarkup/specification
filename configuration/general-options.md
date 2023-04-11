@@ -25,6 +25,8 @@ The following options must be available for all configuration variants.
 
 - `authors` ... `list<inline>` to set the authors of the rendered document(s)
 
+- `description` ... `inline` to provide a short description about the file
+
 - `parameter` ... `list<constant>` to set parameters for a file
 
   All parameters must have default values and cannot be changed later, making them like [constants](/markup/logic/memorables/constants).
@@ -42,3 +44,9 @@ The following options must be available for all configuration variants.
 - `overwrite-out-files` ... Overwrite files set with `output-file` if already existing
 
 - `keep-comments` ... Keep comments set in a Unimakup file in the output format.
+
+- `non-strict` ... Allows unsafe features like JavaScript, WebAssembly, etc.
+
+  **Note:** This option must not have any effect if an `ignore-file` is set.
+
+  **Note:** An implementation is free to define what features are considered unsafe.

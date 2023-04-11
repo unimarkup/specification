@@ -5,8 +5,9 @@ Elements with the highest precedence may not include any elements of lower prece
 
 The following list shows the element precedence with lower number meaning higher precedence.
 
-1. [Comments](/markup/inlines/comments)
-2. [Verbatim-formatting](/markup/inlines/formattings#verbatim) and [math-formatting](/markup/inlines/formattings#math)
-3. [Implicit substitutions](/markup/inlines/implicit-substitutions/README) and [explicit substitutions](/markup/inlines/explicit-substitutions/README)
-4. [Boxes](/markup/inlines/boxes/README)
-5. All other inline elements
+1. [Comments](/markup/inlines/comments) or [doc comments](/markup/logic/doc-comments)
+2. [Anonymous macro](/markup/logic/macros/builtins/statements/anonymous-macro)
+3. [Verbatim-formatting](/markup/inlines/formattings#verbatim) and [math-formatting](/markup/inlines/formattings#math)
+4. [Implicit substitutions](/markup/inlines/implicit-substitutions/README) and [explicit substitutions](/markup/inlines/explicit-substitutions/README)
+5. [Boxes](/markup/inlines/boxes/README)
+6. All other inline elements

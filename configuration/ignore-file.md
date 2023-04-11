@@ -18,6 +18,8 @@ This allows to easily ignore all attributes by using `attributes/*`.
 
 To selectively ignore element types and attributes per output format, the output format may be used as prefix, followed by `/`.
 
+To ignore certain file formats for insertions, set the file extension after the insert-type and `/`.
+
 **Example:**
 
 ```
@@ -30,4 +32,7 @@ pdf/*media*insert
 # ignore all lists except bullet lists
 list*
 !bullet-list
+
+# ignore JavaScript rendered insertions
+*render*insert/js
 ```

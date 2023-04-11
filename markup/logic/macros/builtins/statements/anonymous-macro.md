@@ -1,6 +1,6 @@
 # Anonymous macro
 
-This macro is useful to execute arithmetic macros in a more readable form.
+This macro is useful to execute arithmetic macros in a more readable form. It is also the only macro inside verbatim or render content that is evaluated as macro and not as plain content.
 
 The return type depends on the executed statement.
 

@@ -37,8 +37,7 @@ The rendered output may then depend on the media kind.
 
 **WIP**
 
-Multiple resources may be set for one media insert, by adding one or more `()` at the end of the media insert.
-This is useful for e.g. the HTML output, where a browser may choose the best fitting resource.
+The syntax is the same as defined for the inline [media insert](/markup/inlines/boxes/inserts/inline-media-insert#set-multiple-resources).
 
 ```
 !![some resource](<default link>)(<other source link>, <other source link> { type: <media type>; media: <media query> })(<other source link> { type: <media type> })

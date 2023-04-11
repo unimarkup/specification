@@ -2,6 +2,22 @@
 
 The following field blocks are supported for the HTML output.
 
+## `html`
+
+May include HTML elements that are allowed inside the HTML `body`, except `script` and `style`.
+
+```
+[[[<html>
+  <h1>Heading</h1>
+]]]
+```
+
+renders to
+
+```html
+<h1>Heading</h1>
+```
+
 ## `article`
 
 Defines an article region.

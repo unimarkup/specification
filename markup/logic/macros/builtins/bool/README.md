@@ -15,6 +15,18 @@ Every macro returning type `bool` may be part of a boolean expression.
 {#! <memorable or value>, <other memorable or value>/}
 ```
 
+## Conjunction
+
+```
+{#& <memorable or value>, <memorable or value>/}
+```
+
+## Disjunction
+
+```
+{#| <memorable or value>, <memorable or value>/}
+```
+
 ## Lower than
 
 ```

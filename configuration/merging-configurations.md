@@ -15,6 +15,8 @@ is referred to as `main`, and all others as `additionals`.
 - `fonts` ... Merge fonts of all configurations
 - `title` ... Use setting from `main` if set, or the first `additional` that sets this option
 - `authors` ... Merge authors of all configurations
+- `description` ... Use the setting from `main`, or the `root` file
+- `parameters` ... Merge given parameters, but take `main` parameters if a name collision would occur
 
 ## Boolean options
 
