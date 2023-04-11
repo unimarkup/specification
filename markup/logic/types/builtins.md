@@ -38,6 +38,14 @@ Parent type of all number types.
 
 **Note:** The smallest and biggest supported real may be implementation dependent.
 
+### Date
+
+Set using the [ISO 8601 calendar date extended format](https://tc39.es/ecma262/#sec-date-time-string-format).
+
+The lowest value is defined by the [ECMAScript epoch](https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-time-values-and-time-range).
+
+**Note:** Implementations may provide additional macros to interact with the `date` type.
+
 ## Grapheme
 
 **Value:** Represents one Unicode grapheme.

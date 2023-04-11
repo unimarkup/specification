@@ -2,13 +2,13 @@
 
 **WIP**
 
-Contracts are similar to Traits in Rust, or interfaces in object-oriented languages.
+Contracts are similar to Traits in the Rust programming language, or interfaces in object-oriented languages.
 
-## Defining contracts
+## Creating contracts
+
+A contract is created like a struct type definition, and may add default implementations if applicable.
 
 Every contract has the implicit generic type `self` as placeholder for any type that may comply to the contract.
-
-A contract is defined like a struct type definition, and may add default implementations if applicable.
 
 ```
 {#contract From<T> := (

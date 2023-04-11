@@ -49,3 +49,13 @@ Constant names must be written in [SCREAMING_SNAKE_CASE](https://en.wikipedia.or
 ```
 {%CONSTANT_VARIABLE}
 ```
+
+### Type naming
+
+Type names should be written in [**lower kebab-case**](https://en.wikipedia.org/wiki/Letter_case#Kebab_case).
+
+**Example:**
+
+```
+bullet-list
+```
