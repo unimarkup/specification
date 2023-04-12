@@ -63,7 +63,7 @@ generic-type<concrete-type1, concrete-type2>
 {#type someBlock := heading | verbatim-block/}
 {#var myBlock: someBlock := block(# Heading)/}
 
-{#match myBlock}
+{#match typeof(myBlock)}
   {:case heading}
     {$myBlock}
   {:case verbatim-block}
