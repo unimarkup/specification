@@ -3,7 +3,7 @@
 Verbatim blocks use `` ` `` as keyword.
 
 Content inside a verbatim block is treated as is. No rendering is done, and all whitespace must be preserved.
-The only exceptions are backslash escapes as described in [/markup/escaping](/markup/escaping).
+The only exceptions are backslash escapes as described in [/markup/escaping](/markup/escaping.md).
 
 A language may be set at the start of a verbatim block, by setting the name of a language directly after `` ` ``. An implementation may choose the best supported highlighter for the given language.
 Alternatively, attributes may be set instead of the language name.

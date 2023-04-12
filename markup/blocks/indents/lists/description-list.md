@@ -1,6 +1,6 @@
 # Description list
 
-The general list syntax is described in the [lists](/markup/blocks/indents/lists/README) section.
+The general list syntax is described in the [lists](/markup/blocks/indents/lists/README.md) section.
 A description list is a bullet list, where all entry headings start with one or more description terms that are separated by `|`,
 followed by the sequence `...` set after the terms. The `...` sequence must be surrounded by at least one whitespace.
 The first description may be given directly after the `...` sequence, and all further Unimarkup blocks must be correctly indented, and separated by blank lines.

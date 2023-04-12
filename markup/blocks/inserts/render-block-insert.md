@@ -1,6 +1,6 @@
 # Render block insert
 
-The general syntax for the render block insert is described in the general [block insert](/markup/blocks/inserts/README) section.
+The general syntax for the render block insert is described in the general [block insert](/markup/blocks/inserts/README.md) section.
 
 The keyword for render inserts is `''`.
 

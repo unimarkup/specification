@@ -12,7 +12,7 @@ Those keywords may appear anywhere in an inline content.
 - `((R))` or `((r))` ... ® (U+00AE)
 - `...` ... … (U+2026)
 
-  **Note:** `...` is not converted to a horizontal ellipsis if it is used to form a [description list](/markup/blocks/indents/lists/description-list). 
+  **Note:** `...` is not converted to a horizontal ellipsis if it is used to form a [description list](/markup/blocks/indents/lists/description-list.md). 
 
 - `(+-)` or `(-+)` ... ± (U+00B1)
 - `--` ... – (U+2013)
@@ -23,7 +23,7 @@ Those keywords may appear anywhere in an inline content.
 
   **Note:** The em dash must not be surrounded by other `-`.
 
-  **Note:** `---` is treated as [horizontal line](/markup/blocks/separators/horizontal-line) if it is surrounded by blank lines.
+  **Note:** `---` is treated as [horizontal line](/markup/blocks/separators/horizontal-line.md) if it is surrounded by blank lines.
 
 **Usage:**
 

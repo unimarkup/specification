@@ -2,7 +2,7 @@
 
 This section contains all available list elements in Unimarkup.
 List elements are a subset of indented blocks in Unimarkup.
-The general syntax for indented blocks is described in the general [indented block](/markup/blocks/indents/README) section.
+The general syntax for indented blocks is described in the general [indented block](/markup/blocks/indents/README.md) section.
 
 **Type:** All list elements are part of the `um-list` type.
 

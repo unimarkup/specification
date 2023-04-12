@@ -1,6 +1,6 @@
 # Task list
 
-The general list syntax is described in the [lists](/markup/blocks/indents/lists/README) section.
+The general list syntax is described in the [lists](/markup/blocks/indents/lists/README.md) section.
 A task list may be started with `-[<task state>]` as keyword.
 
 **Note:** There must be no space between `-` and `[`.

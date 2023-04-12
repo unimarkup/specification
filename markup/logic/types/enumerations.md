@@ -2,7 +2,7 @@
 
 **WIP**
 
-Enumerations are a special kind of [case type definitions](/markup/logic/types/type-definition#case-type-definition).
+Enumerations are a special kind of [case type definitions](/markup/logic/types/type-definition.md#case-type-definition).
 Every type of an enumeration is unique, and would require to be wrapped in `type()`.
 The `enum` macro reduces the need for this wrapper.
 

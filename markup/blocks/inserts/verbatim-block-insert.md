@@ -1,6 +1,6 @@
 # Verbatim block insert
 
-The general syntax for the verbatim block insert is described in the general [inline insert](/markup/inlines/boxes/inserts/README) section.
+The general syntax for the verbatim block insert is described in the general [inline insert](/markup/inlines/boxes/inserts/README.md) section.
 
 The keyword for verbatim inserts is ` `` `.
 

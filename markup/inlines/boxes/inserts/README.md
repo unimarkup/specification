@@ -16,7 +16,7 @@ There are two different kinds of inline inserts:
 
    Since the resource is not integrated into the Unimarkup document, it must be assured by the user that the resource is available at the set location.
 
-   The [inline media insert](/markup/inlines/boxes/inserts/inline-media-insert) element may be used to insert media resources as inline content.
+   The [inline media insert](/markup/inlines/boxes/inserts/inline-media-insert.md) element may be used to insert media resources as inline content.
 
 2. Convertible resources
 
@@ -30,7 +30,7 @@ There are two different kinds of inline inserts:
 
    There are two elements for inline inserts of convertible resources:
 
-   1. [inline render insert](/markup/inlines/boxes/inserts/inline-render-insert)
+   1. [inline render insert](/markup/inlines/boxes/inserts/inline-render-insert.md)
 
       This inline element tries to interpret the given content and convert it to fitting Unimarkup inline elements.
 
@@ -38,7 +38,7 @@ There are two different kinds of inline inserts:
 
       **Note:** Using an empty link is a short way to get rendered inline content, since there is no render formatting.
 
-   2. [inline verbatim insert](/markup/inlines/boxes/inserts/inline-verbatim-insert)
+   2. [inline verbatim insert](/markup/inlines/boxes/inserts/inline-verbatim-insert.md)
 
       This inline element applies verbatim formatting to the content.
 

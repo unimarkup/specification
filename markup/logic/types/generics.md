@@ -1,6 +1,6 @@
 # Generics
 
-Generics are type placeholders that may be used for [contracts](/markup/logic/contracts/README) and [macros](/markup/logic/macros/README).
+Generics are type placeholders that may be used for [contracts](/markup/logic/contracts/README.md) and [macros](/markup/logic/macros/README.md).
 
 **Note:** `<>` are not used for placeholders in the examples.
 

@@ -12,7 +12,7 @@ If no displayed text is set, the link is used as display text.
 
 **Note:** Any `(` must be closed with `)`. Otherwise, rendering must fail.
 
-**Note:** Use [ID referencing](/markup/inlines/boxes/referencing/id-reference) instead of hyperlinks to link to elements if you do not need an explicit title.
+**Note:** Use [ID referencing](/markup/inlines/boxes/referencing/id-reference.md) instead of hyperlinks to link to elements if you do not need an explicit title.
 
 **Usage:**
 

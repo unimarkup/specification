@@ -2,10 +2,10 @@
 
 **WIP**
 
-The general syntax for referencing is described in the general [referencing](/markup/inlines/boxes/referencing/README) section.
+The general syntax for referencing is described in the general [referencing](/markup/inlines/boxes/referencing/README.md) section.
 
 Every element that allows attributes, may be referenced by its ID using `##` as keyword followed by the `element ID`.
-The section [element IDs](/markup/element-ids) describes the concept of element IDs in more detail.
+The section [element IDs](/markup/element-ids.md) describes the concept of element IDs in more detail.
 
 As convenience feature, it must be allowed to reference local elements without setting the namespace part of the element ID.
 

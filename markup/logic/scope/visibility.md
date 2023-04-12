@@ -32,7 +32,7 @@ Like with enclosed elements, logic elements defined inside a macro body are also
 
 ## Rendered inserts
 
-If a Unimarkup file is inserted via a [rendered insert](/markup/blocks/inserts/render-block-insert), the visibility of logic elements depends on the name of an element.
+If a Unimarkup file is inserted via a [rendered insert](/markup/blocks/inserts/render-block-insert.md), the visibility of logic elements depends on the name of an element.
 
 ### Private logic elements
 

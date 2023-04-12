@@ -1,10 +1,10 @@
 # Media block insert
 
-The general syntax for the media block insert is described in the general [block insert](/markup/blocks/inserts/README) section.
+The general syntax for the media block insert is described in the general [block insert](/markup/blocks/inserts/README.md) section.
 
 The keyword for media inserts is `!!`.
 
-Compared to [inline media inserts](/markup/inlines/boxes/inserts/inline-media-insert), a media block insert allows [block decorations](/markup/decorators/block-decoration). This may be used to create captions.
+Compared to [inline media inserts](/markup/inlines/boxes/inserts/inline-media-insert.md), a media block insert allows [block decorations](/markup/decorators/block-decoration.md). This may be used to create captions.
 
 **Usage:**
 
@@ -37,7 +37,7 @@ The rendered output may then depend on the media kind.
 
 **WIP**
 
-The syntax is the same as defined for the inline [media insert](/markup/inlines/boxes/inserts/inline-media-insert#set-multiple-resources).
+The syntax is the same as defined for the inline [media insert](/markup/inlines/boxes/inserts/inline-media-insert.md#set-multiple-resources).
 
 ```
 !![some resource](<default link>)(<other source link>, <other source link> { type: <media type>; media: <media query> })(<other source link> { type: <media type> })

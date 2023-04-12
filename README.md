@@ -10,16 +10,16 @@ The focus of Unimarkup is
 - Consistency
 - Internationalization
 
-Since Unimarkup is a markup language, the content will mostly be converted to other formats like PDF or HTML as defined in the [output-formats](output-formats/README) folder.
-Besides those more final formats, the [i18n](i18n/README) folder defines intermediate formats to help with content localization.
+Since Unimarkup is a markup language, the content will mostly be converted to other formats like PDF or HTML as defined in the [output-formats](output-formats/README.md) folder.
+Besides those more final formats, the [i18n](i18n/README.md) folder defines intermediate formats to help with content localization.
 
-Unimarkup also integrates a more programming language like markup that is defined in the [markup/logic](/markup/logic/README) folder.
+Unimarkup also integrates a more programming language like markup that is defined in the [markup/logic](/markup/logic/README.md) folder.
 This makes the construction of more complex content easier, and improves content reusability.
 
 # Example
 
 The following example uses some Unimarkup elements.
-Detailed description about those elements, and others may be found in the [markup](markup/README) section. 
+Detailed description about those elements, and others may be found in the [markup](markup/README.md) section. 
 
 ```
 # Heading
@@ -77,13 +77,13 @@ Other great markup languages (given in alphabetical order):
 
 The following structure of the Unimarkup specification is given in alphabetical order.
 
-- [addons](addons/README) ... contains language addons that are not part of the core specification
-- [associated extensions](associated-extensions) ... defines file extensions that should be associated with Unimarkup content
-- [configuration](configuration/README) ... contains the configuration options for Unimarkup files that must be supported by Unimarkup implementations
-- [glossary](glossary) ... contains definitions for terms used in the Unimarkup specification
-- [i18n](i18n/README) ... contains internationalization aspects of the Unimarkup specification that must be supported by Unimarkup implementations
-- [markup](markup/README) ... contains the core markup syntax for the Unimarkup language
-- [output-formats](output-formats/README) ... contains the output formats that must be supported by Unimarkup implementations, and defines the conversion from Unimarkup markup to the output format 
+- [addons](/addons/README.md) ... contains language addons that are not part of the core specification
+- [associated extensions](/associated-extensions.md) ... defines file extensions that should be associated with Unimarkup content
+- [configuration](/configuration/README.md) ... contains the configuration options for Unimarkup files that must be supported by Unimarkup implementations
+- [glossary](/glossary.md) ... contains definitions for terms used in the Unimarkup specification
+- [i18n](/i18n/README.md) ... contains internationalization aspects of the Unimarkup specification that must be supported by Unimarkup implementations
+- [markup](/markup/README.md) ... contains the core markup syntax for the Unimarkup language
+- [output-formats](/output-formats/README.md) ... contains the output formats that must be supported by Unimarkup implementations, and defines the conversion from Unimarkup markup to the output format 
 
 # Specification notes
 
@@ -95,7 +95,7 @@ Most block, inline, and decorator elements are already quite stable.
 The HTML output is also stable for many elements, but some complex elements require more testing and feedback.
 
 There are still many built-in field elements missing, but this requires external feedback.
-The [logic](/markup/logic/README) section is also pretty rough, but most users won't use them excessively, but rather use predefined macros and memorables.
+The [logic](/markup/logic/README.md) section is also pretty rough, but most users won't use them excessively, but rather use predefined macros and memorables.
 
 ## Placeholder text
 

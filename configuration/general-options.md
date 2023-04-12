@@ -13,7 +13,7 @@ The following options must be available for all configuration variants.
 
   **Note:** This path is not used for path lookup during rendering.
 
-- `ignore-file` ... File that defines elements and attributes that must be ignored for rendering (The syntax is defined in the [ignore file](/configuration/ignore-file) section)
+- `ignore-file` ... File that defines elements and attributes that must be ignored for rendering (The syntax is defined in the [ignore file](/configuration/ignore-file.md) section)
 
 - `citation-style` ... `filepath` to the citation style sheet that must be used to process referenced literature
 
@@ -29,7 +29,7 @@ The following options must be available for all configuration variants.
 
 - `parameter` ... `list<constant>` to set parameters for a file
 
-  All parameters must have default values and cannot be changed later, making them like [constants](/markup/logic/memorables/constants).
+  All parameters must have default values and cannot be changed later, making them like [constants](/markup/logic/memorables/constants.md).
 
   Parameters must be given in the form:
   

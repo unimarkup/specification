@@ -3,7 +3,7 @@
 **WIP**
 
 Explicit column blocks have `|` as keyword.
-Inside an explicit column block, a new column is started after a [section break](/markup/blocks/separators/section-break).
+Inside an explicit column block, a new column is started after a [section break](/markup/blocks/separators/section-break.md).
 
 To nest explicit column blocks, the outer block must have at least one more `|` than the inner one.
 

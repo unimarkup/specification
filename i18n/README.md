@@ -5,6 +5,6 @@ Unimarkup implementations must provide the internationalization capabilities def
 
 **WIP**
 
-- [configuration](/i18n/configuration/) ... contains configuration properties that are specific to internationalization
-- [intermediate-formats](/i18n/intermediate-formats/README) ... contains different data formats specific to the localized representation of Unimarkup content
-- [markup](/i18n/markup/README) ... contains additional Unimarkup markup for internationalization
+- [configuration](/i18n/configuration/README.md) ... contains configuration properties that are specific to internationalization
+- [intermediate-formats](/i18n/intermediate-formats/README.md) ... contains different data formats specific to the localized representation of Unimarkup content
+- [markup](/i18n/markup/README.md) ... contains additional Unimarkup markup for internationalization

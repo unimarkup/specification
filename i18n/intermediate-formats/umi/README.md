@@ -8,9 +8,9 @@ A block element, or any Unimarkup element surrounded by blank lines, is stored a
 The format specification is split into the following sections:
 
 - [Column layout](#column-layout) ... Defines the overall file structure
-- [Blocks](/i18n/intermediate-formats/umi/blocks/README) ... Defines how block elements must be stored in a `.umi` file
-- [Logic](/i18n/intermediate-formats/umi/logic/README) ... Defines how logic elements must be stored in a `.umi` file
-- [Decorators](/i18n/intermediate-formats/umi/decorators) ... Defines how decorators must be stored in a `.umi` file
+- [Blocks](/i18n/intermediate-formats/umi/blocks/README.md) ... Defines how block elements must be stored in a `.umi` file
+- [Logic](/i18n/intermediate-formats/umi/logic/README.md) ... Defines how logic elements must be stored in a `.umi` file
+- [Decorators](/i18n/intermediate-formats/umi/decorators.md) ... Defines how decorators must be stored in a `.umi` file
 
 ## Column layout
 
@@ -26,4 +26,4 @@ The format specification is split into the following sections:
 
 **Note:** It is possible to add content and attribute columns with other bcp47 language tags to existing `.umi` files to translate the original content to other languages. 
 
-Set bcp47 tags of the [language configuration properties](/i18n/configuration/README) are then searched in the `.umi` headers `content` and `attribute` columns.
+Set bcp47 tags of the [language configuration properties](/i18n/configuration/README.md) are then searched in the `.umi` headers `content` and `attribute` columns.

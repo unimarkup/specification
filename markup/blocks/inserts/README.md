@@ -16,7 +16,7 @@ There are two different kinds of block inserts:
 
    Since the resource is not integrated into the Unimarkup document, it must be assured by the user that the resource is available at the set location.
 
-   The [block media insert](/markup/blocks/inserts/media-block-insert) element may be used to insert media resources as block content.
+   The [block media insert](/markup/blocks/inserts/media-block-insert.md) element may be used to insert media resources as block content.
 
 2. Convertible resources
 
@@ -34,12 +34,12 @@ There are two different kinds of block inserts:
 
    There are two elements for block inserts of convertible resources:
 
-   1. [block render insert](/markup/blocks/inserts/render-block-insert)
+   1. [block render insert](/markup/blocks/inserts/render-block-insert.md)
 
       This block element tries to interpret the given content and convert it to fitting Unimarkup block elements.
 
       **Note:** If conversion to block elements is not possible, the alternative text must be used instead. In this case, the implementation should set a warning if the link was not empty.
 
-   2. [block verbatim insert](/markup/blocks/inserts/verbatim-block-insert)
+   2. [block verbatim insert](/markup/blocks/inserts/verbatim-block-insert.md)
 
       This block element applies verbatim formatting to the content.

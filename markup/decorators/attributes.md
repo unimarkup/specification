@@ -18,5 +18,5 @@ some paragraph { color: red }
 
 **Default attributes that must be allowed in all output formats:**
 
-- `id` ... sets the ID of an element (see the [element IDs](/markup/element-ids) section for more details)
+- `id` ... sets the ID of an element (see the [element IDs](/markup/element-ids.md) section for more details)
 - `class` ... sets one or more classes to an element (multiple classes must be separated by spaces)

@@ -15,11 +15,11 @@ The implementation should set a warning if this convention is not fulfilled.
 
 Element IDs for elements **except** headings and logic elements may be generated automatically by an implementation, but must follow the `<namespace>_<element-type>-<element count of same type from file start>` convention.
 
-The generation of heading IDs is defined in the [heading](/markup/blocks/heading) section.
+The generation of heading IDs is defined in the [heading](/markup/blocks/heading.md) section.
 
 Logic elements do not have an ID, but are referred to by their name.
 However, an implementation may choose to set IDs for logic elements.
-This might be useful for the `id` column of the [´.umi` i18n format](/i18n/intermediate-formats/umi/README).
+This might be useful for the `id` column of the [´.umi` i18n format](/i18n/intermediate-formats/umi/README.md).
 
 **Example:**
 

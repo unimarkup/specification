@@ -33,5 +33,5 @@ The allowed attributes may depend on the output format, and only special attribu
 ```
 [some green text]{ color: green }
 
-[!!Some image](/path/to/an/image.pn){ width: 50vw }
+[!!Some image](/path/to/an/image.png){ width: 50vw }
 ```

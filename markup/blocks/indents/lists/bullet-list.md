@@ -1,7 +1,7 @@
 # Bullet list
 
 Bullet lists start with either `-`, `*`, or `+` as keyword.
-The general list syntax is described in the [lists](/markup/blocks/indents/lists/README) section.
+The general list syntax is described in the [lists](/markup/blocks/indents/lists/README.md) section.
 
 **Note:** The different keywords may be used to define different list symbols.
 

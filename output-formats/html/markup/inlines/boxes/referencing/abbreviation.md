@@ -6,7 +6,7 @@ There are two variants:
 
   The full text is set as an HTML definition element with the abbreviation as ID to link to the first abbreviation usage.
 
-  See [element IDs](/markup/element-ids) for the conversion of text to valid IDs.
+  See [element IDs](/markup/element-ids.md) for the conversion of text to valid IDs.
 
   ```
   [::HTML: HyperText Markup Language]

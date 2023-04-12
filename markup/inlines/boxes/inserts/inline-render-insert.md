@@ -1,6 +1,6 @@
 # Inline render insert
 
-The general syntax for the inline render insert is described in the general [inline insert](/markup/inlines/boxes/inserts/README) section.
+The general syntax for the inline render insert is described in the general [inline insert](/markup/inlines/boxes/inserts/README.md) section.
 
 The keyword for render inserts is `''`.
 

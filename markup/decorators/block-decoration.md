@@ -3,7 +3,7 @@
 Blocks may allow decoration to set additional information.
 Each supporting block must define how this information may be formatted.
 
-A block decoration has a similar syntax to [enclosed blocks](/markup/blocks/enclosed/README),
+A block decoration has a similar syntax to [enclosed blocks](/markup/blocks/enclosed/README.md),
 and uses `+++` as keyword.
 The decoration must be set in the next line after the block ends, without any blank lines between.
 

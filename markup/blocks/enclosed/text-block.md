@@ -11,7 +11,7 @@ by nesting these element attributes using the element type as identifier.
 
 **Note:** Attribute nesting allows setting attributes for line blocks and lists, since it is not possible to set attributes for them directly.
 
-**Note** Attribute nesting is defined in the [attributes](/markup/decorators/attributes) section.
+**Note** Attribute nesting is defined in the [attributes](/markup/decorators/attributes.md) section.
 
 **Usage:**
 

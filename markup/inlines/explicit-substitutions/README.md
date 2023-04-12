@@ -7,8 +7,8 @@ Explicitly means that keywords are used to mark the content that should be subst
 
 **Note:** Attributes are not allowed for explicit substitutions.
 
-- [named substitutions](/markup/inlines/explicit-substitutions/named-substitution)
-- [distinct reference](/markup/inlines/explicit-substitutions/distinct-reference)
-- [grapheme substitution](/markup/inlines/explicit-substitutions/grapheme-substitution/)
+- [named substitutions](/markup/inlines/explicit-substitutions/named-substitution.md)
+- [distinct reference](/markup/inlines/explicit-substitutions/distinct-reference.md)
+- [grapheme substitution](/markup/inlines/explicit-substitutions/grapheme-substitution/README.md)
 
 **Type:** All explicit substitution elements are part of the `explicit-substitution` type.

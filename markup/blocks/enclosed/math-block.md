@@ -3,7 +3,7 @@
 Math blocks use `$` as keyword.
 
 Math blocks allow using math mode on block level. Content inside a math block is treated as one mathematical formula.
-Backslash escapes may be used inside render blocks as described in [/markup/escaping](/markup/escaping).
+Backslash escapes may be used inside render blocks as described in [/markup/escaping](/markup/escaping.md).
 
 **Note:** If attributes span multiple lines, the first line after attributes are closed start the verbatim content.
 

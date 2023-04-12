@@ -10,7 +10,7 @@ It is also possible to set doc comments in struct definitions before every field
 
 Macro parameters may be mentioned in doc comments by referring to them using `{$<parameter name>}`.
 
-As convention, parameters should be described using the [description list](/markup/blocks/indents/lists/description-list) syntax.
+As convention, parameters should be described using the [description list](/markup/blocks/indents/lists/description-list.md) syntax.
 
 Parameter names must be used in the rendered doc comment without `{$ }`.
 

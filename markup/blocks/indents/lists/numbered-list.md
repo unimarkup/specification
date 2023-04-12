@@ -1,6 +1,6 @@
 # Numbered list
 
-The general list syntax is described in the [lists](/markup/blocks/indents/lists/README) section.
+The general list syntax is described in the [lists](/markup/blocks/indents/lists/README.md) section.
 A numbered list entry has a positive integer number followed by `.` as keyword.
 The number of the first entry defines the start number of the list.
 Numbered lists are automatically incremented by 1 per new list entry,

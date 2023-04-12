@@ -4,4 +4,4 @@ This section contains different data formats specific to the localized represent
 
 **WIP**
 
-- [.umi](/i18n/intermediate-formats/umi) ... open document spreadsheet with specific column layout
+- [.umi](/i18n/intermediate-formats/umi/README.md) ... open document spreadsheet with specific column layout

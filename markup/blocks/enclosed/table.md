@@ -4,7 +4,7 @@
 
 Tables have `=` as keyword. Every line inside the table content is interpreted as one table row, except lines starting with `---` (see **table entry merging** below). Column breakpoints are set using `|`. Rows and columns are internally numbered, starting with `row = 1, column = 1` at the top left. Both numbers are incremented by one per new row/column.
 
-**Note:** It is not possible to nest tables. Use [column blocks](/markup/blocks/enclosed/columns/README) instead.
+**Note:** It is not possible to nest tables. Use [column blocks](/markup/blocks/enclosed/columns/README.md) instead.
 
 - **Table entry**
 

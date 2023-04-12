@@ -7,7 +7,7 @@ For this, the literature ID, followed by an optional property set after `.`, mus
 
 **Note:** If no property is set, `authors` must be chosen as fallback.
 
-**Note:** The same ID constraints apply as defined for [literature referencing](/markup/inlines/boxes/referencing/literature-reference).
+**Note:** The same ID constraints apply as defined for [literature referencing](/markup/inlines/boxes/referencing/literature-reference.md).
 
 **Usage:**
 
