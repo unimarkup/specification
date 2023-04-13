@@ -1,6 +1,6 @@
 # Generics
 
-Generics are type placeholders that may be used for [contracts](/markup/logic/contracts/README.md) and [macros](/markup/logic/macros/README.md).
+Generics are type placeholders that may be used for [structs](/markup/logic/types/type-definition.md#struct-type-definition) and [macros](/markup/logic/macros/README.md).
 
 **Note:** `<>` are not used for placeholders in the examples.
 
@@ -12,28 +12,32 @@ Generics are type placeholders that may be used for [contracts](/markup/logic/co
 
 ## Restrict generic types
 
-Generic types may be restricted to only represent a limited number of types,
-or enforce that a generic type must comply to specific contracts.
+Generic types may be restricted to only represent a limited number of types (disjunction),
+or a combination of types (conjunction).
 
 **Type restriction:**
 
-```
-{#macro myMacro<T: type1 | type2>(myVar: T) int}
-  macro body
-{/end}
-```
+- Disjunction
 
-**Contracts:**
+  ```
+  {#macro myMacro<T: type1 | type2>(myVar: T) int}
+    macro body
+  {/end}
+  ```
 
-```
-{#macro myMacro<T: contract1 & contract2>(myVar: T) int}
-  macro body
-{/end}
-```
+- Conjunction
+
+  **Note:** Set types must not have fields of same name. 
+
+  ```
+  {#macro myMacro<T: type1 & type2>(myVar: T) int}
+    macro body
+  {/end}
+  ```
 
 ## Direct type restriction
 
-Instead of defining a generic type, type restrictions and contracts may be set directly as type definition.
+Instead of defining a generic type, type restrictions may be set directly as type definition.
 This is useful if the generic type would only be used once.
 
 ```

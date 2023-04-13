@@ -31,7 +31,3 @@ If a field is again a struct, those fields may again be accessed via dot notatio
 
 {#_ someStruct.field1 + someStruct.field2.nestedField/}
 ```
-
-## Contracts
-
-Contracts have the same syntax as structs, so the dot notation is the same as for structs.
