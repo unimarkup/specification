@@ -28,7 +28,7 @@ General styles for Unimarkup elements may be set, using the element type as clas
   }
 }}}
 
-[[[
+[[[{ id: "scoped-example" }
 {{{
   p {
     color: red;

@@ -9,6 +9,9 @@ To nest text blocks, the outer block must have at least one more `]` than the in
 Attribute values for Unimarkup elements may be set as attributes of the text block,
 by nesting these element attributes using the element type as identifier.
 
+**Note:** If no attributes are set, content inside the text block is taken as plain text.
+In contrast to [verbatim blocks](/markup/blocks/enclosed/verbatim-block.md), whitespace is converted as in [paragraph blocks](/markup/blocks/paragraph.md).
+
 **Note:** Attribute nesting allows setting attributes for line blocks and lists, since it is not possible to set attributes for them directly.
 
 **Note** Attribute nesting is defined in the [attributes](/markup/decorators/attributes.md) section.
@@ -41,12 +44,18 @@ This paragraph has the default background.
 ]]]
 ]]]]
 
-[[[
+[[[{ id: "my-block" }
 Any Unimarkup text may be inside a text block
 
 ```
 Verbatim block inside a text block
 ```
+]]]
+
+[[[
+Text blocks without attributes.
+
+No **formatting** is applied, since all content is taken as plain text.
 ]]]
 ````
 
