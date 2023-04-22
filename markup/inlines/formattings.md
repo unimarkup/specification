@@ -6,8 +6,8 @@ Inline formatting consists of keywords that format an enclosed text in a certain
 
 ## Restrictions
 
-A none-whitespace grapheme must immediately follow an opening keyword for inline formatting.
-If the inline formatting is not closed by the same keyword with a none-whitespace grapheme before the closing keyword, no formatting is applied.
+A non-whitespace grapheme must immediately follow an opening keyword for inline formatting.
+If the inline formatting is not closed by the same keyword with a non-whitespace grapheme before the closing keyword, no formatting is applied.
 
 **Note:** Verbatim formatting is an exception and is applied independent of whitespaces.
 
