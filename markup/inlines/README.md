@@ -8,6 +8,6 @@ Inline elements may be part of the content of other elements. They must not cont
 **bold text**, [hyperlink text](url), :D 
 ```
 
-**Type:** All inline elements are part of the `inline` type.
+**Type:** All inline elements are subtypes of the `inline` type.
 
 

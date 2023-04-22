@@ -13,4 +13,4 @@ Attributes may be set directly after the start keyword without any whitespace be
 
 An enclosed block must be taken as plain text paragraph, if the end keyword is not found at the end of input, or if the outer block in a nested or indented context closes.
 
-**Type:** All enclosed block elements are part of the `enclosed-block` type.
+**Type:** All enclosed block elements are subtypes of the `enclosed-block` type.

@@ -13,7 +13,7 @@ The content after the space is part of the block content.
 
 **Note:** An indented block ends before the first element in document flow that is not indented to the required depth.
 
-**Type:** All indented blocks are part of the `indented-block` type.
+**Type:** All indented blocks are subtypes of the `indented-block` type.
 
 **Example:**
 

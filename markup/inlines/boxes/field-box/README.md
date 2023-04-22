@@ -17,6 +17,6 @@ The [builtins](/markup/inlines/boxes/field-box/builtins.md) section includes fie
 [<someField> Some inline content]
 ```
 
-**Type:** All field box variants are part of the `field-box` type.
+**Type:** All field box variants are subtypes of the `field-box` type.
 
 **Note:** Variations must have types with the form `field-box-<field name>` (`<>` are placeholders in this example).

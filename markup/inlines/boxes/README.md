@@ -3,7 +3,7 @@
 Inline boxes are inline elements that use `[]` to surround inline content.
 Some of those elements also allow additional information to be set using `()` directly after `]`.
 
-**Type:** All box elements are part of the `inline-box` type.
+**Type:** All box elements are subtypes of the `inline-box` type.
 
 ## Box elements
 

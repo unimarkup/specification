@@ -7,4 +7,4 @@ This section contains elements for implicit content substitutions.
 - [emojis](/markup/inlines/implicit-substitutions/emojis.md)
 - [special substitution](/markup/inlines/implicit-substitutions/special-substitution.md)
 
-**Type:** All implicit substitutions are part of the `implicit-substitution` type.
+**Type:** All implicit substitutions are subtypes of the `implicit-substitution` type.

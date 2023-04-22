@@ -5,7 +5,7 @@ The general form for block inserts looks like a hyperlink with a **keyword** set
 
 **Note:** The description given inside `[]` is used as alternative text, if the external resource could not be inserted or displayed. The text may then be used as fallback content for convertible resources, or plain text for media resources.
 
-**Type:** All block inserts are part of the `block-insert` type.
+**Type:** All block inserts are subtypes of the `block-insert` type.
 
 There are two different kinds of block inserts:
 

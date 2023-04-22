@@ -11,4 +11,4 @@ Explicitly means that keywords are used to mark the content that should be subst
 - [distinct reference](/markup/inlines/explicit-substitutions/distinct-reference.md)
 - [grapheme substitution](/markup/inlines/explicit-substitutions/grapheme-substitution/README.md)
 
-**Type:** All explicit substitution elements are part of the `explicit-substitution` type.
+**Type:** All explicit substitution elements are subtypes of the `explicit-substitution` type.

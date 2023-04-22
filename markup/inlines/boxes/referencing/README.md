@@ -18,7 +18,7 @@ This allows to overwrite the default text for this ID.
 A paragraph that references [##some-image-id: Custom referencing text].
 ```
 
-**Type:** All referencing elements are part of the `referencing` type.
+**Type:** All referencing elements are subtypes of the `referencing` type.
 
 **Variations:**
 

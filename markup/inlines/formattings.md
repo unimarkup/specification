@@ -2,7 +2,7 @@
 
 Inline formatting consists of keywords that format an enclosed text in a certain way.
 
-**Type:** All inline formattings are part of the `formatting` type.
+**Type:** All inline formattings are subtypes of the `formatting` type.
 
 ## Restrictions
 

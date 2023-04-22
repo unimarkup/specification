@@ -72,5 +72,5 @@ The first paragraph of this heading level starts here.
 
 **Types:**
 
-All headings are part of the `heading` type.
+All headings are subtypes of the `heading` type.
 Each heading has its own type `heading-<heading level>`.

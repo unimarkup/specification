@@ -5,7 +5,7 @@ The general form for inline inserts looks like a hyperlink with a **keyword** se
 
 **Note:** The description given inside `[]` is used as alternative text, if the external resource could not be inserted or displayed. The text may then be used as fallback content for convertible resources, or plain text for media resources.
 
-**Type:** All inline inserts are part of the `inline-insert` type.
+**Type:** All inline inserts are subtypes of the `inline-insert` type.
 
 There are two different kinds of inline inserts:
 
