@@ -45,7 +45,7 @@ The following options must be available for all configuration variants.
 
 - `keep-comments` ... Keep comments set in a Unimakup file in the output format.
 
-- `non-strict` ... Allows unsafe features like JavaScript, WebAssembly, etc.
+- `allow-unsafe` ... Allows unsafe features like JavaScript, WebAssembly, etc.
 
   **Note:** This option must not have any effect if an `ignore-file` is set.
 

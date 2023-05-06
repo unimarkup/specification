@@ -6,11 +6,11 @@ This configuration contains options that are allowed in addition to the general 
 
 ## Taking values
 
-- `favicon` ... `filepath` to a favicon
+- `favicons` ... `list<filepath>` of favicons for the browser to choose from
 
 - `keywords` ... `list<word>` to define keywords used in the document
 
 ## Merging configurations
 
-- `favicon` ... Use the setting from `main`, or the `root` file
+- `favicons` ... Merge favicons of all configurations
 - `keywords` ... Merge keywords of all configurations
