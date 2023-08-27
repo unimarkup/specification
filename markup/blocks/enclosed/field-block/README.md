@@ -19,9 +19,9 @@ If text blocks are used inside field blocks, or field blocks allow nesting, the 
 Any Unimarkup content.
 ]]]
 
-[[[<someField>{some attributes}
+[[[<someField>
 Any Unimarkup content.
-]]]
+]]]{some attributes}
 ```
 
 **Type:** All field block elements are subtypes of the `field-block` type.

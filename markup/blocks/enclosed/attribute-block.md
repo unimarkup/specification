@@ -4,6 +4,8 @@
 
 General styles for Unimarkup elements may be set, using the element type as class selector.
 
+**Note:** Attributes defined in an attribute block affect the whole document **independent** of their position in the document flow.
+
 **Note:** Attributes `id` and `class` are not allowed for attribute blocks.
 
 **Usage:**
@@ -18,27 +20,3 @@ General styles for Unimarkup elements may be set, using the element type as clas
   }
 }}}
 ```
-
-
-
-```
-{{{
-  p {
-    color: green;
-  }
-}}}
-
-[[[{ id: "scoped-example" }
-{{{
-  p {
-    color: red;
-  }
-}}}
-
-Red text.
-]]]
-
-Green text again.
-```
-
-
