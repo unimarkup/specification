@@ -14,7 +14,7 @@ There are two different kinds of block inserts:
    This refers to resources that cannot be converted to Unimarkup content.
    Examples are images, videos, audio, etc.
 
-   Because the resource is not integrated into the Unimarkup document, it must be assured by the user that the resource is available at the set location.
+   **Note:** Because the resource may not be integrated into the Unimarkup document, it must be assured by the user that the resource is available at the set location.
 
    The [block media insert](/markup/blocks/inserts/media-block-insert.md) element may be used to insert media resources as block content.
 

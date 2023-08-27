@@ -14,7 +14,7 @@ There are two different kinds of inline inserts:
    This refers to resources that cannot be converted to Unimarkup content.
    Examples are images, videos, audio, etc.
 
-   Since the resource is not integrated into the Unimarkup document, it must be assured by the user that the resource is available at the set location.
+   **Note:** Because the resource may not be integrated into the Unimarkup document, it must be assured by the user that the resource is available at the set location.
 
    The [inline media insert](/markup/inlines/boxes/inserts/inline-media-insert.md) element may be used to insert media resources as inline content.
 
