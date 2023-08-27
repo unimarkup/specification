@@ -21,12 +21,6 @@ There are two different kinds of inline inserts:
 2. Convertible resources
 
    This refers to resources that may be converted to Unimarkup content.
-   
-   If the resource type is supported by the Unimarkup implementation, the content must be integrated into the Unimarkup document using regular Unimarkup inline elements.
-   Since the content is integrated into the Unimarkup document, the resource must only be available for rendering.
-
-   Since the resource must be convertible to Unimarkup, there must be an understanding of a Unimarkup ID in the content of the resource.
-   This ID may then be used as **filter attribute** `insert-id` for inserts, to only get the content of the element identified by this ID.
 
    There are two elements for inline inserts of convertible resources:
 
@@ -34,7 +28,7 @@ There are two different kinds of inline inserts:
 
       This inline element tries to interpret the given content and convert it to fitting Unimarkup inline elements.
 
-      **Note:** If conversion to inline elements is not possible, the alternative text must be used instead. In this case, the implementation should set a warning if the link was not empty.
+      **Note:** If conversion to inline elements is not possible, the alternative text must be used instead. In this case, the implementation should set a warning.
 
       **Note:** Using an empty link is a short way to get rendered inline content, since there is no render formatting.
 
@@ -42,4 +36,4 @@ There are two different kinds of inline inserts:
 
       This inline element applies verbatim formatting to the content.
 
-      **Note:** If the content contains a blank line, the alternative text must be used instead. In this case, the implementation should set a warning if the link was not empty.
+      **Note:** If the content contains a blank line, the alternative text must be used instead. In this case, the implementation should set a warning.
