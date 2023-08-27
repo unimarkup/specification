@@ -1,6 +1,7 @@
 # Implicit column block
 
-Implicit column blocks, like [explicit column blocks](/markup/blocks/enclosed/columns/explicit-column.md), have `|` as keyword, but allow to set a fix number of columns. For this, the sequence `<number of columns>|` must be set directly after the start sequence of the column block, and `#|` must be set directly after the closing sequence.
+Implicit column blocks, like [explicit column blocks](/markup/blocks/enclosed/columns/explicit-column.md), have `|` as keyword, but allow to set a fix number of columns.
+For this, the sequence `<number of columns>|` must be set directly after the start sequence of the column block, and `#|` must be set directly after the closing sequence.
 
 To nest implicit column blocks, the outer block must have at least one more leading `|` than the inner one.
 
@@ -9,9 +10,9 @@ To nest implicit column blocks, the outer block must have at least one more lead
 **Usage:**
 
 ```
-|||<number of columns>|{<implicit column block attributes>}
+|||<number of columns>|
 content that is distributed over the set number of columns
-|||#|
+|||#|{<implicit column block attributes>}
 
 |||2| 
 This content may have any form of unimarkup content. It is automatically distributed over two columns.

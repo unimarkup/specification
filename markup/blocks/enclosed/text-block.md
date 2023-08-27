@@ -2,38 +2,38 @@
 
 Text blocks use `[` as opening keyword, and `]` as closing keyword.
 The number of `[` and `]` must match per block.
-Attributes may be set directly after the last opening `[`.
 
 To nest text blocks, the outer block must have at least one more `]` than the inner one.
 
-Attribute values for Unimarkup elements may be set as attributes of the text block,
-by nesting these element attributes using the element type as identifier.
+Attributes may be set directly after the last closing `]`.
 
 **Note:** If no attributes are set, content inside the text block is taken as plain text.
 In contrast to [verbatim blocks](/markup/blocks/enclosed/verbatim-block.md), whitespace is converted as in [paragraph blocks](/markup/blocks/paragraph.md).
 
-**Note:** Attribute nesting allows setting attributes for line blocks and lists, since it is not possible to set attributes for them directly.
+Attributes for Unimarkup elements may be set as attributes of the text block,
+by nesting these element attributes using the element type as identifier.
+These attributes are then only applied inside the text block.
+
+**Note:** Attribute nesting allows setting attributes for line blocks and lists, because it is not possible to set attributes for them directly.
 
 **Note** Attribute nesting is defined in the [attributes](/markup/decorators/attributes.md) section.
 
 **Usage:**
 
 ````
-[[[{<Attributes for the text block>}
+[[[
 Everything inside is treated as Unimarkup content.
 Provided attributes apply to all text inside this block
-]]]
+]]]{<Attributes for the text block>}
 
-[[[[{ & heading { color: rgb(255,0,0) }}
+[[[[
 # Red main text block
 
-[[[{ id: "main-text-block-content" }
+[[[
 A nested text block
-]]]
+]]]{ id: "main-text-block-content" }
 
-[[[{ & bullet-list { background-color: rgb(0,255,0) }}
-     & numbered-list { background-color: rgb(0,0,255) }}}
-
+[[[
 - This bullet list has a green background
 
 1. This numbered list has a blue background
@@ -41,16 +41,27 @@ A nested text block
 - Again green background
 
 This paragraph has the default background.
-]]]
-]]]]
+]]]{
+     & bullet-list {
+          background-color: rgb(0,255,0)
+     }
+     & numbered-list {
+          background-color: rgb(0,0,255)
+     }
+}
+]]]]{
+     & heading {
+          color: rgb(255,0,0)
+     }
+}
 
-[[[{ id: "my-block" }
+[[[
 Any Unimarkup text may be inside a text block
 
 ```
 Verbatim block inside a text block
 ```
-]]]
+]]]{ id: "my-block" }
 
 [[[
 Text blocks without attributes.

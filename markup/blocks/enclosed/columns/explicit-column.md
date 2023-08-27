@@ -22,22 +22,22 @@ This content is part of the **second** column
 This content is part of the **third** column
 |||
 
-|||{ direction : rtl }
+|||
 First column is on the most right.
 
 :::
 
 This column is to the left side of the first column
 
-|||
+|||{ direction : rtl }
 
-|||{<attributes for the explicit column block>}
+|||
 Column 1 content
 
 :::
 
 Column 2 content
-|||
+|||{<attributes for the explicit column block>}
 
 ||||
 Some content.
