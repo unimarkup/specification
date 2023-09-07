@@ -7,7 +7,7 @@ Those keywords may appear anywhere in an inline content.
 
 **List of supported special grapheme substitutions:**
 
-- `((TM))` or `((tm))` ... ™ (U+2122)
+- `(TM)` or `(tm)` ... ™ (U+2122)
 - `((C))` or `((c))` ... © (U+00A9)
 - `((R))` or `((r))` ... ® (U+00AE)
 - `...` ... … (U+2026)
