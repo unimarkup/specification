@@ -19,6 +19,8 @@ Those keywords may appear anywhere in an inline content.
 
   **Note:** The en dash must not be surrounded by other `-`.
 
+  **Note:** `--` marks the start of the author paragraph in [quotation blocks](/markup/blocks/indents/quotation-block.md), and must not be converted to an en dash.
+
 - `---` ... — (U+2014)
 
   **Note:** The em dash must not be surrounded by other `-`.
@@ -28,7 +30,7 @@ Those keywords may appear anywhere in an inline content.
 **Usage:**
 
 ```
-Trademark((tm)) and (+-) ""2023--"".
+Trademark(tm) and (+-) ""2023--"".
 ```
 
 renders to
