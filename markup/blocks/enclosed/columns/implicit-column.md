@@ -5,7 +5,7 @@ For this, the sequence `<number of columns>|` must be set directly after the sta
 
 To nest implicit column blocks, the inner block must have at least one more leading `|` than the outer one.
 
-**Note:** [section breaks](/markup/blocks/separators/section-break.md) are not allowed in implicit column blocks.
+**Note:** [line breaks](/markup/blocks/separators/line-break.md) inside implicit column blocks must be treated as regular page breaks.
 
 **Usage:**
 
