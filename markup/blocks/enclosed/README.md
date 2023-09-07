@@ -5,9 +5,12 @@
 This section contains enclosed block elements.
 Enclosed blocks have start and end keywords that must start at a new line.
 Both start and end keywords must have the same length, with a minimum keyword length of three. 
-The inner content may then start at the beginning of the line after the start keyword. The start and end keyword lines count as blank lines for inner block elements.
+The block content may then start at the beginning of the line after the start keyword.
+The start and end keyword lines count as blank lines for inner block elements.
 
-To nest enclosed blocks that allow nesting, the outer keywords must be at least one grapheme longer than the inner ones.
+To nest enclosed blocks that allow nesting, the inner keywords must be at least one grapheme longer than the outer ones for blocks having the same keyword for start and end.
+Blocks with different keywords for start and end may be nested with the same keyword length for outer and inner blocks.
+Increasing the inner length makes it easier to add nested blocks, because the outer keywords must not be changed.
 
 Attributes may be set directly after the end keyword without any whitespace between.
 

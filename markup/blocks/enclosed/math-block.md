@@ -1,9 +1,10 @@
 # Math block
 
 Math blocks use `$` as keyword.
+Block nesting is not allowed.
 
 Math blocks allow using math mode on block level. Content inside a math block is treated as one mathematical formula.
-Backslash escapes may be used inside render blocks as described in [/markup/escaping](/markup/escaping.md).
+Backslash escape handling may depend on the mathematical markup syntax supported by an implementation.
 
 **Example using [AsciiMath](http://asciimath.org/):**
 

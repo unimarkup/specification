@@ -1,13 +1,12 @@
 # Render block
 
 Render blocks use `'` as keyword.
+Render block nesting is not allowed.
 
 Content inside a render block is rendered according to the given language and renderer.
 Backslash escapes may be used inside render blocks as described in [/markup/escaping](/markup/escaping.md).
 
 A language may be set after the start keyword, by setting the name of the language directly after `'`.
-
-**Note:** Render block nesting is not allowed.
 
 **Usage:**
 

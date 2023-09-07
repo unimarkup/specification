@@ -6,7 +6,7 @@ This field name may be used to provide additional built-in elements, or extend t
 If a field name is not known by an implementation, the field block
 must be treated as a normal [text block](/markup/blocks/enclosed/text-block.md) without the field name.
 
-If text blocks are used inside field blocks, or field blocks allow nesting, the outer field block must have at least one more `[` than the inner one.
+If text blocks are used inside field blocks, or field blocks allow nesting, the inner field block must have at least one more `[` than the outer one.
 
 **Note:** Available attributes may vary between different field blocks.
 
