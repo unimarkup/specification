@@ -54,7 +54,7 @@ Second column with a table:
 
 ===
 | column 1 row 1 | column 2 row 1 |
-| column 2 row 1 | column 2 row 2 |
+| column 1 row 2 | column 2 row 2 |
 ===
 |||
 ```
@@ -87,7 +87,13 @@ The following structure of the Unimarkup specification is given in alphabetical 
 
 # Specification notes
 
-The specification is written in Unimarkup. Due to the similarity to Markdown, it is not that obvious.
+The specification is written mostly in Unimarkup. Due to the similarity to Markdown, it is not that obvious.
+Minor differences are nested verbatim blocks being inverted in Unimarkup.
+
+**Notable differences between Markdown and Unimarkup:**
+
+- Block nesting is [inverted](/markup/blocks/enclosed/README.md)
+- Image insert is split into [inline](/markup/inlines/boxes/inserts/inline-media-insert.md) and [block](/markup/blocks/inserts/media-block-insert.md) variants
 
 ## Stability
 

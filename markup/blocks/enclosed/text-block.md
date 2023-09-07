@@ -3,7 +3,8 @@
 Text blocks use `[` as opening keyword, and `]` as closing keyword.
 The number of `[` and `]` must match per block.
 
-To nest text blocks, the outer block must have at least one more `]` than the inner one.
+When nesting text blocks, the inner block may have the same keyword length as the outer one.
+It is just important that start and end keyword length match per block.
 
 Attributes may be set directly after the last closing `]`.
 
@@ -26,7 +27,7 @@ Everything inside is treated as Unimarkup content.
 Provided attributes apply to all text inside this block
 ]]]{<Attributes for the text block>}
 
-[[[[
+[[[
 # Red main text block
 
 [[[
@@ -49,7 +50,7 @@ This paragraph has the default background.
           background-color: rgb(0,0,255)
      }
 }
-]]]]{
+]]]{
      & heading {
           color: rgb(255,0,0)
      }

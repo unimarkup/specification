@@ -5,7 +5,7 @@
 Explicit column blocks have `|` as keyword.
 Inside an explicit column block, a new column is started after a [section break](/markup/blocks/separators/section-break.md).
 
-To nest explicit column blocks, the outer block must have at least one more `|` than the inner one.
+To nest explicit column blocks, the inner block must have at least one more `|` than the outer one.
 
 **Usage:**
 
@@ -39,19 +39,19 @@ Column 1 content
 Column 2 content
 |||{<attributes for the explicit column block>}
 
-||||
+|||
 Some content.
 
 :::
 
-|||
+||||
 Nested column block
 
 :::
 
 Second column of the nested column block
-|||
 ||||
+|||
 ```
 
 **Type:** `explicit-column-block`

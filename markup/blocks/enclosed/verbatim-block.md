@@ -1,6 +1,7 @@
 # Verbatim block
 
 Verbatim blocks use `` ` `` as keyword.
+To nest verbatim blocks, the inner block must have at least one more `` ` `` than the outer one.
 
 Content inside a verbatim block is treated as is. No rendering is done, and all whitespace must be preserved.
 The only exceptions are backslash escapes as described in [/markup/escaping](/markup/escaping.md).
@@ -14,13 +15,13 @@ A language may be set at the start of a verbatim block, by setting the name of a
 Verbatim block, where nothing is rendered
 ```
 
-````
+```
 Outer verbatim block.
 
-```
-Inner verbatim block.
-```
 ````
+Inner verbatim block.
+````
+```
 
 ```
 Verbatim block with given attributes
