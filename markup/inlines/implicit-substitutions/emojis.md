@@ -20,7 +20,7 @@ For the keywords to be substituted, they must only be surrounded by whitespace, 
 - `>:(` ... 🤬 (U+1F92C) has aliases: `cursing_face`
 - `:/` ... 😕 (U+1F615) has aliases: `confused`
 - `3:)` ... 😈 (U+1F608) has aliases: `smiling_imp`
-- `-_-` ... 😑 (U+1F611) has aliases: `expressionless`
+- `:|` ... 😑 (U+1F611) has aliases: `expressionless`
 - `<3` ... ❤ (U+2764) has aliases: `heart`
 - `(Y)` ... 👍 (U+1F44D) has aliases: `+1`, `thumbsup`
 - `(N)` ... 👎 (U+1F44E) has aliases: `-1`, `thumbsdown`
