@@ -3,7 +3,11 @@
 Block inserts may be used to integrate external resources into a Unimarkup file.
 The general form for block inserts looks like a hyperlink with a **keyword** set directly before `[`.
 
-**Note:** The description given inside `[]` is used as alternative text, if the external resource could not be inserted or displayed. The text may then be used as fallback content for convertible resources, or plain text for media resources.
+A block insert is implicitly closed if an outer block end or EOI is reached before the block insert reaches its end.
+In this case, no attributes can be set, because the end keywords are missing.
+
+**Note:** The description given inside `[]` is used as alternative text, if the external resource could not be inserted or displayed.
+The text may then be used as fallback content for convertible resources, or plain text for media resources.
 
 **Type:** All block inserts are subtypes of the `block-insert` type.
 
