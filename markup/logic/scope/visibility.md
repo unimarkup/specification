@@ -21,9 +21,9 @@ Logic elements defined in an enclosed or indented element are only visible insid
 **Example:**
 
 ```
-[[[{ id: "my-block" }
+[[[
   {#const InsideTextblock := 2/}
-]]]
+]]]{ id: "my-block" }
 ```
 
 ## Inside macros

@@ -4,12 +4,12 @@
 
 Named substitution may be used to replace a word by inline content.
 For this, the word to be substituted must be enclosed by `::`.
+Substitutions are only possible for words. Therefore, whitespace is not allowed as part of the name to substitute.
 
-**Note:** If whitespaces appear between `::` (more than one word between),
-no substitution is applied. Therefore, substitutions are only possible per word.
+Named substitutions are not implicitly closed, to prevent collision with abbreviations.
 
 [Emoji aliases](https://github.com/github/gemoji/blob/master/db/emoji.json)
-must be predefined for substitution, substituting the alias with the respective Unicode code point.
+must be predefined for substitution, substituting the alias with the respective Unicode grapheme.
 
 To define new named substitutions, set `:` after the word to substitute, followed by the text that is used as substitution.
 

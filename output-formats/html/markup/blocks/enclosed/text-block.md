@@ -2,10 +2,10 @@
 ## With attributes
 
 ```
-[[[{ id: "my-block" }
+[[[
 Any Unimarkup text **may** be
 inside a text block
-]]]
+]]]{ id: "my-block" }
 ```
 
 renders to

@@ -15,7 +15,8 @@ There are two variants:
   renders to
 
   ```html
-  <dfn id="html">HyperText Markup Language</dfn> (
+  <dfn id="html">HyperText Markup Language</dfn> (HTML)
+  ```
 
 - **Other occurrences of the abbreviation:**
 

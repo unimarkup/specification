@@ -54,7 +54,7 @@ Second column with a table:
 
 ===
 | column 1 row 1 | column 2 row 1 |
-| column 2 row 2 | column 2 row 2 |
+| column 1 row 2 | column 2 row 2 |
 ===
 |||
 ```
@@ -87,7 +87,13 @@ The following structure of the Unimarkup specification is given in alphabetical 
 
 # Specification notes
 
-The specification is written in Unimarkup. Due to the similarity to Markdown, it is not that obvious.
+The specification is written mostly in Unimarkup. Due to the similarity to Markdown, it is not that obvious.
+Minor differences are nested verbatim blocks being inverted in Unimarkup.
+
+**Notable differences between Markdown and Unimarkup:**
+
+- Block nesting is [inverted](/markup/blocks/enclosed/README.md)
+- Image insert is split into [inline](/markup/inlines/boxes/inserts/inline-media-insert.md) and [block](/markup/blocks/inserts/media-block-insert.md) variants
 
 ## Stability
 
@@ -116,8 +122,6 @@ The keywords **must**, **must not**, **should**, **should not**, **may** and **o
 
 # License
 
-[<html>
 <a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nd/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0/">Creative Commons Attribution-NoDerivatives 4.0 International License</a>.
-]
 
 **Short explanation:** The *No Derivatives* part should help to encourage people to get involved in improving the core specification, rather than spin-off their own variation.

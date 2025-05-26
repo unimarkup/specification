@@ -2,7 +2,8 @@
 
 **WIP**
 
-Tables have `=` as keyword. Every line inside the table content is interpreted as one table row, except lines starting with `---` (see **table entry merging** below). Column breakpoints are set using `|`. Rows and columns are internally numbered, starting with `row = 1, column = 1` at the top left. Both numbers are incremented by one per new row/column.
+Tables have `=` as keyword. Every line inside the table content is interpreted as one table row, except lines starting with `---` (see **table entry merging** below).
+Column breakpoints are set using `|`. Rows and columns are internally numbered, starting with `row = 1, column = 1` at the top left. Both numbers are incremented by one per new row/column.
 
 **Note:** It is not possible to nest tables. Use [column blocks](/markup/blocks/enclosed/columns/README.md) instead.
 
@@ -145,28 +146,28 @@ small column | combined +| columns
 combined +| columns | small column
 ===
 
-===(:-, :-:){<attributes for all columns>}
+===(:-, :-:)
 | row 1 | row 1 | row 1 |
 | row 2 | row 2 | row 2 |
-===
+==={<attributes for all columns>}
 
-===(:-:){ id: "table-id" }
+===(:-:)
 | center row 1 | center row 1 | center row 1 |
 | center row 2 | center row 2 | center row 2 |
-===
+==={ id: "table-id" }
 
-==={<attributes for all columns>}
+===
 | row 1 | row 1 | row 1 |
 | row 2 | row 2 | row 2 |
-===
+==={<attributes for all columns>}
 
+===
+| row 1 | row 1 | row 1 |
+| row 2 | row 2 | row 2 |
 ==={<attributes 
   for all columns
   over multiple lines
 >}
-| row 1 | row 1 | row 1 |
-| row 2 | row 2 | row 2 |
-===
 ```
 
 **Type:** `table`

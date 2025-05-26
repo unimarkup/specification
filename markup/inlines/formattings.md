@@ -7,9 +7,8 @@ Inline formatting consists of keywords that format an enclosed text in a certain
 ## Restrictions
 
 A non-whitespace grapheme must immediately follow an opening keyword for inline formatting.
-If the inline formatting is not closed by the same keyword with a non-whitespace grapheme before the closing keyword, no formatting is applied.
-
-**Note:** Verbatim formatting is an exception and is applied independent of whitespaces.
+If the inline formatting is not closed by the same keyword with a non-whitespace grapheme before the closing keyword,
+it is implicitly closed at the end of inline content, inline scope, or if a format is closed explicitly that was opened before.
 
 **Note:** Inline formatting may also be applied inside words.
 
@@ -24,15 +23,14 @@ For*matt*ing inside __word__s is possible.
 The following examples show text with formatting keywords, but no/partial formatting is applied, because not all requirements are fulfilled.
 
 ```
-Text with* italic keyword followed by a whitespace.
+Plain text with* italic keyword followed by a whitespace.
 
-Text *with correct italic opening keyword, but paragraph ends without closing keyword.
+Text *with correct italic opening keyword, it is implicitly closed at the end of this paragraph.
 
 Text *with correct opening keyword, *but closing keyword is preceded by a whitespace.
+Therefore formatting continuous until the end of this paragraph.
 
-Text ***with correct bold and italic opening keyword, but* only italic closing keyword is correct with bold not being applied.
-
-Text ***with correct bold and italic opening keyword, but** only bold closing keyword is correct with italic not being applied.
+Text ***with correct bold and italic opening keyword, but* only italic closing keyword is explicit with bold being closed implicitly at the end of this paragraph.
 ```
 
 ## Format stacking
@@ -61,31 +59,29 @@ Combining ^‾overlined superscript‾^ text.
 - Fallback handling
 
   Formatting is started at the beginning of an inline content. If a formatting keyword is reached, it is parsed until another formatting keyword is encountered.
-  The inner keyword is first tried to be completed, but if an end keyword of the outer format is encountered before the inner formatting is completed, the inner format is ignored, the inner start keyword is treated as plain text, and the outer format is applied.
-  If a formatting is not closed at the end of an inline content, it is not applied, and the start keyword is treated as plain text.
+  The inner keyword is first tried to be completed, but if an end keyword of the outer format is encountered before the inner formatting is completed, the inner format is implicitly closed directly before the outer format closes, and both formats are applied.
 
   **Examples:**
 
   ```
-  *outer **only italic*non-bold** non-italic*
+  *outer-italic **italic+bold*non-bold** non-italic*
   ```
 
   The above renders to the following abstract form
 
   ```
-  <italic start>outer **only italic<italic end>non-bold** non-italic*
+  <italic start>outer-italic <bold start>italic+bold<bold end><italic end>non-bold** non-italic*
   ```
 
   ```
-  *only italic **bold fails* plain text
+  *only-italic **italic+bold* plain text
   ```
 
   The above goes through the following steps:
 
-  1. `<italic start>(only italic <bold start>`
-  2. `<italic start<(only italic <bold start>(bold fails* plain text)<end reached>`
-  3. `<italic start>(only italic **bold fails)<italic end>`
-  4. `<italic start>(only italic **bold fails)<italic end> plain text`
+  1. `<italic start>only-italic <bold start>`
+  2. `<italic start>only-italic <bold start>italic+bold<implicit bold end><explicit italic end>`
+  3. `<italic start>only-italic <bold start>italic+bold<implicit bold end><explicit italic end> plain text`
 
 - Order of formattings sharing the same keyword
 
@@ -100,6 +96,7 @@ Combining ^‾overlined superscript‾^ text.
   1. Start and end are stacked
 
     The order does not matter, since all `*` are part of keywords, and the containing text gets both formats.
+    Implementations should choose a deterministic order in which both formats are applied.
 
     ```
     ***bold and italic***
@@ -161,6 +158,8 @@ Combining ^‾overlined superscript‾^ text.
 
 Attributes may be set directly after a closing keyword.
 The allowed attributes may depend on the output format, and only special attributes are defined explicitly.
+
+**Note:** It is not possible to set attributes for implicitly closed formattings.
 
 **Example:**
 

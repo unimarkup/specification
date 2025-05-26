@@ -12,7 +12,7 @@ The content itself is treated as plain text, with optional syntax highlighting a
 ```
 [``<alternative description for the file content that is inserted>](<file path>)
 
-Some paragraph text with [``First heading](UnimarkupContent.um){ insert-id : "first-heading" }.
+Some paragraph text with [``content from `UnimarkupContent.um`](UnimarkupContent.um).
 ```
 
 **Type:** `inline-verbatim-insert`
@@ -30,5 +30,7 @@ Some paragraph text with [``First heading](UnimarkupContent.um){ insert-id : "fi
   **Note:** The supported highlighters depend on the used implementation.
   
   **Note:** If the highlighter is not supported by the implementation, the content must be treated as plain text.
+
+  **Note:** Implementations may not offer this attribute if they only support one highlighter.
 
 **Note:** Implementations may allow additional attributes.

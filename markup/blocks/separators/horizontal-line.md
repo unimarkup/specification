@@ -2,6 +2,9 @@
 
 A horizontal line is set with three or more `-`.
 
+Attributes may be set directly after the last `-`.
+These attributes must only affect the horizontal line itself.
+
 **Usage:**
 
 ```
